@@ -2,8 +2,7 @@ package petadoption.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-// Commit Test - Nick :)
+// everything is working
 
 @SpringBootApplication
 public class PetAdoptionApplication {
