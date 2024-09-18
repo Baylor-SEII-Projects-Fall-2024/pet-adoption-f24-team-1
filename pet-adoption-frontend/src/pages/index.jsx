@@ -21,7 +21,7 @@ export default function HomePage() {
           <Card sx={{ width: 600 }} elevation={4}>
             <CardContent>
               <Typography variant='h3' align='center'>Pet Adoption Fall 2024</Typography>
-              <Typography variant='body1' color='text.secondary'>I want to suck your toes</Typography>
+              <Typography variant='body1' color='text.secondary'> </Typography>
             </CardContent>
           </Card>
           <Stack direction="row">
