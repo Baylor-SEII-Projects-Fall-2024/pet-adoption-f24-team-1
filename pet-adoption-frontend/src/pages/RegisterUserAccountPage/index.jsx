@@ -9,6 +9,10 @@ return(
         <Head>
             <title>Register User Account Page</title>
         </Head>
+
+        <main>
+            <h1>This is the Register User Account Page</h1>
+        </main>
     </>
 );
 }
