@@ -9,7 +9,7 @@ This set of tools has been chosen to be a solid, simple foundation for backend/a
 ## Quick Reference
 
 To run the server locally, click the play button next to the `main()` method in `PetAdoptionApplication.java`. Your API will be available at `http://localhost:8080`.
-
+x
 To test a build of the project in the same way that your CI/CD pipeline will, run:
 ```bash
 ./gradlew build
