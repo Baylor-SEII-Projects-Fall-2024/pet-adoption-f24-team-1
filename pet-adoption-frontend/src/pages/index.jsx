@@ -9,7 +9,7 @@ import styles from '@/styles/Home.module.css'
 export default function HomePage() {
   const router = useRouter();
 
-  const onButtonPress = (page) => {
+  const navigateTo = (page) => {
     router.push(page);
   }
 
@@ -27,12 +27,19 @@ export default function HomePage() {
               <Typography variant='body1' color='text.secondary'> </Typography>
             </CardContent>
           </Card>
-          <Stack direction="row">
+          <Stack sx={{ display: "flex", flexWrap: "wrap", alignItems: "ceneter", justifyContent: 'center'}} direction="row">
             {/* There are multiple ways to apply styling to Material UI components. One way is using the `sx` prop: */}
-            <Button variant='contained' onClick={() => onButtonPress('/RegisterUserAccountPage')} sx={{ width: 200 }}>Register Account :)</Button>
+            <Button variant='contained' onClick={() => navigateTo('/register-account')} sx={{ width: 200 }}>Register Account</Button>
 
             {/* Another way is by creating a dedicated CSS file and using the styles from there: */}
-            <Button variant='contained' color="secondary" onClick={onButtonPress} className={styles.wideButton}>I am a wider button</Button>
+            <Button variant='contained' color="secondary" onClick={() => navigateTo('adoption-center-home')} className={styles.wideButton}>Adoption Center Home</Button>
+            <Button variant='contained' onClick={() => navigateTo('/settings')} sx={{ width: 200 }}>Settings</Button>
+            <Button variant='contained' onClick={() => navigateTo('/create-account')} sx={{ width: 200 }}>create-account</Button>
+            <Button variant='contained' onClick={() => navigateTo('/forgot-password')} sx={{ width: 200 }}>forgot-password</Button>
+            <Button variant='contained' onClick={() => navigateTo('/login')} sx={{ width: 200 }}>Login</Button>
+            <Button variant='contained' onClick={() => navigateTo('/pet-adoption-form')} sx={{ width: 200 }}>Pet Adoption Form</Button>
+            <Button variant='contained' onClick={() => navigateTo('/pet-info')} sx={{ width: 200 }}>Pet Info</Button>
+            <Button variant='contained' onClick={() => navigateTo('/search')} sx={{ width: 200 }}>Search</Button>
           </Stack>
         </Stack>
       </main>
