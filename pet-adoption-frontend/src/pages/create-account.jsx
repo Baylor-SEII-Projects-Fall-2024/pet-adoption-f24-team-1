@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head'
-import { Button, Card, CardContent, Stack, Typography } from '@mui/material'
+import { Button, Card, CardContent, Stack, Typography, Grid, TextField } from '@mui/material'
 import styles from '@/styles/Home.module.css'
 
 export default function CreateAccount() {
@@ -12,8 +12,25 @@ export default function CreateAccount() {
       </Head>
 
       <main>
-        <Stack sx={{ paddingTop: 4 }} alignItems='center' gap={2}>
+        <Stack alignItems='center'>
           <p>Create Account Page</p>
+          <Card sx={{ width: 600 }} elevation={0}>
+            <CardContent>
+            <form action="/users" method="post">
+              <Grid container spacing={1}>
+                <Grid item xs={12}>
+                  <TextField placeholder="Enter email address" label="Email Address" variant="outlined" fullWidth required />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField placeholder="Enter password" label="Password" variant="outlined" fullWidth required />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField placeholder="Enter user type" label="User Type" variant="outlined" fullWidth required />
+                </Grid>
+              </Grid>
+            </form>
+            </CardContent>
+          </Card>
         </Stack>
       </main>
     </>
