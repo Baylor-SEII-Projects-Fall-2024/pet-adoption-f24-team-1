@@ -6,6 +6,7 @@ import styles from '@/styles/Home.module.css'
 export default function CreateAccount() {
 
   return (
+
     <>
       <Head>
         <title>Create Account</title>
@@ -16,7 +17,7 @@ export default function CreateAccount() {
           <p>Create Account Page</p>
           <Card sx={{ width: 600 }} elevation={0}>
             <CardContent>
-            <form action="/users" method="post">
+            <form>
               <Grid container spacing={1}>
                 <Grid item xs={12}>
                   <TextField id="emailAddress" placeholder="Enter email address" label="Email Address" variant="outlined" fullWidth required />
