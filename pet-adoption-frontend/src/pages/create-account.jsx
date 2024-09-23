@@ -19,13 +19,16 @@ export default function CreateAccount() {
             <form action="/users" method="post">
               <Grid container spacing={1}>
                 <Grid item xs={12}>
-                  <TextField placeholder="Enter email address" label="Email Address" variant="outlined" fullWidth required />
+                  <TextField id="emailAddress" placeholder="Enter email address" label="Email Address" variant="outlined" fullWidth required />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField placeholder="Enter password" label="Password" variant="outlined" fullWidth required />
+                  <TextField id="password" placeholder="Enter password" label="Password" variant="outlined" fullWidth required />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField placeholder="Enter user type" label="User Type" variant="outlined" fullWidth required />
+                  <TextField id="userType" placeholder="Enter user type" label="User Type" variant="outlined" fullWidth required />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button type="submit" variant="contained" color="primary" fullWidth>Submit</Button>
                 </Grid>
               </Grid>
             </form>
