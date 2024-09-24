@@ -32,6 +32,7 @@ public class UserEndpoint {
         return userService.saveUser(user);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/allusers")
     public List<User> getAllUsers()  {
         return userService.findAllUsers();

@@ -11,22 +11,27 @@ export default function CreateAccount() {
   const [userType, setUserType] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page reload on form submit
+    e.preventDefault();
 
-    fetch('http://localhost:8080/users', {
-      mode: 'cors',
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        emailAddress: emailAddress,
-        password: password,
-        userType: userType,
-      })
-  })
-  .then(response => response.json())
+    axios.post('http://localhost:8080/users', {
+      emailAddress: emailAddress,
+      password: password,
+      userType: userType,
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   };
+
+  const getUsers = () => {
+    axios.get('http://localhost:8080/allusers')
+    .then(function (response) {
+      alert(JSON.stringify(response.data, undefined, 4));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   return (
 
@@ -56,6 +61,7 @@ export default function CreateAccount() {
                 </Grid>
               </Grid>
             </form>
+            <Button type="submit" variant="contained" color="primary" fullWidth onClick={getUsers}>List Users</Button>
             </CardContent>
           </Card>
         </Stack>
