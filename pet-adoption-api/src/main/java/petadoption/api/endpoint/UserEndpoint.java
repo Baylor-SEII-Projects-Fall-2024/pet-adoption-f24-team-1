@@ -25,6 +25,7 @@ public class UserEndpoint {
         return user;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/users")
     public User saveUser(@RequestBody User user) {
         System.out.println("in here");
