@@ -12,13 +12,17 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:8080/api/login', {
+    axios.post("http://localhost:8080/api/login", {
       emailAddress: emailAddress,
       password: password,
     })
-    .catch(function (error) {
-      console.log(error);
-    });
+            .then(response => {
+                alert("Login successful!");
+                console.log(response.data); // Handle authentication state here
+            })
+            .catch(error => {
+                alert("Login failed: " + error.message);
+            });
   };
 
   return (
@@ -37,7 +41,7 @@ export default function Login() {
                 Don't have an account? <Link href="/create-account" variant='body2'>Sign up</Link>
               </Typography>
 
-              <form >
+              <form onSubmit={handleSubmit}>
                 <Grid container spacing={4} sx={{ my: 1}}>
                   <Grid item xs={12}>
                     <TextField id="emailAddress" placeholder="Enter email address" label="Email Address" variant="outlined" fullWidth required onChange={(e) => setEmailAddress(e.target.value)} />

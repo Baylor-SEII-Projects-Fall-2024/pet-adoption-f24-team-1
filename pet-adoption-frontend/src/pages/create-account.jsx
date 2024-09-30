@@ -13,25 +13,28 @@ export default function CreateAccount() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:8080/users', {
+    axios.post("http://localhost:8080/api/register", {
       emailAddress: emailAddress,
       password: password,
       userType: userType,
     })
-    .catch(function (error) {
-      console.log(error);
-    });
+            .then(response => {
+                alert("Registration successful!");
+            })
+            .catch(error => {
+                alert("Registration failed: " + error.message);
+            });
   };
 
-  const getUsers = () => {
-    axios.get('http://localhost:8080/allusers')
-    .then(function (response) {
-      alert(JSON.stringify(response.data, undefined, 4));
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
+  // const getUsers = () => {
+  //   axios.get('http://localhost:8080/allusers')
+  //   .then(function (response) {
+  //     alert(JSON.stringify(response.data, undefined, 4));
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // }
 
   return (
 
