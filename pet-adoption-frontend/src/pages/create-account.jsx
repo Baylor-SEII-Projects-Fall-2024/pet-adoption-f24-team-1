@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head'
-import { Button, Card, CardContent, Stack, Typography, Grid, TextField } from '@mui/material'
+import { Button, Card, CardContent, Stack, Typography, Grid, TextField, Container, Link } from '@mui/material'
 import styles from '@/styles/Home.module.css'
 import { useState } from 'react'
 import axios from 'axios';
@@ -41,30 +41,34 @@ export default function CreateAccount() {
       </Head>
 
       <main>
-        <Stack alignItems='center'>
-          <p>Create Account Page</p>
-          <Card sx={{ width: 600 }} elevation={0}>
-            <CardContent>
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={1}>
-                <Grid item xs={12}>
-                  <TextField id="emailAddress" placeholder="Enter email address" label="Email Address" variant="outlined" fullWidth required onChange={(e) => setEmailAddress(e.target.value)} />
+        <Container>
+            <Stack>
+              <Typography variant="h4">
+                Welcome to Furry Friends!
+              </Typography>
+              <Typography>
+                Already have an account? <Link href="#" variant='body2'>Log in</Link>
+              </Typography>
+
+              <form onSubmit={handleSubmit}>
+                <Grid container spacing={4} sx={{ my: 1}}>
+                  <Grid item xs={12}>
+                    <TextField id="emailAddress" placeholder="Enter email address" label="Email Address" variant="outlined" fullWidth required onChange={(e) => setEmailAddress(e.target.value)} />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField id="password" placeholder="Enter password" label="Password" variant="outlined" fullWidth required onChange={(e) => setPassword(e.target.value)} />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField id="userType" placeholder="Enter user type" label="User Type" variant="outlined" fullWidth required onChange={(e) => setUserType(e.target.value)} />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button type="submit" variant="contained" color="primary" fullWidth>Create Account</Button>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <TextField id="password" placeholder="Enter password" label="Password" variant="outlined" fullWidth required onChange={(e) => setPassword(e.target.value)} />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField id="userType" placeholder="Enter user type" label="User Type" variant="outlined" fullWidth required onChange={(e) => setUserType(e.target.value)} />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button type="submit" variant="contained" color="primary" fullWidth>Submit</Button>
-                </Grid>
-              </Grid>
-            </form>
-            <Button type="submit" variant="contained" color="primary" fullWidth onClick={getUsers}>List Users</Button>
-            </CardContent>
-          </Card>
-        </Stack>
+              </form>
+            </Stack>
+          
+        </Container>
       </main>
     </>
   );
