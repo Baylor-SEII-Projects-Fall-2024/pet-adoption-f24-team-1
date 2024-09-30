@@ -11,7 +11,7 @@ export default function CreateAccount() {
   const [userType, setUserType] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
 
     axios.post('http://localhost:8080/users', {
       emailAddress: emailAddress,

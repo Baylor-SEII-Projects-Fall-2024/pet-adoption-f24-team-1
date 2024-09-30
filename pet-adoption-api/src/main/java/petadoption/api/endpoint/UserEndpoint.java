@@ -10,6 +10,7 @@ import java.util.List;
 
 @Log4j2
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserEndpoint {
     @Autowired
     private UserService userService;
@@ -25,14 +26,12 @@ public class UserEndpoint {
         return user;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/users")
     public User saveUser(@RequestBody User user) {
         System.out.println("in here");
         return userService.saveUser(user);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/allusers")
     public List<User> getAllUsers()  {
         return userService.findAllUsers();
