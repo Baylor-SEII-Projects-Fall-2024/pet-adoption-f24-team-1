@@ -47,7 +47,7 @@ export default function CreateAccount() {
                 Welcome to Furry Friends!
               </Typography>
               <Typography>
-                Already have an account? <Link href="#" variant='body2'>Log in</Link>
+                Already have an account? <Link href="/login" variant='body2'>Log in</Link>
               </Typography>
 
               <form onSubmit={handleSubmit}>
