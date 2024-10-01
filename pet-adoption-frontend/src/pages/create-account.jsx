@@ -23,6 +23,7 @@ export default function CreateAccount() {
             })
             .catch(error => {
                 alert("Registration failed: " + error.message);
+                console.log(emailAddress);
             });
   };
 
