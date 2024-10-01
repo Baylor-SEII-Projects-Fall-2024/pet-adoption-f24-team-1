@@ -6,7 +6,7 @@ import { useState } from 'react'
 import axios from 'axios';
 
 export default function CreateAccount() {
-  const [emailAddress, setEmailAddress] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
 
@@ -14,7 +14,7 @@ export default function CreateAccount() {
     //e.preventDefault();
 
     axios.post("http://localhost:8080/api/register", {
-      emailAddress: emailAddress,
+      email: email,
       password: password,
       userType: userType,
     })
@@ -56,7 +56,7 @@ export default function CreateAccount() {
               <form onSubmit={handleSubmit}>
                 <Grid container spacing={4} sx={{ my: 1}}>
                   <Grid item xs={12}>
-                    <TextField id="emailAddress" placeholder="Enter email address" label="Email Address" variant="outlined" fullWidth required onChange={(e) => setEmailAddress(e.target.value)} />
+                    <TextField id="email" placeholder="Enter email address" label="Email Address" variant="outlined" fullWidth required onChange={(e) => setEmail(e.target.value)} />
                   </Grid>
                   <Grid item xs={12}>
                     <TextField id="password" placeholder="Enter password" label="Password" variant="outlined" fullWidth required onChange={(e) => setPassword(e.target.value)} />

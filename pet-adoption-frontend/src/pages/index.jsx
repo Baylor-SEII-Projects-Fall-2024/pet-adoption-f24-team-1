@@ -38,6 +38,7 @@ export default function HomePage() {
             <Button variant='contained' onClick={() => navigateTo('/pet-adoption-form')} sx={{ width: 200 }}>Pet Adoption Form</Button>
             <Button variant='contained' onClick={() => navigateTo('/pet-info')} sx={{ width: 200 }}>Pet Info</Button>
             <Button variant='contained' onClick={() => navigateTo('/search')} sx={{ width: 200 }}>Search Pets</Button>
+            <Button variant='contained' onClick={() => navigateTo('/user-home')} sx={{ width: 200 }}>User Home Page</Button>
           </Stack>
         </Stack>
       </main>
