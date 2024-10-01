@@ -24,7 +24,6 @@ export default function CreateAccount() {
             .catch(error => {
                 // console.error("Login failed:", error); // Log the full error
                 alert("Registration failed: " + error.message);
-                console.log(emailAddress);
             });
           //   .catch(error => {
           //     console.error("Registration failed:", error); // Log the full error
