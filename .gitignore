@@ -5,3 +5,4 @@
 /target
 /node_modules
 .DS_Store
+pet-adoption-api/src/main/java/petadoption/api/config/WebConfig.java

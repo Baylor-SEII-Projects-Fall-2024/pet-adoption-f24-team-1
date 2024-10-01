@@ -22,8 +22,26 @@ export default function CreateAccount() {
                 alert("Registration successful!");
             })
             .catch(error => {
+                // console.error("Login failed:", error); // Log the full error
                 alert("Registration failed: " + error.message);
             });
+          //   .catch(error => {
+          //     console.error("Registration failed:", error); // Log the full error
+          //     if (error.response) {
+          //         // The request was made and the server responded with a status code
+          //         console.error("Response data:", error.response.data);
+          //         console.error("Response status:", error.response.status);
+          //         alert("Registration failed: " + error.response.data.message || error.message);
+          //     } else if (error.request) {
+          //         // The request was made but no response was received
+          //         console.error("Request data:", error.request);
+          //         alert("Registration failed: No response received from the server.");
+          //     } else {
+          //         // Something happened in setting up the request that triggered an Error
+          //         console.error("Error message:", error.message);
+          //         alert("Registration failed: " + error.message);
+          //     }
+          // });
   };
 
   // const getUsers = () => {
