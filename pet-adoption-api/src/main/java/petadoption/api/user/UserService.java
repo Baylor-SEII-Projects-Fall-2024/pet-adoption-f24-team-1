@@ -25,12 +25,12 @@ public class UserService {
     }
 
     public User register(UserDTO userDTO) {
-        if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(userDTO.getEmailAddress()).isPresent()) {
             throw new RuntimeException("Email already exists!");
         }
 
         User user = new User();
-        user.setEmail(userDTO.getEmail());
+        user.setEmail(userDTO.getEmailAddress());
         user.setPassword(userDTO.getPassword());
         user.setUserType(userDTO.getUserType());
 
@@ -38,7 +38,7 @@ public class UserService {
     }
 
     public User login(LoginDTO loginDTO) {
-        Optional<User> userOptional = userRepository.findByEmail(loginDTO.getUsername());
+        Optional<User> userOptional = userRepository.findByEmail(loginDTO.getEmailAddress());
         if (userOptional.isPresent() && userOptional.get().getPassword().equals(loginDTO.getPassword())) {
             return userOptional.get();
         }
