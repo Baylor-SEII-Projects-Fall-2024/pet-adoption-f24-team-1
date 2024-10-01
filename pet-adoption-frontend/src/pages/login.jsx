@@ -18,7 +18,7 @@ export default function Login() {
     })
             .then(response => {
                 alert("Login successful!");
-                console.log(response.data); // Handle authentication state here
+                console.log(response.data);
             })
             .catch(error => {
               // console.error("Login failed:", error); // Log the full error

@@ -1,8 +1,6 @@
 package petadoption.api.endpoint;
 
 import lombok.extern.log4j.Log4j2;
-import org.apache.coyote.Response;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +45,9 @@ public class UserEndpoint {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/api/register")
     public ResponseEntity<User> register(@RequestBody UserDTO userDTO) {
+        System.out.println(userDTO.getEmailAddress());
+        System.out.println(userDTO.getPassword());
+        System.out.println(userDTO.getUserType());
         return ResponseEntity.ok(userService.register(userDTO));
     }
 
