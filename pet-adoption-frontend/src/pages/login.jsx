@@ -21,7 +21,6 @@ export default function Login() {
                 console.log(response.data); // Handle authentication state here
             })
             .catch(error => {
-              // console.error("Login failed:", error); // Log the full error
                 alert("Login failed: " + error.message);
             });
   };
