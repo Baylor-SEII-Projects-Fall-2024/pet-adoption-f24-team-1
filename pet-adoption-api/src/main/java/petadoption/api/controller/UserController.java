@@ -1,4 +1,4 @@
-package petadoption.api.endpoint;
+package petadoption.api.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @GetMapping("/allusers")
-    public List<User> getAllUsers()  {
+    public List<User> getAllUsers() {
         return userService.findAllUsers();
     }
 
@@ -53,3 +53,4 @@ public class UserController {
         return ResponseEntity.ok(userService.login(loginDTO));
     }
 }
+
