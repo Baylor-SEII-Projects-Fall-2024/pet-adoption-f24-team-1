@@ -10,6 +10,8 @@ import axios from 'axios';
 
 
 export default function ManagePets() {
+  // const [selection, setSelection] = useState<GridSelectionModel>([]);
+
   const [rows, setRows] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [newPetData, setNewPetData] = useState({
@@ -155,7 +157,6 @@ export default function ManagePets() {
             <DialogContentText>
               Please enter the details of the pet you want to insert.
             </DialogContentText>
-            <TextField autoFocus margin="dense" name="petID" label="Pet ID" type="text" fullWidth variant="outlined" value={newPetData.petID} onChange={handleInputChange}/>
             <TextField margin="dense" name="petName" label="Name"  type="text" fullWidth variant="outlined" value={newPetData.petName} onChange={handleInputChange}/>
             <TextField margin="dense"name="petBreed"label="Breed"type="text"fullWidth variant="outlined"value={newPetData.petBreed}onChange={handleInputChange}/>
             <TextField margin="dense"name="petGender"label="Gender"type="text"fullWidthvariant="outlined"value={newPetData.petGender}onChange={handleInputChange}/>
