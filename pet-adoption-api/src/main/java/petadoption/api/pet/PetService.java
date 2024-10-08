@@ -20,6 +20,10 @@ public class PetService {
         return petRepository.save(pet);
     }
 
+    public Optional<Pet> findPetById(Long id) {
+        return petRepository.findById(id);
+    }
+
     public boolean deletePet(Long id) {
         Optional<Pet> petOptional = petRepository.findById(id);
         if (petOptional.isPresent()) {
