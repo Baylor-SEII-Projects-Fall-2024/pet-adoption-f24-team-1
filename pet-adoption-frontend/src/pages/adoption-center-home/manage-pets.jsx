@@ -11,34 +11,62 @@ import axios from 'axios';
 
 export default function ManagePets() {
   const [rows, setRows] = useState([]);
-  const [columns, setColumns] = useState([]);
+
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const columns = [
+    { field: "petID", headerName: "Pet ID", width: 100 },
+    { field: "petName", headerName: "Name", width: 150 },
+    { field: "petBreed", headerName: "Breed", width: 150 },
+    { field: "petGender", headerName: "Gender", width: 120 },
+    { field: "petAge", headerName: "Age", width: 100 },
+    { field: "petWeight", headerName: "Weight (kg)", width: 130 },
+    { field: "petpecies", headerName: "Species", width: 150 },
+    { field: "color", headerName: "Color", width: 130 }
+  ];
   const [adoptionCenterName, setAdoptionCenter] = useState("")
 
 
-  const loadData = (e) => {
 
-    axios.get("http://localhost:8080/api/loadPetData", {
-      responseType: "json",
+  const [pets, setPets] = useState([]);  // State to hold the pet data
+  const [loading, setLoading] = useState(true);  // State to handle loading
+  const [error, setError] = useState(null);  // State to handle errors
 
-    })
-      .then(response => {
-        alert("Login successful!");
-        console.log(response.data); // Handle authentication state here
-      })
-        .catch(error => {
-          alert("Login failed: " + error.message);
-        });
-  };
-
-  const insertPets = (e) => {
-    axios.put("http://localhost:8080/api/insertPet/", {
-    })
-  };
-
-
+  // Fetch pet data from backend API
   useEffect(() => {
-    loadData();
-  }, [])
+    fetch('http://localhost:8080/api/pets')  // Adjust this endpoint as per your backend
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setPets(data);  // Set the fetched data to state
+        setLoading(false);  // Data fetching complete
+      })
+      .catch((error) => {
+        setError(error);  // Handle error
+        setLoading(false);
+      });
+      
+  }, []);
+
+
+
+  const petsData = pets.map(pet => ({
+    id: pet.petID,
+    petID: pet.petID,            // Pet ID column
+    petName: pet.petName,      // Pet's name
+    petBreed: pet.petBreed,    // Pet's breed
+    petGender: pet.petGender,  // Pet's gender
+    petAge: pet.petAge,        // Pet's age
+    petWeight: pet.petWeight,  // Pet's weight
+    petSpecies: pet.petSpecies,// Pet's species
+    color: pet.color             // Pet's color
+  }));
+
+  console.log(pets);
 
   return (
     <>
@@ -53,7 +81,7 @@ export default function ManagePets() {
         
           <Paper sx={{ height: 400, width: '50%' }}>
             <DataGrid
-              rows={rows}
+              rows={petsData}
               columns={columns}
               pageSizeOptions={[5, 10]}
               checkboxSelection
