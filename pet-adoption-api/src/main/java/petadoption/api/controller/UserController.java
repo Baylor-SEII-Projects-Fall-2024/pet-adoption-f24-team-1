@@ -1,8 +1,6 @@
-package petadoption.api.endpoint;
+package petadoption.api.controller;
 
 import lombok.extern.log4j.Log4j2;
-import org.apache.coyote.Response;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +14,8 @@ import java.util.List;
 @Log4j2
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-public class UserEndpoint {
+public class UserController {
+
 
     @Autowired
     private UserService userService;
@@ -39,7 +38,7 @@ public class UserEndpoint {
     }
 
     @GetMapping("/allusers")
-    public List<User> getAllUsers()  {
+    public List<User> getAllUsers() {
         return userService.findAllUsers();
     }
 
@@ -55,3 +54,4 @@ public class UserEndpoint {
         return ResponseEntity.ok(userService.login(loginDTO));
     }
 }
+
