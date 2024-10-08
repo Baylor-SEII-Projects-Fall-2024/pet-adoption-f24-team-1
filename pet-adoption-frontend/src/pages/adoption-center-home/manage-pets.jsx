@@ -10,7 +10,8 @@ import axios from 'axios';
 
 
 export default function ManagePets() {
-  const [openDialog, setOpenDialog] = useState(false);
+  const [openInsertDialog, setOpenInsertDialog] = useState(false);
+  const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
   const [selectionModel, setSelectionModel] = useState([]);
   const [newPetData, setNewPetData] = useState({
     petName: '',
@@ -21,6 +22,14 @@ export default function ManagePets() {
     petSpecies: '',
     color: ''
   });
+  const handleRowSelection = (selectionModel) => {
+    const selectedID = selectionModel[0]; // Only single row selection
+    const selectedPet = petsData.find((pet) => pet.id === selectedID);
+    setSelectionModel(selectedID)
+    setSelectedRow(selectedPet);
+    console.log(selectedRow);
+  };
+
   const columns = [
     { field: "petID", headerName: "Pet ID", width: 100 },
     { field: "petName", headerName: "Name", width: 150 },
@@ -74,7 +83,8 @@ export default function ManagePets() {
 
 
   const handleDialogClose = () => {
-    setOpenDialog(false);
+    setOpenInsertDialog(false);
+    setOpenUpdateDialog(false);
     setNewPetData({ // Reset pet data
       petName: '',
       petBreed: '',
@@ -99,6 +109,10 @@ export default function ManagePets() {
     color: pet.color             // Pet's color
   }));
 
+  const getPetById = (petId) => {
+    return petsData.find(pet => pet.id === petId);
+  }
+
   const handleInsertPet = () => {
     axios.post("http://localhost:8080/api/pets",newPetData )
       .then(response => {
@@ -110,10 +124,42 @@ export default function ManagePets() {
         setErrorMessage("Insert Failed: " + error.message);
       });
   };
-  const handleDialogOpen = () => {
-    setOpenDialog(true);
+  const handleInsertDialogOpen = () => {
+    setOpenInsertDialog(true);
   };
 
+  const handleUpdateDialogOpen = () => {
+    if (selectionModel.length === 1) { // Ensure only one pet is selected
+      const selectedPet = getPetById(selectionModel[0]);
+      if (selectedPet) {
+        setNewPetData({
+          petName: selectedPet.petName,
+          petBreed: selectedPet.petBreed,
+          petGender: selectedPet.petGender,
+          petAge: selectedPet.petAge,
+          petWeight: selectedPet.petWeight,
+          petSpecies: selectedPet.petSpecies,
+          color: selectedPet.color
+        });
+        setOpenUpdateDialog(true); // Open the update dialog
+      }
+    } else {
+      console.log('Please select one pet to update.');
+    }
+  };
+
+  const handleUpdatePet = () => {
+    const petID = selectionModel[0]; // Get the selected pet ID
+    axios.put(`http://localhost:8080/api/pets/${petID}`, newPetData) // Update the pet
+      .then(response => {
+        console.log('Update successful:', response.data);
+        loadData(); // Reload the data after the update
+        handleDialogClose(); // Close the dialog
+      })
+      .catch(error => {
+        console.error('Update failed:', error);
+      });
+  };
 
 
   const handleDeletePets = () => {
@@ -133,9 +179,6 @@ export default function ManagePets() {
     }  
 
   };
-
-
-
 
   
 
@@ -167,13 +210,13 @@ export default function ManagePets() {
           {/* </Paper> */}
 
           <Stack s1 = {{direction:'column', spacing:'2'}}>
-            <Button variant='contained' color="secondary" onClick={() => navigateTo()} className={styles.wideButton}>UPDATE</Button>
+            <Button variant='contained' color="secondary" onClick={() => handleUpdateDialogOpen()} className={styles.wideButton}>UPDATE</Button>
             <Button variant='contained' color="secondary" onClick={() => handleDeletePets()} className={styles.wideButton}>DELETE</Button>
-            <Button variant='contained' color="secondary" onClick={() => handleDialogOpen()}>Insert Pets</Button>            
+            <Button variant='contained' color="secondary" onClick={() => handleInsertDialogOpen()}>Insert Pets</Button>            
             <Button variant='contained' color="secondary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button>
           </Stack>
         </Stack>
-        <Dialog open={openDialog} onClose={handleDialogClose}>
+        <Dialog open={openInsertDialog} onClose={handleDialogClose}>
           <DialogTitle>Insert Pet</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -190,6 +233,26 @@ export default function ManagePets() {
           <DialogActions>
             <Button onClick={handleDialogClose}>Cancel</Button>
             <Button onClick={handleInsertPet}>Insert</Button>
+          </DialogActions>
+        </Dialog>
+
+        <Dialog open={openUpdateDialog} onClose={handleDialogClose}>
+          <DialogTitle>Update Pet</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Please change the details of the pet you want to update.
+            </DialogContentText>
+            <TextField margin="dense" name="petName" label="Name"  type="text" fullWidth variant="outlined" value={newPetData.petName} onChange={handleInputChange}/>
+            <TextField margin="dense"name="petBreed"label="Breed"type="text"fullWidth variant="outlined"value={newPetData.petBreed}onChange={handleInputChange}/>
+            <TextField margin="dense"name="petGender"label="Gender"type="text"fullWidthvariant="outlined"value={newPetData.petGender}onChange={handleInputChange}/>
+            <TextField margin="dense"name="petAge"label="Age"type="number"fullWidthvariant="outlined"value={newPetData.petAge}onChange={handleInputChange}/>
+            <TextField margin="dense"name="petWeight"label="Weight (kg)"type="number"fullWidthvariant="outlined"value={newPetData.petWeight}onChange={handleInputChange}/>
+            <TextField margin="dense"name="petSpecies"label="Species"type="text"fullWidth variant="outlined"value={newPetData.petSpecies}onChange={handleInputChange}/>
+            <TextField margin="dense"name="color"label="Color"type="text"fullWidthvariant="outlined"value={newPetData.color}onChange={handleInputChange}/>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleDialogClose}>Cancel</Button>
+            <Button onClick={handleUpdatePet}>Update</Button>
           </DialogActions>
         </Dialog>
 
