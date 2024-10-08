@@ -13,7 +13,6 @@ export default function ManagePets() {
   const [rows, setRows] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [newPetData, setNewPetData] = useState({
-    petID: '',
     petName: '',
     petBreed: '',
     petGender: '',
@@ -79,7 +78,6 @@ export default function ManagePets() {
   const handleDialogClose = () => {
     setOpenDialog(false);
     setNewPetData({ // Reset pet data
-      petID: '',
       petName: '',
       petBreed: '',
       petGender: '',
