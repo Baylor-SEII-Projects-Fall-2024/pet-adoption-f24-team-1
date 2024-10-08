@@ -1,21 +1,178 @@
-import React from 'react';
-import Head from 'next/head'
-import { Button, Card, CardContent, Stack, Typography } from '@mui/material'
-import styles from '@/styles/Home.module.css'
+import React, { useState } from 'react';
+import Head from 'next/head';
+import { Button, Grid, Stack, TextField, Typography } from '@mui/material';
+import Image from 'next/image';
+import axios from 'axios';
 
 export default function PetAdoptionForm() {
+    const [fullName, setFullName] = useState("");
+    const [licenseNumber, setLicenseNumber] = useState("");
+    const [address, setAddress] = useState("");
+    const [cityStateZip, setCityStateZip] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [email, setEmail] = useState("");
+    const [employer, setEmployer] = useState("");
+    const [jobTime, setJobTime] = useState("");
 
-  return (
-    <>
-      <Head>
-        <title>Pet Adoption Form</title>
-      </Head>
+    const [message, setMessage] = useState("");  // State to store success/error message
+    const [isSubmitted, setIsSubmitted] = useState(false);  // State to track submission
 
-      <main>
-        <Stack sx={{ paddingTop: 4 }} alignItems='center' gap={2}>
-          <p>Pet Adoption Form</p>
-        </Stack>
-      </main>
-    </>
-  );
+    // Form submission handler
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const formData = {
+            fullName,
+            licenseNumber,
+            address,
+            cityStateZip,
+            phoneNumber,
+            email,
+            employer,
+            jobTime
+        };
+
+        axios.post("http://localhost:8080/api/form", formData)
+            .then(response => {
+                setMessage("Form submitted successfully!");  // Set success message
+                setIsSubmitted(true);  // Mark the form as submitted
+            })
+            .catch(error => {
+                setMessage("There was an error submitting the form. Please try again.");  // Set error message
+                setIsSubmitted(true);  // Mark as submitted even on error
+            });
+    };
+
+    return (
+        <>
+            <Head>
+                <title>Pet Adoption Form</title>
+            </Head>
+
+            <main>
+                {!isSubmitted ? (
+                    <form onSubmit={handleSubmit}>
+                        <Stack sx={{ paddingTop: 4 }} alignItems="center" gap={2}>
+                            <Typography variant="h4">Pet Adoption Form</Typography>
+                        </Stack>
+
+                        <Grid container spacing={4} sx={{ my: 1 }}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="fullName"
+                                    placeholder="Enter your full name"
+                                    label="Full Name"
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    onChange={(e) => setFullName(e.target.value)}
+                                />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="licenseNumber"
+                                    placeholder="Enter your license number"
+                                    label="License Number"
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    onChange={(e) => setLicenseNumber(e.target.value)}
+                                />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="address"
+                                    placeholder="Enter your address"
+                                    label="Address"
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    onChange={(e) => setAddress(e.target.value)}
+                                />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="cityStateZip"
+                                    placeholder="Enter your city, state, and ZIP code"
+                                    label="City, State, ZIP"
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    onChange={(e) => setCityStateZip(e.target.value)}
+                                />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="phoneNumber"
+                                    placeholder="Enter your phone number"
+                                    label="Phone Number"
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="email"
+                                    placeholder="Enter your email address"
+                                    label="Email Address"
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="employer"
+                                    placeholder="Enter your employer"
+                                    label="Employer"
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    onChange={(e) => setEmployer(e.target.value)}
+                                />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="jobTime"
+                                    placeholder="How long have you been at this job?"
+                                    label="Job Duration"
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    onChange={(e) => setJobTime(e.target.value)}
+                                />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <Button type="submit" variant="contained" color="primary" fullWidth>
+                                    Submit Form
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </form>
+                ) : (
+                    <Stack sx={{ paddingTop: 4 }} alignItems="center" gap={2}>
+                        <Image
+                            src="/checkmark.png"
+                            alt="Success"
+                            width={100}
+                            height={100}
+                            />
+                        <Typography variant="h4">Thank You!</Typography>
+                        <Typography variant="body1">Your pet adoption form has been successfully submitted.</Typography>
+                    </Stack>
+                )}
+            </main>
+        </>
+    );
 }
