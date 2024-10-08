@@ -3,17 +3,15 @@ import Head from 'next/head'
 import { Button, Stack, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
 import styles from '@/styles/Home.module.css'
 import Paper from '@mui/material/Paper';
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
-import { useEffect, useState } from 'react'
+import { DataGrid, GridSelectionModel} from '@mui/x-data-grid';
+import { useRef,useEffect, useState } from 'react'
 import axios from 'axios';
 
 
 
 export default function ManagePets() {
-  // const [selection, setSelection] = useState<GridSelectionModel>([]);
-
-  const [rows, setRows] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
+  const [selectionModel, setSelectionModel] = useState([]);
   const [newPetData, setNewPetData] = useState({
     petName: '',
     petBreed: '',
@@ -23,18 +21,6 @@ export default function ManagePets() {
     petSpecies: '',
     color: ''
   });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewPetData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-    console.log(newPetData);
-  };
-
-  const [errorMessage, setErrorMessage] = useState('');
-
   const columns = [
     { field: "petID", headerName: "Pet ID", width: 100 },
     { field: "petName", headerName: "Name", width: 150 },
@@ -46,12 +32,22 @@ export default function ManagePets() {
     { field: "color", headerName: "Color", width: 130 }
   ];
   const [adoptionCenterName, setAdoptionCenter] = useState("")
-
-
-
   const [pets, setPets] = useState([]);  // State to hold the pet data
   const [loading, setLoading] = useState(true);  // State to handle loading
   const [error, setError] = useState(null);  // State to handle errors
+  const [selectedRows, setSelectedRows] = React.useState([]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewPetData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+    console.log(newPetData);
+  };  
+
+
+
 
 
   const loadData = () => {
@@ -120,6 +116,26 @@ export default function ManagePets() {
 
 
 
+  const handleDeletePets = () => {
+    const selectedIds = selectionModel; // selection should be an array now
+
+    
+    console.log("Selected IDs for deletion:", selectionModel);
+    for(const petID of selectedIds){
+      axios
+        .delete(`http://localhost:8080/api/pets/${petID}`)
+        .then(response => {
+          loadData();
+        })
+        .catch(error => {
+          console.error("Deletion Failed:", error);
+        });
+    }  
+
+  };
+
+
+
 
   
 
@@ -134,21 +150,27 @@ export default function ManagePets() {
 
         <Stack sx={{  paddingTop: 10, flexDirection:'row', flexGrow: 1,spacing:'4'}}  gap={2}>
         
-          <Paper sx={{ height: 400, width: '50%' }}>
+          {/* <Paper sx={{ height: 400, width: '50%' }}> */}
             <DataGrid
               rows={petsData}
               columns={columns}
-              pageSizeOptions={[5, 10]}
-              checkboxSelection
+              pageSizeOptions={[2,50, 100]}
               sx={{ border: 0 }}
+              checkboxSelection
+              onRowSelectionModelChange={(newSelection) => {
+                setSelectionModel(newSelection);
+                console.log(newSelection); // This will print the array of selected IDs
+              }}
+              selectionModel={selectionModel}
             />
-          </Paper>
+    
+          {/* </Paper> */}
 
           <Stack s1 = {{direction:'column', spacing:'2'}}>
-            <Button variant='contained' color="secondary" onClick={() => navigateTo('adoption-center-home')} className={styles.wideButton}>UPDATE</Button>
-            <Button variant='contained' color="secondary" onClick={() => navigateTo('adoption-center-home')} className={styles.wideButton}>DELETE</Button>
-            <Button variant='contained' color="secondary" onClick={handleDialogOpen}>Insert Pets</Button>            
-            <Button variant='contained' color="secondary" onClick={() => navigateTo('adoption-center-home')} className={styles.wideButton}>LOAD DATA</Button>
+            <Button variant='contained' color="secondary" onClick={() => navigateTo()} className={styles.wideButton}>UPDATE</Button>
+            <Button variant='contained' color="secondary" onClick={() => handleDeletePets()} className={styles.wideButton}>DELETE</Button>
+            <Button variant='contained' color="secondary" onClick={() => handleDialogOpen()}>Insert Pets</Button>            
+            <Button variant='contained' color="secondary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button>
           </Stack>
         </Stack>
         <Dialog open={openDialog} onClose={handleDialogClose}>
