@@ -13,7 +13,7 @@ export default function Login() {
     e.preventDefault();
 
     axios.post("http://localhost:8080/api/login", {
-      email: email,
+      username: email,
       password: password,
     })
             .then(response => {

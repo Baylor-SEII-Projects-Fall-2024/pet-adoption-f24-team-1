@@ -1,16 +1,20 @@
 import * as React from 'react';
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Stack } from '@mui/material';
+import PetsIcon from '@mui/icons-material/Pets';
 import { useState, useEffect } from 'react';
-
+import { useRouter } from 'next/router';
 
 const pages = ['Centers', 'Policies', 'Help'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Settings', 'Logout'];
 const loginSettings = ['Login', 'Create Account'];
 
 export default function NavBar() {
+  const router = useRouter();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [user, setUser] = useState(null);
+
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -27,6 +31,22 @@ export default function NavBar() {
     setAnchorElUser(null);
   };
 
+  const handleNav = (setting) => {
+    console.log(setting);
+    if(setting === 'Login')  {
+      router.push('/login');
+    }
+    if(setting === 'Create Account') {
+      router.push('/create-account');
+    }
+    if(setting === 'Settings')  {
+      router.push('/settings');
+    }
+    if(setting === 'Logout')  {
+
+    }
+  };
+
   useEffect(() => {
     const userFromLocalStorage = JSON.parse(sessionStorage.getItem('user'));
     if (userFromLocalStorage) {
@@ -40,23 +60,26 @@ export default function NavBar() {
     <AppBar position="static">
       <Container maxWidth={false}>
         <Toolbar disableGutters sx={{width: `100%`}}>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/user-home"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <PetsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              FLUFFY FRIENDS
+            </Typography>
+          </Stack>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -125,7 +148,7 @@ export default function NavBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {user ? <Avatar/> : <Avatar>?</Avatar>}
+                {user ? <Avatar>{user.email.substring(0,1)}</Avatar> : <Avatar>?</Avatar>}
               </IconButton>
             </Tooltip>
             <Menu
@@ -145,7 +168,7 @@ export default function NavBar() {
               onClose={handleCloseUserMenu}
             >
               {(user ? settings : loginSettings).map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={() => handleNav(setting)}>
                   <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
                 </MenuItem>
               ))}
