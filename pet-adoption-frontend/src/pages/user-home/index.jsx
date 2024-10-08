@@ -42,7 +42,7 @@ export default function UserHome() {
         gender: 'Male',
         weight: 25,
         imgSrc: 'https://t4.ftcdn.net/jpg/02/90/84/47/360_F_290844781_V4hoIL3E291xvY5nEL7NCaWIoCIQxHfI.jpg',
-        location: {adoptionCenter: 'Pet Heaven', address: '987 Round About Ln, Waco, '},
+        location: {adoptionCenter: 'Pet Heaven', address: '987 Round About Ln, Waco, TX 76706'},
         description: 'Max is a 3-year-old Labrador Retriever with a friendly and loving nature. He is a bit shy but is eager to please.',
         adopted: false
       },
@@ -88,7 +88,7 @@ export default function UserHome() {
             <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2} sx={{}}>
               {pets.map((pet) => (
                 <Grid item>
-                  <PetCard key={pet.id} name={pet.name} breed={pet.breed} age={pet.age} gender={pet.gender} weight={pet.weight} imgSrc={pet.imgSrc} id={pet.id}/>
+                  <PetCard key={pet.id} name={pet.name} breed={pet.breed} age={pet.age} gender={pet.gender} weight={pet.weight} imgSrc={pet.imgSrc} id={pet.id} location={pet.location}/>
                 </Grid>
               ))}
             </Grid>

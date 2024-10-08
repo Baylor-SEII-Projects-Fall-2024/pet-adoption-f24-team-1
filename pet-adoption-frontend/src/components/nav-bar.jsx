@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Stack } from '@mui/material';
 import PetsIcon from '@mui/icons-material/Pets';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useStyles } from 'react';
 import { useRouter } from 'next/router';
 
 const pages = ['Centers', 'Policies', 'Help'];
 const settings = ['Settings', 'Logout'];
 const loginSettings = ['Login', 'Create Account'];
 
+
+
 export default function NavBar() {
   const router = useRouter();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [user, setUser] = useState(null);
-
-
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -116,6 +116,7 @@ export default function NavBar() {
             </Menu>
           </Box>
           
+          <PetsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -132,8 +133,9 @@ export default function NavBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            FLUFFY FRIENDS
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button

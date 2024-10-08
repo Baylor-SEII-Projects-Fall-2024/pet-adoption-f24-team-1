@@ -41,9 +41,9 @@ export default function PetCard(props) {
         <Stack direction="column" alignItems="center">
           <Typography variant="h6">{props.name}</Typography>
           <Typography variant="body2">Adoption Center</Typography>
-          <Stack direction="row" alignItems="center" spacing={1} sx={{ width: "100%", marginLeft: 0, border: 1, borderRadius: 1, borderColor: theme.palette.primary.dark }}>
+          <Stack direction="row" alignItems="center" spacing={1} sx={{ width: "105%", marginLeft: 0, border: 1, borderRadius: 1, borderColor: theme.palette.primary.dark }}>
             <LocationOnIcon fontSize="11px" sx={{ color: theme.palette.primary.light }}/>
-            <Typography variant="body2">Location</Typography>
+            <Typography variant="caption">{props.location.address}</Typography>
           </Stack>
         </Stack>
         <Grid container direction="column" alignItems="center" justifyContent="center" rowGap={2}>
