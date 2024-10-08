@@ -157,93 +157,14 @@ export default function ManagePets() {
             <DialogContentText>
               Please enter the details of the pet you want to insert.
             </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              name="petID"
-              label="Pet ID"
-              type="text"
-              fullWidth
-              variant="outlined"
-              value={newPetData.petID}
-              onChange={handleInputChange}
-            />
-            <TextField
-              margin="dense"
-              name="petName"
-              label="Name"
-              type="text"
-              fullWidth
-              variant="outlined"
-              value={newPetData.petName}
-              onChange={handleInputChange}
-            />
-            <TextField
-              margin="dense"
-              name="petBreed"
-              label="Breed"
-              type="text"
-              fullWidth
-              variant="outlined"
-              value={newPetData.petBreed}
-              onChange={handleInputChange}
-
-            />
-            <TextField
-              margin="dense"
-              name="petGender"
-              label="Gender"
-              type="text"
-              fullWidth
-              variant="outlined"
-              value={newPetData.petGender}
-              onChange={handleInputChange}
-
-            />
-            <TextField
-              margin="dense"
-              name="petAge"
-              label="Age"
-              type="number"
-              fullWidth
-              variant="outlined"
-              value={newPetData.petAge}
-              onChange={handleInputChange}
-
-            />
-            <TextField
-              margin="dense"
-              name="petWeight"
-              label="Weight (kg)"
-              type="number"
-              fullWidth
-              variant="outlined"
-              value={newPetData.petWeight}
-              onChange={handleInputChange}
-
-            />
-            <TextField
-              margin="dense"
-              name="petSpecies"
-              label="Species"
-              type="text"
-              fullWidth
-              variant="outlined"
-              value={newPetData.petSpecies}
-              onChange={handleInputChange}
-
-            />
-            <TextField
-              margin="dense"
-              name="color"
-              label="Color"
-              type="text"
-              fullWidth
-              variant="outlined"
-              value={newPetData.color}
-              onChange={handleInputChange}
-
-            />
+            <TextField autoFocus margin="dense" name="petID" label="Pet ID" type="text" fullWidth variant="outlined" value={newPetData.petID} onChange={handleInputChange}/>
+            <TextField margin="dense" name="petName" label="Name"  type="text" fullWidth variant="outlined" value={newPetData.petName} onChange={handleInputChange}/>
+            <TextField margin="dense"name="petBreed"label="Breed"type="text"fullWidth variant="outlined"value={newPetData.petBreed}onChange={handleInputChange}/>
+            <TextField margin="dense"name="petGender"label="Gender"type="text"fullWidthvariant="outlined"value={newPetData.petGender}onChange={handleInputChange}/>
+            <TextField margin="dense"name="petAge"label="Age"type="number"fullWidthvariant="outlined"value={newPetData.petAge}onChange={handleInputChange}/>
+            <TextField margin="dense"name="petWeight"label="Weight (kg)"type="number"fullWidthvariant="outlined"value={newPetData.petWeight}onChange={handleInputChange}/>
+            <TextField margin="dense"name="petSpecies"label="Species"type="text"fullWidth variant="outlined"value={newPetData.petSpecies}onChange={handleInputChange}/>
+            <TextField margin="dense"name="color"label="Color"type="text"fullWidthvariant="outlined"value={newPetData.color}onChange={handleInputChange}/>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleDialogClose}>Cancel</Button>
