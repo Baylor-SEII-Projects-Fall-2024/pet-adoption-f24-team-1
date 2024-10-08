@@ -13,7 +13,6 @@ export default function ManagePets() {
   const [rows, setRows] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [newPetData, setNewPetData] = useState({
-    petID: '',
     petName: '',
     petBreed: '',
     petGender: '',
@@ -79,7 +78,6 @@ export default function ManagePets() {
   const handleDialogClose = () => {
     setOpenDialog(false);
     setNewPetData({ // Reset pet data
-      petID: '',
       petName: '',
       petBreed: '',
       petGender: '',
@@ -157,17 +155,6 @@ export default function ManagePets() {
             <DialogContentText>
               Please enter the details of the pet you want to insert.
             </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              name="petID"
-              label="Pet ID"
-              type="text"
-              fullWidth
-              variant="outlined"
-              value={newPetData.petID}
-              onChange={handleInputChange}
-            />
             <TextField
               margin="dense"
               name="petName"
