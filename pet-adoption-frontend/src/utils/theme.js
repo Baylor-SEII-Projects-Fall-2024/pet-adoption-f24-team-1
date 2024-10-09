@@ -33,6 +33,21 @@ const themeOptions = {
                 },
             },
         },
+    },
+    palette: {
+        primary: {
+            main: '#008CBA',
+            light: '#4CAF50',
+            dark: '#004575',
+        },
+        secondary: {
+            main: '#f44336',
+            light: '#ff9800',
+            dark: '#b71c1c',
+        },
+        background: {
+            default: '#f5f5f5',
+        }
     }
 };
 

@@ -14,6 +14,7 @@ export default function UserHome() {
   const router = useRouter();
 
   const [pets, setPets] = useState([]);
+  
 
   const navigateTo = (page) => {
     router.push(page);
@@ -60,15 +61,16 @@ export default function UserHome() {
       }
     ]
     setPets(recommendedPets);
-    /*
-    axios.get('/api/pets')
+    
+    axios.get('http://localhost:8080/api/pets')
      .then(response => {
-        setPets(response.data);
+        console.log(response.data);
+        //setPets(response.data);
       })
      .catch(error => {
         console.error('Error fetching pets:', error);
       });
-      */
+      
 
   }, []);
 

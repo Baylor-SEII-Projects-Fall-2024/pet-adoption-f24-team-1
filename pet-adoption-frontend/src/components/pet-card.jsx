@@ -6,9 +6,14 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { red } from '@mui/material/colors';
 import { useState } from'react';
+import PetInfoModal from '@/components/pet-info-modal';
 
 export default function PetCard(props) {
   const [liked, setLiked] = useState(false);
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => console.log(setOpen(false));
 
   const theme = useTheme();
   const breed = props.breed.length < 11 ? props.breed : props.breed.substring(0, 8) + '...';
@@ -27,25 +32,30 @@ export default function PetCard(props) {
 
   
   return (
+    <Box>
     <Paper sx={{ width: 250, marginBottom: 10 }} elevation={3}>
       <Grid container direction="column" alignItems="center" justifyContent="center" rowGap={2}>
 
         <Box component="img" sx={{ width: 250, height: 120, objectFit: "cover"}} src={props.imgSrc} alt="pet image"/>
           
-        <Box sx={{ width: 240, position: "absolute", display: "flex", marginTop: -5 }} justifyContent="flex-start">
+        <Box sx={{ width: 240, position: "absolute", display: "flex", marginTop: -9 }} justifyContent="flex-start">
           <IconButton color="primary" size="small" onClick={handleLikedPet}>
             {liked ? <FavoriteIcon sx={{ color: red[500] }} /> : <FavoriteBorderIcon sx={{ color: red[500] }} color="red"/>}
           </IconButton>
         </Box>
 
-        <Stack direction="column" alignItems="center">
-          <Typography variant="h6">{props.name}</Typography>
-          <Typography variant="body2">Adoption Center</Typography>
-          <Stack direction="row" alignItems="center" spacing={1} sx={{ width: "105%", marginLeft: 0, border: 1, borderRadius: 1, borderColor: theme.palette.primary.dark }}>
+        <Stack direction="column" alignItems="center" >
+          <Typography variant="h6" marginBottom={2}>{props.name}</Typography>
+          <Stack direction="row" alignItems="center" spacing={1} marginLeft={-3}>
             <LocationOnIcon fontSize="11px" sx={{ color: theme.palette.primary.light }}/>
-            <Typography variant="caption">{props.location.address}</Typography>
+            <Typography variant="body2">{props.location.adoptionCenter}</Typography>
+          </Stack>
+          <Stack direction="row" alignItems="center" spacing={1} >
+            
+            <Typography fontSize="11px">{props.location.address}</Typography>
           </Stack>
         </Stack>
+
         <Grid container direction="column" alignItems="center" justifyContent="center" rowGap={2}>
           <Stack direction={{ xs: 'column', sm: 'row'}} spacing={2}>
             <Stack justifyContent="space-between" direction="row" spacing={1} alignItems="center" sx={{width: 105}}>
@@ -78,9 +88,15 @@ export default function PetCard(props) {
         </Grid>
 
         <Box sx={{ width: 200, height: 50 }}>
-          <Button sx={{ width: 200 }}variant="outlined" color="primary">Pet Info</Button>
+          <Button onClick={handleOpen} sx={{ width: 200 }}variant="outlined" color="primary">Pet Info</Button>
         </Box>
       </Grid>
     </Paper>
+
+    <PetInfoModal open={open} handleClose={handleClose} pet={props} />
+
+    </Box>
+
+    
   );
 }
