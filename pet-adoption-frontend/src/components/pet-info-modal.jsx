@@ -48,6 +48,7 @@ export default function PetInfoModal(props) {
               <Button onClick={props.handleClose}>Close Child Modal</Button>
             </Box>
 
+            <ImageDropzone />
            
 
           </Box>

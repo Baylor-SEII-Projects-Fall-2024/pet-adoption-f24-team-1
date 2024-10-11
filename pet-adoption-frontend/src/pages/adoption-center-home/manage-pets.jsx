@@ -1,11 +1,12 @@
 import * as React from 'react';
 import Head from 'next/head'
-import { Button, Stack, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
+import { Button, Stack, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Box } from '@mui/material'
 import styles from '@/styles/Home.module.css'
 import Paper from '@mui/material/Paper';
 import { DataGrid, GridSelectionModel} from '@mui/x-data-grid';
 import { useRef,useEffect, useState } from 'react'
 import axios from 'axios';
+import ImageDropzone from '@/components/image-dropzone';
 
 
 
@@ -20,8 +21,10 @@ export default function ManagePets() {
     petAge: '',
     petWeight: '',
     petSpecies: '',
-    color: ''
+    color: '',
+    imgUrl: ''
   });
+
   const handleRowSelection = (selectionModel) => {
     const selectedID = selectionModel[0]; // Only single row selection
     const selectedPet = petsData.find((pet) => pet.id === selectedID);
@@ -37,8 +40,9 @@ export default function ManagePets() {
     { field: "petGender", headerName: "Gender", width: 120 },
     { field: "petAge", headerName: "Age", width: 100 },
     { field: "petWeight", headerName: "Weight (kg)", width: 130 },
-    { field: "petpecies", headerName: "Species", width: 150 },
-    { field: "color", headerName: "Color", width: 130 }
+    { field: "petSpecies", headerName: "Species", width: 150 },
+    { field: "color", headerName: "Color", width: 130 },
+    { field: "imgUrl", headerName: "Image URL", width: 130 }
   ];
   const [adoptionCenterName, setAdoptionCenter] = useState("")
   const [pets, setPets] = useState([]);  // State to hold the pet data
@@ -92,7 +96,8 @@ export default function ManagePets() {
       petAge: '',
       petWeight: '',
       petSpecies: '',
-      color: ''
+      color: '',
+      imgUrl: ''
     });
   };
 
@@ -106,7 +111,8 @@ export default function ManagePets() {
     petAge: pet.petAge,        // Pet's age
     petWeight: pet.petWeight,  // Pet's weight
     petSpecies: pet.petSpecies,// Pet's species
-    color: pet.color             // Pet's color
+    color: pet.color,             // Pet's color
+    imgUrl: pet.imgUrl         // Pet's image URL
   }));
 
   const getPetById = (petId) => {
@@ -114,6 +120,7 @@ export default function ManagePets() {
   }
 
   const handleInsertPet = () => {
+    console.log('Should see this: ' + newPetData.imgUrl);
     axios.post("http://localhost:8080/api/pets",newPetData )
       .then(response => {
         loadData(); // Reload data to see the newly inserted pet
@@ -139,7 +146,8 @@ export default function ManagePets() {
           petAge: selectedPet.petAge,
           petWeight: selectedPet.petWeight,
           petSpecies: selectedPet.petSpecies,
-          color: selectedPet.color
+          color: selectedPet.color,
+          imgUrl: selectedPet.imgUrl 
         });
         setOpenUpdateDialog(true); // Open the update dialog
       }
@@ -226,9 +234,12 @@ export default function ManagePets() {
             <TextField margin="dense"name="petBreed"label="Breed"type="text"fullWidth variant="outlined"value={newPetData.petBreed}onChange={handleInputChange}/>
             <TextField margin="dense"name="petGender"label="Gender"type="text"fullWidthvariant="outlined"value={newPetData.petGender}onChange={handleInputChange}/>
             <TextField margin="dense"name="petAge"label="Age"type="number"fullWidthvariant="outlined"value={newPetData.petAge}onChange={handleInputChange}/>
-            <TextField margin="dense"name="petWeight"label="Weight (kg)"type="number"fullWidthvariant="outlined"value={newPetData.petWeight}onChange={handleInputChange}/>
+            <TextField margin="dense"name="petWeight"label="Weight (kg)"type="number" fullWidthvariant="outlined"value={newPetData.petWeight}onChange={handleInputChange}/>
             <TextField margin="dense"name="petSpecies"label="Species"type="text"fullWidth variant="outlined"value={newPetData.petSpecies}onChange={handleInputChange}/>
-            <TextField margin="dense"name="color"label="Color"type="text"fullWidthvariant="outlined"value={newPetData.color}onChange={handleInputChange}/>
+            <TextField margin="dense"name="color"label="Color"type="text"fullWidth variant="outlined"value={newPetData.color}onChange={handleInputChange}/>
+
+            <ImageDropzone newPetData={newPetData}/>
+
           </DialogContent>
           <DialogActions>
             <Button onClick={handleDialogClose}>Cancel</Button>
@@ -248,7 +259,12 @@ export default function ManagePets() {
             <TextField margin="dense"name="petAge"label="Age"type="number"fullWidthvariant="outlined"value={newPetData.petAge}onChange={handleInputChange}/>
             <TextField margin="dense"name="petWeight"label="Weight (kg)"type="number"fullWidthvariant="outlined"value={newPetData.petWeight}onChange={handleInputChange}/>
             <TextField margin="dense"name="petSpecies"label="Species"type="text"fullWidth variant="outlined"value={newPetData.petSpecies}onChange={handleInputChange}/>
-            <TextField margin="dense"name="color"label="Color"type="text"fullWidthvariant="outlined"value={newPetData.color}onChange={handleInputChange}/>
+            <TextField margin="dense"name="color"label="Color"type="text"fullWidth variant="outlined"value={newPetData.color}onChange={handleInputChange}/>
+
+            <Box sx={{ width: 200, height: 50 }}>
+              <ImageDropzone newPetData={newPetData}/>
+            </Box>
+
           </DialogContent>
           <DialogActions>
             <Button onClick={handleDialogClose}>Cancel</Button>

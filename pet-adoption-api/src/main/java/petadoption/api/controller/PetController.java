@@ -45,6 +45,7 @@ public class PetController {
         pet.setPetWeight(updatedPet.getPetWeight());
         pet.setPetSpecies(updatedPet.getPetSpecies());
         pet.setColor(updatedPet.getColor());
+        pet.setImgUrl(updatedPet.getImgUrl());
 
         Pet savedPet = petService.savePet(pet);
         return new ResponseEntity<>(savedPet, HttpStatus.OK);
