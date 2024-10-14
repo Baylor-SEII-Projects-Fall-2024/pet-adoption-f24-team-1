@@ -63,8 +63,7 @@ export default function ManagePets() {
       setLoading(false);  // Data fetching complete
     })
     .catch((error) => {
-      setError(error);  // Handle error
-      setLoading(false);
+      console.log(error);
     });
   };
 
@@ -107,7 +106,6 @@ export default function ManagePets() {
       })
       .catch(error => {
         console.error("Insert Failed:", error);
-        setErrorMessage("Insert Failed: " + error.message);
       });
   };
   const handleDialogOpen = () => {
