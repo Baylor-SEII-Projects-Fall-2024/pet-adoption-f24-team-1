@@ -33,9 +33,6 @@ export default function ManagePets() {
   ];
   const [adoptionCenterName, setAdoptionCenter] = useState("")
   const [pets, setPets] = useState([]);  // State to hold the pet data
-  const [loading, setLoading] = useState(true);  // State to handle loading
-  const [error, setError] = useState(null);  // State to handle errors
-  const [selectedRows, setSelectedRows] = React.useState([]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -60,7 +57,6 @@ export default function ManagePets() {
     })
     .then((data) => {
       setPets(data);  // Set the fetched data to state
-      setLoading(false);  // Data fetching complete
     })
     .catch((error) => {
       console.log(error);
