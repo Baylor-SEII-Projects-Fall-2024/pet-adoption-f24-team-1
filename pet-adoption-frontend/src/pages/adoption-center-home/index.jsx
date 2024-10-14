@@ -23,6 +23,7 @@ export default function AdoptionCenterHome() {
         </Stack>
         <Stack sx={{ display: "flex", flexWrap: "wrap", alignItems: "ceneter", justifyContent: 'center'}} direction="row">
             <Button variant='contained' onClick={() => navigateTo('/adoption-center-home/manage-pets')} sx={{ width: 200 }}>Manage Pets</Button>
+            <Button variant='contained' onClick={() => navigateTo('/adoption-center-home/manage-events')} sx={{ width: 200 }}>Manage Events</Button>
           </Stack>
       </main>
     </>
