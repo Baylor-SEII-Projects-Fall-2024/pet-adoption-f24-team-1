@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "event")
@@ -15,10 +15,11 @@ import java.util.Date;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long eventId;
+    // Why are there two event ids?? one event_id and one eventID
+    private long eventID;
 
     private String title;
-    private Date date;
+    private LocalDateTime date;
     private String description;
     private String location;
 }

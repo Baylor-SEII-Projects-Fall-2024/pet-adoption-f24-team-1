@@ -1,6 +1,6 @@
 USE petadoption;
 
-DELETE FROM pet;
+DELETE FROM event;
 
 INSERT INTO pet (petID, pet_name, pet_breed, pet_gender, pet_age, pet_weight, pet_species, color)
 VALUES (1, 'Buddy', 'Golden Retriever', 'Male', 3, 30, 'Dog', 'Golden');

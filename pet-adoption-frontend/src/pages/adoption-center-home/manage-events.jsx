@@ -1,0 +1,238 @@
+import * as React from 'react';
+import Head from 'next/head'
+import { Button, Stack, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
+import styles from '@/styles/Home.module.css'
+import Paper from '@mui/material/Paper';
+import { DataGrid, GridSelectionModel} from '@mui/x-data-grid';
+import { useRef,useEffect, useState } from 'react'
+import axios from 'axios';
+
+
+
+export default function ManageEvents() {
+  const [openInsertDialog, setOpenInsertDialog] = useState(false);
+  const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
+  const [selectionModel, setSelectionModel] = useState([]);
+  const [newEventData, setNewEventData] = useState({
+    eventTitle: '',
+    eventDate: '',
+    eventDescription: '',
+    eventLocation: ''
+  });
+  const columns = [
+    { field: "eventID", headerName: "Event ID", width: 100 },
+    { field: "title", headerName: "Title", width: 100 },
+    { field: "date", headerName: "Date", width: 100 },
+    { field: "description", headerName: "Description", width: 100 },
+    { field: "location", headerName: "Location", width: 100 },
+  ];
+  const [events, setEvents] = useState([]);  // State to hold the event data
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewEventData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+    console.log(newEventData);
+  };  
+
+
+
+
+
+  const loadData = () => {
+    fetch('http://localhost:8080/api/events') 
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+       return response.json();
+    })
+    .then((data) => {
+      setEvents(data); 
+    })
+    .catch((error) => {
+      throw error;
+    });
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+
+  const handleDialogClose = () => {
+    setOpenInsertDialog(false);
+    setOpenUpdateDialog(false);
+    setNewEventData({ // Reset event data
+      eventTitle: '',
+      eventDate: '',
+      eventDescription: '',
+      eventLocation: ''  
+    });
+    loadData(); // Reload data to see the newly inserted event
+  };
+
+
+  const eventsData = events.map(event => ({
+    id: event.eventID,
+    eventID: event.eventID,
+    title: event.title,
+    date: event.date,
+    description: event.description,
+    location: event.location
+    }));
+
+    const getEventByID = (eventID) => {
+      return eventsData.find(event => event.id === eventID);
+    }
+
+  const handleInsertEvent = () => {
+    axios.post("http://localhost:8080/api/events", newEventData )
+      .then(response => {
+        handleDialogClose();
+
+      })
+      .catch(error => {
+        if (error.response) {
+          console.error('Server error:', error.response.data);
+          console.error('Status code:', error.response.status);
+          console.error('Headers:', error.response.headers);
+          console.log(newEventData);
+        } else {
+          console.error('Error:', error.message);
+        }
+      });
+    }
+
+  const handleInsertDialogOpen = () => {
+    setOpenInsertDialog(true);
+  };
+
+
+
+  const handleDeleteEvents = () => {
+    const selectedIDs = selectionModel; // selection should be an array now
+
+    
+    console.log("Selected IDs for deletion:", selectionModel);
+    for(const eventID of selectedIDs){
+      axios
+        .delete(`http://localhost:8080/api/events/${eventID}`)
+        .then(response => {
+          loadData();
+        })
+        .catch(error => {
+          console.error("Deletion Failed:", error);
+        });
+    }  
+
+  };
+
+
+  const handleUpdateDialogOpen = () => {
+    if (selectionModel.length === 1) { // Ensure only one event is selected
+      const selectedEvent = getEventByID(selectionModel[0]);
+      if (selectedEvent) {
+        setNewEventData({
+          eventTitle: selectedEvent.eventTitle,
+          eventDate: selectedEvent.eventDate,
+          eventDescription: selectedEvent.eventDescription,
+          eventLocation: selectedEvent.eventLocation,
+
+        });
+        setOpenUpdateDialog(true); // Open the update dialog
+      }
+    } else {
+      console.log('Please select one event to update.');
+    }
+  };
+
+  const handleUpdateEvent = () => {
+    const eventID = selectionModel[0]; // Get the selected event ID
+    axios.put(`http://localhost:8080/api/events/${eventID}`, newEventData) // Update the event
+      .then(response => {
+        console.log('Update successful:', response.data);
+        loadData(); // Reload the data after the update
+        handleDialogClose(); // Close the dialog
+      })
+      .catch(error => {
+        console.error('Update failed:', error);
+      });
+  };
+
+  
+
+  return (
+    <>
+      <Head>
+        <title>Manage Events</title>
+      </Head>
+
+      <main>          
+      <p>Manage Events Page</p>
+
+        <Stack sx={{  paddingTop: 10, flexDirection:'row', flexGrow: 1,spacing:'4'}}  gap={2}>
+        
+          {/* <Paper sx={{ height: 400, width: '50%' }}> */}
+            <DataGrid
+              rows={eventsData}
+              columns={columns}
+              pageSizeOptions={[2, 50, 100]}
+              sx={{ border: 0 }}
+              checkboxSelection
+              onRowSelectionModelChange={(newSelection) => {
+                setSelectionModel(newSelection);
+                console.log(newSelection); // This will print the array of selected IDs
+              }}
+              selectionModel={selectionModel}
+            />
+    
+          {/* </Paper> */}
+
+          <Stack s1 = {{direction:'column', spacing:'2'}}>
+            <Button variant='contained' color="secondary" onClick={() => handleUpdateDialogOpen()} className={styles.wideButton}>UPDATE</Button>
+            <Button variant='contained' color="secondary" onClick={() => handleDeleteEvents()} className={styles.wideButton}>DELETE</Button>
+            <Button variant='contained' color="secondary" onClick={() => handleInsertDialogOpen()}>Insert Events</Button>            
+            <Button variant='contained' color="secondary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button>
+          </Stack>
+        </Stack>
+        <Dialog open={openInsertDialog} onClose={handleDialogClose}>
+          <DialogTitle>Insert event</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Please enter the details of the event you want to insert.
+            </DialogContentText>
+  {/* //date; 
+  //description;
+  //location; */}
+             <TextField margin="dense" name="eventTitle" label="Title"  type="text" fullWidth variant="outlined" value={newEventData.eventTitle} onChange={handleInputChange}/>
+             <TextField margin="dense" name="eventDate" label="Date"  type="date" fullWidth variant="outlined" value={newEventData.eventDate} onChange={handleInputChange}/>
+             <TextField margin="dense" name="eventDescription" label="Description"  type="text" fullWidth variant="outlined" value={newEventData.eventDescription} onChange={handleInputChange}/>
+             <TextField margin="dense" name="eventLocation" label="Location"  type="text" fullWidth variant="outlined" value={newEventData.eventLocation} onChange={handleInputChange}/>
+
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleDialogClose}>Cancel</Button>
+            <Button onClick={handleInsertEvent}>Insert</Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog open={openUpdateDialog} onClose={handleDialogClose}>
+          <DialogTitle>Update Event</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Please change the details of the event you want to update.
+            </DialogContentText>
+            {/* <TextField margin="dense" name="eventName" label="Name"  type="text" fullWidth variant="outlined" value={newEventData.eventName} onChange={handleInputChange}/> */}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleDialogClose}>Cancel</Button>
+            <Button onClick={handleUpdateEvent}>Update</Button>
+          </DialogActions>
+        </Dialog>
+
+      </main>
+    </>
+  );
+}
