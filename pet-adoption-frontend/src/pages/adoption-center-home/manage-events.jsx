@@ -14,10 +14,10 @@ export default function ManageEvents() {
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
   const [selectionModel, setSelectionModel] = useState([]);
   const [newEventData, setNewEventData] = useState({
-    eventTitle: '',
-    eventDate: '',
-    eventDescription: '',
-    eventLocation: ''
+    title: '',
+    date: '',
+    description: '',
+    location: ''
   });
   const columns = [
     { field: "eventID", headerName: "Event ID", width: 100 },
@@ -63,6 +63,7 @@ export default function ManageEvents() {
 
 
   const handleDialogClose = () => {
+    loadData(); // Reload data to see the newly inserted event
     setOpenInsertDialog(false);
     setOpenUpdateDialog(false);
     setNewEventData({ // Reset event data
@@ -92,7 +93,6 @@ export default function ManageEvents() {
     axios.post("http://localhost:8080/api/events", newEventData )
       .then(response => {
         handleDialogClose();
-
       })
       .catch(error => {
         if (error.response) {
@@ -207,10 +207,10 @@ export default function ManageEvents() {
   {/* //date; 
   //description;
   //location; */}
-             <TextField margin="dense" name="eventTitle" label="Title"  type="text" fullWidth variant="outlined" value={newEventData.eventTitle} onChange={handleInputChange}/>
-             <TextField margin="dense" name="eventDate" label="Date"  type="date" fullWidth variant="outlined" value={newEventData.eventDate} onChange={handleInputChange}/>
-             <TextField margin="dense" name="eventDescription" label="Description"  type="text" fullWidth variant="outlined" value={newEventData.eventDescription} onChange={handleInputChange}/>
-             <TextField margin="dense" name="eventLocation" label="Location"  type="text" fullWidth variant="outlined" value={newEventData.eventLocation} onChange={handleInputChange}/>
+             <TextField margin="dense" name="title" label="Title"  type="text" fullWidth variant="outlined" value={newEventData.eventTitle} onChange={handleInputChange}/>
+             <TextField margin="dense" name="date" label=""  type="date" fullWidth variant="outlined" value={newEventData.eventDate} onChange={handleInputChange}/>
+             <TextField margin="dense" name="description" label="Description"  type="text" fullWidth variant="outlined" value={newEventData.eventDescription} onChange={handleInputChange}/>
+             <TextField margin="dense" name="location" label="Location"  type="text" fullWidth variant="outlined" value={newEventData.eventLocation} onChange={handleInputChange}/>
 
           </DialogContent>
           <DialogActions>
