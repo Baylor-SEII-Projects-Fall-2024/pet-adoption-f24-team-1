@@ -50,6 +50,8 @@ const LoginModal = ({ isOpen, onClose }) => {
                 alert("Login successful!");
                 console.log(response.data); // Handle authentication state here
                 sessionStorage.setItem('user', JSON.stringify(response.data)); // Store user data in session storage
+                // Reload page
+                window.location.reload();
             })
             .catch(error => {
                 alert("Login failed: " + error.message);
@@ -77,6 +79,7 @@ const LoginModal = ({ isOpen, onClose }) => {
                                placeholder="Email Address"
                                variant="outlined"
                                required
+                               onChange={(e) => setEmail(e.target.value)}
                                sx={{ width: "100%" }}
                                InputProps={{
                                 startAdornment: (
@@ -93,6 +96,7 @@ const LoginModal = ({ isOpen, onClose }) => {
                                required
                                type={showPassword ? 'text' : 'password'}
                                variant="outlined"
+                               onChange={(e) => setPassword(e.target.value)}
                                sx={{ width: "100%" }}
                                InputProps={{
                                 startAdornment: (
