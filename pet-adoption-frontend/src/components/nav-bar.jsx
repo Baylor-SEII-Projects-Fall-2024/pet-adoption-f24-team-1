@@ -3,6 +3,7 @@ import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, 
 import PetsIcon from '@mui/icons-material/Pets';
 import { useState, useEffect, useStyles } from 'react';
 import { useRouter } from 'next/router';
+import LoginModal from './login-modal';
 
 const pages = ['Centers', 'Policies', 'Help'];
 const settings = ['Settings', 'Logout'];
@@ -15,6 +16,7 @@ export default function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [user, setUser] = useState(null);
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -31,10 +33,21 @@ export default function NavBar() {
     setAnchorElUser(null);
   };
 
+  // Login
+  const openModal = () => {
+    setLoginModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setLoginModalOpen(false);
+  };
+
   const handleNav = (setting) => {
     console.log(setting);
     if(setting === 'Login')  {
-      router.push('/login');
+      //router.push('/login');
+      // Open to login modal now instead
+      openModal();
     }
     if(setting === 'Create Account') {
       router.push('/create-account');
@@ -57,6 +70,7 @@ export default function NavBar() {
   }, []);
 
   return (
+    <>
     <AppBar position="static">
       <Container maxWidth={false}>
         <Toolbar disableGutters sx={{width: `100%`}}>
@@ -179,5 +193,8 @@ export default function NavBar() {
         </Toolbar>
       </Container>
     </AppBar>
+    {/* Login modal */}
+    <LoginModal isOpen={isLoginModalOpen} onClose={closeModal} />
+    </>
   );
 }

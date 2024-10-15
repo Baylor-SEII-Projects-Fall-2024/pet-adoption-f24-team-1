@@ -43,7 +43,7 @@ export default function HomePage() {
               </Typography>
             </Box>
             <Typography sx={{ maxWidth: "400px" }}>Adopting a pet not only provides a loving home for an animal in need, but it also brings companionship and joy to your life. Every adoption helps reduce the number of animals in shelters, giving them a second chance at happiness.</Typography>
-            <Button variant='contained' sx={{ width: "150px", height: "40px" }}>Adopt Now</Button>
+            <Button variant='contained' size='large' sx={{ position: "static" }}>Adopt Now</Button>
           </Box>
 
           <Box>
