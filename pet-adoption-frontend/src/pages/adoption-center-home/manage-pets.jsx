@@ -74,11 +74,9 @@ export default function ManagePets() {
     })
     .then((data) => {
       setPets(data);  // Set the fetched data to state
-      setLoading(false);  // Data fetching complete
     })
     .catch((error) => {
-      setError(error);  // Handle error
-      setLoading(false);
+      console.log(error);
     });
   };
 

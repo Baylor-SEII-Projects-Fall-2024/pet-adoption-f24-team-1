@@ -1,10 +1,9 @@
 import React from 'react';
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { Button, Card, CardContent, Stack, Typography } from '@mui/material'
+import { Button, Box, Card, CardContent, Stack, Typography } from '@mui/material'
 import styles from '@/styles/Home.module.css'
-
-// Commit Test - alan
+import NavBar from '@/components/nav-bar';
 
 export default function HomePage() {
   const router = useRouter();
@@ -16,20 +15,46 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        <title>Home Page</title>
+        <title>Landing page</title>
       </Head>
 
       <main>
+        <NavBar />
+
+        <Box className={styles.container}>
+          <Box className={styles.textContainer}>
+            <Typography variant='h3'>Give A New Life to</Typography>
+            <Box sx={{ display: "flex", justifyContent: "center", width: "100%"}}>
+              <Typography
+                variant="h5"
+                noWrap
+                component="a"
+                sx={{
+                  mr: 2,
+                  display: 'flex',
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                FLUFFY FRIENDS
+              </Typography>
+            </Box>
+            <Typography sx={{ maxWidth: "400px" }}>Adopting a pet not only provides a loving home for an animal in need, but it also brings companionship and joy to your life. Every adoption helps reduce the number of animals in shelters, giving them a second chance at happiness.</Typography>
+            <Button variant='contained' size='large' sx={{ position: "static" }}>Adopt Now</Button>
+          </Box>
+
+          <Box>
+            <img src="/pets.png" alt="pets" style={{ width: "300px", height: "auto" }}/>
+          </Box>
+
+        </Box>
+
         <Stack sx={{ paddingTop: 4 }} alignItems='center' gap={2}>
-          <Card sx={{ width: 600 }} elevation={4}>
-            <CardContent>
-              <Typography variant='h3' align='center'>Pet Adoption Fall 2024</Typography>
-              <Typography variant='body1' color='text.secondary'> </Typography>
-            </CardContent>
-          </Card>
           <Stack sx={{ display: "flex", flexWrap: "wrap", alignItems: "ceneter", justifyContent: 'center'}} direction="row">
 
-            {/* Another way is by creating a dedicated CSS file and using the styles from there: */}
             <Button variant='contained' color="secondary" onClick={() => navigateTo('adoption-center-home')} className={styles.wideButton}>Adoption Center Home</Button>
             <Button variant='contained' onClick={() => navigateTo('/settings')} sx={{ width: 200 }}>Settings</Button>
             <Button variant='contained' onClick={() => navigateTo('/create-account')} sx={{ width: 200 }}>Create Account</Button>

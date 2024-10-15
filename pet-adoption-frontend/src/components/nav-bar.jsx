@@ -3,6 +3,8 @@ import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, 
 import PetsIcon from '@mui/icons-material/Pets';
 import { useState, useEffect, useStyles } from 'react';
 import { useRouter } from 'next/router';
+import LoginModal from './login-modal';
+import DialogModal from './dialog-modal';
 
 const pages = ['Centers', 'Policies', 'Help'];
 const settings = ['Settings', 'Logout'];
@@ -15,6 +17,8 @@ export default function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [user, setUser] = useState(null);
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -31,10 +35,35 @@ export default function NavBar() {
     setAnchorElUser(null);
   };
 
+  // Login
+  const openLoginModal = () => {
+    setLoginModalOpen(true);
+  };
+
+  const closeLoginModal = () => {
+    setLoginModalOpen(false);
+  };
+
+  // Logout
+  const openLogoutModal = () => {
+    setLogoutModalOpen(true);
+  };
+
+  const closeLogoutModal = () => {
+    setLogoutModalOpen(false);
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('user');
+    window.location.reload();
+  }
+
   const handleNav = (setting) => {
     console.log(setting);
     if(setting === 'Login')  {
-      router.push('/login');
+      //router.push('/login');
+      // Open to login modal now instead
+      openLoginModal();
     }
     if(setting === 'Create Account') {
       router.push('/create-account');
@@ -43,7 +72,7 @@ export default function NavBar() {
       router.push('/settings');
     }
     if(setting === 'Logout')  {
-
+      openLogoutModal();
     }
   };
 
@@ -57,6 +86,7 @@ export default function NavBar() {
   }, []);
 
   return (
+    <>
     <AppBar position="static">
       <Container maxWidth={false}>
         <Toolbar disableGutters sx={{width: `100%`}}>
@@ -179,5 +209,15 @@ export default function NavBar() {
         </Toolbar>
       </Container>
     </AppBar>
+    {/* Login modal */}
+    <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
+    {/* Logout modal */}
+    <DialogModal open={isLogoutModalOpen} 
+                 header="Log out?" 
+                 message="This will kick you out of the current session."
+                 handleYes={handleLogout}
+                 handleNo={closeLogoutModal}
+    />
+    </>
   );
 }
