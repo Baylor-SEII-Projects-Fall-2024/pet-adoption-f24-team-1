@@ -66,7 +66,7 @@ export default function NavBar() {
               variant="h6"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
+              href="/user-home"
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
@@ -77,7 +77,7 @@ export default function NavBar() {
                 textDecoration: 'none',
               }}
             >
-              FLUFFY FRIENDS
+              PAWS&MORE
             </Typography>
           </Stack>
 
@@ -133,7 +133,7 @@ export default function NavBar() {
               textDecoration: 'none',
             }}
           >
-            FLUFFY FRIENDS
+            PAWS&MORE
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>

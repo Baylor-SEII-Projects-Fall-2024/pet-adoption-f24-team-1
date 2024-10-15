@@ -16,17 +16,17 @@ export default function PetCard(props) {
   const handleClose = () => console.log(setOpen(false));
 
   const theme = useTheme();
-  const breed = props.breed.length < 11 ? props.breed : props.breed.substring(0, 8) + '...';
+  const breed = props.petBreed.length < 11 ? props.petBreed : props.petBreed.substring(0, 8) + '...';
 
   const handleLikedPet = () => {
     
     if(!liked)  {
       setLiked(true);
-      console.log('liked animal: ' + props.id);
+      console.log('liked animal: ' + props.petID);
     }
     else  {
       setLiked(false);
-      console.log('unliked animal: ' + props.id);
+      console.log('unliked animal: ' + props.petID);
     }
 }
 
@@ -36,7 +36,7 @@ export default function PetCard(props) {
     <Paper sx={{ width: 250, marginBottom: 10 }} elevation={3}>
       <Grid container direction="column" alignItems="center" justifyContent="center" rowGap={2}>
 
-        <Box component="img" sx={{ width: 250, height: 120, objectFit: "cover"}} src={props.imgSrc} alt="pet image"/>
+        <Box component="img" sx={{ width: 250, height: 120, objectFit: "cover"}} src={props.imgUrl} alt="pet image"/>
           
         <Box sx={{ width: 240, position: "absolute", display: "flex", marginTop: -9 }} justifyContent="flex-start">
           <IconButton color="primary" size="small" onClick={handleLikedPet}>
@@ -45,7 +45,7 @@ export default function PetCard(props) {
         </Box>
 
         <Stack direction="column" alignItems="center" >
-          <Typography variant="h6" marginBottom={2}>{props.name}</Typography>
+          <Typography variant="h6" marginBottom={2}>{props.petName}</Typography>
           <Stack direction="row" alignItems="center" spacing={1} marginLeft={-3}>
             <LocationOnIcon fontSize="11px" sx={{ color: theme.palette.primary.light }}/>
             <Typography variant="body2">{props.location.adoptionCenter}</Typography>
@@ -61,13 +61,13 @@ export default function PetCard(props) {
             <Stack justifyContent="space-between" direction="row" spacing={1} alignItems="center" sx={{width: 105}}>
               <Typography variant="body2" align="left">Gender:</Typography>
               <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex" }} alignItems="center" align="right" justifyContent="center">
-                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.gender}</Typography>
+                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.petGender}</Typography>
               </Box>
             </Stack>
             <Stack justifyContent="space-between" direction="row" spacing={1} alignItems="center" sx={{width: 105}}>
               <Typography variant="body2" align="left">Age:</Typography>
               <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex" }} alignItems="center" align="right" justifyContent="center">
-                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.age} years</Typography>
+                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.petAge} years</Typography>
               </Box>
             </Stack>
           </Stack>  
@@ -81,7 +81,7 @@ export default function PetCard(props) {
             <Stack justifyContent="space-between" direction="row" spacing={1} alignItems="center" sx={{width: 105}}>
               <Typography variant="body2" align="left">Weight:</Typography>
               <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex" }} alignItems="center" align="right" justifyContent="center">
-                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.weight} lbs</Typography>
+                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.petWeight} lbs</Typography>
               </Box>
             </Stack>
           </Stack>

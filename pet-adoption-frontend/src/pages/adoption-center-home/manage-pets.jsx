@@ -49,6 +49,7 @@ export default function ManagePets() {
   const [loading, setLoading] = useState(true);  // State to handle loading
   const [error, setError] = useState(null);  // State to handle errors
   const [selectedRows, setSelectedRows] = React.useState([]);
+  const [imgUrl, setImgUrl] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -120,6 +121,7 @@ export default function ManagePets() {
   }
 
   const handleInsertPet = () => {
+    newPetData.imgUrl = imgUrl;
     console.log('Should see this: ' + newPetData.imgUrl);
     axios.post("http://localhost:8080/api/pets",newPetData )
       .then(response => {
@@ -128,7 +130,7 @@ export default function ManagePets() {
       })
       .catch(error => {
         console.error("Insert Failed:", error);
-        setErrorMessage("Insert Failed: " + error.message);
+        //setErrorMessage("Insert Failed: " + error.message);
       });
   };
   const handleInsertDialogOpen = () => {
@@ -238,7 +240,9 @@ export default function ManagePets() {
             <TextField margin="dense"name="petSpecies"label="Species"type="text"fullWidth variant="outlined"value={newPetData.petSpecies}onChange={handleInputChange}/>
             <TextField margin="dense"name="color"label="Color"type="text"fullWidth variant="outlined"value={newPetData.color}onChange={handleInputChange}/>
 
-            <ImageDropzone newPetData={newPetData}/>
+            <Box sx={{ width: 200, height: 50 }}>
+              <ImageDropzone newPetData={newPetData} imgUrl={imgUrl} setImgUrl={setImgUrl}/>
+            </Box>
 
           </DialogContent>
           <DialogActions>

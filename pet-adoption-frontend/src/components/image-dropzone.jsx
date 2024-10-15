@@ -10,7 +10,9 @@ import ImageIcon from '@mui/icons-material/Image';
       uploadPreset="dnslxddnnpetadoption"
       onSuccess={(result) => {
         // Set the image URL after a successful upload
-        props.newPetData.imgUrl = result.info.secure_url;
+        console.log(result.info.secure_url)
+        props.setImgUrl(result.info.secure_url)
+        //props.newPetData.imgUrl = result.info.secure_url;
       }}
       >
       {({ open }) => {

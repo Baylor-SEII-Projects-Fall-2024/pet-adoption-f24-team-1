@@ -14,7 +14,7 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  borderRadius: 1,
   boxShadow: 24,
   p: 4,
 };
@@ -39,16 +39,15 @@ export default function PetInfoModal(props) {
         <Fade in={props.open}>
           <Box sx={style}>
             <Typography variant="h6" component="h2">
-              Text in a modal
+              {props.pet.petName}
             </Typography>
             <Typography sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+              {props.pet.petDescription}
             </Typography>
             <Box display="flex" justifyContent="center" alignItems="center">
               <Button onClick={props.handleClose}>Close Child Modal</Button>
             </Box>
 
-            <ImageDropzone />
            
 
           </Box>
