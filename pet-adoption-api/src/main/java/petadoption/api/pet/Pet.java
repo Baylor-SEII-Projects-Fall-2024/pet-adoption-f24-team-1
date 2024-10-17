@@ -19,7 +19,7 @@ public class Pet {
     private String petBreed;
     private String petGender;
     private int petAge;
-    private int petWeight;
+    private double petWeight;
     private String petSpecies;
     private String color;
 }
