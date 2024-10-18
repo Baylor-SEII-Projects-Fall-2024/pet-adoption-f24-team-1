@@ -41,8 +41,12 @@ const LoginModal = ({ isOpen, onClose }) => {
   // Login api
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    axios.post("http://localhost:8080/api/login", {
+    console.log(`${apiBaseUrl}/api/login`);
+
+    axios.post(`${apiBaseUrl}/api/login`, {
       username: email,
       password: password,
     })
