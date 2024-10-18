@@ -44,8 +44,6 @@ const LoginModal = ({ isOpen, onClose }) => {
     
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    console.log(`${apiBaseUrl}/api/login`);
-
     axios.post(`${apiBaseUrl}/api/login`, {
       username: email,
       password: password,

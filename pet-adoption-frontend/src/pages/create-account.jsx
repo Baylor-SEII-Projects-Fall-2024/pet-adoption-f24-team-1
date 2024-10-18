@@ -1,20 +1,54 @@
 import React from 'react';
 import { Box, Button, TextField, Typography, Grid, Paper, IconButton, InputAdornment, Link } from '@mui/material';
+import { useState } from "react";
+import { useRouter } from 'next/router'
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import axios from 'axios';
 
 const SignupPage = () => {
   const [showPassword, setShowPassword] = React.useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [userType, setUserType] = useState("");
+  const router = useRouter();
+
+  const handleSubmit = (e) => {
+
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+
+    axios.post(`${apiBaseUrl}/api/register`, {
+      email: email,
+      password: password,
+      userType: userType,
+    })
+            .then(response => {
+                alert("Registration successful!");
+                sessionStorage.setItem('user', JSON.stringify(response.data)); // Store user data in session storage
+                // Go to home page
+                router.push("/");
+
+            })
+            .catch(error => {
+                alert("Registration failed: " + error.message);
+            });
+  };
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   return (
+    <>
+    <Box sx={{ display: "flex", width: "100%", justifyContent: "start" }}>
+        <Button startIcon={<ArrowBackIcon />} size='large' href='/'>Back to Paws&More</Button>
+      </Box>
     <Box
       sx={{
         height: '100vh',
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#f5f5f5'
@@ -33,7 +67,7 @@ const SignupPage = () => {
           Create account
         </Typography>
         <Typography variant="subtitle1" sx={{ marginBottom: 3 }}>
-          Start your 30-day free trial. Cancel anytime.
+          Start adopting new friends today!
         </Typography>
         
         {/* Google Sign-Up Button */}
@@ -64,6 +98,7 @@ const SignupPage = () => {
           variant="outlined"
           fullWidth
           sx={{ marginBottom: 2 }}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         {/* Password Input */}
@@ -85,10 +120,10 @@ const SignupPage = () => {
               </InputAdornment>
             ),
           }}
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        {/* Create Account Button */}
-        <Button variant="contained" fullWidth>
+        <Button variant="contained" fullWidth onClick={handleSubmit}>
           Create Account
         </Button>
 
@@ -97,6 +132,7 @@ const SignupPage = () => {
         </Typography>
       </Paper>
     </Box>
+    </>
   );
 };
 
