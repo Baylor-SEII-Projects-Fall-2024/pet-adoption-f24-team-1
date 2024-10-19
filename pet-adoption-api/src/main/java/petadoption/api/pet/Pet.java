@@ -1,9 +1,11 @@
 package petadoption.api.pet;
 
 import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Entity
 @Table(name = "pet")
@@ -22,4 +24,5 @@ public class Pet {
     private double petWeight;
     private String petSpecies;
     private String color;
+    private String imgUrl;
 }

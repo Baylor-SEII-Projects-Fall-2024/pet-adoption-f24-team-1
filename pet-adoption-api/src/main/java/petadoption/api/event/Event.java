@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "event")
@@ -15,10 +15,10 @@ import java.util.Date;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long eventId;
+    private long eventID;
 
     private String title;
-    private Date date;
+    private LocalDate date;
     private String description;
     private String location;
 }
