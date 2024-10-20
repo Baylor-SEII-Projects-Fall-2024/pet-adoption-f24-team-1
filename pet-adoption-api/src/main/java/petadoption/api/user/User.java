@@ -2,6 +2,11 @@ package petadoption.api.user;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import petadoption.api.pet.Pet;
+import petadoption.api.userPetLike.userPetLike;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,6 +31,11 @@ public class User {
 
     @Column(name = "USER_TYPE")
     String userType;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<userPetLike> likedPets = new ArrayList<>();
+
 
     public Long getId() {
         return id;
@@ -57,5 +67,12 @@ public class User {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    public void likePet(Pet pet){
+        userPetLike like = new userPetLike();
+        like.setUser(this);
+        like.setPet(pet);
+        likedPets.add(like);
     }
 }
