@@ -2,47 +2,40 @@ package petadoption.api.Recommendation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import petadoption.api.Recommendation.RecommendationRepository;
+import petadoption.api.userPetLike.userPetLike;
 import petadoption.api.pet.Pet;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
+
 @Service
 public class RecommendationService {
 
     @Autowired
     private RecommendationRepository recommendationRepository;
-    /*
-    public List<Pet> getRecommendationsForUser(Long userID){
-        // Fetch user perferences and liked pets
 
-        // Apply recommendation logic (collaborative or content-based)
-        // Return list of recommended pets
-    }
-     */
+    // Get recommendations for a user based on their liked pets
+    public Set<Pet> getRecommendations(Long userId) {
+        // Get the liked pets for the user
+        List<userPetLike> likedPets = recommendationRepository.findByUserId(userId);
 
-    /*
-    public List<Pet> getSimilarPets(Long petID){
-        // Fetch similar pets based on characteristics
-    }
-*/
-    public void likePet(Long userID, Long petID){
-        // Store the like action in the database
-    }
-    /*
-    public List<Pet> getTopTrendingPets(){
-        // Fetch trending pets based on interactions
-    }
-*/
-    public void saveRecommendation(Long petID, Long userID){
-        // Save recommendation in the database
-    }
-/*
-    public List<Recommendation> getAllRecommendations(){
-        // Fetch all recommendations for admin or analytics
-    }
-*/
-    public void updateRecommendation(Long recommendationID, Recommendation newDetails){
-        // Update existing recommendation
-    }
+        Set<Pet> recommendations = new HashSet<>();
 
+        // For each liked pet, find other users who liked the same pet
+        for (userPetLike like : likedPets) {
+            Long petId = like.getPet().getPetID();
+            List<userPetLike> likesForPet = recommendationRepository.findByPetId(petId);
+
+            // Find pets liked by those users
+            for (userPetLike userLike : likesForPet) {
+                if (!userLike.getUser().getId().equals(userId)) {  // Avoid recommending pets the user already liked
+                    recommendations.add(userLike.getPet());  // Add the pet to recommendations
+                }
+            }
+        }
+
+        return recommendations;  // Return unique recommended pets
+    }
 }

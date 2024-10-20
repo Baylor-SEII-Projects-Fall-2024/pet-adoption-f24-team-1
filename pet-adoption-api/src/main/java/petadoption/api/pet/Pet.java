@@ -2,9 +2,7 @@ package petadoption.api.pet;
 
 import jakarta.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @Entity
@@ -14,9 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Pet {
 
+    @Setter
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int petID;
+    private Long petID;
     private String petName;
     private String petBreed;
     private String petGender;
