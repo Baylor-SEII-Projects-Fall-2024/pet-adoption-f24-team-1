@@ -9,7 +9,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import axios from 'axios';
 
-const SignupPage = () => {
+const CreateAccountPage = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -131,7 +131,7 @@ const SignupPage = () => {
         </form>
 
         <Typography variant="body2" sx={{ marginTop: 2 }}>
-          Are you an adoption center? <Link href="adoption-create-account">Start here</Link>
+          Are you an adoption center? <Link href="adoption-center-register">Start here</Link>
         </Typography>
       </Paper>
     </Box>
@@ -139,4 +139,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default CreateAccountPage;
