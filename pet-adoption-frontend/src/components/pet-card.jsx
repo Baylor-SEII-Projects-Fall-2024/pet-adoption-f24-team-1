@@ -7,10 +7,13 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { red } from '@mui/material/colors';
 import { useState } from'react';
 import PetInfoModal from '@/components/pet-info-modal';
+import LoginModal from './login-modal';
+import axios from 'axios';
 
 export default function PetCard(props) {
-  const [liked, setLiked] = useState(false);
-  const [open, setOpen] = React.useState(false);
+  const [liked, setLiked] = useState(props.liked);
+  const [open, setOpen] = useState(false);
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => console.log(setOpen(false));
@@ -18,15 +21,46 @@ export default function PetCard(props) {
   const theme = useTheme();
   const breed = props.petBreed.length < 11 ? props.petBreed : props.petBreed.substring(0, 8) + '...';
 
+  // Login
+  const openLoginModal = () => {
+    setLoginModalOpen(true);
+  };
+  const closeLoginModal = () => {
+    setLoginModalOpen(false);
+  };
+
   const handleLikedPet = () => {
     
     if(!liked)  {
-      setLiked(true);
-      console.log('liked animal: ' + props.petID);
+      if(props.user)  {
+        axios.post('http://localhost:8080/api/matches', {
+          petID: props.petID,
+          userID: props.user.id
+        })
+        .then(() => {
+          setLiked(true);
+        })
+        .catch(error => {
+          console.error('Error adding match:', error);
+        });
+      }
+      else  {
+        openLoginModal();
+      }
     }
     else  {
-      setLiked(false);
-      console.log('unliked animal: ' + props.petID);
+      axios.delete('http://localhost:8080/api/matches', {
+        data: {
+          petID: props.petID,
+          userID: props.user.id
+        }
+      })
+      .then(() => {
+        setLiked(false);
+      })
+      .catch(error => {
+        console.error('Error deleting match:', error);
+      });
     }
 }
 
@@ -94,6 +128,8 @@ export default function PetCard(props) {
     </Paper>
 
     <PetInfoModal open={open} handleClose={handleClose} pet={props} />
+
+    <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
 
     </Box>
 
