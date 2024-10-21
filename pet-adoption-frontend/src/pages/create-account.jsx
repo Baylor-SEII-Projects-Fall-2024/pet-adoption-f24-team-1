@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Button, TextField, Typography, Grid, Paper, IconButton, InputAdornment, Link } from '@mui/material';
 import { useState } from "react";
 import { useRouter } from 'next/router'
+import PetsIcon from '@mui/icons-material/Pets';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import Visibility from '@mui/icons-material/Visibility';
@@ -9,11 +10,11 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import axios from 'axios';
 
-const SignupPage = () => {
+const CreateAccountPage = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState("");
+  //const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
 
   const handleSubmit = (e) => {
@@ -23,7 +24,6 @@ const SignupPage = () => {
     axios.post(`${apiBaseUrl}/api/register`, {
       email: email,
       password: password,
-      userType: userType,
     })
             .then(response => {
                 alert("Registration successful!");
@@ -63,6 +63,7 @@ const SignupPage = () => {
           textAlign: 'center',
         }}
       >
+        <PetsIcon sx={{ width: "50px", height: "auto" }}/>
         <Typography variant="h5" sx={{ marginBottom: 2 }}>
           Create account
         </Typography>
@@ -92,43 +93,47 @@ const SignupPage = () => {
 
         <Typography variant="subtitle1" sx={{ marginY: 2 }}>OR</Typography>
 
-        {/* Email Input */}
-        <TextField
-          label="Email"
-          variant="outlined"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <form onSubmit={handleSubmit}>
+          {/* Email Input */}
+          <TextField
+            label="Email"
+            variant="outlined"
+            fullWidth
+            required
+            sx={{ marginBottom: 2 }}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-        {/* Password Input */}
-        <TextField
-          label="Password"
-          variant="outlined"
-          type={showPassword ? 'text' : 'password'}
-          fullWidth
-          sx={{ marginBottom: 3 }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={handleClickShowPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+          {/* Password Input */}
+          <TextField
+            label="Password"
+            variant="outlined"
+            type={showPassword ? 'text' : 'password'}
+            fullWidth
+            required
+            sx={{ marginBottom: 3 }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleClickShowPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-        <Button variant="contained" fullWidth onClick={handleSubmit}>
-          Create Account
-        </Button>
+          <Button type="submit" variant="contained" fullWidth>
+            Create Account
+          </Button>
+        </form>
 
         <Typography variant="body2" sx={{ marginTop: 2 }}>
-          Are you an adoption center? <Link href="adoption-create-account">Start here</Link>
+          Are you an adoption center? <Link href="adoption-center-register">Start here</Link>
         </Typography>
       </Paper>
     </Box>
@@ -136,4 +141,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default CreateAccountPage;

@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { Button, Card, CardContent, Stack, Typography, Grid, TextField, Container, Link, Paper, Box } from '@mui/material'
 import styles from '@/styles/Home.module.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import axios from 'axios';
 import NavBar from '@/components/nav-bar';
@@ -13,14 +13,37 @@ import PetCard from '@/components/pet-card';
 export default function UserHome() {
   const router = useRouter();
 
+  const [user, setUser] = useState(null);
   const [pets, setPets] = useState([]);
+
+  // Filters
+  const [ageFltr, setAgeFltr] = useState([0, 30]);
+  const [weightFltr, setWeightFltr] = useState([0, 100]);
+  const [breedFltr, setBreedFltr] = useState('Any');
+  const [speciesFltr, setSpeciesFltr] = useState('Any');
+  const [genderFltr, setGenderFltr] = useState(() => ['Male', 'Female']);
+  
+  function filters(pet)  {
+    return (
+      (pet.petAge >= ageFltr[0] && pet.petAge <= ageFltr[1]) &&
+      (pet.petWeight >= weightFltr[0] && pet.petWeight <= weightFltr[1]) &&
+      (speciesFltr == 'Any' ? true : pet.petSpecies == speciesFltr) &&
+      (breedFltr == 'Any' ? true : pet.petBreed == breedFltr) &&
+      (genderFltr.length == 2 || genderFltr.length == 0 ? true : pet.petGender == genderFltr[0])
+    );
+  }
+
+  useEffect(() => {
+    const userFromLocalStorage = JSON.parse(sessionStorage.getItem('user'));
+    if (userFromLocalStorage) {
+      setUser(userFromLocalStorage);
+    } else {
+      setUser(null);
+    }
+  }, []);
   
   const navigateTo = (page) => {
     router.push(page);
-  }
-
-  function isGender(value)  {
-    return value.petGender === 'Male';
   }
 
   // Get pets from database
@@ -87,11 +110,11 @@ export default function UserHome() {
           
         
           <Stack direction="row" >
-          <FilterStack />
+            <FilterStack ageFltr={ageFltr} breedFltr={breedFltr} speciesFltr={speciesFltr} weightFltr={weightFltr} genderFltr={genderFltr} setAgeFltr={setAgeFltr} setBreedFltr={setBreedFltr} setSpeciesFltr={setSpeciesFltr} setWeightFltr={setWeightFltr} setGenderFltr={setGenderFltr}/>
             <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2}>
-              {pets.map((pet) => (
+              {pets.filter(filters).map((pet) => (
                 <Grid item>
-                  <PetCard key={pet.petID} petName={pet.petName} petBreed={pet.petBreed} petAge={pet.petAge} petGender={pet.petGender} petWeight={pet.petWeight} imgUrl={pet.imgUrl} petID={pet.petID} location={{adoptionCenter: 'Home Free', address: '111 Drive Street, Waco, TX 76706'}} petDescription={pet.petDescription}/>
+                  <PetCard key={pet.petID} petName={pet.petName} petBreed={pet.petBreed} petAge={pet.petAge} petGender={pet.petGender} petWeight={pet.petWeight} imgUrl={pet.imgUrl} petID={pet.petID} location={{adoptionCenter: 'Home Free', address: '111 Drive Street, Waco, TX 76706'}} petDescription={pet.petDescription} user={user} liked={false}/>
                 </Grid>
               ))}
             </Grid>
