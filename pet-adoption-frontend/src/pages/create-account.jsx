@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Button, TextField, Typography, Grid, Paper, IconButton, InputAdornment, Link } from '@mui/material';
 import { useState } from "react";
 import { useRouter } from 'next/router'
+import PetsIcon from '@mui/icons-material/Pets';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import Visibility from '@mui/icons-material/Visibility';
@@ -62,6 +63,7 @@ const CreateAccountPage = () => {
           textAlign: 'center',
         }}
       >
+        <PetsIcon sx={{ width: "50px", height: "auto" }}/>
         <Typography variant="h5" sx={{ marginBottom: 2 }}>
           Create account
         </Typography>

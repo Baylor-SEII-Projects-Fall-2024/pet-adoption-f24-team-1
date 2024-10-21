@@ -2,8 +2,8 @@ import React from 'react';
 import { Box, Button, TextField, Typography, Grid, Paper, IconButton, InputAdornment, Collapse, Fade } from '@mui/material';
 import { useState } from "react";
 import { useRouter } from 'next/router';
-import GoogleIcon from '@mui/icons-material/Google';
-import FacebookIcon from '@mui/icons-material/Facebook';
+import HomeIcon from '@mui/icons-material/Home';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -173,6 +173,7 @@ const AdoptionCenterRegisterPage = () => {
         >
             {/* Adoption Center form */}
             <Collapse in={isAdoptionCenterFormVisible} timeout={300} unmountOnExit>
+                <HomeIcon sx={{ width: "50px", height: "auto" }}/>
                 <Typography variant="h5" sx={{ marginBottom: 2 }}>
                     Register Adoption Center
                 </Typography>
@@ -253,6 +254,7 @@ const AdoptionCenterRegisterPage = () => {
 
             {/* Admin form */}
             <Collapse in={isAdminFormVisible} timeout={300} unmountOnExit>
+            <SupervisorAccountIcon sx={{ width: "50px", height: "auto" }} />
                 <Typography variant="h5" sx={{ marginBottom: 2 }}>
                     One Last Step!
                 </Typography>
