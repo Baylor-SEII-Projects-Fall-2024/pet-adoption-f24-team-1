@@ -99,19 +99,37 @@ const AdoptionCenterRegisterPage = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const registerAdoptionCenter = (e) => {
+        e.preventDefault();
 
         const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
     
-        axios.post(`${apiBaseUrl}/api/admins`, {
+        axios.post(`${apiBaseUrl}/api/adoptioncenters`, {
+          centerName: adoptionCenterName,
+          centerAddress: adoptionCenterLocation,
+          centerPhone: adoptionCenterPhone,
+          centerEmail: adoptionCenterEmail,
+        })
+                .then(response => {
+                    alert("Adoption Center Registration successful!");
+                    registerAdmin(e, response.data.centerId);
+    
+                })
+                .catch(error => {
+                    alert("Adoption Center Registration failed: " + error.message);
+                });
+    }
+
+    const registerAdmin = (e, centerId) => {
+        e.preventDefault();
+
+        const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+    
+        axios.post(`${apiBaseUrl}/api/admins/${centerId}`, {
           firstName: firstName,
           lastName: lastName,
           email: email,
           password: password,
-        //   centerName: adoptionCenterName,
-        //   centerAddress: adoptionCenterLocation,
-        //   centerPhone: adoptionCenterPhone,
-        //   centerEmail: adoptionCenterEmail,
         })
                 .then(response => {
                     alert("Registration successful!");
@@ -123,6 +141,10 @@ const AdoptionCenterRegisterPage = () => {
                 .catch(error => {
                     alert("Registration failed: " + error.message);
                 });
+    }
+
+    const handleSubmit = (e) => {
+        registerAdoptionCenter(e);
       };
 
     return (
@@ -297,7 +319,7 @@ const AdoptionCenterRegisterPage = () => {
                     />
 
                     <Button type="submit" variant="contained" fullWidth>
-                        Create Account
+                        Register Admin
                     </Button>
                 </form>
             </Collapse>
