@@ -1,7 +1,11 @@
 import * as React from 'react';
 import Head from 'next/head'
-import {  Container, Stack, Typography, Box, Item, IconButton, Button, FormControl, InputLabel, Select, MenuItem, Slider } from '@mui/material';
+import {  Container, Stack, Typography, Box, Item, IconButton, Button, FormControl, InputLabel, Select, MenuItem, Slider, ToggleButtonGroup, ToggleButton, Icon } from '@mui/material';
 import { useState, useEffect } from 'react';
+import MaleIcon from '@mui/icons-material/Male';
+import FemaleIcon from '@mui/icons-material/Female';
+import { BorderBottomOutlined } from '@mui/icons-material';
+
 
 function valuetext(value) {
   return `${value}`;
@@ -11,6 +15,12 @@ export default function FilterStack(props) {
   const [age, setAge] = useState([0, 30])
   const [weight, setWeight] = useState([0, 100])
   const [distance, setDistance] = useState(50)
+
+  
+
+  const handleGenderChange = (event, newFormats) => {
+    props.setGenderFltr(newFormats);
+  };
   
   useEffect(() =>  {
     //Get species options
@@ -48,6 +58,23 @@ export default function FilterStack(props) {
   return (
 
     <Stack sx={{ width: 300, position: 'sticky', marginLeft: 3, marginRight: 3 }} spacing={5}>
+      <Stack sx={{boxShadow: '0 2px 2px -2px gray'}}>
+        <Typography fontSize={19}>Filters</Typography>
+      </Stack>
+      <Stack>
+        <Typography>Gender</Typography>
+        <ToggleButtonGroup value={props.genderFltr} onChange={handleGenderChange} aria-label="gender filtering">
+          <ToggleButton value="Male" aria-label="Male">
+            <MaleIcon />
+            <Typography>M</Typography>
+          </ToggleButton>
+          <ToggleButton value="Female" aria-label="Female">
+            <FemaleIcon />
+            <Typography>F</Typography>
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </Stack>
+
       <FormControl>
         <InputLabel>Species</InputLabel>
         <Select
@@ -91,7 +118,7 @@ export default function FilterStack(props) {
         />
       </Box>
       <Box>
-        <Typography marginLeft={1.5}>Weight Range (lbs)</Typography>
+        <Typography marginLeft={1.5}>Weight Range (kg)</Typography>
         <Slider
           getAriaLabel={() => 'Weight range'}
           value={weight}

@@ -115,7 +115,7 @@ export default function PetCard(props) {
             <Stack justifyContent="space-between" direction="row" spacing={1} alignItems="center" sx={{width: 105}}>
               <Typography variant="body2" align="left">Weight:</Typography>
               <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex" }} alignItems="center" align="right" justifyContent="center">
-                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.petWeight} lbs</Typography>
+                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.petWeight} kg</Typography>
               </Box>
             </Stack>
           </Stack>

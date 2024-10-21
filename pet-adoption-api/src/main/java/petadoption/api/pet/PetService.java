@@ -32,4 +32,8 @@ public class PetService {
         }
         return false;
     }
+
+    public List<String> getSpecies()  {
+        return petRepository.findSpecies();
+    }
 }

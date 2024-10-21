@@ -59,4 +59,9 @@ public class PetController {
         }
         return new ResponseEntity<>("Pet deleted successfully", HttpStatus.OK);
     }
+
+    @GetMapping("/species")
+    public List<String> getSpecies()  {
+        return petService.getSpecies();
+    }
 }

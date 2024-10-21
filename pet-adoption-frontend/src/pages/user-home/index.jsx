@@ -21,7 +21,7 @@ export default function UserHome() {
   const [weightFltr, setWeightFltr] = useState([0, 100]);
   const [breedFltr, setBreedFltr] = useState('Any');
   const [speciesFltr, setSpeciesFltr] = useState('Any');
-  const [genderFltr, setGenderFltr] = useState('Any');
+  const [genderFltr, setGenderFltr] = useState(() => ['Male', 'Female']);
   
   function filters(pet)  {
     return (
@@ -29,7 +29,7 @@ export default function UserHome() {
       (pet.petWeight >= weightFltr[0] && pet.petWeight <= weightFltr[1]) &&
       (speciesFltr == 'Any' ? true : pet.petSpecies == speciesFltr) &&
       (breedFltr == 'Any' ? true : pet.petBreed == breedFltr) &&
-      (genderFltr == 'Any' ? true : pet.petGender == genderFltr)
+      (genderFltr.length == 2 || genderFltr.length == 0 ? true : pet.petGender == genderFltr[0])
     );
   }
 

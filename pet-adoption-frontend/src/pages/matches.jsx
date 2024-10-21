@@ -49,7 +49,6 @@ export default function Matches() {
   // Get pets from database
   useEffect(() => {
     if (!user) return;
-    console.log(user.id)
     axios.get('http://localhost:8080/api/matches', {
       params: {
         userID: user.id
