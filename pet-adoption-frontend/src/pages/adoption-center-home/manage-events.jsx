@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { Button, Stack, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
 import styles from '@/styles/Home.module.css'
 import Paper from '@mui/material/Paper';
-import { DataGrid, GridSelectionModel} from '@mui/x-data-grid';
+import { DataGrid} from '@mui/x-data-grid';
 import { useRef,useEffect, useState } from 'react'
 import axios from 'axios';
 
@@ -15,7 +15,7 @@ export default function ManageEvents() {
   const [selectionModel, setSelectionModel] = useState([]);
   const [newEventData, setNewEventData] = useState({
     title: '',
-    date: '',
+    date:  '',
     description: '',
     location: ''
   });
@@ -27,6 +27,8 @@ export default function ManageEvents() {
     { field: "location", headerName: "Location", width: 100 },
   ];
   const [events, setEvents] = useState([]);  // State to hold the event data
+  const [isFormValid, setIsFormValid] = useState(false);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -35,6 +37,12 @@ export default function ManageEvents() {
       [name]: value
     }));
     console.log(newEventData);
+    setIsFormValid(
+      // newEventData.title !== '' &&
+      // newEventData.date !== '' &&
+      // newEventData.description !== '' &&
+      // newEventData.location !== ''
+    );
   };  
 
 
@@ -63,7 +71,6 @@ export default function ManageEvents() {
 
 
   const handleDialogClose = () => {
-    loadData(); // Reload data to see the newly inserted event
     setOpenInsertDialog(false);
     setOpenUpdateDialog(false);
     setNewEventData({ // Reset event data
@@ -90,6 +97,7 @@ export default function ManageEvents() {
     }
 
   const handleInsertEvent = () => {
+    // if(isFormValid){
     axios.post("http://localhost:8080/api/events", newEventData )
       .then(response => {
         handleDialogClose();
@@ -104,6 +112,10 @@ export default function ManageEvents() {
           console.error('Error:', error.message);
         }
       });
+    // }else{
+    //   // Want to eventually make this an alert dialog
+    //   console.error('NO DATA');
+    // }
     }
 
   const handleInsertDialogOpen = () => {
@@ -163,6 +175,8 @@ export default function ManageEvents() {
   };
 
   
+  const today = new Date();
+  const defaultDate = today.toISOString().split('T')[0]; // "YYYY-MM-DD"
 
   return (
     <>
@@ -177,6 +191,7 @@ export default function ManageEvents() {
         
           {/* <Paper sx={{ height: 400, width: '50%' }}> */}
             <DataGrid
+              key={eventsData.length}  // This will trigger a rerender when data changes
               rows={eventsData}
               columns={columns}
               pageSizeOptions={[2, 50, 100]}
@@ -195,7 +210,7 @@ export default function ManageEvents() {
             <Button variant='contained' color="secondary" onClick={() => handleUpdateDialogOpen()} className={styles.wideButton}>UPDATE</Button>
             <Button variant='contained' color="secondary" onClick={() => handleDeleteEvents()} className={styles.wideButton}>DELETE</Button>
             <Button variant='contained' color="secondary" onClick={() => handleInsertDialogOpen()}>Insert Events</Button>            
-            <Button variant='contained' color="secondary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button>
+            {/* <Button variant='contained' color="secondary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button> */}
           </Stack>
         </Stack>
         <Dialog open={openInsertDialog} onClose={handleDialogClose}>
@@ -207,10 +222,10 @@ export default function ManageEvents() {
   {/* //date; 
   //description;
   //location; */}
-             <TextField margin="dense" name="title" label="Title"  type="text" fullWidth variant="outlined" value={newEventData.eventTitle} onChange={handleInputChange}/>
-             <TextField margin="dense" name="date" label=""  type="date" fullWidth variant="outlined" value={newEventData.eventDate} onChange={handleInputChange}/>
-             <TextField margin="dense" name="description" label="Description"  type="text" fullWidth variant="outlined" value={newEventData.eventDescription} onChange={handleInputChange}/>
-             <TextField margin="dense" name="location" label="Location"  type="text" fullWidth variant="outlined" value={newEventData.eventLocation} onChange={handleInputChange}/>
+            <TextField margin="dense" name="title" label="Title"  type="text" fullWidth variant="outlined" value={newEventData.title} onChange={handleInputChange}/>
+            <TextField margin="dense" name="date"  type="date" fullWidth variant="outlined" value={console.log(defaultDate)} onChange={handleInputChange}/>
+            <TextField margin="dense" name="description" label="Description"  type="text" fullWidth variant="outlined" value={newEventData.description} onChange={handleInputChange}/>
+            <TextField margin="dense" name="location" label="Location"  type="text" fullWidth variant="outlined" value={newEventData.location} onChange={handleInputChange}/>
 
           </DialogContent>
           <DialogActions>
@@ -224,7 +239,10 @@ export default function ManageEvents() {
             <DialogContentText>
               Please change the details of the event you want to update.
             </DialogContentText>
-            {/* <TextField margin="dense" name="eventName" label="Name"  type="text" fullWidth variant="outlined" value={newEventData.eventName} onChange={handleInputChange}/> */}
+            <TextField margin="dense" name="title" label="Title"  type="text" fullWidth variant="outlined" value={newEventData.title} onChange={handleInputChange}/>
+            <TextField margin="dense" name="date"  type="date" fullWidth variant="outlined" value={console.log(defaultDate)} onChange={handleInputChange}/>
+            <TextField margin="dense" name="description" label="Description"  type="text" fullWidth variant="outlined" value={newEventData.description} onChange={handleInputChange}/>
+            <TextField margin="dense" name="location" label="Location"  type="text" fullWidth variant="outlined" value={newEventData.location} onChange={handleInputChange}/>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleDialogClose}>Cancel</Button>

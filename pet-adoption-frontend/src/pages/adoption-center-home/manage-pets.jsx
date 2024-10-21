@@ -203,6 +203,7 @@ export default function ManagePets() {
         
           {/* <Paper sx={{ height: 400, width: '50%' }}> */}
             <DataGrid
+              key={petsData.length}  // This will trigger a rerender when data changes
               rows={petsData}
               columns={columns}
               pageSizeOptions={[2,50, 100]}
@@ -221,7 +222,7 @@ export default function ManagePets() {
             <Button variant='contained' color="secondary" onClick={() => handleUpdateDialogOpen()} className={styles.wideButton}>UPDATE</Button>
             <Button variant='contained' color="secondary" onClick={() => handleDeletePets()} className={styles.wideButton}>DELETE</Button>
             <Button variant='contained' color="secondary" onClick={() => handleInsertDialogOpen()}>Insert Pets</Button>            
-            <Button variant='contained' color="secondary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button>
+            {/* <Button variant='contained' color="secondary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button> */}
           </Stack>
         </Stack>
         <Dialog open={openInsertDialog} onClose={handleDialogClose}>

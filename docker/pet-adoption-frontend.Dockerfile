@@ -3,6 +3,7 @@ FROM node:20 AS build
 WORKDIR /build
 COPY . .
 
+RUN yarn config set network-timeout 600000 -g
 RUN yarn install
 RUN yarn run build
 

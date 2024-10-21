@@ -4,18 +4,25 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import petadoption.api.adoptioncenteradmin.AdoptionCenterAdmin;
 
 @Entity
-@Table(name = "adoptionCenter")
+@Table(name = "adoption_center")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class AdoptionCenter {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    long centerId;
-    String name;
-    String address;
-    String phone;
-    String email;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "center_generator")
+    private long centerId;
+
+    @Column(name = "center_name")
+    private String centerName;
+
+    @Column(name = "center_address")
+    private String centerAddress;
+
+    @Column(name = "center_phone")
+    private String centerPhone;
+
+    @Column(name = "center_email")
+    private String centerEmail;
 }

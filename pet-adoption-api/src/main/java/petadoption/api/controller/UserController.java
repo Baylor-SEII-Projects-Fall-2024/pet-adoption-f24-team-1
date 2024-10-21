@@ -13,7 +13,7 @@ import java.util.List;
 
 @Log4j2
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
 public class UserController {
 
     @Autowired
