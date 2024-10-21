@@ -75,31 +75,29 @@ export default function UserHome() {
   }, []);
 
   return (
-    <>
-      <Head>
-        <title>Home</title>
-      </Head>
+      <>
+        <Head>
+          <title>Home</title>
+        </Head>
 
-      <main>
-        <Stack spacing={10}>
-        <NavBar/>
-        
-        
-          <Stack direction="row" spacing={5}>
-            <FilterStack />
-            <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2} sx={{}}>
-              {pets.map((pet) => (
-                <Grid item>
-                  <PetCard key={pet.id} name={pet.name} breed={pet.breed} age={pet.age} gender={pet.gender} weight={pet.weight} imgSrc={pet.imgSrc} id={pet.id} location={pet.location}/>
-                </Grid>
-              ))}
-            </Grid>
-            
-            
+        <main>
+          <Stack spacing={10}>
+            <NavBar />
+            <Stack direction="row" spacing={5}>
+              <FilterStack />
+              <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2}>
+                {pets.map((pet) => (
+                    <Grid item key={pet.id}>
+                      <PetCard name={pet.name} breed={pet.breed} age={pet.age} gender={pet.gender} weight={pet.weight} imgSrc={pet.imgSrc} id={pet.id} location={pet.location} />
+                    </Grid>
+                ))}
+              </Grid>
+            </Stack>
+
+            {/* Add a button to navigate to the About page */}
+            <Button variant="contained" onClick={() => navigateTo('/about')} sx={{ width: 200, alignSelf: 'center' }}>About Us</Button>
           </Stack>
-        
-        </Stack>
-      </main>
-    </>
+        </main>
+      </>
   );
 }
