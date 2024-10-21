@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+//AdoptionCenterInfo
 public class AdoptionCenter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
