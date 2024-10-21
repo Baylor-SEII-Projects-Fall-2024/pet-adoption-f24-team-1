@@ -13,7 +13,7 @@ function valuetext(value) {
 
 export default function FilterStack(props) {
   const [age, setAge] = useState([0, 30])
-  const [weight, setWeight] = useState([0, 100])
+  const [weight, setWeight] = useState([0, 200])
   const [distance, setDistance] = useState(50)
 
   
@@ -125,6 +125,8 @@ export default function FilterStack(props) {
           onChange={handleWeightChange}
           onChangeCommitted={hangeWeightComm}
           valueLabelDisplay="auto"
+          min={0}
+          max={200}
           getAriaValueText={valuetext}
           sx={{width: '90%'}}
         />
