@@ -1,22 +1,18 @@
 package petadoption.api.adoptioncenteradmin;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import petadoption.api.adoptioncenter.AdoptionCenter;
 
-@Data
 @Entity
-@Table(name = AdoptionCenterAdmin.TABLE_NAME)
+@Table(name = "adoption_center_admins")
+@Data
 public class AdoptionCenterAdmin {
-    public static final String TABLE_NAME = "adoption_center_admins";
-
     @Id
-    @GeneratedValue(generator = TABLE_NAME + "_GENERATOR")
-    @SequenceGenerator(
-            name = TABLE_NAME + "_GENERATOR",
-            sequenceName = TABLE_NAME + "_SEQUENCE"
-    )
-    @Column(name = "ADMIN_ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "admin_generator")
     private Long id;
 
     @Column(name = "FIRST_NAME")
@@ -31,7 +27,9 @@ public class AdoptionCenterAdmin {
     @Column(name = "PASSWORD")
     private String password;
 
-    @PrimaryKeyJoinColumn(name = "adoption_center")
-    @OneToOne(mappedBy = "admin", cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "center_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private AdoptionCenter adoptionCenter;
 }

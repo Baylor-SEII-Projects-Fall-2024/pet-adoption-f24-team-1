@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Button, TextField, Typography, Grid, Paper, IconButton, InputAdornment, Collapse, Fade } from '@mui/material';
 import { useState } from "react";
+import { useRouter } from 'next/router';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import Visibility from '@mui/icons-material/Visibility';
@@ -9,6 +10,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import axios from 'axios';
 
 const AdoptionCenterRegisterPage = () => {
+    const router = useRouter();
+
     // Adoption Center form use states
     const [isAdoptionCenterFormVisible, setIsAdoptionCenterFormVisible] = useState(true);
     const [isNameFieldVisible, setIsNameFieldVisibile] = useState(true);
@@ -95,6 +98,32 @@ const AdoptionCenterRegisterPage = () => {
             }
         }
     };
+
+    const handleSubmit = (e) => {
+
+        const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+    
+        axios.post(`${apiBaseUrl}/api/admins`, {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        //   centerName: adoptionCenterName,
+        //   centerAddress: adoptionCenterLocation,
+        //   centerPhone: adoptionCenterPhone,
+        //   centerEmail: adoptionCenterEmail,
+        })
+                .then(response => {
+                    alert("Registration successful!");
+                    sessionStorage.setItem('user', JSON.stringify(response.data)); // Store user data in session storage
+                    // Go to home page
+                    router.push("/");
+    
+                })
+                .catch(error => {
+                    alert("Registration failed: " + error.message);
+                });
+      };
 
     return (
         <>
@@ -213,7 +242,7 @@ const AdoptionCenterRegisterPage = () => {
 
                 <Typography variant="subtitle1" sx={{ marginY: 2 }}>Note: More admin accounts can be created later</Typography>
 
-                <form >
+                <form onSubmit={handleSubmit}>
                     {/* First Name Input */}
                     <TextField
                         label="First Name"

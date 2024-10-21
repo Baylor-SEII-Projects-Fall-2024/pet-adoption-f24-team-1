@@ -11,23 +11,18 @@ import petadoption.api.adoptioncenteradmin.AdoptionCenterAdmin;
 @Data
 public class AdoptionCenter {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "CENTER_ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "center_generator")
     private long centerId;
 
-    @Column(name = "NAME")
-    private String name;
+    @Column(name = "center_name")
+    private String centerName;
 
-    @Column(name = "ADDRESS")
-    private String address;
+    @Column(name = "center_address")
+    private String centerAddress;
 
-    @Column(name = "PHONE")
-    private String phone;
+    @Column(name = "center_phone")
+    private String centerPhone;
 
-    @Column(name = "EMAIL")
-    private String email;
-
-    @OneToOne
-    @JoinColumn(name = "admin_id", nullable = false)
-    private AdoptionCenterAdmin admin;
+    @Column(name = "center_email")
+    private String centerEmail;
 }
