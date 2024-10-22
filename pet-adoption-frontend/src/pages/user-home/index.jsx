@@ -11,6 +11,7 @@ import PetCard from '@/components/pet-card';
 
 
 export default function UserHome() {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
 
   const [user, setUser] = useState(null);
@@ -88,7 +89,7 @@ export default function UserHome() {
     ]
     //setPets(recommendedPets);
     
-    axios.get('http://localhost:8080/api/pets')
+    axios.get(`${apiBaseUrl}/api/pets`)
      .then(response => {
         console.log(response.data);
         setPets(response.data);
