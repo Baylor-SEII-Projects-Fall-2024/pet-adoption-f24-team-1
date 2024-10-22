@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pet-adoption-forms")
+@CrossOrigin(origins = "http://localhost:3000")
 public class petAdoptionFormController {
 
     private static final Logger logger = LoggerFactory.getLogger(petAdoptionFormController.class);
