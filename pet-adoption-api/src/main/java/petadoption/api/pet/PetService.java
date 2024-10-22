@@ -36,4 +36,8 @@ public class PetService {
     public List<String> getSpecies()  {
         return petRepository.findSpecies();
     }
+
+    public List<String> getBreeds()  {
+        return petRepository.findBreeds();
+    }
 }

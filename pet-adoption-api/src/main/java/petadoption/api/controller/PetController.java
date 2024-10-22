@@ -64,4 +64,9 @@ public class PetController {
     public List<String> getSpecies()  {
         return petService.getSpecies();
     }
+
+    @GetMapping("/breeds")
+    public List<String> getBreeds()  {
+        return petService.getBreeds();
+    }
 }
