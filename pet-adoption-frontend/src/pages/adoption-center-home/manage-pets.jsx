@@ -68,7 +68,7 @@ export default function ManagePets() {
 
 
   const loadData = () => {
-    fetch('http://localhost:8080/api/pets')  // Adjust this endpoint as per your backend
+    fetch(`${apiBaseUrl}/api/pets`)  // Adjust this endpoint as per your backend
     .then((response) => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
