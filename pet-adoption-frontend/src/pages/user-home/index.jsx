@@ -114,7 +114,7 @@ export default function UserHome() {
             <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2}>
               {pets.filter(filters).map((pet) => (
                 <Grid item>
-                  <PetCard key={pet.petID} petName={pet.petName} petBreed={pet.petBreed} petAge={pet.petAge} petGender={pet.petGender} petWeight={pet.petWeight} imgUrl={pet.imgUrl} petID={pet.petID} location={{adoptionCenter: 'Home Free', address: '111 Drive Street, Waco, TX 76706'}} petDescription={pet.petDescription} user={user} liked={false}/>
+                  <PetCard key={pet.petID} pet={pet} location={{adoptionCenter: 'Home Free', address: '111 Drive Street, Waco, TX 76706'}} user={user} liked={false}/>
                 </Grid>
               ))}
             </Grid>
