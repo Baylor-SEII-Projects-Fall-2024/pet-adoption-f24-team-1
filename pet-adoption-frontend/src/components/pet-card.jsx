@@ -19,7 +19,7 @@ export default function PetCard(props) {
   const handleClose = () => console.log(setOpen(false));
 
   const theme = useTheme();
-  const breed = props.petBreed.length < 11 ? props.petBreed : props.petBreed.substring(0, 8) + '...';
+  const breed = props.pet.petBreed.length < 11 ? props.pet.petBreed : props.pet.petBreed.substring(0, 8) + '...';
 
   // Login
   const openLoginModal = () => {
@@ -34,7 +34,7 @@ export default function PetCard(props) {
     if(!liked)  {
       if(props.user)  {
         axios.post('http://localhost:8080/api/matches', {
-          petID: props.petID,
+          petID: props.pet.petID,
           userID: props.user.id
         })
         .then(() => {
@@ -51,7 +51,7 @@ export default function PetCard(props) {
     else  {
       axios.delete('http://localhost:8080/api/matches', {
         data: {
-          petID: props.petID,
+          petID: props.pet.petID,
           userID: props.user.id
         }
       })
@@ -70,7 +70,7 @@ export default function PetCard(props) {
     <Paper sx={{ width: 250, marginBottom: 10 }} elevation={3}>
       <Grid container direction="column" alignItems="center" justifyContent="center" rowGap={2}>
 
-        <Box component="img" sx={{ width: 250, height: 120, objectFit: "cover"}} src={props.imgUrl} alt="pet image"/>
+        <Box component="img" sx={{ width: 250, height: 120, objectFit: "cover"}} src={props.pet.imgUrl} alt="pet image"/>
           
         <Box sx={{ width: 240, position: "absolute", display: "flex", marginTop: -9 }} justifyContent="flex-start">
           <IconButton color="primary" size="small" onClick={handleLikedPet}>
@@ -79,7 +79,7 @@ export default function PetCard(props) {
         </Box>
 
         <Stack direction="column" alignItems="center" >
-          <Typography variant="h6" marginBottom={2}>{props.petName}</Typography>
+          <Typography variant="h6" marginBottom={2}>{props.pet.petName}</Typography>
           <Stack direction="row" alignItems="center" spacing={1} marginLeft={-3}>
             <LocationOnIcon fontSize="11px" sx={{ color: theme.palette.primary.light }}/>
             <Typography variant="body2">{props.location.adoptionCenter}</Typography>
@@ -95,13 +95,13 @@ export default function PetCard(props) {
             <Stack justifyContent="space-between" direction="row" spacing={1} alignItems="center" sx={{width: 105}}>
               <Typography variant="body2" align="left">Gender:</Typography>
               <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex" }} alignItems="center" align="right" justifyContent="center">
-                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.petGender}</Typography>
+                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.pet.petGender}</Typography>
               </Box>
             </Stack>
             <Stack justifyContent="space-between" direction="row" spacing={1} alignItems="center" sx={{width: 105}}>
               <Typography variant="body2" align="left">Age:</Typography>
               <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex" }} alignItems="center" align="right" justifyContent="center">
-                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.petAge} years</Typography>
+                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.pet.petAge} years</Typography>
               </Box>
             </Stack>
           </Stack>  
@@ -115,7 +115,7 @@ export default function PetCard(props) {
             <Stack justifyContent="space-between" direction="row" spacing={1} alignItems="center" sx={{width: 105}}>
               <Typography variant="body2" align="left">Weight:</Typography>
               <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex" }} alignItems="center" align="right" justifyContent="center">
-                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.petWeight} kg</Typography>
+                <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.pet.petWeight} kg</Typography>
               </Box>
             </Stack>
           </Stack>
@@ -127,7 +127,7 @@ export default function PetCard(props) {
       </Grid>
     </Paper>
 
-    <PetInfoModal open={open} handleClose={handleClose} pet={props} />
+    <PetInfoModal open={open} handleClose={handleClose} pet={props.pet} />
 
     <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
 

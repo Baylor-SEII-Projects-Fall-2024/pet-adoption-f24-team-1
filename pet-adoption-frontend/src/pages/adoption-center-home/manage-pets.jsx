@@ -2,8 +2,10 @@ import * as React from 'react';
 import Head from 'next/head'
 import { Button, Stack, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Box } from '@mui/material'
 import styles from '@/styles/Home.module.css'
+import { useRouter } from 'next/router'
 import Paper from '@mui/material/Paper';
 import { DataGrid, GridSelectionModel} from '@mui/x-data-grid';
+import NavBar from '@/components/nav-bar-adoption-center';
 import { useRef,useEffect, useState } from 'react'
 import axios from 'axios';
 import ImageDropzone from '@/components/image-dropzone';
@@ -66,7 +68,7 @@ export default function ManagePets() {
 
 
   const loadData = () => {
-    fetch('http://localhost:8080/api/pets')  // Adjust this endpoint as per your backend
+    fetch(`${apiBaseUrl}/api/pets`)  // Adjust this endpoint as per your backend
     .then((response) => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -189,6 +191,12 @@ export default function ManagePets() {
 
   };
 
+
+  const router = useRouter();
+
+  const navigateTo = (page) => {
+    router.push(page);
+  }
   
 
   return (
@@ -197,7 +205,8 @@ export default function ManagePets() {
         <title>Manage Pets</title>
       </Head>
 
-      <main>          
+      <main>
+      <NavBar />
       <p>Manage Pets Page</p>
 
         <Stack sx={{  paddingTop: 10, flexDirection:'row', flexGrow: 1,spacing:'4'}}  gap={2}>
@@ -220,10 +229,10 @@ export default function ManagePets() {
           {/* </Paper> */}
 
           <Stack s1 = {{direction:'column', spacing:'2'}}>
-            <Button variant='contained' color="secondary" onClick={() => handleUpdateDialogOpen()} className={styles.wideButton}>UPDATE</Button>
-            <Button variant='contained' color="secondary" onClick={() => handleDeletePets()} className={styles.wideButton}>DELETE</Button>
-            <Button variant='contained' color="secondary" onClick={() => handleInsertDialogOpen()}>Insert Pets</Button>            
-            {/* <Button variant='contained' color="secondary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button> */}
+            <Button variant='contained' color="primary" onClick={() => handleUpdateDialogOpen()} className={styles.wideButton}>UPDATE</Button>
+            <Button variant='contained' color="primary" onClick={() => handleDeletePets()} className={styles.wideButton}>DELETE</Button>
+            <Button variant='contained' color="primary" onClick={() => handleInsertDialogOpen()}>Insert Pets</Button>            
+            {/* <Button variant='contained' color="primary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button> */}
           </Stack>
         </Stack>
         <Dialog open={openInsertDialog} onClose={handleDialogClose}>
