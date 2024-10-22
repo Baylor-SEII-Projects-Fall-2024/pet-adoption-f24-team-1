@@ -11,7 +11,7 @@ import petadoption.api.event.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
 @RequestMapping("/api/events")
 @RestController
 public class EventController {
