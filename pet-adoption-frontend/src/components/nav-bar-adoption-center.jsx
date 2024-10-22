@@ -55,6 +55,9 @@ export default function NavBar() {
     if(nav === 'Settings')  {
       router.push('/adoption-center-home/adpotion-center-settings');
     }
+    if(nav === 'Logout')  {
+      openLogoutModal();
+    }
     if(nav === 'Manage Pets')  {
       router.push('/adoption-center-home/manage-pets');    
     }
