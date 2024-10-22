@@ -12,6 +12,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 export default function Matches() {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
 
   const [user, setUser] = useState(null);
@@ -50,7 +51,7 @@ export default function Matches() {
   // Get pets from database
   useEffect(() => {
     if (!user) return;
-    axios.get('http://localhost:8080/api/matches', {
+    axios.get(`${apiBaseUrl}/api/matches`, {
       params: {
         userID: user.id
       }

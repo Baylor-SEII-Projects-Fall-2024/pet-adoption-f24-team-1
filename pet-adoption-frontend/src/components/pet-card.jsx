@@ -11,6 +11,8 @@ import LoginModal from './login-modal';
 import axios from 'axios';
 
 export default function PetCard(props) {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+
   const [liked, setLiked] = useState(props.liked);
   const [open, setOpen] = useState(false);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -33,7 +35,7 @@ export default function PetCard(props) {
     
     if(!liked)  {
       if(props.user)  {
-        axios.post('http://localhost:8080/api/matches', {
+        axios.post(`${apiBaseUrl}/api/matches`, {
           petID: props.pet.petID,
           userID: props.user.id
         })
@@ -49,7 +51,7 @@ export default function PetCard(props) {
       }
     }
     else  {
-      axios.delete('http://localhost:8080/api/matches', {
+      axios.delete(`${apiBaseUrl}/api/matches`, {
         data: {
           petID: props.pet.petID,
           userID: props.user.id
