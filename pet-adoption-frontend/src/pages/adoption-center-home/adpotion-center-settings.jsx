@@ -23,6 +23,9 @@ export default function Settings() {
         </Stack>
         <Stack sx={{ display: "flex", flexWrap: "wrap", alignItems: "ceneter", justifyContent: 'center'}} direction="row">
         </Stack>
+
+
+
       </main>
     </>
   );
