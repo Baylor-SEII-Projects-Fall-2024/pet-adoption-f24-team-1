@@ -7,6 +7,7 @@ import { DataGrid} from '@mui/x-data-grid';
 import { useRef,useEffect, useState } from 'react'
 import axios from 'axios';
 
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 
 export default function ManageEvents() {
@@ -38,10 +39,10 @@ export default function ManageEvents() {
     }));
     console.log(newEventData);
     setIsFormValid(
-      // newEventData.title !== '' &&
-      // newEventData.date !== '' &&
-      // newEventData.description !== '' &&
-      // newEventData.location !== ''
+      newEventData.title !== '' &&
+      newEventData.date !== '' &&
+      newEventData.description !== '' &&
+      newEventData.location !== ''
     );
   };  
 
@@ -50,7 +51,7 @@ export default function ManageEvents() {
 
 
   const loadData = () => {
-    fetch('http://localhost:8080/api/events') 
+    fetch(`${apiBaseUrl}/api/events`) 
     .then((response) => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -98,7 +99,7 @@ export default function ManageEvents() {
 
   const handleInsertEvent = () => {
     // if(isFormValid){
-    axios.post("http://localhost:8080/api/events", newEventData )
+    axios.post(`${apiBaseUrl}/api/events`, newEventData )
       .then(response => {
         handleDialogClose();
       })
@@ -131,7 +132,7 @@ export default function ManageEvents() {
     console.log("Selected IDs for deletion:", selectionModel);
     for(const eventID of selectedIDs){
       axios
-        .delete(`http://localhost:8080/api/events/${eventID}`)
+        .delete(`${apiBaseUrl}/api/events/${eventID}`)
         .then(response => {
           loadData();
         })
@@ -163,7 +164,7 @@ export default function ManageEvents() {
 
   const handleUpdateEvent = () => {
     const eventID = selectionModel[0]; // Get the selected event ID
-    axios.put(`http://localhost:8080/api/events/${eventID}`, newEventData) // Update the event
+    axios.put(`${apiBaseUrl}/api/events/${eventID}`, newEventData) // Update the event
       .then(response => {
         console.log('Update successful:', response.data);
         loadData(); // Reload the data after the update

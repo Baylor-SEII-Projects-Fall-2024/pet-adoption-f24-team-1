@@ -8,6 +8,7 @@ import { useRef,useEffect, useState } from 'react'
 import axios from 'axios';
 import ImageDropzone from '@/components/image-dropzone';
 
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 
 export default function ManagePets() {
@@ -30,7 +31,7 @@ export default function ManagePets() {
     const selectedPet = petsData.find((pet) => pet.id === selectedID);
     setSelectionModel(selectedID)
     setSelectedRow(selectedPet);
-    console.log(selectedRow);
+    console.log(selectedRows);
   };
 
   const columns = [
@@ -121,7 +122,7 @@ export default function ManagePets() {
   const handleInsertPet = () => {
     newPetData.imgUrl = imgUrl;
     console.log('Should see this: ' + newPetData.imgUrl);
-    axios.post("http://localhost:8080/api/pets",newPetData )
+    axios.post(`${apiBaseUrl}/api/pets`, newPetData )
       .then(response => {
         loadData(); // Reload data to see the newly inserted pet
         handleDialogClose();
@@ -158,7 +159,7 @@ export default function ManagePets() {
 
   const handleUpdatePet = () => {
     const petID = selectionModel[0]; // Get the selected pet ID
-    axios.put(`http://localhost:8080/api/pets/${petID}`, newPetData) // Update the pet
+    axios.put(`${apiBaseUrl}/api/pets/${petID}`, newPetData) // Update the pet
       .then(response => {
         console.log('Update successful:', response.data);
         loadData(); // Reload the data after the update
@@ -177,7 +178,7 @@ export default function ManagePets() {
     console.log("Selected IDs for deletion:", selectionModel);
     for(const petID of selectedIds){
       axios
-        .delete(`http://localhost:8080/api/pets/${petID}`)
+        .delete(`${apiBaseUrl}/api/pets/${petID}`)
         .then(response => {
           loadData();
         })
