@@ -62,9 +62,9 @@ export default function PetAdoptionForm() {
                 <title>Pet Adoption Form</title>
             </Head>
 
-            <NavBar />
-
             <main>
+                <Stack spacing={10}>
+                <NavBar />
                 {!isSubmitted ? (
                     <form onSubmit={handleSubmit}>
                         <Stack sx={{ paddingTop: 4 }} alignItems="center" gap={2}>
@@ -187,6 +187,7 @@ export default function PetAdoptionForm() {
                         <Typography variant="body1">Your pet adoption form has been successfully submitted.</Typography>
                     </Stack>
                 )}
+                </Stack>
             </main>
         </>
     );
