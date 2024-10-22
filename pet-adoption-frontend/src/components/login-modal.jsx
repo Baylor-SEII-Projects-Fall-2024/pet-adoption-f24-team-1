@@ -1,9 +1,11 @@
 import React from "react";
-import styles from '@/styles/Login.module.css';
-import { Box, Button, Typography, Grid, TextField, InputAdornment, IconButton, Link, Modal } from "@mui/material";
+import { Box, Button, Typography, Grid, TextField, InputAdornment, IconButton, Link, Modal, Paper } from "@mui/material";
 import EmailIcon from '@mui/icons-material/Email';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import PetsIcon from '@mui/icons-material/Pets';
+import GoogleIcon from '@mui/icons-material/Google';
+import FacebookIcon from '@mui/icons-material/Facebook';
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
@@ -66,74 +68,94 @@ const LoginModal = ({ isOpen, onClose }) => {
       onClose={onClose}
       aria-labelledby="login-modal-title"
       aria-describedby="login-modal-description"
+      sx={{
+        border: "solid black 2px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}
     >
-    <Box className={styles.modalOverlay}>
-      <Box className={styles.modalContent}>
-        <Box className={styles.modalLeftContent}>
-          <Typography variant="h5">Log in to Fluffy Friends</Typography>
-          <Typography>
-                Don't have an account? <Link href="/create-account" variant='body2'>Sign up</Link>
+        <Paper
+          elevation={3}
+          sx={{
+          padding: 4,
+          width: 400,
+          borderRadius: 2,
+          textAlign: 'center',
+        }}>
+          <PetsIcon sx={{ width: "50px", height: "auto" }}/>
+          <Typography variant="h5" sx={{ marginBottom: 2 }}>
+            Log In to Fluffy Friends!
           </Typography>
+          <Typography variant="body2" sx={{ marginBottom: 3 }}>
+            Don't have an account? <Link href="create-account">Sign up</Link>
+          </Typography>
+          
+          {/* Google Sign-Up Button */}
+          <Button
+            variant="outlined"
+            startIcon={<GoogleIcon />}
+            fullWidth
+            sx={{ marginBottom: 2 }}
+          >
+            Sign in with Google
+          </Button>
+
+          {/* Facebook Sign-Up Button */}
+          <Button
+            variant="outlined"
+            startIcon={<FacebookIcon />}
+            fullWidth
+            sx={{ marginBottom: 2 }}
+          >
+            Sign in with Facebook
+          </Button>
+
+          <Typography variant="subtitle1" sx={{ marginY: 2 }}>OR</Typography>
+
           <form onSubmit={handleSubmit}>
-          <Grid container spacing={4} sx={{ my: 1}}>
-                  <Grid item xs={12}>
-                    <TextField id="email"
-                               placeholder="Email Address"
-                               variant="outlined"
-                               required
-                               onChange={(e) => setEmail(e.target.value)}
-                               sx={{ width: "100%" }}
-                               InputProps={{
-                                startAdornment: (
-                                  <InputAdornment position="start">
-                                    <EmailIcon />
-                                  </InputAdornment>
-                                ),
-                              }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField id="password"
-                               placeholder="Password"
-                               required
-                               type={showPassword ? 'text' : 'password'}
-                               variant="outlined"
-                               onChange={(e) => setPassword(e.target.value)}
-                               sx={{ width: "100%" }}
-                               InputProps={{
-                                startAdornment: (
-                                  <InputAdornment position="start">
-                                    <VpnKeyIcon />
-                                  </InputAdornment>
-                                ),
-                                endAdornment: (
-                                  <InputAdornment position="end">
-                                    <IconButton
-                                      aria-label="toggle password visibility"
-                                      onClick={handleClickShowPassword}
-                                      onMouseDown={handleMouseDownPassword}
-                                      onMouseUp={handleMouseUpPassword}
-                                      edge="end"
-                                    >
-                                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                  </InputAdornment>
-                                ),
-                              }}
-                        
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Button type="submit" variant="contained" color="primary" size="large">Login</Button>
-                  </Grid>
-                </Grid>
+            {/* Email Input */}
+            <TextField
+              label="Email"
+              variant="outlined"
+              fullWidth
+              required
+              sx={{ marginBottom: 2 }}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            {/* Password Input */}
+            <TextField
+              label="Password"
+              variant="outlined"
+              type={showPassword ? 'text' : 'password'}
+              fullWidth
+              required
+              sx={{ marginBottom: 3 }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <Button type="submit" variant="contained" fullWidth>
+              Log In
+            </Button>
           </form>
-        </Box>
-        <Box className={styles.modalRightContent}>
-          <Button onClick={onClose} className={styles.closeButton}>X</Button>
-        </Box>
-      </Box>
-    </Box>
+
+          <Typography variant="body2" sx={{ marginTop: 2 }}>
+            Logging in as adoption center? <Link href="adoption-center-login">Admin login</Link>
+          </Typography>
+        </Paper>
     </Modal>
   );
 };

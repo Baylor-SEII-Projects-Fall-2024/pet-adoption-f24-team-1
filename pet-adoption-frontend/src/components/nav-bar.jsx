@@ -2,26 +2,33 @@ import * as React from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Stack } from '@mui/material';
 import PetsIcon from '@mui/icons-material/Pets';
 import { useState, useEffect, useStyles } from 'react';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import LoginModal from './login-modal';
 import DialogModal from './dialog-modal';
-import Link from 'next/link';
 
-const pages = ['Centers', 'Matches'];
+const pages = ['Centers', 'Policies', 'Help'];
 const settings = ['Settings', 'Logout'];
 const loginSettings = ['Login', 'Create Account'];
 
 
+
 export default function NavBar() {
   const router = useRouter();
-  
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [user, setUser] = useState(null);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
 
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -51,21 +58,21 @@ export default function NavBar() {
     window.location.reload();
   }
 
-  const handleNav = (nav) => {
-    if(nav === 'Login')  {
+  const handleNav = (setting) => {
+    console.log(setting);
+    if(setting === 'Login')  {
+      //router.push('/login');
+      // Open to login modal now instead
       openLoginModal();
     }
-    if(nav === 'Create Account') {
+    if(setting === 'Create Account') {
       router.push('/create-account');
     }
-    if(nav === 'Settings')  {
+    if(setting === 'Settings')  {
       router.push('/settings');
     }
-    if(nav === 'Logout')  {
+    if(setting === 'Logout')  {
       openLogoutModal();
-    }
-    if(nav === 'Matches')  {
-      router.push('/matches');
     }
   };
 
@@ -80,7 +87,7 @@ export default function NavBar() {
 
   return (
     <>
-    <AppBar position="fixed">
+    <AppBar position="static">
       <Container maxWidth={false}>
         <Toolbar disableGutters sx={{width: `100%`}}>
           <Stack direction="row" alignItems="center" spacing={1}>
@@ -100,9 +107,44 @@ export default function NavBar() {
                 textDecoration: 'none',
               }}
             >
-              FLUFFY FRIENDS
+              PAWS&MORE
             </Typography>
           </Stack>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{ display: { xs: 'block', md: 'none' } }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
           
           <PetsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
@@ -121,14 +163,14 @@ export default function NavBar() {
               textDecoration: 'none',
             }}
           >
-            FLUFFY FRIENDS
+            PAWS&MORE
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={() => handleNav(page)}
+                onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
