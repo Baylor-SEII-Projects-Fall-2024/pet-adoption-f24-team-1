@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head'
-import { Button, Card, CardContent, Stack, Typography } from '@mui/material'
+import { Button, Box, CardContent, Stack, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import styles from '@/styles/Home.module.css'
 import NavBar from '@/components/nav-bar-adoption-center';
@@ -22,11 +22,33 @@ export default function AdoptionCenterHome() {
       <main>
       <NavBar />
 
-        <Stack sx={{ paddingTop: 4 }} alignItems='center' gap={2}>
-          <p>Adoption Center Home Page</p>
-        </Stack>
-        <Stack sx={{ display: "flex", flexWrap: "wrap", alignItems: "ceneter", justifyContent: 'center'}} direction="row">
-             
+        <Stack sx={{ paddingTop: 0 }} alignItems='center' gap={2}>
+        <Box className={styles.container}>
+          <Box className={styles.textContainer}>
+            <Typography variant='h3'>Adoption Center Home Page</Typography>
+            <Box sx={{ display: "flex", justifyContent: "center", width: "100%"}}>
+              <Typography
+                variant="h5"
+                noWrap
+                component="a"
+                sx={{
+                  mr: 2,
+                  display: 'flex',
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+              </Typography>
+            </Box>
+            <Typography sx={{ maxWidth: "400px" }}>Here is your landing page for displaying and editing events and pet postings!</Typography>
+          </Box>
+
+
+        </Box>
+
         </Stack>
       </main>
     </>
