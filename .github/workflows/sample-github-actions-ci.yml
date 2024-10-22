@@ -11,6 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Use API key
+        run: |
+          echo "Using API key"
+          echo "${{ secrets.API_KEY_CLOUD }}"  # Access your API key
+
       - name: Build
         # This step builds both the frontend and backend docker images using
         # Docker Compose. To change how the images are built or their actual
