@@ -42,7 +42,7 @@ const CreateAccountPage = () => {
   return (
     <>
     <Box sx={{ display: "flex", width: "100%", justifyContent: "start" }}>
-        <Button startIcon={<ArrowBackIcon />} size='large' href='/'>Back to Paws&More</Button>
+        <Button startIcon={<ArrowBackIcon />} size='large' href='/'>Back to FLUFFY FRIENDS</Button>
       </Box>
     <Box
       sx={{
