@@ -42,7 +42,7 @@ export default function HomePage() {
                 FLUFFY FRIENDS
               </Typography>
             </Box>
-            <Typography sx={{ maxWidth: "400px" }}>Adopting a pet not only provides a loving home for an animal in need, but it also brings companionship and joy to your life. Every adoption helps reduce the number of animals in shelters, giving them a second chance at happiness.</Typography>
+            <Typography sx={{ maxWidth: "400px" }}>This page has been updated and has passed the github runner CI/CD</Typography>
             <Button variant='contained' size='large' sx={{ position: "static" }}>Adopt Now</Button>
           </Box>
 
