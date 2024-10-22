@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Button, Grid, Stack, TextField, Typography } from '@mui/material';
 import Image from 'next/image';
 import axios from 'axios';
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 export default function PetAdoptionForm() {
     const [fullName, setFullName] = useState("");
@@ -32,7 +33,9 @@ export default function PetAdoptionForm() {
             jobTime
         };
 
-        axios.post("http://localhost:8080/api/pet-adoption-forms", formData)
+        const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+        console.log(formData);
+        axios.post(`${apiBaseUrl}/api/pet-adoption-forms`, formData)
             .then(response => {
                 setMessage("Form submitted successfully!");
                 setIsSubmitted(true);

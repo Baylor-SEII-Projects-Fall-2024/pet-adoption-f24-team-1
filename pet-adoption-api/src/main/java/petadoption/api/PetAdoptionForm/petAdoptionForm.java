@@ -25,6 +25,7 @@ public class petAdoptionForm{
     private String phoneNumber;
     private String email;
     private String employer;
+    private Date durationTime;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date submissionData;
