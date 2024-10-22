@@ -10,7 +10,7 @@ import petadoption.api.adoptioncenter.AdoptionCenterRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
 @RestController
 @RequestMapping("/api/adoptioncenters")
 public class AdoptionCenterController {
