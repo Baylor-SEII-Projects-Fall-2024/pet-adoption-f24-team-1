@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { Button, Card, CardContent, Stack, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import styles from '@/styles/Home.module.css'
+import NavBar from '@/components/nav-bar-adoption-center';
 
 export default function Settings() {
   const router = useRouter();
@@ -18,6 +19,7 @@ export default function Settings() {
       </Head>
 
       <main>
+      <NavBar />
         <Stack sx={{ paddingTop: 4 }} alignItems='center' gap={2}>
           <p>Adoption Center Profile Page</p>
         </Stack>
