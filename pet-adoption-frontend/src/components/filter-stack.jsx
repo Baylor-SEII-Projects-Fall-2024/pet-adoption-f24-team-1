@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 import { BorderBottomOutlined } from '@mui/icons-material';
+import axios from 'axios';
 
 
 function valuetext(value) {
@@ -13,21 +14,31 @@ function valuetext(value) {
 
 export default function FilterStack(props) {
   const [age, setAge] = useState([0, 30])
-  const [weight, setWeight] = useState([0, 100])
+  const [weight, setWeight] = useState([0, 200])
   const [distance, setDistance] = useState(50)
 
+  const [species, setSpecies] = useState([]);
+  const [breeds, setBreeds] = useState([]);
   
-
-  const handleGenderChange = (event, newFormats) => {
-    props.setGenderFltr(newFormats);
-  };
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
   
   useEffect(() =>  {
-    //Get species options
+    // Get species options
+    axios.get(`${apiBaseUrl}/api/pets/species`)
+    .then(response =>  {
+      setSpecies(response.data);
+    })
     //Get breed options
+    axios.get(`${apiBaseUrl}/api/pets/breeds`)
+    .then(response =>  {
+      setBreeds(response.data);
+    })
   }, []);
 
   
+  const handleGenderChange = (event, newFormats) => {
+    props.setGenderFltr(newFormats);
+  };
 
   const handleAgeChange = (event, newValue) => {
     setAge(newValue);
@@ -58,9 +69,11 @@ export default function FilterStack(props) {
   return (
 
     <Stack sx={{ width: 300, position: 'sticky', marginLeft: 3, marginRight: 3 }} spacing={5}>
+
       <Stack sx={{boxShadow: '0 2px 2px -2px gray'}}>
         <Typography fontSize={19}>Filters</Typography>
       </Stack>
+
       <Stack>
         <Typography>Gender</Typography>
         <ToggleButtonGroup value={props.genderFltr} onChange={handleGenderChange} aria-label="gender filtering">
@@ -85,8 +98,9 @@ export default function FilterStack(props) {
           onChange={handleSpeciesChange}
         >
           <MenuItem value={'Any'}>Any</MenuItem>
-          <MenuItem value={'Dog'}>Dog</MenuItem>
-          <MenuItem value={'Cat'}>Cat</MenuItem>
+          {species.map((species) => (
+            <MenuItem value={species}>{species}</MenuItem>
+          ))}
         </Select>
       </FormControl>
       <FormControl>
@@ -99,8 +113,9 @@ export default function FilterStack(props) {
           onChange={handleBreedChange}
         >
           <MenuItem value={'Any'}>Any</MenuItem>
-          <MenuItem value={'Husky'}>Husky</MenuItem>
-          <MenuItem value={'Yorky'}>Yorky</MenuItem>
+          {breeds.map((breed) => (
+            <MenuItem value={breed}>{breed}</MenuItem>
+          ))}
         </Select>
       </FormControl>
       <Box>
@@ -125,6 +140,8 @@ export default function FilterStack(props) {
           onChange={handleWeightChange}
           onChangeCommitted={hangeWeightComm}
           valueLabelDisplay="auto"
+          min={0}
+          max={200}
           getAriaValueText={valuetext}
           sx={{width: '90%'}}
         />

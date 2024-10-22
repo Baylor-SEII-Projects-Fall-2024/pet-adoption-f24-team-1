@@ -8,6 +8,7 @@ import axios from 'axios';
 import NavBar from '@/components/nav-bar';
 import FilterStack from '@/components/filter-stack';
 import PetCard from '@/components/pet-card';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 export default function Matches() {
@@ -18,10 +19,10 @@ export default function Matches() {
 
   // Filters
   const [ageFltr, setAgeFltr] = useState([0, 30]);
-  const [weightFltr, setWeightFltr] = useState([0, 100]);
+  const [weightFltr, setWeightFltr] = useState([0, 200]);
   const [breedFltr, setBreedFltr] = useState('Any');
   const [speciesFltr, setSpeciesFltr] = useState('Any');
-  const [genderFltr, setGenderFltr] = useState('Any');
+  const [genderFltr, setGenderFltr] = useState(() => ['Male', 'Female']);
   
   function filters(pet)  {
     return (
@@ -29,7 +30,7 @@ export default function Matches() {
       (pet.petWeight >= weightFltr[0] && pet.petWeight <= weightFltr[1]) &&
       (speciesFltr == 'Any' ? true : pet.petSpecies == speciesFltr) &&
       (breedFltr == 'Any' ? true : pet.petBreed == breedFltr) &&
-      (genderFltr == 'Any' ? true : pet.petGender == genderFltr)
+      (genderFltr.length == 2 || genderFltr.length == 0 ? true : pet.petGender == genderFltr[0])
     );
   }
 
@@ -72,8 +73,11 @@ export default function Matches() {
       <main>
         <Stack spacing={10}>
           <NavBar/>
+
+          <Box sx={{ position: "absolute", display: "flex", width: "100%", justifyContent: "start" }}>
+            <Button startIcon={<ArrowBackIcon />} size='large' onClick={() => {router.push('/user-home')}}>Back to Home</Button>
+          </Box>
           
-        
           <Stack direction="row" >
             <FilterStack ageFltr={ageFltr} breedFltr={breedFltr} speciesFltr={speciesFltr} weightFltr={weightFltr} genderFltr={genderFltr} setAgeFltr={setAgeFltr} setBreedFltr={setBreedFltr} setSpeciesFltr={setSpeciesFltr} setWeightFltr={setWeightFltr} setGenderFltr={setGenderFltr}/>
             <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2}>
@@ -85,7 +89,14 @@ export default function Matches() {
             </Grid>
             
             
+
+            
           </Stack>
+          {!user && (
+            <Box sx={{position: 'absolute', top: '40%', bottom: '50%', left: '43%', right: 0, width: '300'}}> 
+              <Typography variant="h5">Sign in to start matching!</Typography>
+            </Box>
+          )}
         
         </Stack>
       </main>

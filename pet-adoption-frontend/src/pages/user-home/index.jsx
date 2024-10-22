@@ -18,7 +18,7 @@ export default function UserHome() {
 
   // Filters
   const [ageFltr, setAgeFltr] = useState([0, 30]);
-  const [weightFltr, setWeightFltr] = useState([0, 100]);
+  const [weightFltr, setWeightFltr] = useState([0, 200]);
   const [breedFltr, setBreedFltr] = useState('Any');
   const [speciesFltr, setSpeciesFltr] = useState('Any');
   const [genderFltr, setGenderFltr] = useState(() => ['Male', 'Female']);
