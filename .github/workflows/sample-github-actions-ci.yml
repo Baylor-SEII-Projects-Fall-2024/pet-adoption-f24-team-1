@@ -11,10 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use API key
+      - name: Create .env
         run: |
-          echo "Using API key"
-          echo "${{ secrets.API_KEY_CLOUD }}"  # Access your API key
+          echo "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=${{ secrets.SECRET_KEY }}" >> pet-adoption-frontend/.env
 
       - name: Build
         # This step builds both the frontend and backend docker images using
