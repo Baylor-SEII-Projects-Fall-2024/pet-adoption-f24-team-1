@@ -39,9 +39,9 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
-        Optional<User> userOptional = userService.findUser(id);
+    @PutMapping("/api/update-profile")
+    public ResponseEntity<User> updateUser(@RequestBody User updatedUser) {
+        Optional<User> userOptional = userService.findUser(updatedUser.getId());
 
         if (userOptional.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -53,8 +53,8 @@ public class UserController {
         user.setImgUrl(updatedUser.getImgUrl());
 
         //should we allow user to change email and password here?
-        user.setEmail(updatedUser.getEmail());
-        user.setPassword(updatedUser.getPassword());
+        //user.setEmail(updatedUser.getEmail());
+        //user.setPassword(updatedUser.getPassword());
 
         User savedUser = userService.saveUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.OK);

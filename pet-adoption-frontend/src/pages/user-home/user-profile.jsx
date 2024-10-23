@@ -11,6 +11,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import NavBar from '@/components/nav-bar';
 import Sidebar from '@/components/Sidebar';
 import axios from 'axios';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function UserProfile() {
   // State variables for editing
@@ -21,6 +22,7 @@ export default function UserProfile() {
   const [phone, setPhone] = useState('702-684-2621');
   const [location, setLocation] = useState('Las Vegas 1028 Hall Street');
   const [instagram, setInstagram] = useState('beets.juice');
+  const [profilePicture, setProfilePicture] = useState(''); // Add state for profile picture
 
   // Fetch user profile data when component mounts
   useEffect(() => {
@@ -33,8 +35,8 @@ export default function UserProfile() {
         setEmail(userData.email || 'beetlejuice@Gmail.com');
         setPhone(userData.phone || '702-684-2621');
         setLocation(userData.location || 'Las Vegas 1028 Hall Street');
-        // probably don't need instagram
         setInstagram(userData.instagram || 'beets.juice');
+        setProfilePicture(userData.imgUrl || ''); // Set the profile picture
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -76,58 +78,60 @@ export default function UserProfile() {
                   {/* Profile Picture */}
                   <Grid item>
                     <Avatar
-                      alt="User Profile Picture"
-                      src="/profile-picture.jpg"
+                      alt={name}
+                      src={profilePicture || ''}  // Use profilePicture state
                       sx={{ width: 120, height: 120 }}
-                    />
+                    >
+                      {!profilePicture && <AccountCircleIcon sx={{ fontSize: 120 }} />}  // Fallback to icon
+                    </Avatar>
                   </Grid>
 
                   {/* Profile Info */}
                   <Grid item xs>
                     {isEditing ? (
                       <>
-                        <TextField 
-                          label="Name" 
-                          value={name} 
-                          onChange={(e) => setName(e.target.value)} 
-                          fullWidth 
+                        <TextField
+                          label="Name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          fullWidth
                           sx={{ marginBottom: 1 }}
                         />
-                        <TextField 
-                          label="Bio" 
-                          value={bio} 
-                          onChange={(e) => setBio(e.target.value)} 
-                          fullWidth 
-                          multiline 
+                        <TextField
+                          label="Bio"
+                          value={bio}
+                          onChange={(e) => setBio(e.target.value)}
+                          fullWidth
+                          multiline
                           rows={4}
                           sx={{ marginBottom: 1 }}
                         />
-                        <TextField 
-                          label="Email" 
-                          value={email} 
-                          onChange={(e) => setEmail(e.target.value)} 
-                          fullWidth 
+                        <TextField
+                          label="Email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          fullWidth
                           sx={{ marginBottom: 1 }}
                         />
-                        <TextField 
-                          label="Phone" 
-                          value={phone} 
-                          onChange={(e) => setPhone(e.target.value)} 
-                          fullWidth 
+                        <TextField
+                          label="Phone"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          fullWidth
                           sx={{ marginBottom: 1 }}
                         />
-                        <TextField 
-                          label="Location" 
-                          value={location} 
-                          onChange={(e) => setLocation(e.target.value)} 
-                          fullWidth 
+                        <TextField
+                          label="Location"
+                          value={location}
+                          onChange={(e) => setLocation(e.target.value)}
+                          fullWidth
                           sx={{ marginBottom: 1 }}
                         />
-                        <TextField 
-                          label="Instagram" 
-                          value={instagram} 
-                          onChange={(e) => setInstagram(e.target.value)} 
-                          fullWidth 
+                        <TextField
+                          label="Instagram"
+                          value={instagram}
+                          onChange={(e) => setInstagram(e.target.value)}
+                          fullWidth
                           sx={{ marginBottom: 1 }}
                         />
                       </>
@@ -190,11 +194,11 @@ export default function UserProfile() {
                     </IconButton>
                   </Box>
                 ) : (
-                  <Button 
-                    variant="outlined" 
-                    startIcon={<EditIcon />} 
-                    color="primary" 
-                    sx={{ position: 'absolute', top: 16, right: 16 }} 
+                  <Button
+                    variant="outlined"
+                    startIcon={<EditIcon />}
+                    color="primary"
+                    sx={{ position: 'absolute', top: 16, right: 16 }}
                     onClick={handleEditProfile}
                   >
                     Edit Profile
