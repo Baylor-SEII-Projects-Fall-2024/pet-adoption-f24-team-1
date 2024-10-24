@@ -2,10 +2,6 @@ package petadoption.api.user;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import petadoption.api.pet.Pet;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity

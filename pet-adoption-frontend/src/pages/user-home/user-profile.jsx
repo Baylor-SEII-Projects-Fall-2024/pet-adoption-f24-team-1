@@ -13,6 +13,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+
 export default function UserProfile() {
   const router = useRouter();
 
@@ -49,7 +51,7 @@ export default function UserProfile() {
   const handleSaveProfile = async () => {
     try {
       //await axios.put('/api/update-profile', userFromSessionStorage.id);
-      await axios.put('/api/update-profile', { id, name, bio, email, phone, location, imgUrl, password, userType });
+      await axios.put(`${apiBaseUrl}/api/update-profile`, { id, name, bio, email, phone, location, imgUrl, password, userType });
       sessionStorage.setItem('user', JSON.stringify({ name, bio, email, phone, location }));
       setIsEditing(false);
     } catch (error) {
