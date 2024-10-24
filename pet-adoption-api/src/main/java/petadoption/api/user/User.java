@@ -22,22 +22,28 @@ public class User {
     @Column(name = "USER_ID")
     Long id;
 
-    @Column(name = "FIRST_NAME")
-    String firstName;
+    @Column(name = "NAME")
+    String name;
 
-    @Column(name = "LAST_NAME")
-    String lastName;
+    @Column(name = "BIO")
+    String bio;
 
     @Column(name = "EMAIL")
     String email;
+
+    @Column(name = "PHONE")
+    String phone;
+
+    @Column(name = "LOCATION")
+    String location;
+
+    @Column(name = "IMG_URG")
+    String imgUrl;
 
     @Column(name = "PASSWORD")
     String password;
 
     @Column(name = "USER_TYPE")
     String userType;
-
-    @Column(name = "IMG_URG")
-    String imgUrl;
 
 }

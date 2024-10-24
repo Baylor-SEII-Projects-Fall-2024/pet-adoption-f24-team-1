@@ -7,49 +7,50 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import InstagramIcon from '@mui/icons-material/Instagram';
 import NavBar from '@/components/nav-bar';
 import Sidebar from '@/components/Sidebar';
-import axios from 'axios';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 export default function UserProfile() {
+  const router = useRouter();
+
   // State variables for editing
   const [isEditing, setIsEditing] = useState(false);
+  const [id, setId] = useState();
   const [name, setName] = useState('Beetle Juice');
   const [bio, setBio] = useState('Just looking for a cuppa pets');
   const [email, setEmail] = useState('beetlejuice@Gmail.com');
   const [phone, setPhone] = useState('702-684-2621');
   const [location, setLocation] = useState('Las Vegas 1028 Hall Street');
-  const [instagram, setInstagram] = useState('beets.juice');
-  const [profilePicture, setProfilePicture] = useState(''); // Add state for profile picture
+  const [imgUrl, setProfilePicture] = useState(''); // Add state for profile picture
+  const [password, setPassword] = useState();
+  const [userType, setUserType] = useState();
 
-  // Fetch user profile data when component mounts
+  // Fetch user profile data from sessionStorage when component mounts
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await axios.get('/api/user');
-        const userData = response.data;
-        setName(userData.name || 'Beetle Juice');
-        setBio(userData.bio || 'Just looking for a cuppa pets');
-        setEmail(userData.email || 'beetlejuice@Gmail.com');
-        setPhone(userData.phone || '702-684-2621');
-        setLocation(userData.location || 'Las Vegas 1028 Hall Street');
-        setInstagram(userData.instagram || 'beets.juice');
-        setProfilePicture(userData.imgUrl || ''); // Set the profile picture
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
-
-    fetchUserProfile();
+    const userFromSessionStorage = JSON.parse(sessionStorage.getItem('user'));
+    if (userFromSessionStorage) {
+      setId(userFromSessionStorage.id);
+      setName(userFromSessionStorage.name || 'Beetle Juice');
+      setBio(userFromSessionStorage.bio || 'Just looking for a cuppa pets');
+      setEmail(userFromSessionStorage.email || 'beetlejuice@Gmail.com');
+      setPhone(userFromSessionStorage.phone || '702-684-2621');
+      setLocation(userFromSessionStorage.location || 'Las Vegas 1028 Hall Street');
+      setProfilePicture(userFromSessionStorage.imgUrl || '');
+      setPassword(userFromSessionStorage.password); 
+      setUserType(userFromSessionStorage.userType);
+    }
   }, []);
 
   // Toggle between editing and viewing modes
   const handleEditProfile = () => setIsEditing(true);
   const handleSaveProfile = async () => {
     try {
-      await axios.put('/api/update-profile', { name, bio, email, phone, location, instagram });
+      //await axios.put('/api/update-profile', userFromSessionStorage.id);
+      await axios.put('/api/update-profile', { id, name, bio, email, phone, location, imgUrl, password, userType });
+      sessionStorage.setItem('user', JSON.stringify({ name, bio, email, phone, location }));
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -79,10 +80,10 @@ export default function UserProfile() {
                   <Grid item>
                     <Avatar
                       alt={name}
-                      src={profilePicture || ''}  // Use profilePicture state
+                      src={imgUrl || ''}  // Use profilePicture state
                       sx={{ width: 120, height: 120 }}
                     >
-                      {!profilePicture && <AccountCircleIcon sx={{ fontSize: 120 }} />}  // Fallback to icon
+                      {!imgUrl && <AccountCircleIcon sx={{ fontSize: 120 }} />}  // Fallback to icon
                     </Avatar>
                   </Grid>
 
@@ -127,13 +128,6 @@ export default function UserProfile() {
                           fullWidth
                           sx={{ marginBottom: 1 }}
                         />
-                        <TextField
-                          label="Instagram"
-                          value={instagram}
-                          onChange={(e) => setInstagram(e.target.value)}
-                          fullWidth
-                          sx={{ marginBottom: 1 }}
-                        />
                       </>
                     ) : (
                       <>
@@ -166,15 +160,6 @@ export default function UserProfile() {
                           <Grid item>
                             <Typography variant="body2" color="text.secondary">
                               <strong>Location:</strong> {location}
-                            </Typography>
-                          </Grid>
-
-                          <Grid item>
-                            <InstagramIcon fontSize="small" />
-                          </Grid>
-                          <Grid item>
-                            <Typography variant="body2" color="text.secondary">
-                              <strong>Instagram:</strong> @{instagram}
                             </Typography>
                           </Grid>
                         </Grid>
