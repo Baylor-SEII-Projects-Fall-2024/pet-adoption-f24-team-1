@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import axios from 'axios';
 import NavBar from '@/components/nav-bar';
-import FilterStack from '@/components/filter-stack';
+import FilterStack from '@/components/pet-filter-stack';
 import PetCard from '@/components/pet-card';
 
 

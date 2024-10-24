@@ -1,63 +1,130 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import { Button, Card, CardContent, Stack, Typography, TextField, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
-import styles from '@/styles/Home.module.css';
+import { Button, Card, CardContent, Stack, Typography, Grid, TextField, Container, Link, Paper, Box } from '@mui/material'
+import styles from '@/styles/Home.module.css'
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'
+import axios from 'axios';
+import NavBar from '@/components/nav-bar';
+import FilterStack from '@/components/pet-filter-stack';
+import PetCard from '@/components/pet-card';
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+
 
 export default function adoptionCenterSearch() {
-    // State to hold search filters
-    const [name, setName] = useState('');
-    const [address, setAddress] = useState('');
-    const [zipCode, setZipCode] = useState('');
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+    const router = useRouter();
 
-    // Handle search button click
-    const handleSearch = () => {
-        // Here you'd trigger the search functionality with filters
-        console.log('Search clicked', {name, address, zipCode });
-    };
+    const [user, setUser] = useState(null);
+    const [adoptionCenter, setCenters] = useState([]);
+
+    // Filters
+    const [nameFltr, setNameFltr] = useState('Any');
+    const [addressFltr, setAddressFltr] = useState('Any');
+    const [zipCodeFltr, setZipCodeFltr] = useState([501, 89049]);
+
+    function filters(AdoptionCenter)  {
+        return (
+            (AdoptionCenter.zipCode >= zipCodeFltr[0] && AdoptionCenter.zipCode <= zipCodeFltr()[1]) &&
+            (addressFltr == 'Any' ? true : AdoptionCenter.centerAddress == addressFltr) &&
+            (nameFltr == 'Any' ? true : AdoptionCenter.centerName == breedFltr)
+        );
+    }
+
+    useEffect(() => {
+        const userFromLocalStorage = JSON.parse(sessionStorage.getItem('user'));
+        if (userFromLocalStorage) {
+            setUser(userFromLocalStorage);
+        } else {
+            setUser(null);
+        }
+    }, []);
+
+    const navigateTo = (page) => {
+        router.push(page);
+    }
+/*
+private long centerId;
+
+    @Column(name = "center_name")
+    private String centerName;
+
+    @Column(name = "center_address")
+    private String centerAddress;
+
+    @Column(name = "center_phone")
+    private String centerPhone;
+
+    @Column(name = "center_email")
+    private String centerEmail;
+
+    @Column(name = "zip_code")
+    private long zipCode;
+ */
+    // Get pets from database
+    useEffect(() => {
+        const recommendedPets = [
+            {
+                centerId: 1,
+                centerName: 'Human Society of Central Texas',
+                centerAddress: '2032 Circle Rd, Waco',
+                centerPhone: '(254) 754-1454',
+                centerEmail: 'humanesocietycentraltexas.org',
+                zipCode: 76706
+            },
+            {
+                centerId: 2,
+                centerName: 'Nightlight Christian Adoptions',
+                centerAddress: '400 Schroeder Dr, Waco',
+                centerPhone: '(254) 741-1633',
+                centerEmail: 'idk@gmail.com',
+                zipCode: 76710
+            },
+            {
+                centerId: 3,
+                centerName: 'Fuzzy Friends Rescue',
+                centerAddress: '6321 Airport Rd, Waco',
+                centerPhone: '(254) 754-9444',
+                centerEmail: 'fuzzyfriendsrescue.com',
+                zipCode: 76708
+            }
+        ]
+        //setPets(recommendedPets);
+
+        axios.get(`${apiBaseUrl}/api/adoptioncenters`)
+            .then(response => {
+                console.log(response.data);
+                setPets(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching adoption centers:', error);
+            });
+    }, []);
 
     return (
         <>
             <Head>
-                <title>Find Adoption Centers</title>
+                <title>Adoption Centers</title>
             </Head>
 
             <main>
-                <Stack sx={{ paddingTop: 4 }} alignItems='center' gap={2}>
-                    <Typography variant='h4'>Find Adoption Centers</Typography>
-
-                    {/* Name Filter */}
-                    <TextField
-                        fullWidth
-                        sx={{ maxWidth: 400 }}
-                        label="Name"
-                        type="Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    {/* address filter */}
-                    <TextField
-                        fullWidth
-                        sx={{ maxWidth: 400 }}
-                        label="Address"
-                        type="Address"
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                    />
-                    {/* zip code filter */}
-                    <TextField
-                        fullWidth
-                        sx={{ maxWidth: 400 }}
-                        label="Zip"
-                        type="Zip"
-                        value={zipCode}
-                        onChange={(e) => setZipCode(e.target.value)}
-                    />
+                <Stack spacing={10}>
+                    <NavBar/>
 
 
-                    {/* Search Button */}
-                    <Button variant="contained" color="primary" onClick={handleSearch}>
-                        Search
-                    </Button>
+                    <Stack direction="row" >
+                        <FilterStack nameFltr={nameFltr} addressFltr={addressFltr} zipCodeFltr={zipCodeFltr}/>
+                        <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2}>
+                            {adoptionCenter.filter(filters).map((pet) => (
+                                <Grid item>
+                                    <PetCard key={pet.petID} pet={pet} location={{adoptionCenter: 'Home Free', address: '111 Drive Street, Waco, TX 76706'}} user={user} liked={false}/>
+                                </Grid>
+                            ))}
+                        </Grid>
+
+
+                    </Stack>
+
                 </Stack>
             </main>
         </>

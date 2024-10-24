@@ -12,7 +12,7 @@ function valuetext(value) {
   return `${value}`;
 }
 
-export default function FilterStack(props) {
+export default function PetFilterStack(props) {
   const [age, setAge] = useState([0, 30])
   const [weight, setWeight] = useState([0, 200])
   const [distance, setDistance] = useState(50)
