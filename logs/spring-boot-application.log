@@ -1,0 +1,483 @@
+2024-10-22T00:08:55.859-05:00  INFO 16332 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 16332 (/Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by noahcaldwell in /Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1)
+2024-10-22T00:08:55.860-05:00  INFO 16332 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-22T00:08:56.279-05:00  INFO 16332 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-22T00:08:56.319-05:00  INFO 16332 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 35 ms. Found 7 JPA repository interfaces.
+2024-10-22T00:08:56.681-05:00  INFO 16332 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-22T00:08:56.689-05:00  INFO 16332 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-22T00:08:56.690-05:00  INFO 16332 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-22T00:08:56.720-05:00  INFO 16332 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-22T00:08:56.720-05:00  INFO 16332 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 835 ms
+2024-10-22T00:08:56.780-05:00  INFO 16332 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-22T00:08:57.042-05:00  INFO 16332 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2fd9fb34
+2024-10-22T00:08:57.043-05:00  INFO 16332 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-22T00:08:57.103-05:00  INFO 16332 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-22T00:08:57.143-05:00  INFO 16332 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-10-22T00:08:57.167-05:00  INFO 16332 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-22T00:08:57.390-05:00  INFO 16332 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-22T00:08:58.081-05:00  INFO 16332 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-22T00:08:58.142-05:00  INFO 16332 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T00:08:58.400-05:00  INFO 16332 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-10-22T00:08:58.753-05:00  WARN 16332 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-22T00:08:58.989-05:00  INFO 16332 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-22T00:08:58.996-05:00  INFO 16332 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 3.424 seconds (process running for 4.2)
+2024-10-22T00:09:09.498-05:00  INFO 16332 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-22T00:09:09.499-05:00  INFO 16332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-22T00:09:09.503-05:00  INFO 16332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-10-22T00:11:13.343-05:00  INFO 16332 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T00:11:13.351-05:00  INFO 16332 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-22T00:11:13.366-05:00  INFO 16332 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-10-22T00:11:15.667-05:00  INFO 16420 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 16420 (/Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by noahcaldwell in /Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1)
+2024-10-22T00:11:15.668-05:00  INFO 16420 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-22T00:11:16.078-05:00  INFO 16420 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-22T00:11:16.126-05:00  INFO 16420 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 44 ms. Found 7 JPA repository interfaces.
+2024-10-22T00:11:16.453-05:00  INFO 16420 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-22T00:11:16.462-05:00  INFO 16420 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-22T00:11:16.463-05:00  INFO 16420 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-22T00:11:16.498-05:00  INFO 16420 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-22T00:11:16.499-05:00  INFO 16420 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 804 ms
+2024-10-22T00:11:16.566-05:00  INFO 16420 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-22T00:11:16.849-05:00  INFO 16420 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@42c12b3e
+2024-10-22T00:11:16.850-05:00  INFO 16420 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-22T00:11:16.905-05:00  INFO 16420 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-22T00:11:16.940-05:00  INFO 16420 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-10-22T00:11:16.961-05:00  INFO 16420 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-22T00:11:17.168-05:00  INFO 16420 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-22T00:11:17.865-05:00  INFO 16420 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-22T00:11:17.933-05:00  INFO 16420 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T00:11:18.193-05:00  INFO 16420 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-10-22T00:11:18.534-05:00  WARN 16420 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-22T00:11:18.768-05:00  INFO 16420 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-22T00:11:18.775-05:00  INFO 16420 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 3.387 seconds (process running for 4.17)
+2024-10-22T00:11:48.310-05:00  INFO 16420 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-22T00:11:48.311-05:00  INFO 16420 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-22T00:11:48.314-05:00  INFO 16420 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2024-10-22T00:13:38.023-05:00  INFO 16420 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T00:13:38.033-05:00  INFO 16420 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-22T00:13:38.053-05:00  INFO 16420 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-10-22T00:13:40.759-05:00  INFO 16518 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 16518 (/Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by noahcaldwell in /Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1)
+2024-10-22T00:13:40.760-05:00  INFO 16518 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-22T00:13:41.170-05:00  INFO 16518 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-22T00:13:41.223-05:00  INFO 16518 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 7 JPA repository interfaces.
+2024-10-22T00:13:41.531-05:00  INFO 16518 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-22T00:13:41.539-05:00  INFO 16518 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-22T00:13:41.539-05:00  INFO 16518 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-22T00:13:41.569-05:00  INFO 16518 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-22T00:13:41.570-05:00  INFO 16518 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 785 ms
+2024-10-22T00:13:41.627-05:00  INFO 16518 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-22T00:13:41.872-05:00  INFO 16518 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@41aebbb4
+2024-10-22T00:13:41.873-05:00  INFO 16518 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-22T00:13:41.926-05:00  INFO 16518 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-22T00:13:41.961-05:00  INFO 16518 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-10-22T00:13:41.981-05:00  INFO 16518 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-22T00:13:42.189-05:00  INFO 16518 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-22T00:13:42.873-05:00  INFO 16518 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-22T00:13:42.978-05:00  INFO 16518 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T00:13:43.245-05:00  INFO 16518 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-10-22T00:13:43.636-05:00  WARN 16518 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-22T00:13:43.974-05:00  INFO 16518 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-22T00:13:43.981-05:00  INFO 16518 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 3.487 seconds (process running for 4.108)
+2024-10-22T00:13:58.154-05:00  INFO 16518 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-22T00:13:58.155-05:00  INFO 16518 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-22T00:13:58.157-05:00  INFO 16518 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-10-22T00:21:56.739-05:00 DEBUG 16518 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : select paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.phone_number,paf1_0.submission_data from pet_adoption_form paf1_0
+2024-10-22T00:23:16.866-05:00  WARN 16518 --- [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-10-22T00:23:33.487-05:00 DEBUG 16518 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.phone_number,paf1_0.submission_data from pet_adoption_form paf1_0
+2024-10-22T00:23:45.763-05:00  WARN 16518 --- [http-nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-10-22T00:27:58.525-05:00  WARN 16518 --- [http-nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-10-22T00:30:03.330-05:00  WARN 16518 --- [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.lang.Long` from String "A123456789": not a valid `java.lang.Long` value]
+2024-10-22T00:31:51.005-05:00  INFO 16518 --- [http-nio-8080-exec-4] p.a.P.petAdoptionFormController          : Received form submission: petAdoptionForm(id=null, fullName=John Doe, licenseNumber=123456, address=123 Main St, cityStatZip=City, ST 12345, phoneNumber=555-555-5555, email=john.doe@example.com, employer=Example Corp, submissionData=null)
+2024-10-22T00:31:51.046-05:00 DEBUG 16518 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select next_val as id_val from pet_adoption_form_seq for update
+2024-10-22T00:31:51.055-05:00 DEBUG 16518 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : update pet_adoption_form_seq set next_val= ? where next_val=?
+2024-10-22T00:31:51.116-05:00 DEBUG 16518 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : insert into pet_adoption_form (address,city_stat_zip,email,employer,full_name,license_number,phone_number,submission_data,id) values (?,?,?,?,?,?,?,?,?)
+2024-10-22T00:33:01.122-05:00  WARN 16518 --- [http-nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2024-10-22T00:34:04.657-05:00 DEBUG 16518 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : select paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.phone_number,paf1_0.submission_data from pet_adoption_form paf1_0
+2024-10-22T00:34:36.469-05:00  WARN 16518 --- [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-10-22T00:34:59.706-05:00  WARN 16518 --- [http-nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-10-22T00:35:05.982-05:00  INFO 16518 --- [http-nio-8080-exec-5] p.a.P.petAdoptionFormController          : Received form submission: petAdoptionForm(id=null, fullName=John Doe, licenseNumber=123456, address=123 Main St, cityStatZip=City, ST 12345, phoneNumber=555-555-5555, email=john.doe@example.com, employer=Example Corp, submissionData=null)
+2024-10-22T00:35:05.995-05:00 DEBUG 16518 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select next_val as id_val from pet_adoption_form_seq for update
+2024-10-22T00:35:06.000-05:00 DEBUG 16518 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : update pet_adoption_form_seq set next_val= ? where next_val=?
+2024-10-22T00:35:06.014-05:00 DEBUG 16518 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : insert into pet_adoption_form (address,city_stat_zip,email,employer,full_name,license_number,phone_number,submission_data,id) values (?,?,?,?,?,?,?,?,?)
+2024-10-22T00:35:15.017-05:00  INFO 16518 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T00:35:15.025-05:00  INFO 16518 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-22T00:35:15.039-05:00  INFO 16518 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-10-22T00:35:17.999-05:00  INFO 17418 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 17418 (/Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by noahcaldwell in /Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1)
+2024-10-22T00:35:18.000-05:00  INFO 17418 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-22T00:35:18.422-05:00  INFO 17418 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-22T00:35:18.473-05:00  INFO 17418 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 46 ms. Found 7 JPA repository interfaces.
+2024-10-22T00:35:18.796-05:00  INFO 17418 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-22T00:35:18.806-05:00  INFO 17418 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-22T00:35:18.806-05:00  INFO 17418 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-22T00:35:18.836-05:00  INFO 17418 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-22T00:35:18.836-05:00  INFO 17418 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 812 ms
+2024-10-22T00:35:18.896-05:00  INFO 17418 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-22T00:35:19.166-05:00  INFO 17418 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@11e9ac24
+2024-10-22T00:35:19.168-05:00  INFO 17418 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-22T00:35:19.229-05:00  INFO 17418 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-22T00:35:19.282-05:00  INFO 17418 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-10-22T00:35:19.309-05:00  INFO 17418 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-22T00:35:19.527-05:00  INFO 17418 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-22T00:35:20.274-05:00  INFO 17418 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-22T00:35:20.344-05:00  INFO 17418 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T00:35:20.596-05:00  INFO 17418 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-10-22T00:35:20.944-05:00  WARN 17418 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-22T00:35:21.178-05:00  INFO 17418 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-22T00:35:21.185-05:00  INFO 17418 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 3.469 seconds (process running for 4.153)
+2024-10-22T00:35:22.582-05:00  INFO 17418 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-22T00:35:22.582-05:00  INFO 17418 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-22T00:35:22.584-05:00  INFO 17418 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-10-22T00:35:26.568-05:00  INFO 17418 --- [http-nio-8080-exec-3] p.a.P.petAdoptionFormController          : Received form submission: petAdoptionForm(id=null, fullName=John Doe, licenseNumber=123456, address=123 Main St, cityStatZip=City, ST 12345, phoneNumber=555-555-5555, email=john.doe@example.com, employer=Example Corp, submissionData=null)
+2024-10-22T00:35:26.587-05:00 DEBUG 17418 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select next_val as id_val from pet_adoption_form_seq for update
+2024-10-22T00:35:26.589-05:00 DEBUG 17418 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : update pet_adoption_form_seq set next_val= ? where next_val=?
+2024-10-22T00:35:26.616-05:00 DEBUG 17418 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : insert into pet_adoption_form (address,city_stat_zip,email,employer,full_name,license_number,phone_number,submission_data,id) values (?,?,?,?,?,?,?,?,?)
+2024-10-22T00:35:31.539-05:00  INFO 17418 --- [http-nio-8080-exec-4] p.a.P.petAdoptionFormController          : Received form submission: petAdoptionForm(id=null, fullName=John Doe, licenseNumber=123456, address=123 Main St, cityStatZip=City, ST 12345, phoneNumber=555-555-5555, email=john.doe@example.com, employer=Example Corp, submissionData=null)
+2024-10-22T00:35:31.546-05:00 DEBUG 17418 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : insert into pet_adoption_form (address,city_stat_zip,email,employer,full_name,license_number,phone_number,submission_data,id) values (?,?,?,?,?,?,?,?,?)
+2024-10-22T00:35:43.435-05:00 DEBUG 17418 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.phone_number,paf1_0.submission_data from pet_adoption_form paf1_0
+2024-10-22T00:44:04.739-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m15s460ms).
+2024-10-22T00:57:53.578-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=13m18s831ms).
+2024-10-22T01:25:51.782-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m28s5ms).
+2024-10-22T01:31:49.901-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m28s127ms).
+2024-10-22T01:39:59.857-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m39s948ms).
+2024-10-22T01:53:57.820-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m57s922ms).
+2024-10-22T03:00:26.532-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m28s79ms).
+2024-10-22T03:08:24.965-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m28s409ms).
+2024-10-22T04:18:14.228-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m18s717ms).
+2024-10-22T04:24:42.699-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m28s458ms).
+2024-10-22T04:31:40.898-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m28s179ms).
+2024-10-22T04:37:08.578-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m27s680ms).
+2024-10-22T04:44:36.619-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m28s21ms).
+2024-10-22T05:58:13.088-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=13m5s910ms).
+2024-10-22T06:04:10.742-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m27s640ms).
+2024-10-22T06:10:08.754-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m28s10ms).
+2024-10-22T06:17:06.539-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m27s767ms).
+2024-10-22T07:20:50.862-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m43s780ms).
+2024-10-22T07:25:12.175-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m21s313ms).
+2024-10-22T07:43:07.886-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m25s703ms).
+2024-10-22T08:00:46.279-05:00  WARN 17418 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m38s392ms).
+2024-10-22T08:00:53.607-05:00  INFO 17418 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T08:00:53.636-05:00  INFO 17418 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-22T08:00:53.659-05:00  INFO 17418 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-10-22T14:35:02.472-05:00  INFO 3315 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 3315 (/Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by noahcaldwell in /Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1)
+2024-10-22T14:35:02.474-05:00  INFO 3315 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-22T14:35:03.139-05:00  INFO 3315 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-22T14:35:03.182-05:00  INFO 3315 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 38 ms. Found 7 JPA repository interfaces.
+2024-10-22T14:35:03.511-05:00  INFO 3315 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-22T14:35:03.521-05:00  INFO 3315 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-22T14:35:03.521-05:00  INFO 3315 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-22T14:35:03.557-05:00  INFO 3315 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-22T14:35:03.557-05:00  INFO 3315 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1048 ms
+2024-10-22T14:35:03.623-05:00  INFO 3315 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-22T14:35:04.765-05:00  INFO 3315 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-22T14:35:04.807-05:00  INFO 3315 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-10-22T14:35:04.830-05:00  INFO 3315 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-22T14:35:05.066-05:00  INFO 3315 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-22T14:35:05.087-05:00  INFO 3315 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-22T14:35:06.090-05:00  WARN 3315 --- [main] o.h.e.j.e.i.JdbcEnvironmentInitiator     : HHH000342: Could not obtain connection to query metadata
+
+java.lang.NullPointerException: Cannot invoke "org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(java.sql.SQLException, String)" because the return value of "org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.sqlExceptionHelper()" is null
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:116) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:290) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:123) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:77) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:221) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:189) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:171) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1431) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1502) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.11.jar:6.1.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.1.11.jar:6.1.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.11.jar:6.1.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.11.jar:6.1.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1802) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:954) ~[spring-context-6.1.11.jar:6.1.11]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625) ~[spring-context-6.1.11.jar:6.1.11]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.3.2.jar:3.3.2]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.3.2.jar:3.3.2]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.3.2.jar:3.3.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335) ~[spring-boot-3.3.2.jar:3.3.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363) ~[spring-boot-3.3.2.jar:3.3.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352) ~[spring-boot-3.3.2.jar:3.3.2]
+	at petadoption.api.PetAdoptionApplication.main(PetAdoptionApplication.java:10) ~[main/:na]
+
+2024-10-22T14:35:06.094-05:00 ERROR 3315 --- [main] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
+2024-10-22T14:35:06.095-05:00  WARN 3315 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
+2024-10-22T14:35:06.096-05:00  INFO 3315 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2024-10-22T14:35:06.105-05:00  INFO 3315 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-10-22T14:35:06.117-05:00 ERROR 3315 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1806) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:954) ~[spring-context-6.1.11.jar:6.1.11]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625) ~[spring-context-6.1.11.jar:6.1.11]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.3.2.jar:3.3.2]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.3.2.jar:3.3.2]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.3.2.jar:3.3.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335) ~[spring-boot-3.3.2.jar:3.3.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363) ~[spring-boot-3.3.2.jar:3.3.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352) ~[spring-boot-3.3.2.jar:3.3.2]
+	at petadoption.api.PetAdoptionApplication.main(PetAdoptionApplication.java:10) ~[main/:na]
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:276) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:221) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:189) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:171) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1431) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1502) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.11.jar:6.1.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.1.11.jar:6.1.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.11.jar:6.1.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.11.jar:6.1.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853) ~[spring-beans-6.1.11.jar:6.1.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1802) ~[spring-beans-6.1.11.jar:6.1.11]
+	... 15 common frames omitted
+Caused by: org.hibernate.HibernateException: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.determineDialect(DialectFactoryImpl.java:191) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:87) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentWithDefaults(JdbcEnvironmentInitiator.java:152) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:362) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:123) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:77) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	... 30 common frames omitted
+
+2024-10-22T14:35:51.647-05:00  INFO 3481 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 3481 (/Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by noahcaldwell in /Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1)
+2024-10-22T14:35:51.649-05:00  INFO 3481 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-22T14:35:52.099-05:00  INFO 3481 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-22T14:35:52.149-05:00  INFO 3481 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 37 ms. Found 7 JPA repository interfaces.
+2024-10-22T14:35:52.498-05:00  INFO 3481 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-22T14:35:52.508-05:00  INFO 3481 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-22T14:35:52.509-05:00  INFO 3481 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-22T14:35:52.541-05:00  INFO 3481 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-22T14:35:52.541-05:00  INFO 3481 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 868 ms
+2024-10-22T14:35:52.603-05:00  INFO 3481 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-22T14:35:52.886-05:00  INFO 3481 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@8641b7d
+2024-10-22T14:35:52.887-05:00  INFO 3481 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-22T14:35:52.943-05:00  INFO 3481 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-22T14:35:52.984-05:00  INFO 3481 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-10-22T14:35:53.010-05:00  INFO 3481 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-22T14:35:53.280-05:00  INFO 3481 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-22T14:35:53.969-05:00  INFO 3481 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-22T14:35:54.040-05:00  INFO 3481 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T14:35:54.292-05:00  INFO 3481 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-10-22T14:35:54.639-05:00  WARN 3481 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-22T14:35:54.881-05:00  INFO 3481 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-22T14:35:54.889-05:00  INFO 3481 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 3.588 seconds (process running for 4.116)
+2024-10-22T14:37:11.112-05:00  INFO 3481 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-22T14:37:11.113-05:00  INFO 3481 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-22T14:37:11.116-05:00  INFO 3481 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2024-10-22T14:37:56.246-05:00 DEBUG 3481 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select u1_0.user_id,u1_0.email,u1_0.password,u1_0.user_type from users u1_0 where u1_0.email=?
+2024-10-22T14:37:56.295-05:00 DEBUG 3481 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select next_val as id_val from users_sequence for update
+2024-10-22T14:37:56.306-05:00 DEBUG 3481 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : update users_sequence set next_val= ? where next_val=?
+2024-10-22T14:37:56.333-05:00 DEBUG 3481 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : insert into users (email,password,user_type,user_id) values (?,?,?,?)
+2024-10-22T14:45:08.190-05:00  INFO 3481 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T14:45:08.195-05:00  INFO 3481 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-22T14:45:08.213-05:00  INFO 3481 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-10-22T14:45:12.757-05:00  INFO 3813 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 3813 (/Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by noahcaldwell in /Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1)
+2024-10-22T14:45:12.763-05:00  INFO 3813 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-22T14:45:13.810-05:00  INFO 3813 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-22T14:45:13.918-05:00  INFO 3813 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 96 ms. Found 7 JPA repository interfaces.
+2024-10-22T14:45:15.006-05:00  INFO 3813 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-22T14:45:15.032-05:00  INFO 3813 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-22T14:45:15.033-05:00  INFO 3813 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-22T14:45:15.140-05:00  INFO 3813 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-22T14:45:15.141-05:00  INFO 3813 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2321 ms
+2024-10-22T14:45:15.436-05:00  INFO 3813 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-22T14:45:16.245-05:00  INFO 3813 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@508ad266
+2024-10-22T14:45:16.249-05:00  INFO 3813 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-22T14:45:16.416-05:00  INFO 3813 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-22T14:45:16.512-05:00  INFO 3813 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-10-22T14:45:16.601-05:00  INFO 3813 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-22T14:45:17.484-05:00  INFO 3813 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-22T14:45:18.422-05:00  INFO 3813 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-22T14:45:18.479-05:00  INFO 3813 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T14:45:18.769-05:00  INFO 3813 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-10-22T14:45:19.115-05:00  WARN 3813 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-22T14:45:19.372-05:00  INFO 3813 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-22T14:45:19.379-05:00  INFO 3813 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 7.249 seconds (process running for 8.31)
+2024-10-22T14:45:36.104-05:00  INFO 3813 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-22T14:45:36.106-05:00  INFO 3813 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-22T14:45:36.111-05:00  INFO 3813 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2024-10-22T14:46:28.598-05:00  INFO 3813 --- [http-nio-8080-exec-4] p.a.P.petAdoptionFormController          : Received form submission: petAdoptionForm(id=null, fullName=John Doe, licenseNumber=123456, address=123 Main St, cityStatZip=City, ST 12345, phoneNumber=555-555-5555, email=john.doe@example.com, employer=Example Corp, submissionData=null)
+2024-10-22T14:46:28.627-05:00 DEBUG 3813 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select next_val as id_val from pet_adoption_form_seq for update
+2024-10-22T14:46:28.642-05:00 DEBUG 3813 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : update pet_adoption_form_seq set next_val= ? where next_val=?
+2024-10-22T14:46:28.667-05:00 DEBUG 3813 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : insert into pet_adoption_form (address,city_stat_zip,email,employer,full_name,license_number,phone_number,submission_data,id) values (?,?,?,?,?,?,?,?,?)
+2024-10-22T14:46:33.998-05:00 DEBUG 3813 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.phone_number,paf1_0.submission_data from pet_adoption_form paf1_0
+2024-10-22T14:47:12.618-05:00  INFO 3813 --- [http-nio-8080-exec-6] p.a.P.petAdoptionFormController          : Received form submission: petAdoptionForm(id=null, fullName=John Doe, licenseNumber=123456, address=123 Main St, cityStatZip=City, ST 12345, phoneNumber=555-555-5555, email=john.doe@example.com, employer=Example Corp, submissionData=null)
+2024-10-22T14:47:12.630-05:00 DEBUG 3813 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : insert into pet_adoption_form (address,city_stat_zip,email,employer,full_name,license_number,phone_number,submission_data,id) values (?,?,?,?,?,?,?,?,?)
+2024-10-22T14:47:15.653-05:00 DEBUG 3813 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : select paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.phone_number,paf1_0.submission_data from pet_adoption_form paf1_0
+2024-10-22T14:49:25.309-05:00  INFO 3813 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T14:49:25.316-05:00  INFO 3813 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-22T14:49:25.333-05:00  INFO 3813 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-10-22T14:49:29.329-05:00  INFO 4008 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 4008 (/Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by noahcaldwell in /Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1)
+2024-10-22T14:49:29.332-05:00  INFO 4008 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-22T14:49:30.667-05:00  INFO 4008 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-22T14:49:30.849-05:00  INFO 4008 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 119 ms. Found 7 JPA repository interfaces.
+2024-10-22T14:49:31.962-05:00  INFO 4008 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-22T14:49:31.990-05:00  INFO 4008 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-22T14:49:31.993-05:00  INFO 4008 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-22T14:49:32.100-05:00  INFO 4008 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-22T14:49:32.102-05:00  INFO 4008 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2686 ms
+2024-10-22T14:49:32.299-05:00  INFO 4008 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-22T14:49:32.717-05:00  INFO 4008 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@42c12b3e
+2024-10-22T14:49:32.718-05:00  INFO 4008 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-22T14:49:32.785-05:00  INFO 4008 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-22T14:49:32.828-05:00  INFO 4008 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-10-22T14:49:32.852-05:00  INFO 4008 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-22T14:49:33.094-05:00  INFO 4008 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-22T14:49:33.835-05:00  INFO 4008 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-22T14:49:33.898-05:00  INFO 4008 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T14:49:34.171-05:00  INFO 4008 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-10-22T14:49:34.520-05:00  WARN 4008 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-22T14:49:34.775-05:00  INFO 4008 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-22T14:49:34.782-05:00  INFO 4008 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 6.508 seconds (process running for 7.721)
+2024-10-22T14:49:51.169-05:00  INFO 4008 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-22T14:49:51.170-05:00  INFO 4008 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-22T14:49:51.180-05:00  INFO 4008 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2024-10-22T14:49:54.480-05:00 DEBUG 4008 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.phone_number,paf1_0.submission_data from pet_adoption_form paf1_0
+2024-10-22T14:51:14.936-05:00  INFO 4008 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T14:51:14.943-05:00  INFO 4008 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-22T14:51:14.962-05:00  INFO 4008 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-10-22T14:51:18.638-05:00  INFO 4087 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 4087 (/Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by noahcaldwell in /Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1)
+2024-10-22T14:51:18.640-05:00  INFO 4087 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-22T14:51:19.358-05:00  INFO 4087 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-22T14:51:19.413-05:00  INFO 4087 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 7 JPA repository interfaces.
+2024-10-22T14:51:19.763-05:00  INFO 4087 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-22T14:51:19.772-05:00  INFO 4087 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-22T14:51:19.772-05:00  INFO 4087 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-22T14:51:19.802-05:00  INFO 4087 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-22T14:51:19.803-05:00  INFO 4087 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1128 ms
+2024-10-22T14:51:19.870-05:00  INFO 4087 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-22T14:51:20.151-05:00  INFO 4087 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@65cc5252
+2024-10-22T14:51:20.152-05:00  INFO 4087 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-22T14:51:20.210-05:00  INFO 4087 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-22T14:51:20.249-05:00  INFO 4087 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-10-22T14:51:20.273-05:00  INFO 4087 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-22T14:51:20.511-05:00  INFO 4087 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-22T14:51:21.212-05:00  INFO 4087 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-22T14:51:21.274-05:00  INFO 4087 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T14:51:21.536-05:00  INFO 4087 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-10-22T14:51:21.938-05:00  WARN 4087 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-22T14:51:22.210-05:00  INFO 4087 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-22T14:51:22.217-05:00  INFO 4087 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 4.074 seconds (process running for 5.375)
+2024-10-22T14:51:30.159-05:00  INFO 4087 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-22T14:51:30.160-05:00  INFO 4087 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-22T14:51:30.161-05:00  INFO 4087 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-10-22T14:51:45.563-05:00 DEBUG 4087 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.phone_number,paf1_0.submission_data from pet_adoption_form paf1_0
+2024-10-22T14:58:59.530-05:00  INFO 4087 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T14:58:59.540-05:00  INFO 4087 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-22T14:58:59.562-05:00  INFO 4087 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-10-22T14:59:07.377-05:00  INFO 4355 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 4355 (/Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by noahcaldwell in /Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1)
+2024-10-22T14:59:07.380-05:00  INFO 4355 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-22T14:59:09.289-05:00  INFO 4355 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-22T14:59:09.488-05:00  INFO 4355 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 178 ms. Found 7 JPA repository interfaces.
+2024-10-22T14:59:10.746-05:00  INFO 4355 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-22T14:59:10.806-05:00  INFO 4355 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-22T14:59:10.807-05:00  INFO 4355 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-22T14:59:10.996-05:00  INFO 4355 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-22T14:59:10.997-05:00  INFO 4355 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3525 ms
+2024-10-22T14:59:11.278-05:00  INFO 4355 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-22T14:59:12.205-05:00  INFO 4355 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@216372b7
+2024-10-22T14:59:12.208-05:00  INFO 4355 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-22T14:59:12.303-05:00  INFO 4355 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-22T14:59:12.356-05:00  INFO 4355 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-10-22T14:59:12.382-05:00  INFO 4355 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-22T14:59:12.615-05:00  INFO 4355 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-22T14:59:13.321-05:00  INFO 4355 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-22T14:59:13.363-05:00 DEBUG 4355 --- [main] org.hibernate.SQL                        : alter table pet_adoption_form add column duration_time datetime(6)
+2024-10-22T14:59:13.413-05:00  INFO 4355 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T14:59:13.693-05:00  INFO 4355 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-10-22T14:59:14.070-05:00  WARN 4355 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-22T14:59:14.315-05:00  INFO 4355 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-22T14:59:14.323-05:00  INFO 4355 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 7.934 seconds (process running for 9.18)
+2024-10-22T14:59:27.079-05:00  INFO 4355 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-22T14:59:27.080-05:00  INFO 4355 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-22T14:59:27.082-05:00  INFO 4355 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-10-22T14:59:43.763-05:00  INFO 4355 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T14:59:43.768-05:00  INFO 4355 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-22T14:59:43.788-05:00  INFO 4355 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-10-22T14:59:45.962-05:00  INFO 4385 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 4385 (/Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by noahcaldwell in /Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1)
+2024-10-22T14:59:45.964-05:00  INFO 4385 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-22T14:59:46.878-05:00  INFO 4385 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-22T14:59:46.992-05:00  INFO 4385 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 100 ms. Found 7 JPA repository interfaces.
+2024-10-22T14:59:47.777-05:00  INFO 4385 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-22T14:59:47.799-05:00  INFO 4385 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-22T14:59:47.800-05:00  INFO 4385 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-22T14:59:47.867-05:00  INFO 4385 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-22T14:59:47.867-05:00  INFO 4385 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1823 ms
+2024-10-22T14:59:48.014-05:00  INFO 4385 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-22T14:59:48.726-05:00  INFO 4385 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4ffced4e
+2024-10-22T14:59:48.732-05:00  INFO 4385 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-22T14:59:48.919-05:00  INFO 4385 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-22T14:59:48.987-05:00  INFO 4385 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-10-22T14:59:49.048-05:00  INFO 4385 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-22T14:59:49.568-05:00  INFO 4385 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-22T14:59:50.536-05:00  INFO 4385 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-22T14:59:50.598-05:00  INFO 4385 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T14:59:50.892-05:00  INFO 4385 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-10-22T14:59:51.236-05:00  WARN 4385 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-22T14:59:51.479-05:00  INFO 4385 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-22T14:59:51.486-05:00  INFO 4385 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 6.055 seconds (process running for 6.546)
+2024-10-22T14:59:53.635-05:00  INFO 4385 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-22T14:59:53.636-05:00  INFO 4385 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-22T14:59:53.638-05:00  INFO 4385 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-10-22T15:01:30.195-05:00 DEBUG 4385 --- [http-nio-8080-exec-9] org.hibernate.SQL                        : select paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.duration_time,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.phone_number,paf1_0.submission_data from pet_adoption_form paf1_0
+2024-10-22T15:01:41.159-05:00 DEBUG 4385 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.duration_time,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.phone_number,paf1_0.submission_data from pet_adoption_form paf1_0
+2024-10-22T15:04:02.495-05:00  INFO 4385 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T15:04:02.498-05:00  INFO 4385 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-22T15:04:02.517-05:00  INFO 4385 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-10-22T15:04:05.329-05:00  INFO 4527 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 4527 (/Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by noahcaldwell in /Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1)
+2024-10-22T15:04:05.330-05:00  INFO 4527 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-22T15:04:05.722-05:00  INFO 4527 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-22T15:04:05.803-05:00  INFO 4527 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 76 ms. Found 7 JPA repository interfaces.
+2024-10-22T15:04:06.113-05:00  INFO 4527 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-22T15:04:06.122-05:00  INFO 4527 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-22T15:04:06.122-05:00  INFO 4527 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-22T15:04:06.154-05:00  INFO 4527 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-22T15:04:06.154-05:00  INFO 4527 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 801 ms
+2024-10-22T15:04:06.211-05:00  INFO 4527 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-22T15:04:06.455-05:00  INFO 4527 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@afde064
+2024-10-22T15:04:06.456-05:00  INFO 4527 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-22T15:04:06.509-05:00  INFO 4527 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-22T15:04:06.547-05:00  INFO 4527 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-10-22T15:04:06.567-05:00  INFO 4527 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-22T15:04:06.776-05:00  INFO 4527 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-22T15:04:07.441-05:00  INFO 4527 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-22T15:04:07.518-05:00  INFO 4527 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T15:04:08.170-05:00  INFO 4527 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-10-22T15:04:08.544-05:00  WARN 4527 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-22T15:04:08.922-05:00  INFO 4527 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-22T15:04:08.929-05:00  INFO 4527 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 3.865 seconds (process running for 4.356)
+2024-10-22T15:04:23.844-05:00  INFO 4527 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-22T15:04:23.844-05:00  INFO 4527 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-22T15:04:23.850-05:00  INFO 4527 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2024-10-22T15:04:23.946-05:00  INFO 4527 --- [http-nio-8080-exec-2] p.a.P.petAdoptionFormController          : Received form submission: petAdoptionForm(id=null, fullName=noah, licenseNumber=1, address=1, cityStatZip=null, phoneNumber=1, email=1, employer=1, durationTime=null, submissionData=null)
+2024-10-22T15:04:23.974-05:00 DEBUG 4527 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select next_val as id_val from pet_adoption_form_seq for update
+2024-10-22T15:04:23.979-05:00 DEBUG 4527 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : update pet_adoption_form_seq set next_val= ? where next_val=?
+2024-10-22T15:04:24.005-05:00 DEBUG 4527 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : insert into pet_adoption_form (address,city_stat_zip,duration_time,email,employer,full_name,license_number,phone_number,submission_data,id) values (?,?,?,?,?,?,?,?,?,?)
+2024-10-22T15:04:39.764-05:00 DEBUG 4527 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.duration_time,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.phone_number,paf1_0.submission_data from pet_adoption_form paf1_0
+2024-10-22T15:31:02.885-05:00  WARN 4527 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=25m56s311ms).

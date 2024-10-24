@@ -135,7 +135,7 @@ const AdoptionCenterRegisterPage = () => {
                     alert("Registration successful!");
                     sessionStorage.setItem('user', JSON.stringify(response.data)); // Store user data in session storage
                     // Go to home page
-                    router.push("/");
+                    router.push("/adoption-center-home");
     
                 })
                 .catch(error => {

@@ -6,6 +6,12 @@ import Paper from '@mui/material/Paper';
 import { DataGrid} from '@mui/x-data-grid';
 import { useRef,useEffect, useState } from 'react'
 import axios from 'axios';
+import { useRouter } from 'next/router'
+import NavBar from '@/components/nav-bar-adoption-center';
+
+
+
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 
 
@@ -38,10 +44,10 @@ export default function ManageEvents() {
     }));
     console.log(newEventData);
     setIsFormValid(
-      // newEventData.title !== '' &&
-      // newEventData.date !== '' &&
-      // newEventData.description !== '' &&
-      // newEventData.location !== ''
+      newEventData.title !== '' &&
+      newEventData.date !== '' &&
+      newEventData.description !== '' &&
+      newEventData.location !== ''
     );
   };  
 
@@ -50,7 +56,7 @@ export default function ManageEvents() {
 
 
   const loadData = () => {
-    fetch('http://localhost:8080/api/events') 
+    fetch(`${apiBaseUrl}/api/events`) 
     .then((response) => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -98,7 +104,7 @@ export default function ManageEvents() {
 
   const handleInsertEvent = () => {
     // if(isFormValid){
-    axios.post("http://localhost:8080/api/events", newEventData )
+    axios.post(`${apiBaseUrl}/api/events`, newEventData )
       .then(response => {
         handleDialogClose();
       })
@@ -131,7 +137,7 @@ export default function ManageEvents() {
     console.log("Selected IDs for deletion:", selectionModel);
     for(const eventID of selectedIDs){
       axios
-        .delete(`http://localhost:8080/api/events/${eventID}`)
+        .delete(`${apiBaseUrl}/api/events/${eventID}`)
         .then(response => {
           loadData();
         })
@@ -147,12 +153,14 @@ export default function ManageEvents() {
     if (selectionModel.length === 1) { // Ensure only one event is selected
       const selectedEvent = getEventByID(selectionModel[0]);
       if (selectedEvent) {
+        const formattedDate = new Date(selectedEvent.date).toISOString().split('T')[0];
+        console.log(formattedDate)
         setNewEventData({
-          eventTitle: selectedEvent.eventTitle,
-          eventDate: selectedEvent.eventDate,
-          eventDescription: selectedEvent.eventDescription,
-          eventLocation: selectedEvent.eventLocation,
 
+          title: selectedEvent.title,
+          date: formattedDate,
+          description: selectedEvent.description,
+          location: selectedEvent.location,
         });
         setOpenUpdateDialog(true); // Open the update dialog
       }
@@ -163,7 +171,7 @@ export default function ManageEvents() {
 
   const handleUpdateEvent = () => {
     const eventID = selectionModel[0]; // Get the selected event ID
-    axios.put(`http://localhost:8080/api/events/${eventID}`, newEventData) // Update the event
+    axios.put(`${apiBaseUrl}/api/events/${eventID}`, newEventData) // Update the event
       .then(response => {
         console.log('Update successful:', response.data);
         loadData(); // Reload the data after the update
@@ -175,6 +183,14 @@ export default function ManageEvents() {
   };
 
   
+
+  const router = useRouter();
+
+  const navigateTo = (page) => {
+    router.push(page);
+  }
+
+
   const today = new Date();
   const defaultDate = today.toISOString().split('T')[0]; // "YYYY-MM-DD"
 
@@ -186,6 +202,9 @@ export default function ManageEvents() {
 
       <main>          
       <p>Manage Events Page</p>
+      <NavBar />
+
+
 
         <Stack sx={{  paddingTop: 10, flexDirection:'row', flexGrow: 1,spacing:'4'}}  gap={2}>
         
@@ -207,10 +226,10 @@ export default function ManageEvents() {
           {/* </Paper> */}
 
           <Stack s1 = {{direction:'column', spacing:'2'}}>
-            <Button variant='contained' color="secondary" onClick={() => handleUpdateDialogOpen()} className={styles.wideButton}>UPDATE</Button>
-            <Button variant='contained' color="secondary" onClick={() => handleDeleteEvents()} className={styles.wideButton}>DELETE</Button>
-            <Button variant='contained' color="secondary" onClick={() => handleInsertDialogOpen()}>Insert Events</Button>            
-            {/* <Button variant='contained' color="secondary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button> */}
+            <Button variant='contained' color="primary" onClick={() => handleUpdateDialogOpen()} className={styles.wideButton}>UPDATE</Button>
+            <Button variant='contained' color="primary" onClick={() => handleDeleteEvents()} className={styles.wideButton}>DELETE</Button>
+            <Button variant='contained' color="primary" onClick={() => handleInsertDialogOpen()}>Insert Events</Button>            
+            {/* <Button variant='contained' color="primary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button> */}
           </Stack>
         </Stack>
         <Dialog open={openInsertDialog} onClose={handleDialogClose}>
@@ -223,7 +242,7 @@ export default function ManageEvents() {
   //description;
   //location; */}
             <TextField margin="dense" name="title" label="Title"  type="text" fullWidth variant="outlined" value={newEventData.title} onChange={handleInputChange}/>
-            <TextField margin="dense" name="date"  type="date" fullWidth variant="outlined" value={console.log(defaultDate)} onChange={handleInputChange}/>
+            <TextField margin="dense" name="date"  type="date" fullWidth variant="outlined" value={newEventData.date} onChange={handleInputChange}/>
             <TextField margin="dense" name="description" label="Description"  type="text" fullWidth variant="outlined" value={newEventData.description} onChange={handleInputChange}/>
             <TextField margin="dense" name="location" label="Location"  type="text" fullWidth variant="outlined" value={newEventData.location} onChange={handleInputChange}/>
 
@@ -240,7 +259,7 @@ export default function ManageEvents() {
               Please change the details of the event you want to update.
             </DialogContentText>
             <TextField margin="dense" name="title" label="Title"  type="text" fullWidth variant="outlined" value={newEventData.title} onChange={handleInputChange}/>
-            <TextField margin="dense" name="date"  type="date" fullWidth variant="outlined" value={console.log(defaultDate)} onChange={handleInputChange}/>
+            <TextField margin="dense" name="date"  type="date" fullWidth variant="outlined" value={newEventData.date} onChange={handleInputChange}/>
             <TextField margin="dense" name="description" label="Description"  type="text" fullWidth variant="outlined" value={newEventData.description} onChange={handleInputChange}/>
             <TextField margin="dense" name="location" label="Location"  type="text" fullWidth variant="outlined" value={newEventData.location} onChange={handleInputChange}/>
           </DialogContent>

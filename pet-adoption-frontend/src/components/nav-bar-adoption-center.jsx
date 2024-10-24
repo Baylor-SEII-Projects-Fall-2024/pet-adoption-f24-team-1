@@ -7,7 +7,7 @@ import LoginModal from './login-modal';
 import DialogModal from './dialog-modal';
 import Link from 'next/link';
 
-const pages = ['Centers', 'Matches'];
+const pages = ['Manage Pets', 'Manage Events', 'Profile'];
 const settings = ['Settings', 'Logout'];
 const loginSettings = ['Login', 'Create Account'];
 
@@ -52,21 +52,22 @@ export default function NavBar() {
   }
 
   const handleNav = (nav) => {
-    if(nav === 'Login')  {
-      openLoginModal();
-    }
-    if(nav === 'Create Account') {
-      router.push('/create-account');
-    }
     if(nav === 'Settings')  {
-      router.push('/settings');
+      router.push('/adoption-center-home/adpotion-center-settings');
     }
     if(nav === 'Logout')  {
       openLogoutModal();
     }
-    if(nav === 'Matches')  {
-      router.push('/matches');
+    if(nav === 'Manage Pets')  {
+      router.push('/adoption-center-home/manage-pets');    
     }
+    if(nav === 'Manage Events')  {
+      router.push('/adoption-center-home/manage-events');   
+    }
+    if(nav === 'Profile')  {
+      router.push('/adoption-center-home/adpotion-center-profile');
+    }
+    
   };
 
   useEffect(() => {
@@ -89,7 +90,7 @@ export default function NavBar() {
               variant="h6"
               noWrap
               component="a"
-              href="/user-home"
+              href="/adoption-center-home"
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },

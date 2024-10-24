@@ -12,6 +12,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 export default function Matches() {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
 
   const [user, setUser] = useState(null);
@@ -50,7 +51,7 @@ export default function Matches() {
   // Get pets from database
   useEffect(() => {
     if (!user) return;
-    axios.get('http://localhost:8080/api/matches', {
+    axios.get(`${apiBaseUrl}/api/matches`, {
       params: {
         userID: user.id
       }
@@ -83,7 +84,7 @@ export default function Matches() {
             <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2}>
               {pets.filter(filters).map((pet) => (
                 <Grid item>
-                  <PetCard key={pet.petID} petName={pet.petName} petBreed={pet.petBreed} petAge={pet.petAge} petGender={pet.petGender} petWeight={pet.petWeight} imgUrl={pet.imgUrl} petID={pet.petID} location={{adoptionCenter: 'Home Free', address: '111 Drive Street, Waco, TX 76706'}} petDescription={pet.petDescription} user={user} liked={true} />
+                  <PetCard key={pet.petID} pet={pet} location={{adoptionCenter: 'Home Free', address: '111 Drive Street, Waco, TX 76706'}} user={user} liked={true} />
                 </Grid>
               ))}
             </Grid>

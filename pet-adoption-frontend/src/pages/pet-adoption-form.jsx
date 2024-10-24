@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Button, Grid, Stack, TextField, Typography } from '@mui/material';
 import Image from 'next/image';
 import axios from 'axios';
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 export default function PetAdoptionForm() {
     const [fullName, setFullName] = useState("");
@@ -32,14 +33,25 @@ export default function PetAdoptionForm() {
             jobTime
         };
 
-        axios.post("http://localhost:8080/api/form", formData)
+        const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+        console.log(formData);
+        axios.post(`${apiBaseUrl}/api/pet-adoption-forms`, formData)
             .then(response => {
-                setMessage("Form submitted successfully!");  // Set success message
-                setIsSubmitted(true);  // Mark the form as submitted
+                setMessage("Form submitted successfully!");
+                setIsSubmitted(true);
             })
             .catch(error => {
-                setMessage("There was an error submitting the form. Please try again.");  // Set error message
-                setIsSubmitted(true);  // Mark as submitted even on error
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    setMessage(`Error: ${error.response.data}`);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    setMessage("No response from server.");
+                } else {
+                    // Something happened in setting up the request that triggered an error
+                    setMessage("There was an error submitting the form. Please try again.");
+                }
+                setIsSubmitted(true);
             });
     };
 

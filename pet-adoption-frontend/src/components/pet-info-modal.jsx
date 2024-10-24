@@ -6,6 +6,7 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ImageDropzone from './image-dropzone';
+import { useRouter } from 'next/router';
 
 const style = {
   position: 'absolute',
@@ -23,6 +24,11 @@ const style = {
 };
 
 export default function PetInfoModal(props) {
+  const router = useRouter();
+
+  const handleAdopt = () => {
+    router.push('/pet-adoption-form');
+  }
   
   return (
     <div>
@@ -48,14 +54,17 @@ export default function PetInfoModal(props) {
               {props.pet.petName}
             </Typography>
 
-            <Typography sx={{ mt: 2 }}>
-              {props.pet.petDescription}
+            <Typography sx={{ mt: 1 }}>
+              {props.pet.petName} is a {props.pet.color} {props.pet.petGender} {props.pet.petBreed}, weighing approximately {props.pet.petWeight} kilograms. {props.pet.petGender === 'Male' ? 'He' : 'She'} has a sweet personality and is waiting for the perfect family to provide lots of love and care.
             </Typography>
+            
+            
+            <Box display="flex" justifyContent="center" alignItems="center" sx={{ mt: 2 }}>
+              <Button variant="contained" sx={{ fontSize: '20px' }} onClick={() => handleAdopt()}>Adopt {props.pet.petName}</Button>
+            </Box>
 
-
-
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <Button onClick={props.handleClose}>Close Child Modal</Button>
+            <Box display="flex" justifyContent="flex-end" alignItems="flex-end" sx={{ mt: 2, width: '90%'}}>
+              <Button onClick={props.handleClose}>Close</Button>
             </Box>
 
           </Box>
