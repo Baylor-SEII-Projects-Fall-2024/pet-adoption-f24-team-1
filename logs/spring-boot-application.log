@@ -733,3 +733,22 @@ java.lang.RuntimeException: Email already exists!
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
 	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
 
+2024-10-24T11:38:41.930-05:00 DEBUG 45155 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select next_val as id_val from center_generator for update
+2024-10-24T11:38:41.956-05:00 DEBUG 45155 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : update center_generator set next_val= ? where next_val=?
+2024-10-24T11:38:41.980-05:00 DEBUG 45155 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : insert into adoption_center (center_address,center_email,center_name,center_phone,center_id) values (?,?,?,?,?)
+2024-10-24T11:38:43.853-05:00 DEBUG 45155 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : select ac1_0.center_id,ac1_0.center_address,ac1_0.center_email,ac1_0.center_name,ac1_0.center_phone from adoption_center ac1_0 where ac1_0.center_id=?
+2024-10-24T11:38:43.862-05:00 DEBUG 45155 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : select next_val as id_val from admin_generator for update
+2024-10-24T11:38:43.870-05:00 DEBUG 45155 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : update admin_generator set next_val= ? where next_val=?
+2024-10-24T11:38:43.877-05:00 DEBUG 45155 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : insert into adoption_center_admins (center_id,email,first_name,last_name,password,id) values (?,?,?,?,?,?)
+2024-10-24T11:42:36.184-05:00 DEBUG 45155 --- [http-nio-8080-exec-10] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-24T11:42:36.184-05:00 DEBUG 45155 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-24T11:42:36.185-05:00 DEBUG 45155 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : select p1_0.petid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-24T11:42:36.221-05:00 DEBUG 45155 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-24T11:42:36.221-05:00 DEBUG 45155 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-24T11:42:36.225-05:00 DEBUG 45155 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select p1_0.petid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-24T11:43:06.340-05:00 DEBUG 45155 --- [http-nio-8080-exec-9] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-24T11:43:06.340-05:00 DEBUG 45155 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-24T11:43:06.360-05:00 DEBUG 45155 --- [http-nio-8080-exec-10] org.hibernate.SQL                        : select p1_0.petid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-24T11:43:06.371-05:00 DEBUG 45155 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-24T11:43:06.372-05:00 DEBUG 45155 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-24T11:43:06.416-05:00 DEBUG 45155 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select p1_0.petid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0

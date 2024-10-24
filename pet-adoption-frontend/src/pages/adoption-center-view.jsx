@@ -27,8 +27,12 @@ export default function adoptionCenterViewPage() {
             <Stack spacing={10}>
                 <NavBar />
                         <Stack sx={{ paddingTop: 4 }} alignItems="center" gap={2}>
-                            <Typography variant="h4">Pet Adoption Form</Typography>
+                            <Typography variant="h4">Adoption Centers</Typography>
                         </Stack>
+
+
+
+
 
                     {/* Navigate back to Home button */}
                     <Button variant="contained" onClick={navigateToHome} sx={{ width: 200 }}>

@@ -25,4 +25,7 @@ public class AdoptionCenter {
 
     @Column(name = "center_email")
     private String centerEmail;
+
+    @Column(name = "zip_code")
+    private long zipCode;
 }

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Button, Card, CardContent, Stack, Typography, TextField, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import styles from '@/styles/Home.module.css';
 
-export default function Search() {
+export default function petSearch() {
   // State to hold search filters
   const [species, setSpecies] = useState('');
   const [age, setAge] = useState('');
