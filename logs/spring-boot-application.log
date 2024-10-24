@@ -571,3 +571,19 @@ Caused by: org.hibernate.HibernateException: Unable to determine Dialect without
 2024-10-22T17:03:14.569-05:00  WARN 7846 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 2024-10-22T17:03:14.825-05:00  INFO 7846 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
 2024-10-22T17:03:14.833-05:00  INFO 7846 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 5.652 seconds (process running for 7.133)
+2024-10-22T17:09:39.633-05:00  WARN 7846 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m26s786ms).
+2024-10-22T17:12:39.983-05:00  WARN 7846 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m310ms).
+2024-10-22T17:13:12.986-05:00  INFO 7846 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-22T17:13:12.987-05:00  INFO 7846 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-22T17:13:12.989-05:00  INFO 7846 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-10-22T17:13:13.102-05:00 DEBUG 7846 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-22T17:13:13.102-05:00 DEBUG 7846 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-22T17:13:13.102-05:00 DEBUG 7846 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select p1_0.petid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-22T17:13:13.150-05:00 DEBUG 7846 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-22T17:13:13.151-05:00 DEBUG 7846 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-22T17:13:13.189-05:00 DEBUG 7846 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select p1_0.petid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-22T17:17:14.150-05:00  WARN 7846 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m34s141ms).
+2024-10-22T17:42:08.301-05:00  WARN 7846 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m54s42ms).
+2024-10-22T17:43:00.727-05:00  INFO 7846 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-22T17:43:00.731-05:00  INFO 7846 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-22T17:43:00.749-05:00  INFO 7846 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
