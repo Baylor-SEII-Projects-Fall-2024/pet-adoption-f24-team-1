@@ -8,7 +8,6 @@ import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import NavBar from '@/components/nav-bar';
-import Sidebar from '@/components/Sidebar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useRouter } from 'next/router';
 import axios from 'axios';
@@ -21,12 +20,12 @@ export default function UserProfile() {
   // State variables for editing
   const [isEditing, setIsEditing] = useState(false);
   const [id, setId] = useState();
-  const [name, setName] = useState('Beetle Juice');
-  const [bio, setBio] = useState('Just looking for a cuppa pets');
-  const [email, setEmail] = useState('beetlejuice@Gmail.com');
-  const [phone, setPhone] = useState('702-684-2621');
-  const [location, setLocation] = useState('Las Vegas 1028 Hall Street');
-  const [imgUrl, setProfilePicture] = useState(''); // Add state for profile picture
+  const [name, setName] = useState();
+  const [bio, setBio] = useState();
+  const [email, setEmail] = useState();
+  const [phone, setPhone] = useState();
+  const [location, setLocation] = useState();
+  const [imgUrl, setProfilePicture] = useState('');
   const [password, setPassword] = useState();
   const [userType, setUserType] = useState();
 
@@ -69,10 +68,6 @@ export default function UserProfile() {
         <NavBar />
         <Container maxWidth="lg" sx={{ display: 'flex', marginTop: '64px' }}>
           <Grid container spacing={2}>
-            {/* Sidebar */}
-            <Grid item xs={3}>
-              <Sidebar />
-            </Grid>
 
             {/* Main Content */}
             <Grid item xs={9}>
@@ -85,7 +80,7 @@ export default function UserProfile() {
                       src={imgUrl || ''}  // Use profilePicture state
                       sx={{ width: 120, height: 120 }}
                     >
-                      {!imgUrl && <AccountCircleIcon sx={{ fontSize: 120 }} />}  // Fallback to icon
+                      {!imgUrl && <AccountCircleIcon sx={{ fontSize: 150 }} />} 
                     </Avatar>
                   </Grid>
 
