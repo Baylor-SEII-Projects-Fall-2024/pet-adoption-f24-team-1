@@ -50,7 +50,8 @@ public class UserController {
         }
 
         User user = userOptional.get();
-        user.setName(updatedUser.getName());
+        user.setFirstName(updatedUser.getFirstName());
+        user.setLastName(updatedUser.getLastName());
         user.setBio(updatedUser.getBio());
         user.setEmail(updatedUser.getEmail());
         user.setPhone(updatedUser.getPhone());

@@ -32,7 +32,6 @@ public class UserService {
         User user = new User();
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
-        user.setUserType(userDTO.getUserType());
 
         return userRepository.save(user);
     }
