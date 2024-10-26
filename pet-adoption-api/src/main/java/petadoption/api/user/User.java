@@ -43,7 +43,8 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "preference_id")
     private UserPreference userPreference;
 
 }

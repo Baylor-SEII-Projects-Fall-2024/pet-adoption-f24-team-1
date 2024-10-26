@@ -2,7 +2,6 @@ package petadoption.api.userpreference;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import petadoption.api.user.User;
 
 @Entity
 @Data
@@ -30,9 +29,5 @@ public class UserPreference {
 
     @Column(name = "age_max")
     private Integer ageMax;
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
 }

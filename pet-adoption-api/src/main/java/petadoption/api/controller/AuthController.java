@@ -18,6 +18,7 @@ import petadoption.api.dto.RegisterDTO;
 import petadoption.api.security.JWTGenerator;
 import petadoption.api.user.User;
 import petadoption.api.user.UserRepository;
+import petadoption.api.userpreference.UserPreference;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -51,13 +52,33 @@ public class AuthController {
 
     @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
+        // Check if email exists
         if(userRepository.existsByEmail(registerDTO.getEmail())) {
             return new ResponseEntity<>("Email is taken!", HttpStatus.BAD_REQUEST);
         }
 
+        // Set User attributes
         User user = new User();
         user.setEmail(registerDTO.getEmail());
         user.setPassword(passwordEncoder.encode((registerDTO.getPassword())));
+        user.setFirstName(registerDTO.getFirstName());
+        user.setLastName(registerDTO.getLastName());
+        user.setBio(registerDTO.getBio());
+        user.setPhone(registerDTO.getPhone());
+        user.setLocation(registerDTO.getLocation());
+        user.setImgUrl(registerDTO.getImgUrl());
+
+        // Set UserPreference attributes
+        UserPreference userPreference = new UserPreference();
+        userPreference.setPreferredSpecies(registerDTO.getPreferredSpecies());
+        userPreference.setPreferredBreed(registerDTO.getPreferredBreed());
+        userPreference.setPreferredGender(registerDTO.getPreferredGender());
+        userPreference.setPreferredSize(registerDTO.getPreferredSize());
+        userPreference.setAgeMin(registerDTO.getAgeMin());
+        userPreference.setAgeMax(registerDTO.getAgeMax());
+
+        // Assign userId to UserPreference
+        user.setUserPreference(userPreference);
 
         userRepository.save(user);
 
