@@ -2,6 +2,7 @@ package petadoption.api.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import petadoption.api.dto.LoginDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +38,7 @@ public class UserService {
     }
 
     public User login(LoginDTO loginDTO) {
-        Optional<User> userOptional = userRepository.findByEmail(loginDTO.getUsername());
+        Optional<User> userOptional = userRepository.findByEmail(loginDTO.getEmail());
         if (userOptional.isPresent() && userOptional.get().getPassword().equals(loginDTO.getPassword())) {
             return userOptional.get();
         }

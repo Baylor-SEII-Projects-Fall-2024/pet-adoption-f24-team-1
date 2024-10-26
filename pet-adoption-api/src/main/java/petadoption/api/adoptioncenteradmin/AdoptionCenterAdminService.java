@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import petadoption.api.adoptioncenter.AdoptionCenterRepository;
-import petadoption.api.user.LoginDTO;
+import petadoption.api.dto.LoginDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +34,7 @@ public class AdoptionCenterAdminService {
     }
 
     public AdoptionCenterAdmin loginAdmin(LoginDTO loginDTO) {
-        Optional<AdoptionCenterAdmin> adminOptional = adminRepository.findByEmail(loginDTO.getUsername());
+        Optional<AdoptionCenterAdmin> adminOptional = adminRepository.findByEmail(loginDTO.getEmail());
         if (adminOptional.isPresent() && adminOptional.get().getPassword().equals(loginDTO.getPassword())) {
             return adminOptional.get();
         }

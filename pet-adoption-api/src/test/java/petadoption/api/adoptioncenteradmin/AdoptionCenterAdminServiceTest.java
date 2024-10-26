@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import petadoption.api.adoptioncenter.AdoptionCenter;
 import petadoption.api.adoptioncenter.AdoptionCenterRepository;
-import petadoption.api.user.LoginDTO;
+import petadoption.api.dto.LoginDTO;
 
 import java.util.List;
 import java.util.Optional;
