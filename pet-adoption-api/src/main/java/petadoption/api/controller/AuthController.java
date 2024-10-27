@@ -8,10 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import petadoption.api.dto.AuthResponseDTO;
 import petadoption.api.dto.LoginDTO;
 import petadoption.api.dto.RegisterDTO;
@@ -20,8 +17,11 @@ import petadoption.api.user.User;
 import petadoption.api.user.UserRepository;
 import petadoption.api.userpreference.UserPreference;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
 public class AuthController {
 
     private AuthenticationManager authenticationManager;
@@ -45,9 +45,10 @@ public class AuthController {
                         loginDTO.getEmail(),
                         loginDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        System.out.println(1);
+        System.out.println(authentication.getPrincipal());
         String token = jwtGenerator.generateToken(authentication);
-        return new ResponseEntity<>(new AuthResponseDTO(token), HttpStatus.OK);
+        Optional<User> user = userRepository.findByEmail(loginDTO.getEmail());
+        return new ResponseEntity<>(new AuthResponseDTO(token, user.get()), HttpStatus.OK);
     }
 
     @PostMapping("register")
