@@ -7,6 +7,7 @@ import PetsIcon from '@mui/icons-material/Pets';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { useState, useEffect } from "react";
+import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import axios from 'axios';
 
 const LoginModal = ({ isOpen, onClose }) => {
@@ -28,6 +29,7 @@ const LoginModal = ({ isOpen, onClose }) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const signIn = useSignIn();
 
   // UI handling
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -41,25 +43,30 @@ const LoginModal = ({ isOpen, onClose }) => {
   };
 
   // Login api
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    axios.post(`${apiBaseUrl}/api/login`, {
-      username: email,
-      password: password,
-    })
-            .then(response => {
-                alert("Login successful!");
-                console.log(response.data); // Handle authentication state here
-                sessionStorage.setItem('user', JSON.stringify(response.data)); // Store user data in session storage
-                // Reload page
-                window.location.reload();
-            })
-            .catch(error => {
-                alert("Login failed: " + error.message);
-            });
+    try {
+      const response = await axios.post(`${apiBaseUrl}/api/auth/login`, { email, password });
+      alert("Login Successfull");
+      if(signIn({
+        auth: {
+            token: response.data.accessToken,
+            type: response.data.tokenType
+        },
+        userState: response.data.user
+        })){
+        // Redirect or do-something
+    }else {
+        //Throw error
+        console.log("Unsuccessfull");
+    }
+    } catch (error) {
+      console.error('Login failed:', error);
+      throw error;
+    }
   };
 
   return (
