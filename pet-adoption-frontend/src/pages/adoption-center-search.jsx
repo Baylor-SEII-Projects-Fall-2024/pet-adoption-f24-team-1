@@ -43,25 +43,6 @@ export default function adoptionCenterSearch() {
     const navigateTo = (page) => {
         router.push(page);
     }
-/*
-private long centerId;
-
-    @Column(name = "center_name")
-    private String centerName;
-
-    @Column(name = "center_address")
-    private String centerAddress;
-
-    @Column(name = "center_phone")
-    private String centerPhone;
-
-    @Column(name = "center_email")
-    private String centerEmail;
-
-    @Column(name = "zip_code")
-    private long zipCode;
- */
-    // Get pets from database
     useEffect(() => {
         const recommendedPets = [
             {
@@ -115,7 +96,7 @@ private long centerId;
                     <Stack direction="row" >
                         <FilterStack nameFltr={nameFltr} addressFltr={addressFltr} zipCodeFltr={zipCodeFltr}/>
                         <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2}>
-                            {adoptionCenter.filter(filters).map((pet) => (
+                            {adoptionCenter.map((pet) => (
                                 <Grid item>
                                     <PetCard key={pet.petID} pet={pet} location={{adoptionCenter: 'Home Free', address: '111 Drive Street, Waco, TX 76706'}} user={user} liked={false}/>
                                 </Grid>
