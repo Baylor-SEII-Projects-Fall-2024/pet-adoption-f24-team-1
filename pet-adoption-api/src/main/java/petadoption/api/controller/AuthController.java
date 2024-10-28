@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import petadoption.api.dto.AuthResponseDTO;
 import petadoption.api.dto.LoginDTO;
 import petadoption.api.dto.RegisterDTO;
+import petadoption.api.dto.UserDTO;
 import petadoption.api.security.JWTGenerator;
 import petadoption.api.user.User;
 import petadoption.api.user.UserRepository;
@@ -48,7 +49,20 @@ public class AuthController {
         System.out.println(authentication.getPrincipal());
         String token = jwtGenerator.generateToken(authentication);
         Optional<User> user = userRepository.findByEmail(loginDTO.getEmail());
-        return new ResponseEntity<>(new AuthResponseDTO(token, user.get()), HttpStatus.OK);
+
+        UserDTO userInfo = new UserDTO();
+        if (user.isPresent()) {
+            userInfo.setFirstName(user.get().getFirstName());
+            userInfo.setLastName(user.get().getLastName());
+            userInfo.setBio(user.get().getBio());
+            userInfo.setEmail(user.get().getEmail());
+            userInfo.setPhone(user.get().getPhone());
+            userInfo.setLocation(user.get().getLocation());
+            userInfo.setImgUrl(user.get().getImgUrl());
+            userInfo.setUserPreference(user.get().getUserPreference());
+        }
+
+        return new ResponseEntity<>(new AuthResponseDTO(token, userInfo), HttpStatus.OK);
     }
 
     @PostMapping("register")

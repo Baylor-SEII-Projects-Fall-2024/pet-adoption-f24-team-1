@@ -25,17 +25,17 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User register(UserDTO userDTO) {
-        if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already exists!");
-        }
-
-        User user = new User();
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
-
-        return userRepository.save(user);
-    }
+//    public User register(UserDTO userDTO) {
+//        if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
+//            throw new RuntimeException("Email already exists!");
+//        }
+//
+//        User user = new User();
+//        user.setEmail(userDTO.getEmail());
+//        user.setPassword(userDTO.getPassword());
+//
+//        return userRepository.save(user);
+//    }
 
     public User login(LoginDTO loginDTO) {
         Optional<User> userOptional = userRepository.findByEmail(loginDTO.getEmail());

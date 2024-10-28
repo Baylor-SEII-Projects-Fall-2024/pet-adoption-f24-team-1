@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import petadoption.api.dto.LoginDTO;
 import petadoption.api.user.User;
-import petadoption.api.user.UserDTO;
 import petadoption.api.user.UserService;
 
 import java.util.*;
@@ -65,11 +64,11 @@ public class UserController {
         return userService.findAllUsers();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/api/register")
-    public ResponseEntity<User> register(@RequestBody UserDTO userDTO) {
-        return ResponseEntity.ok(userService.register(userDTO));
-    }
+//    @CrossOrigin(origins = "http://localhost:3000")
+//    @PostMapping("/api/register")
+//    public ResponseEntity<User> register(@RequestBody UserDTO userDTO) {
+//        return ResponseEntity.ok(userService.register(userDTO));
+//    }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/api/login")
