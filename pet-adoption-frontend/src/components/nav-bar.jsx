@@ -6,6 +6,7 @@ import Router, { useRouter } from 'next/router';
 import LoginModal from './login-modal';
 import DialogModal from './dialog-modal';
 import Link from 'next/link';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
 const pages = ['Centers', 'Matches'];
 const settings = ['Settings', 'Logout'];
@@ -16,9 +17,10 @@ export default function NavBar() {
   const router = useRouter();
   
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [user, setUser] = useState(null);
+  const user = useAuthUser();
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
+
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -68,15 +70,6 @@ export default function NavBar() {
       router.push('/matches');
     }
   };
-
-  useEffect(() => {
-    const userFromLocalStorage = JSON.parse(sessionStorage.getItem('user'));
-    if (userFromLocalStorage) {
-      setUser(userFromLocalStorage);
-    } else {
-      setUser(null);
-    }
-  }, []);
 
   return (
     <>

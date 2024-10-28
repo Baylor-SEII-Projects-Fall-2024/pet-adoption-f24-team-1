@@ -9,6 +9,8 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import { useState, useEffect } from "react";
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import axios from 'axios';
+import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated'
+import { useRouter } from 'next/router';
 
 const LoginModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -29,7 +31,10 @@ const LoginModal = ({ isOpen, onClose }) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
   const signIn = useSignIn();
+  const isAuthenticated = useIsAuthenticated()
+  const router = useRouter();
 
   // UI handling
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -44,29 +49,33 @@ const LoginModal = ({ isOpen, onClose }) => {
 
   // Login api
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
+    e.preventDefault()
+    console.log(email);
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
-
-    try {
-      const response = await axios.post(`${apiBaseUrl}/api/auth/login`, { email, password });
-      alert("Login Successfull");
-      if(signIn({
-        auth: {
-            token: response.data.accessToken,
-            type: response.data.tokenType
-        },
-        userState: response.data.user
-        })){
-        // Redirect or do-something
-    }else {
-        //Throw error
-        console.log("Unsuccessfull");
-    }
-    } catch (error) {
-      console.error('Login failed:', error);
-      throw error;
-    }
+        axios.post(`${apiBaseUrl}/api/auth/login`, {
+          email: email,
+          password: password,
+        })
+            .then((res)=>{
+                if(res.status === 200){
+                    if(signIn({
+                        auth: {
+                            token: res.data.accessToken,
+                            type: "Bearer"
+                        },
+                        userState: res.data.user
+                    })){
+                      setError(false);
+                      alert("Login Successfull!");
+                      router.push('/user-home');
+                    }else {
+                      alert("Sign In error.");
+                    }
+                }
+            })
+            .catch((err) =>{
+              setError(true);
+            })
   };
 
   return (
@@ -127,6 +136,7 @@ const LoginModal = ({ isOpen, onClose }) => {
               variant="outlined"
               fullWidth
               required
+              error={error}
               sx={{ marginBottom: 2 }}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -138,7 +148,7 @@ const LoginModal = ({ isOpen, onClose }) => {
               type={showPassword ? 'text' : 'password'}
               fullWidth
               required
-              sx={{ marginBottom: 3 }}
+              error={error}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -153,8 +163,11 @@ const LoginModal = ({ isOpen, onClose }) => {
               }}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {error && (
+              <Typography variant="body2" color="red" sx={{ textAlign: "start", marginTop: 1 }}>The email or password is incorrect.</Typography>
+            )}
 
-            <Button type="submit" variant="contained" fullWidth>
+            <Button type="submit" variant="contained" fullWidth sx={{ marginTop: 3 }}>
               Log In
             </Button>
           </form>
