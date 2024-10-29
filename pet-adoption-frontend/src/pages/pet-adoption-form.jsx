@@ -4,6 +4,7 @@ import { Button, Grid, Stack, TextField, Typography } from '@mui/material';
 import Image from 'next/image';
 import axios from 'axios';
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import NavBar from "@/components/nav-bar";
 
 export default function PetAdoptionForm() {
     const [fullName, setFullName] = useState("");
@@ -62,6 +63,8 @@ export default function PetAdoptionForm() {
             </Head>
 
             <main>
+                <Stack spacing={10}>
+                <NavBar />
                 {!isSubmitted ? (
                     <form onSubmit={handleSubmit}>
                         <Stack sx={{ paddingTop: 4 }} alignItems="center" gap={2}>
@@ -184,6 +187,7 @@ export default function PetAdoptionForm() {
                         <Typography variant="body1">Your pet adoption form has been successfully submitted.</Typography>
                     </Stack>
                 )}
+                </Stack>
             </main>
         </>
     );

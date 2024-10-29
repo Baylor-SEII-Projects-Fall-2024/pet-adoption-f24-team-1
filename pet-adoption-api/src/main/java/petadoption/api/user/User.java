@@ -2,10 +2,6 @@ package petadoption.api.user;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import petadoption.api.pet.Pet;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity
@@ -22,8 +18,23 @@ public class User {
     @Column(name = "USER_ID")
     Long id;
 
+    @Column(name = "NAME")
+    String name;
+
+    @Column(name = "BIO")
+    String bio;
+
     @Column(name = "EMAIL")
     String email;
+
+    @Column(name = "PHONE")
+    String phone;
+
+    @Column(name = "LOCATION")
+    String location;
+
+    @Column(name = "IMG_URG")
+    String imgUrl;
 
     @Column(name = "PASSWORD")
     String password;
@@ -31,36 +42,4 @@ public class User {
     @Column(name = "USER_TYPE")
     String userType;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
 }

@@ -2,14 +2,17 @@ package petadoption.api.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import petadoption.api.pet.Pet;
 import petadoption.api.user.LoginDTO;
 import petadoption.api.user.User;
 import petadoption.api.user.UserDTO;
 import petadoption.api.user.UserService;
 
-import java.util.List;
+import java.util.*;
 
 @Log4j2
 @RestController
@@ -34,6 +37,28 @@ public class UserController {
     public User saveUser(@RequestBody User user) {
         System.out.println("in here");
         return userService.saveUser(user);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PutMapping("/api/update-profile")
+    public ResponseEntity<User> updateUser(@RequestBody User updatedUser) {
+        log.info("Updating user: {}", updatedUser); // Log the incoming User object
+        Optional<User> userOptional = userService.findUser(updatedUser.getId());
+
+        if (userOptional.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        User user = userOptional.get();
+        user.setName(updatedUser.getName());
+        user.setBio(updatedUser.getBio());
+        user.setEmail(updatedUser.getEmail());
+        user.setPhone(updatedUser.getPhone());
+        user.setLocation(updatedUser.getLocation());
+        user.setImgUrl(updatedUser.getImgUrl());
+
+        User savedUser = userService.saveUser(user);
+        return new ResponseEntity<>(savedUser, HttpStatus.OK);
     }
 
     @GetMapping("/allusers")
