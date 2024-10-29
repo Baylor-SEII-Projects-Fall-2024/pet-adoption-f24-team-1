@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import ImageDropzone from './image-dropzone';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import { useRouter } from 'next/router';
 
 const style = {
@@ -60,7 +60,7 @@ export default function PetInfoModal(props) {
             
             
             <Box display="flex" justifyContent="center" alignItems="center" sx={{ mt: 2 }}>
-              <Button variant="contained" sx={{ fontSize: '20px' }} onClick={() => handleAdopt()}>Adopt {props.pet.petName}</Button>
+              <Button variant="contained" sx={{ fontSize: '20px' }} onClick={() => handleAdopt()} startIcon={<VolunteerActivismIcon/>}>Adopt {props.pet.petName}</Button>
             </Box>
 
             <Box display="flex" justifyContent="flex-end" alignItems="flex-end" sx={{ mt: 2, width: '90%'}}>

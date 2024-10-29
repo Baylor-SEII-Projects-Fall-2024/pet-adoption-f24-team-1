@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import petadoption.api.adoptioncenteradmin.AdoptionCenterAdmin;
 
+import java.util.List;
+
 @Entity
 @Table(name = "adoption_center")
 @Data

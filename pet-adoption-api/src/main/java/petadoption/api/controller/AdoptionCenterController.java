@@ -21,6 +21,11 @@ public class AdoptionCenterController {
         return adoptionCenterService.getAllCenters();
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<AdoptionCenter> getAdoptionCenter(@PathVariable int id) {
+        return adoptionCenterService.getAdoptionCenter(id);
+    }
+
     @PostMapping
     public ResponseEntity<AdoptionCenter> addCenter(@RequestBody AdoptionCenter adoptionCenter) {
         return adoptionCenterService.addCenter(adoptionCenter);

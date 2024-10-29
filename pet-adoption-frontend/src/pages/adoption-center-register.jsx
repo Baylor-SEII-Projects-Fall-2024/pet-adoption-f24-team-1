@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Button, TextField, Typography, Grid, Paper, IconButton, InputAdornment, Collapse, Fade } from '@mui/material';
-import { useState } from "react";
+import { Box, Button, TextField, Typography, Grid, Paper, IconButton, InputAdornment, Collapse, Fade, Input } from '@mui/material';
+import { useState, useRef } from "react";
 import { useRouter } from 'next/router';
 import HomeIcon from '@mui/icons-material/Home';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
@@ -8,6 +8,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import axios from 'axios';
+import Autocomplete, { usePlacesWidget } from "react-google-autocomplete";
 
 const AdoptionCenterRegisterPage = () => {
     const router = useRouter();
@@ -34,6 +35,18 @@ const AdoptionCenterRegisterPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+
+    // Google Maps Autocomplete
+    const [country, setCountry] = useState("us");
+    const { ref: materialRef } = usePlacesWidget({
+        apiKey: process.env.REACT_APP_GOOGLE,
+        onPlaceSelected: (place) => {console.log(place)},
+        options: {
+            componentRestrictions: { country: country },
+            fields: ['formatted_address'],
+        },
+        
+    });
 
     const handleClickShowPassword = () => setShowPassword(!showPassword);
 
@@ -212,6 +225,31 @@ const AdoptionCenterRegisterPage = () => {
                             sx={{ marginBottom: 2 }}
                             onChange={(e) => setAdoptionCenterLocation(e.target.value)}
                         />
+                        {/*
+                        <TextField
+                            fullWidth
+                            color="primary"
+                            variant="outlined"
+                            required
+                            inputRef={materialRef}
+                            onChange={(e) => {
+                                setAdoptionCenterLocation(e.target.value);
+                                console.log(e.target.value);
+                            }}
+                        />
+                        
+                        <Input
+                            fullWidth
+                            color="secondary"
+                            inputComponent={({ inputRef, onFocus, onBlur, ...props }) => (
+                            <Autocomplete
+                                apiKey={process.env.NEXT_PUBLIC_GOOGLE_AUTOFILL_API_KEY}
+                                {...props}
+                                onPlaceSelected={(selected) => console.log(selected)}
+                            />
+                            )}
+                        />
+                        */}
                     </Box>
                 </Collapse>
 
