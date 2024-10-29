@@ -247,3 +247,69 @@
 2024-10-28T19:46:33.056-05:00  INFO 92669 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-10-28T19:46:33.112-05:00  INFO 92669 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-10-28T19:46:33.183-05:00  INFO 92669 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-10-28T22:02:07.250-05:00  INFO 3714 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 3714 (/Users/jakemauldin/Desktop/SWE2/template-project/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by jakemauldin in /Users/jakemauldin/Desktop/SWE2/template-project/pet-adoption-f24-team-1/pet-adoption-api)
+2024-10-28T22:02:07.254-05:00  INFO 3714 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-28T22:02:08.152-05:00  INFO 3714 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-28T22:02:08.275-05:00  INFO 3714 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 103 ms. Found 8 JPA repository interfaces.
+2024-10-28T22:02:08.803-05:00  INFO 3714 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-28T22:02:08.813-05:00  INFO 3714 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-28T22:02:08.814-05:00  INFO 3714 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-28T22:02:08.847-05:00  INFO 3714 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-28T22:02:08.847-05:00  INFO 3714 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1517 ms
+2024-10-28T22:02:08.912-05:00  INFO 3714 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-28T22:02:09.226-05:00  INFO 3714 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@251c90f
+2024-10-28T22:02:09.227-05:00  INFO 3714 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-28T22:02:09.286-05:00  INFO 3714 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-28T22:02:09.332-05:00  INFO 3714 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-10-28T22:02:09.355-05:00  INFO 3714 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-28T22:02:09.581-05:00  INFO 3714 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-28T22:02:10.321-05:00  INFO 3714 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-28T22:02:10.409-05:00  INFO 3714 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-28T22:02:10.577-05:00  INFO 3714 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-10-28T22:02:11.025-05:00  WARN 3714 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-28T22:02:11.284-05:00  INFO 3714 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-28T22:02:11.291-05:00  INFO 3714 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 4.782 seconds (process running for 5.764)
+2024-10-28T22:02:48.570-05:00  INFO 3714 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-28T22:02:48.571-05:00  INFO 3714 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-28T22:02:48.574-05:00  INFO 3714 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2024-10-28T22:02:48.680-05:00 DEBUG 3714 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:02:48.680-05:00 DEBUG 3714 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:02:48.681-05:00 DEBUG 3714 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-28T22:02:48.726-05:00 DEBUG 3714 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:02:48.726-05:00 DEBUG 3714 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:02:48.765-05:00 DEBUG 3714 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-28T22:02:53.519-05:00 DEBUG 3714 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select u1_0.user_id,u1_0.email,u1_0.password,u1_0.user_type from users u1_0 where u1_0.email=?
+2024-10-28T22:02:55.969-05:00 DEBUG 3714 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:02:55.969-05:00 DEBUG 3714 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:02:55.982-05:00 DEBUG 3714 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-28T22:02:55.990-05:00 DEBUG 3714 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:02:55.990-05:00 DEBUG 3714 --- [http-nio-8080-exec-10] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:02:56.004-05:00 DEBUG 3714 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-28T22:03:01.907-05:00 DEBUG 3714 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:03:01.907-05:00 DEBUG 3714 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:03:01.925-05:00 DEBUG 3714 --- [http-nio-8080-exec-10] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:03:01.925-05:00 DEBUG 3714 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:03:01.963-05:00 DEBUG 3714 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0 join matches m1_0 on p1_0.petid=m1_0.petid where m1_0.userid=?
+2024-10-28T22:03:21.171-05:00 DEBUG 3714 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:03:21.171-05:00 DEBUG 3714 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:03:21.188-05:00 DEBUG 3714 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-28T22:03:21.194-05:00 DEBUG 3714 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:03:21.194-05:00 DEBUG 3714 --- [http-nio-8080-exec-10] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:03:21.228-05:00 DEBUG 3714 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-28T22:03:31.259-05:00 DEBUG 3714 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:03:31.259-05:00 DEBUG 3714 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:03:31.273-05:00 DEBUG 3714 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:03:31.273-05:00 DEBUG 3714 --- [http-nio-8080-exec-10] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:03:31.304-05:00 DEBUG 3714 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0 join matches m1_0 on p1_0.petid=m1_0.petid where m1_0.userid=?
+2024-10-28T22:03:34.107-05:00 DEBUG 3714 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:03:34.107-05:00 DEBUG 3714 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:03:34.120-05:00 DEBUG 3714 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-28T22:03:34.123-05:00 DEBUG 3714 --- [http-nio-8080-exec-10] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:03:34.123-05:00 DEBUG 3714 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:03:34.140-05:00 DEBUG 3714 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-28T22:03:52.516-05:00 DEBUG 3714 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:03:52.516-05:00 DEBUG 3714 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:03:52.535-05:00 DEBUG 3714 --- [http-nio-8080-exec-10] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-10-28T22:03:52.539-05:00 DEBUG 3714 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-10-28T22:03:52.539-05:00 DEBUG 3714 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-10-28T22:03:52.582-05:00 DEBUG 3714 --- [http-nio-8080-exec-10] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0

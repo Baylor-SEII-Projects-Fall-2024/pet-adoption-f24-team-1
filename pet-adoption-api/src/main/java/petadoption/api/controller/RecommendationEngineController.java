@@ -16,7 +16,7 @@ public class RecommendationEngineController {
     private RecommendationEngineService recommendationEngineService;
 
     @GetMapping
-    List<Pet> getRecommendedPets(@RequestParam int userID)  {
+    List<Pet> getRecommendedPets(@RequestParam Long userID)  {
         return recommendationEngineService.recommendationAlgorithm(userID);
     }
 }
