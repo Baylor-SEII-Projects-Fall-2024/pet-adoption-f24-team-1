@@ -52,14 +52,12 @@ public class AuthController {
 
         UserDTO userInfo = new UserDTO();
         if (user.isPresent()) {
+            userInfo.setId(user.get().getId());
             userInfo.setFirstName(user.get().getFirstName());
             userInfo.setLastName(user.get().getLastName());
             userInfo.setBio(user.get().getBio());
             userInfo.setEmail(user.get().getEmail());
             userInfo.setPhone(user.get().getPhone());
-            userInfo.setLocation(user.get().getLocation());
-            userInfo.setImgUrl(user.get().getImgUrl());
-            userInfo.setUserPreference(user.get().getUserPreference());
         }
 
         return new ResponseEntity<>(new AuthResponseDTO(token, userInfo), HttpStatus.OK);

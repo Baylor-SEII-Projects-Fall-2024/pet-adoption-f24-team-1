@@ -1,8 +1,10 @@
 package petadoption.api.user;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import petadoption.api.dto.LoginDTO;
+import petadoption.api.userpreference.UserPreference;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,23 +27,17 @@ public class UserService {
         return userRepository.findAll();
     }
 
-//    public User register(UserDTO userDTO) {
-//        if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
-//            throw new RuntimeException("Email already exists!");
-//        }
-//
-//        User user = new User();
-//        user.setEmail(userDTO.getEmail());
-//        user.setPassword(userDTO.getPassword());
-//
-//        return userRepository.save(user);
-//    }
+    public User updateUserPreferences(Long userId, UserPreference newPreferences) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));
 
-    public User login(LoginDTO loginDTO) {
-        Optional<User> userOptional = userRepository.findByEmail(loginDTO.getEmail());
-        if (userOptional.isPresent() && userOptional.get().getPassword().equals(loginDTO.getPassword())) {
-            return userOptional.get();
-        }
-        throw new RuntimeException("Invalid username or password");
+        user.getUserPreference().setPreferredSpecies(newPreferences.getPreferredSpecies());
+        user.getUserPreference().setPreferredBreed(newPreferences.getPreferredBreed());
+        user.getUserPreference().setPreferredGender(newPreferences.getPreferredGender());
+        user.getUserPreference().setPreferredSize(newPreferences.getPreferredSize());
+        user.getUserPreference().setAgeMin(newPreferences.getAgeMin());
+        user.getUserPreference().setAgeMax(newPreferences.getAgeMax());
+
+        return userRepository.save(user);
     }
 }
