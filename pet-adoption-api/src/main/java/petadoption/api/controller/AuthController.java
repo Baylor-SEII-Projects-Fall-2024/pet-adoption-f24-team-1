@@ -78,19 +78,20 @@ public class AuthController {
         user.setPassword(passwordEncoder.encode((registerDTO.getPassword())));
         user.setFirstName(registerDTO.getFirstName());
         user.setLastName(registerDTO.getLastName());
-        user.setBio(registerDTO.getBio());
+        user.setBio("Hi, my name is " + registerDTO.getFirstName() + " " + registerDTO.getLastName() +
+                ", and I'm looking for new fluffy friends!");
         user.setPhone(registerDTO.getPhone());
-        user.setLocation(registerDTO.getLocation());
-        user.setImgUrl(registerDTO.getImgUrl());
+//        user.setLocation(registerDTO.getLocation());
+//        user.setImgUrl(registerDTO.getImgUrl());
 
         // Set UserPreference attributes
         UserPreference userPreference = new UserPreference();
-        userPreference.setPreferredSpecies(registerDTO.getPreferredSpecies());
-        userPreference.setPreferredBreed(registerDTO.getPreferredBreed());
-        userPreference.setPreferredGender(registerDTO.getPreferredGender());
-        userPreference.setPreferredSize(registerDTO.getPreferredSize());
-        userPreference.setAgeMin(registerDTO.getAgeMin());
-        userPreference.setAgeMax(registerDTO.getAgeMax());
+//        userPreference.setPreferredSpecies(registerDTO.getPreferredSpecies());
+//        userPreference.setPreferredBreed(registerDTO.getPreferredBreed());
+//        userPreference.setPreferredGender(registerDTO.getPreferredGender());
+//        userPreference.setPreferredSize(registerDTO.getPreferredSize());
+//        userPreference.setAgeMin(registerDTO.getAgeMin());
+//        userPreference.setAgeMax(registerDTO.getAgeMax());
 
         // Assign userId to UserPreference
         user.setUserPreference(userPreference);
