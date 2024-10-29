@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { Avatar, Button, Grid, Typography, Container, Box, TextField, IconButton } from '@mui/material';
+import { Avatar, Button, Grid, Typography, Container, Box, TextField, IconButton, Modal } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -11,6 +11,7 @@ import NavBar from '@/components/nav-bar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import ImageDropzone from '@/components/image-dropzone';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -25,22 +26,25 @@ export default function UserProfile() {
   const [email, setEmail] = useState();
   const [phone, setPhone] = useState();
   const [location, setLocation] = useState();
-  const [imgUrl, setProfilePicture] = useState('');
+  const [imgUrl, setProfilePicture] = useState();
   const [password, setPassword] = useState();
   const [userType, setUserType] = useState();
+
+  // State for the modal
+  const [openModal, setOpenModal] = useState(false);
 
   // Fetch user profile data from sessionStorage when component mounts
   useEffect(() => {
     const userFromSessionStorage = JSON.parse(sessionStorage.getItem('user'));
     if (userFromSessionStorage) {
       setId(userFromSessionStorage.id);
-      setName(userFromSessionStorage.name || 'Beetle Juice');
-      setBio(userFromSessionStorage.bio || 'Just looking for a cuppa pets');
-      setEmail(userFromSessionStorage.email || 'beetlejuice@Gmail.com');
-      setPhone(userFromSessionStorage.phone || '702-684-2621');
-      setLocation(userFromSessionStorage.location || 'Las Vegas 1028 Hall Street');
+      setName(userFromSessionStorage.name || '');
+      setBio(userFromSessionStorage.bio || '');
+      setEmail(userFromSessionStorage.email || '');
+      setPhone(userFromSessionStorage.phone || '');
+      setLocation(userFromSessionStorage.location || '');
       setProfilePicture(userFromSessionStorage.imgUrl || '');
-      setPassword(userFromSessionStorage.password); 
+      setPassword(userFromSessionStorage.password);
       setUserType(userFromSessionStorage.userType);
     }
   }, []);
@@ -49,15 +53,24 @@ export default function UserProfile() {
   const handleEditProfile = () => setIsEditing(true);
   const handleSaveProfile = async () => {
     try {
-      //await axios.put('/api/update-profile', userFromSessionStorage.id);
       await axios.put(`${apiBaseUrl}/api/update-profile`, { id, name, bio, email, phone, location, imgUrl, password, userType });
-      sessionStorage.setItem('user', JSON.stringify({ name, bio, email, phone, location }));
+      sessionStorage.setItem('user', JSON.stringify({ name, bio, email, phone, location, imgUrl }));
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating profile:", error);
     }
   };
   const handleCancelEdit = () => setIsEditing(false);
+
+  // Function to open the image upload modal
+  const handleAvatarClick = () => {
+    setOpenModal(true);
+  };
+
+  // Function to close the modal
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   return (
     <>
@@ -68,7 +81,6 @@ export default function UserProfile() {
         <NavBar />
         <Container maxWidth="lg" sx={{ display: 'flex', marginTop: '64px' }}>
           <Grid container spacing={2}>
-
             {/* Main Content */}
             <Grid item xs={9}>
               <Box sx={{ padding: 2, backgroundColor: '#fff', borderRadius: 1, boxShadow: 1, position: 'relative' }}>
@@ -77,10 +89,11 @@ export default function UserProfile() {
                   <Grid item>
                     <Avatar
                       alt={name}
-                      src={imgUrl || ''}  // Use profilePicture state
-                      sx={{ width: 120, height: 120 }}
+                      src={imgUrl || ''}
+                      sx={{ width: 120, height: 120, cursor: 'pointer' }}  // Cursor changes to pointer
+                      onClick={handleAvatarClick} // Open modal on click
                     >
-                      {!imgUrl && <AccountCircleIcon sx={{ fontSize: 150 }} />} 
+                      {!imgUrl && <AccountCircleIcon sx={{ fontSize: 150 }} />}
                     </Avatar>
                   </Grid>
 
@@ -190,6 +203,19 @@ export default function UserProfile() {
             </Grid>
           </Grid>
         </Container>
+
+        {/* Modal for Image Dropzone */}
+        <Modal open={openModal} onClose={handleCloseModal}>
+          <Box sx={{ width: 400, bgcolor: 'background.paper', padding: 2, borderRadius: 2, boxShadow: 3, position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+            <Typography variant="h6" component="h2" gutterBottom>
+              Upload Profile Picture
+            </Typography>
+            <ImageDropzone setImgUrl={setProfilePicture} onClose={handleCloseModal} />
+            <Button variant="outlined" color="secondary" onClick={handleCloseModal} sx={{ marginTop: 2 }}>
+              Cancel
+            </Button>
+          </Box>
+        </Modal>
       </main>
     </>
   );

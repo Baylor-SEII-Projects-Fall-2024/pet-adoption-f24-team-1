@@ -69,7 +69,7 @@ export default function NavBar() {
       openLogoutModal();
     }
     if(nav === 'Matches')  {
-      router.push('/matches');
+      router.push('/user-home/matches');
     }
   };
 

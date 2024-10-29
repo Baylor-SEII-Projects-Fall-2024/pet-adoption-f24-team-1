@@ -14,6 +14,26 @@ const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 
 export default function ManagePets() {
+  const [user, setUser] = useState(null);
+  const [adoptionCenter, setAdoptionCenter] = useState(null);
+
+  useEffect(() => {
+    const userFromLocalStorage = JSON.parse(sessionStorage.getItem('user'));
+    if (userFromLocalStorage) {
+      setUser(userFromLocalStorage);
+      axios.get(`${apiBaseUrl}/api/admins/center/` + userFromLocalStorage.id)
+      .then(response => {
+        setAdoptionCenter(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    } else {
+      setUser(null);
+    }
+  }, []);
+
+
   const [openInsertDialog, setOpenInsertDialog] = useState(false);
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
   const [selectionModel, setSelectionModel] = useState([]);
@@ -25,7 +45,8 @@ export default function ManagePets() {
     petWeight: '',
     petSpecies: '',
     color: '',
-    imgUrl: ''
+    imgUrl: '',
+    centerID: ''
   });
 
   const handleRowSelection = (selectionModel) => {
@@ -47,7 +68,7 @@ export default function ManagePets() {
     { field: "color", headerName: "Color", width: 130 },
     { field: "imgUrl", headerName: "Image URL", width: 130 }
   ];
-  const [adoptionCenterName, setAdoptionCenter] = useState("")
+  
   const [pets, setPets] = useState([]);  // State to hold the pet data
   const [loading, setLoading] = useState(true);  // State to handle loading
   const [error, setError] = useState(null);  // State to handle errors
@@ -99,7 +120,8 @@ export default function ManagePets() {
       petWeight: '',
       petSpecies: '',
       color: '',
-      imgUrl: ''
+      imgUrl: '',
+      centerID: ''
     });
   };
 
@@ -114,7 +136,8 @@ export default function ManagePets() {
     petWeight: pet.petWeight,  // Pet's weight
     petSpecies: pet.petSpecies,// Pet's species
     color: pet.color,             // Pet's color
-    imgUrl: pet.imgUrl         // Pet's image URL
+    imgUrl: pet.imgUrl,         // Pet's image URL
+    centerID: pet.centerID
   }));
 
   const getPetById = (petId) => {
@@ -123,7 +146,8 @@ export default function ManagePets() {
 
   const handleInsertPet = () => {
     newPetData.imgUrl = imgUrl;
-    console.log('Should see this: ' + newPetData.imgUrl);
+    newPetData.centerID = adoptionCenter.centerId;
+    console.log(newPetData)
     axios.post(`${apiBaseUrl}/api/pets`, newPetData )
       .then(response => {
         loadData(); // Reload data to see the newly inserted pet

@@ -37,6 +37,7 @@ export default function UserHome() {
   useEffect(() => {
     const userFromLocalStorage = JSON.parse(sessionStorage.getItem('user'));
     if (userFromLocalStorage) {
+      console.log(userFromLocalStorage)
       setUser(userFromLocalStorage);
     } else {
       setUser(null);
