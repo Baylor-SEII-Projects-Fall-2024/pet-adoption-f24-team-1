@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import petadoption.api.adoptioncenteradmin.AdoptionCenterAdmin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdoptionCenterService {
@@ -20,6 +22,13 @@ public class AdoptionCenterService {
         adoptionCenterRepository.findAll().forEach(centers::add);
 
         return new ResponseEntity<>(centers, HttpStatus.OK);
+    }
+
+    public ResponseEntity<AdoptionCenter> getAdoptionCenter(int id)  {
+        Optional<AdoptionCenter> center = adoptionCenterRepository.findById(Long.valueOf(id));
+        return center
+                .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     public ResponseEntity<AdoptionCenter> addCenter(AdoptionCenter adoptionCenter) {

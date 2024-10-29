@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import petadoption.api.adoptioncenter.AdoptionCenter;
 import petadoption.api.adoptioncenter.AdoptionCenterRepository;
 import petadoption.api.user.LoginDTO;
 
@@ -35,9 +36,18 @@ public class AdoptionCenterAdminService {
 
     public AdoptionCenterAdmin loginAdmin(LoginDTO loginDTO) {
         Optional<AdoptionCenterAdmin> adminOptional = adminRepository.findByEmail(loginDTO.getUsername());
+        System.out.println(adminOptional.get().getEmail() + " " + adminOptional.get().getPassword());
         if (adminOptional.isPresent() && adminOptional.get().getPassword().equals(loginDTO.getPassword())) {
             return adminOptional.get();
         }
         throw new RuntimeException("Invalid username or password");
+    }
+
+    public ResponseEntity<AdoptionCenter> getAdoptionCenter(Long id)  {
+        Optional<AdoptionCenterAdmin> adminOptional = adminRepository.findById(id);
+        if(adminOptional.isPresent()) {
+            return new ResponseEntity<>(adminOptional.get().getAdoptionCenter(), HttpStatus.OK);
+        }
+        throw new RuntimeException("Adoption center not found");
     }
 }
