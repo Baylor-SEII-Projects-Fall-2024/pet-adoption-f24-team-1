@@ -2,6 +2,8 @@ import React from 'react';
 import { Box, Button, TextField, Typography, Grid, Paper, IconButton, InputAdornment, Link } from '@mui/material';
 import { useState } from "react";
 import { useRouter } from 'next/router'
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import PetsIcon from '@mui/icons-material/Pets';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -12,23 +14,49 @@ import axios from 'axios';
 
 const CreateAccountPage = () => {
   const [showPassword, setShowPassword] = React.useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  //const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+
+  const validationSchema = yup.object({
+    firstName: yup
+      .string('Enter your first name')
+      .matches(/^[A-Za-z]+$/, 'No special character or number allowed')
+      .required('First name is required'),
+    lastName: yup
+      .string('Enter your last name')
+      .matches(/^[A-Za-z]+$/, 'No special character or number allowed')
+      .required('Last name is required'),
+    phone: yup
+      .string('Enter your phone number')
+      .matches(
+        /^(\+?\d{1,2}[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/,
+        'Phone number is not valid'
+      )
+      .required('Phone number is required'),
+    email: yup
+      .string('Enter your email')
+      .email('Enter a valid email')
+      .required('Email is required'),
+    password: yup
+      .string('Enter your password')
+      .min(8, 'Password length should be at least 8')
+      .required('Password is required'),
+  })
+
+  const handleSubmit = (values) => {
 
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    axios.post(`${apiBaseUrl}/api/register`, {
-      email: email,
-      password: password,
+    axios.post(`${apiBaseUrl}/api/auth/register`, {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      phone: values.phone,
+      email: values.email,
+      password: values.password,
     })
             .then(response => {
                 alert("Registration successful!");
-                sessionStorage.setItem('user', JSON.stringify(response.data)); // Store user data in session storage
-                // Go to home page
                 router.push("/");
 
             })
@@ -37,7 +65,17 @@ const CreateAccountPage = () => {
             });
   };
 
-  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      phone: '',
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: handleSubmit,
+  });
 
   return (
     <>
@@ -93,24 +131,80 @@ const CreateAccountPage = () => {
 
         <Typography variant="subtitle1" sx={{ marginY: 2 }}>OR</Typography>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
+          {/* First Name Input */}
+          <TextField
+            id="firstName"
+            name="firstName"
+            label="First Name"
+            variant="outlined"
+            value={formik.values.firstName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+            helperText={formik.touched.firstName && formik.errors.firstName}
+            sx={{ marginBottom: 2 }}
+            fullWidth
+          />
+
+          {/* Last Name Input */}
+          <TextField
+            id="lastName"
+            name="lastName"
+            label="Last Name"
+            variant="outlined"
+            value={formik.values.lastName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+            helperText={formik.touched.lastName && formik.errors.lastName}
+            sx={{ marginBottom: 2 }}
+            fullWidth
+          />
+
+          {/* Phone Input */}
+          <TextField
+            id="phone"
+            name="phone"
+            label="Phone Number"
+            variant="outlined"
+            value={formik.values.phone}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.phone && Boolean(formik.errors.phone)}
+            helperText={formik.touched.phone && formik.errors.phone}
+            sx={{ marginBottom: 2 }}
+            fullWidth
+          />
+
           {/* Email Input */}
           <TextField
+            id="email"
+            name="email"
             label="Email"
             variant="outlined"
-            fullWidth
-            required
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
             sx={{ marginBottom: 2 }}
-            onChange={(e) => setEmail(e.target.value)}
+            fullWidth
           />
 
           {/* Password Input */}
           <TextField
+            id="password"
+            name="password"
             label="Password"
             variant="outlined"
             type={showPassword ? 'text' : 'password'}
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
             fullWidth
-            required
             sx={{ marginBottom: 3 }}
             InputProps={{
               endAdornment: (
@@ -124,7 +218,6 @@ const CreateAccountPage = () => {
                 </InputAdornment>
               ),
             }}
-            onChange={(e) => setPassword(e.target.value)}
           />
 
           <Button type="submit" variant="contained" fullWidth>
