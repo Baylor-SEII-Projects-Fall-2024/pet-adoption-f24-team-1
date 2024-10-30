@@ -27,7 +27,7 @@ const SetUserPreferencesPage = () => {
     const [breed, setBreed] = useState(null);
     const [gender, setGender] = useState(null);
     const [size, setSize] = useState(null);
-    const [age, setAge] = useState([0, 30])
+    const [age, setAge] = useState([0, 30]);
 
     const handleSpecies = (event) => {
         setSpecies(event.target.value);
