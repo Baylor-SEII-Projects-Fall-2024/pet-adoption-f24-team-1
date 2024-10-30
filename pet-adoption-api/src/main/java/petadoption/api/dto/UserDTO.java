@@ -11,4 +11,5 @@ public class UserDTO {
     private String bio;
     private String email;
     private String phone;
+    private String role;
 }

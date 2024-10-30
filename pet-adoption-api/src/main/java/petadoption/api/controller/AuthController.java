@@ -9,10 +9,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import petadoption.api.dto.AuthResponseDTO;
-import petadoption.api.dto.LoginDTO;
-import petadoption.api.dto.RegisterDTO;
-import petadoption.api.dto.UserDTO;
+import petadoption.api.adoptioncenter.AdoptionCenter;
+import petadoption.api.adoptioncenter.AdoptionCenterRepository;
+import petadoption.api.adoptioncenteradmin.AdoptionCenterAdmin;
+import petadoption.api.adoptioncenteradmin.AdoptionCenterAdminRepository;
+import petadoption.api.dto.*;
 import petadoption.api.security.JWTGenerator;
 import petadoption.api.user.User;
 import petadoption.api.user.UserRepository;
@@ -27,20 +28,25 @@ public class AuthController {
 
     private AuthenticationManager authenticationManager;
     private UserRepository userRepository;
+    private AdoptionCenterAdminRepository adminRepository;
+    private AdoptionCenterRepository centerRepository;
     private PasswordEncoder passwordEncoder;
     private JWTGenerator jwtGenerator;
 
     @Autowired
     public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository,
+                          AdoptionCenterAdminRepository adminRepository, AdoptionCenterRepository centerRepository,
                           PasswordEncoder passwordEncoder, JWTGenerator jwtGenerator) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
+        this.adminRepository = adminRepository;
+        this.centerRepository = centerRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtGenerator = jwtGenerator;
     }
 
-    @PostMapping("login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginDTO loginDTO) {
+    @PostMapping("login/user")
+    public ResponseEntity<AuthResponseDTO> loginUser(@RequestBody LoginDTO loginDTO) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginDTO.getEmail(),
@@ -58,13 +64,14 @@ public class AuthController {
             userInfo.setBio(user.get().getBio());
             userInfo.setEmail(user.get().getEmail());
             userInfo.setPhone(user.get().getPhone());
+            userInfo.setRole("USER");
         }
 
         return new ResponseEntity<>(new AuthResponseDTO(token, userInfo), HttpStatus.OK);
     }
 
-    @PostMapping("register")
-    public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
+    @PostMapping("register/user")
+    public ResponseEntity<String> registerUser(@RequestBody RegisterDTO registerDTO) {
         // Check if email exists
         if(userRepository.existsByEmail(registerDTO.getEmail())) {
             return new ResponseEntity<>("Email is taken!", HttpStatus.BAD_REQUEST);
@@ -79,23 +86,38 @@ public class AuthController {
         user.setBio("Hi, my name is " + registerDTO.getFirstName() + " " + registerDTO.getLastName() +
                 ", and I'm looking for new fluffy friends!");
         user.setPhone(registerDTO.getPhone());
-//        user.setLocation(registerDTO.getLocation());
-//        user.setImgUrl(registerDTO.getImgUrl());
 
-        // Set UserPreference attributes
+        // Assign user with user preferences (attributes initially null)
         UserPreference userPreference = new UserPreference();
-//        userPreference.setPreferredSpecies(registerDTO.getPreferredSpecies());
-//        userPreference.setPreferredBreed(registerDTO.getPreferredBreed());
-//        userPreference.setPreferredGender(registerDTO.getPreferredGender());
-//        userPreference.setPreferredSize(registerDTO.getPreferredSize());
-//        userPreference.setAgeMin(registerDTO.getAgeMin());
-//        userPreference.setAgeMax(registerDTO.getAgeMax());
-
-        // Assign userId to UserPreference
         user.setUserPreference(userPreference);
 
         userRepository.save(user);
 
         return new ResponseEntity<>("User registered success!", HttpStatus.OK);
+    }
+
+    @PostMapping("register/admin")
+    public ResponseEntity<String> registerAdmin(@RequestBody RegisterAdminDTO registerAdminDTO) {
+        if(adminRepository.existsByEmail(registerAdminDTO.getEmail())) {
+            return new ResponseEntity<>("Email is taken!", HttpStatus.BAD_REQUEST);
+        }
+
+        // Set Admin attributes
+        AdoptionCenterAdmin admin = new AdoptionCenterAdmin();
+        admin.setEmail(registerAdminDTO.getEmail());
+        admin.setPassword(passwordEncoder.encode((registerAdminDTO.getPassword())));
+        admin.setFirstName(registerAdminDTO.getFirstName());
+        admin.setLastName(registerAdminDTO.getLastName());
+
+        Optional<AdoptionCenter> centerOptional = centerRepository.findById(registerAdminDTO.getCenterId());
+        if (centerOptional.isEmpty()) {
+            return new ResponseEntity<>("Adoption center id does not exist!", HttpStatus.BAD_REQUEST);
+        }
+        // Assign Adoption Center with admin
+        admin.setAdoptionCenter(centerOptional.get());
+
+        adminRepository.save(admin);
+
+        return  new ResponseEntity<>("Admin registered success!", HttpStatus.OK);
     }
 }

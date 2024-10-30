@@ -30,6 +30,5 @@ public class AdoptionCenterAdmin {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "center_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private AdoptionCenter adoptionCenter;
 }
