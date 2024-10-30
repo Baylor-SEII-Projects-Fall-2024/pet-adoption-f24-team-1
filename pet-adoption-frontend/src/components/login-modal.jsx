@@ -61,7 +61,7 @@ const LoginModal = ({ isOpen, onClose }) => {
                     if(signIn({
                         auth: {
                             token: res.data.accessToken,
-                            type: "Bearer"
+                            type: res.data.tokenType
                         },
                         userState: res.data.user
                     })){
@@ -85,7 +85,6 @@ const LoginModal = ({ isOpen, onClose }) => {
       aria-labelledby="login-modal-title"
       aria-describedby="login-modal-description"
       sx={{
-        border: "solid black 2px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center"

@@ -17,6 +17,7 @@ import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import axios from 'axios';
+import ProtectedRoute from '@/components/protected-route';
 
 const SetUserPreferencesPage = () => {
     const router = useRouter();
@@ -72,146 +73,146 @@ const SetUserPreferencesPage = () => {
 };
 
     return (
-        <>
-        <Box
-        sx={{
-            height: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#f5f5f5'
-        }}
-        >
-        <Paper
-            elevation={3}
+        <ProtectedRoute>
+            <Box
             sx={{
-            padding: 4,
-            width: 600,
-            borderRadius: 2,
-            textAlign: 'center',
+                height: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#f5f5f5'
             }}
-        >
-            <PersonIcon sx={{ width: "50px", height: "auto" }} />
+            >
+            <Paper
+                elevation={3}
+                sx={{
+                padding: 4,
+                width: 600,
+                borderRadius: 2,
+                textAlign: 'center',
+                }}
+            >
+                <PersonIcon sx={{ width: "50px", height: "auto" }} />
 
-            <Typography variant="h5" sx={{ marginBottom: 2 }}>
-                Welcome to Fluffy Friends{user ? ", " + user.firstName : ""}
-            </Typography>
+                <Typography variant="h5" sx={{ marginBottom: 2 }}>
+                    Welcome to Fluffy Friends{user ? ", " + user.firstName : ""}
+                </Typography>
 
-            <Typography variant="subtitle1" sx={{ marginBottom: 3 }}>
-                Thank you for registering with Fluffy Friends! Take a moment to fill out the
-                information below to help us connect you with your preferred pets! You can always
-                change these later.
-            </Typography>
+                <Typography variant="subtitle1" sx={{ marginBottom: 3 }}>
+                    Thank you for registering with Fluffy Friends! Take a moment to fill out the
+                    information below to help us connect you with your preferred pets! You can always
+                    change these later.
+                </Typography>
 
-            {/* Species Selection */}
-            <Box >
-                <Typography variant="h6" sx={{ marginY: 1 }}>Select your preferred species:</Typography>
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <InputLabel id="demo-simple-select-helper-label">Species</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-helper-label"
-                        id="demo-simple-select-helper"
-                        value={species}
-                        label="Species"
-                        onChange={handleSpecies}
-                    >
-                    <MenuItem value={null}>
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="Dog">Dog</MenuItem>
-                    <MenuItem value="Cat">Cat</MenuItem>
-                    <MenuItem value="Other">Other</MenuItem>
-                    </Select>
-                </FormControl>
-            </Box>
-
-            {/* Breed Selection */}
-            <Box>
-                <Typography variant="h6" sx={{ marginY: 1 }}>What is your preferred breed?</Typography>
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <InputLabel id="demo-simple-select-helper-label">Breed</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-helper-label"
-                        id="demo-simple-select-helper"
-                        value={breed}
-                        label="Breed"
-                        onChange={handleBreed}
-                    >
-                    <MenuItem value={null}>
-                        <em>None</em>
-                    </MenuItem>
-                    {AnimalBreeds.DOG_BREEDS.map((dogBreed, index) => (
-                        <MenuItem key={index} value={dogBreed}>
-                            {dogBreed}
+                {/* Species Selection */}
+                <Box >
+                    <Typography variant="h6" sx={{ marginY: 1 }}>Select your preferred species:</Typography>
+                    <FormControl sx={{ m: 1, minWidth: 120 }}>
+                        <InputLabel id="demo-simple-select-helper-label">Species</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-helper-label"
+                            id="demo-simple-select-helper"
+                            value={species}
+                            label="Species"
+                            onChange={handleSpecies}
+                        >
+                        <MenuItem value={null}>
+                            <em>None</em>
                         </MenuItem>
-                    ))}
-                    </Select>
-                </FormControl>
+                        <MenuItem value="Dog">Dog</MenuItem>
+                        <MenuItem value="Cat">Cat</MenuItem>
+                        <MenuItem value="Other">Other</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+
+                {/* Breed Selection */}
+                <Box>
+                    <Typography variant="h6" sx={{ marginY: 1 }}>What is your preferred breed?</Typography>
+                    <FormControl sx={{ m: 1, minWidth: 120 }}>
+                        <InputLabel id="demo-simple-select-helper-label">Breed</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-helper-label"
+                            id="demo-simple-select-helper"
+                            value={breed}
+                            label="Breed"
+                            onChange={handleBreed}
+                        >
+                        <MenuItem value={null}>
+                            <em>None</em>
+                        </MenuItem>
+                        {AnimalBreeds.DOG_BREEDS.map((dogBreed, index) => (
+                            <MenuItem key={index} value={dogBreed}>
+                                {dogBreed}
+                            </MenuItem>
+                        ))}
+                        </Select>
+                    </FormControl>
+                </Box>
+
+                {/* Gender Selection */}
+                <Box>
+                    <Typography variant="h6" sx={{ marginY: 1 }}>Gender?</Typography>
+                    <ToggleButtonGroup
+                        value={gender}
+                        exclusive
+                        onChange={handleGender}
+                        aria-label="text alignment"
+                        size='large'
+                        >
+                        <ToggleButton value="Male" aria-label="left aligned">
+                            <MaleIcon />
+                        </ToggleButton>
+                        <ToggleButton value="Female" aria-label="centered">
+                            <FemaleIcon />
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+                </Box>
+
+                {/* Size Selection */}
+                <Box>
+                    <Typography variant="h6" sx={{ marginY: 1 }}>Select your preferred size:</Typography>
+                    <FormControl sx={{ m: 1, minWidth: 120 }}>
+                        <InputLabel id="demo-simple-select-helper-label">Size</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-helper-label"
+                            id="demo-simple-select-helper"
+                            value={size}
+                            label="Szie"
+                            onChange={handleSize}
+                        >
+                        <MenuItem value={null}>
+                            <em>None</em>
+                        </MenuItem>
+                        <MenuItem value="Small">Small</MenuItem>
+                        <MenuItem value="Medium">Medium</MenuItem>
+                        <MenuItem value="Large">Large</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+
+                {/* Age Range Selection */}
+                <Box>
+                    <Typography variant="h6" sx={{ marginY: 1 }}>Select your preferred age range:</Typography>
+                    <Slider
+                    getAriaLabel={() => 'Age range'}
+                    value={age}
+                    min={0}
+                    max={30}
+                    onChange={handleAge}
+                    valueLabelDisplay="auto"
+                    sx={{width: '80%'}}
+                    />
+                </Box>
+
+                <Button onClick={handleSubmit} variant="contained" size='large'>
+                    Set Preferences
+                </Button>
+
+            </Paper>
             </Box>
-
-            {/* Gender Selection */}
-            <Box>
-                <Typography variant="h6" sx={{ marginY: 1 }}>Gender?</Typography>
-                <ToggleButtonGroup
-                    value={gender}
-                    exclusive
-                    onChange={handleGender}
-                    aria-label="text alignment"
-                    size='large'
-                    >
-                    <ToggleButton value="Male" aria-label="left aligned">
-                        <MaleIcon />
-                    </ToggleButton>
-                    <ToggleButton value="Female" aria-label="centered">
-                        <FemaleIcon />
-                    </ToggleButton>
-                </ToggleButtonGroup>
-            </Box>
-
-            {/* Size Selection */}
-            <Box>
-                <Typography variant="h6" sx={{ marginY: 1 }}>Select your preferred size:</Typography>
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <InputLabel id="demo-simple-select-helper-label">Size</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-helper-label"
-                        id="demo-simple-select-helper"
-                        value={size}
-                        label="Szie"
-                        onChange={handleSize}
-                    >
-                    <MenuItem value={null}>
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="Small">Small</MenuItem>
-                    <MenuItem value="Medium">Medium</MenuItem>
-                    <MenuItem value="Large">Large</MenuItem>
-                    </Select>
-                </FormControl>
-            </Box>
-
-            {/* Age Range Selection */}
-            <Box>
-                <Typography variant="h6" sx={{ marginY: 1 }}>Select your preferred age range:</Typography>
-                <Slider
-                getAriaLabel={() => 'Age range'}
-                value={age}
-                min={0}
-                max={30}
-                onChange={handleAge}
-                valueLabelDisplay="auto"
-                sx={{width: '80%'}}
-                />
-            </Box>
-
-            <Button onClick={handleSubmit} variant="contained" size='large'>
-                Set Preferences
-            </Button>
-
-        </Paper>
-        </Box>
-        </>
+        </ProtectedRoute>
     );
 };
 

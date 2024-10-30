@@ -10,14 +10,17 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import axios from 'axios';
 
 const CreateAccountPage = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const router = useRouter();
+  const signIn = useSignIn();
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
+  //Validation requirements
   const validationSchema = yup.object({
     firstName: yup
       .string('Enter your first name')
@@ -44,10 +47,36 @@ const CreateAccountPage = () => {
       .required('Password is required'),
   })
 
-  const handleSubmit = (values) => {
-
+  const login = async (values) => {
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+        axios.post(`${apiBaseUrl}/api/auth/login`, {
+          email: values.email,
+          password: values.password,
+        })
+            .then((res)=>{
+                if(res.status === 200){
+                    if(signIn({
+                        auth: {
+                            token: res.data.accessToken,
+                            type: res.data.tokenType
+                        },
+                        userState: res.data.user
+                    })){
+                      alert("Login Successfull!");
+                      return true;
+                    }else {
+                      alert("Sign In error.");
+                    }
+                }
+            })
+            .catch((err) =>{
+              alert("Login Unsuccessfull!")
+              return false;
+            })
+  };
 
+  const handleSubmit = (values) => {
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
     axios.post(`${apiBaseUrl}/api/auth/register`, {
       firstName: values.firstName,
       lastName: values.lastName,
@@ -57,7 +86,11 @@ const CreateAccountPage = () => {
     })
             .then(response => {
                 alert("Registration successful!");
-                router.push("/");
+                if (login(values)) {
+                  router.push('set-user-preferences');
+                } else {
+                  router.push('/');
+                }
 
             })
             .catch(error => {
