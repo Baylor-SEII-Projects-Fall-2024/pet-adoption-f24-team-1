@@ -12,11 +12,17 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import ImageDropzone from '@/components/image-dropzone';
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function UserProfile() {
   const router = useRouter();
+
+  const navigateTo = (page) => {
+    router.push(page);
+  }
+
 
   // State variables for editing
   const [isEditing, setIsEditing] = useState(false);
@@ -29,7 +35,7 @@ export default function UserProfile() {
   const [imgUrl, setProfilePicture] = useState();
   const [password, setPassword] = useState();
   const [userType, setUserType] = useState();
-
+  const [adoptionCenter, setAdoptionCenter] = useState();
   // State for the modal
   const [openModal, setOpenModal] = useState(false);
 
@@ -46,6 +52,7 @@ export default function UserProfile() {
       setProfilePicture(userFromSessionStorage.imgUrl || '');
       setPassword(userFromSessionStorage.password);
       setUserType(userFromSessionStorage.userType);
+      setAdoptionCenter(userFromSessionStorage.adoptionCenter);
     }
   }, []);
 
@@ -71,6 +78,8 @@ export default function UserProfile() {
   const handleCloseModal = () => {
     setOpenModal(false);
   };
+
+
 
   return (
     <>
@@ -193,12 +202,22 @@ export default function UserProfile() {
                     variant="outlined"
                     startIcon={<EditIcon />}
                     color="primary"
-                    sx={{ position: 'absolute', top: 16, right: 16 }}
+                    sx={{ position: 'absolute', top: 12, right: 16 }}
                     onClick={handleEditProfile}
                   >
                     Edit Profile
                   </Button>
                 )}
+
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  sx={{ position: 'absolute', top: 80, right: 40}}
+                  onClickonClick={() => navigateTo('/adoption-center-profile')}
+                  >
+                  Adoption Center
+                </Button>
+
               </Box>
             </Grid>
           </Grid>
