@@ -52,7 +52,7 @@ const LoginModal = ({ isOpen, onClose }) => {
     e.preventDefault()
     console.log(email);
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
-        axios.post(`${apiBaseUrl}/api/auth/login`, {
+        axios.post(`${apiBaseUrl}/api/auth/login/user`, {
           email: email,
           password: password,
         })

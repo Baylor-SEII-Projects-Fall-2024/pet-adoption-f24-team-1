@@ -49,7 +49,7 @@ const CreateAccountPage = () => {
 
   const login = async (values) => {
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
-        axios.post(`${apiBaseUrl}/api/auth/login`, {
+        axios.post(`${apiBaseUrl}/api/auth/login/user`, {
           email: values.email,
           password: values.password,
         })
@@ -77,7 +77,7 @@ const CreateAccountPage = () => {
 
   const handleSubmit = (values) => {
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
-    axios.post(`${apiBaseUrl}/api/auth/register`, {
+    axios.post(`${apiBaseUrl}/api/auth/register/user`, {
       firstName: values.firstName,
       lastName: values.lastName,
       phone: values.phone,

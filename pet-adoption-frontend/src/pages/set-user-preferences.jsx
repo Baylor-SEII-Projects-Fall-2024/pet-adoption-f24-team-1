@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Button, TextField, Typography, Grid, Paper, IconButton, InputAdornment, Slider } from '@mui/material';
 import { useState } from "react";
 import { useRouter } from 'next/router';
+import dynamic from "next/dynamic";
 import AnimalBreeds from './constants/animal-breeds';
 
 import ToggleButton from '@mui/material/ToggleButton';
@@ -216,4 +217,4 @@ const SetUserPreferencesPage = () => {
     );
 };
 
-export default SetUserPreferencesPage;
+export default dynamic (() => Promise.resolve(SetUserPreferencesPage), {ssr: false})

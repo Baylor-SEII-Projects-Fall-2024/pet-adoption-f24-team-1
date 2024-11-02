@@ -5,7 +5,7 @@ import { useState, useEffect, useStyles } from 'react';
 import Router, { useRouter } from 'next/router';
 import LoginModal from './login-modal';
 import DialogModal from './dialog-modal';
-import Link from 'next/link';
+import dynamic from "next/dynamic";
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import useSignOut from 'react-auth-kit/hooks/useSignOut';
 
@@ -14,7 +14,7 @@ const settings = ['Settings', 'Logout'];
 const loginSettings = ['Login', 'Create Account'];
 
 
-export default function NavBar() {
+function NavBar() {
   const router = useRouter();
   const user = useAuthUser();
   const signOut = useSignOut();
@@ -132,7 +132,7 @@ export default function NavBar() {
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} >
                 {user ? <Avatar>{user.email.substring(0,1)}</Avatar> : <Avatar>?</Avatar>}
               </IconButton>
             </Tooltip>
@@ -174,3 +174,5 @@ export default function NavBar() {
     </>
   );
 }
+
+export default dynamic (() => Promise.resolve(NavBar), {ssr: false})
