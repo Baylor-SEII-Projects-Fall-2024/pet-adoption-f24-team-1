@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -51,8 +52,12 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(
                         loginDTO.getEmail(),
                         loginDTO.getPassword()));
+        // Check in case user logs into an admin account
+        if (authentication.getAuthorities().stream()
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN"))) {
+            return new ResponseEntity<>(new AuthResponseDTO(null, null), HttpStatus.BAD_REQUEST);
+        }
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        System.out.println(authentication.getPrincipal());
         String token = jwtGenerator.generateToken(authentication);
         Optional<User> user = userRepository.findByEmail(loginDTO.getEmail());
 
@@ -64,7 +69,7 @@ public class AuthController {
             userInfo.setBio(user.get().getBio());
             userInfo.setEmail(user.get().getEmail());
             userInfo.setPhone(user.get().getPhone());
-            userInfo.setRole("USER");
+            userInfo.setRole(user.get().getRole());
         }
 
         return new ResponseEntity<>(new AuthResponseDTO(token, userInfo), HttpStatus.OK);
@@ -119,5 +124,33 @@ public class AuthController {
         adminRepository.save(admin);
 
         return  new ResponseEntity<>("Admin registered success!", HttpStatus.OK);
+    }
+
+    @PostMapping("login/admin")
+    public ResponseEntity<AuthResponseDTO> loginAdmin(@RequestBody LoginDTO loginDTO) {
+        System.out.println(1);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginDTO.getEmail(),
+                        loginDTO.getPassword()));
+        // Check in case admin logs into a user account
+        if (authentication.getAuthorities().stream()
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("USER"))) {
+            return new ResponseEntity<>(new AuthResponseDTO(null, null), HttpStatus.BAD_REQUEST);
+        }
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtGenerator.generateToken(authentication);
+        Optional<AdoptionCenterAdmin> admin = adminRepository.findByEmail(loginDTO.getEmail());
+
+        UserDTO userInfo = new UserDTO();
+        if (admin.isPresent()) {
+            userInfo.setId(admin.get().getId());
+            userInfo.setFirstName(admin.get().getFirstName());
+            userInfo.setLastName(admin.get().getLastName());
+            userInfo.setEmail(admin.get().getEmail());
+            userInfo.setRole(admin.get().getRole());
+        }
+
+        return new ResponseEntity<>(new AuthResponseDTO(token, userInfo), HttpStatus.OK);
     }
 }

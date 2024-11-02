@@ -43,6 +43,9 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
+    @Column(nullable = false, updatable = false)
+    private final String role = "USER";
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "preference_id")
     private UserPreference userPreference;
