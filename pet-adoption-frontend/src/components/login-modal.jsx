@@ -8,9 +8,8 @@ import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { useState, useEffect } from "react";
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
-import axios from 'axios';
-import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated'
 import { useRouter } from 'next/router';
+import { loginUser } from "@/auth/authentication";
 
 const LoginModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -33,49 +32,20 @@ const LoginModal = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const signIn = useSignIn();
-  const isAuthenticated = useIsAuthenticated()
   const router = useRouter();
 
   // UI handling
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  const handleMouseUpPassword = (event) => {
-    event.preventDefault();
-  };
-
   // Login api
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    console.log(email);
-    const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
-        axios.post(`${apiBaseUrl}/api/auth/login/user`, {
-          email: email,
-          password: password,
-        })
-            .then((res)=>{
-                if(res.status === 200){
-                    if(signIn({
-                        auth: {
-                            token: res.data.accessToken,
-                            type: res.data.tokenType
-                        },
-                        userState: res.data.user
-                    })){
-                      setError(false);
-                      alert("Login Successfull!");
-                      router.push('/user-home');
-                    }else {
-                      alert("Sign In error.");
-                    }
-                }
-            })
-            .catch((err) =>{
-              setError(true);
-            })
+    e.preventDefault();
+    try {
+      const result = await loginUser(email, password, signIn);
+      router.push("/user-home");
+    } catch (error) {
+      setError(true);
+    }
   };
 
   return (

@@ -138,11 +138,12 @@ const AdoptionCenterRegisterPage = () => {
 
         const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
     
-        axios.post(`${apiBaseUrl}/api/admins/${centerId}`, {
+        axios.post(`${apiBaseUrl}/api/auth/register/admin`, {
           firstName: firstName,
           lastName: lastName,
           email: email,
           password: password,
+          centerId: centerId,
         })
                 .then(response => {
                     alert("Registration successful!");

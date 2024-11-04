@@ -18,7 +18,7 @@ import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import axios from 'axios';
-import ProtectedRoute from '@/components/protected-route';
+import ProtectedUserRoute from '@/components/protected-user-route';
 
 const SetUserPreferencesPage = () => {
     const router = useRouter();
@@ -74,7 +74,7 @@ const SetUserPreferencesPage = () => {
 };
 
     return (
-        <ProtectedRoute>
+        <ProtectedUserRoute>
             <Box
             sx={{
                 height: '100vh',
@@ -213,7 +213,7 @@ const SetUserPreferencesPage = () => {
 
             </Paper>
             </Box>
-        </ProtectedRoute>
+        </ProtectedUserRoute>
     );
 };
 

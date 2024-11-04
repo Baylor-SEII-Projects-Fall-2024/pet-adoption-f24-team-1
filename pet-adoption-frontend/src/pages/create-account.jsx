@@ -11,6 +11,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
+import { registerUser, loginUser } from '@/auth/authentication';
 import axios from 'axios';
 
 const CreateAccountPage = () => {
@@ -47,55 +48,20 @@ const CreateAccountPage = () => {
       .required('Password is required'),
   })
 
-  const login = async (values) => {
-    const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
-        axios.post(`${apiBaseUrl}/api/auth/login/user`, {
-          email: values.email,
-          password: values.password,
-        })
-            .then((res)=>{
-                if(res.status === 200){
-                    if(signIn({
-                        auth: {
-                            token: res.data.accessToken,
-                            type: res.data.tokenType
-                        },
-                        userState: res.data.user
-                    })){
-                      alert("Login Successfull!");
-                      return true;
-                    }else {
-                      alert("Sign In error.");
-                    }
-                }
-            })
-            .catch((err) =>{
-              alert("Login Unsuccessfull!")
-              return false;
-            })
-  };
-
-  const handleSubmit = (values) => {
-    const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
-    axios.post(`${apiBaseUrl}/api/auth/register/user`, {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      phone: values.phone,
-      email: values.email,
-      password: values.password,
-    })
-            .then(response => {
-                alert("Registration successful!");
-                if (login(values)) {
-                  router.push('set-user-preferences');
-                } else {
-                  router.push('/');
-                }
-
-            })
-            .catch(error => {
-                alert("Registration failed: " + error.message);
-            });
+  const handleSubmit = async (values) => {
+    try {
+      const response = await registerUser(values);
+      alert("Registration success!");
+      // login user if registered
+      try {
+        const result = await loginUser(values.email, values.password, signIn);
+        router.push("/user-home");
+      } catch (error) {
+        alert("Login failed: " + error.message);
+      }
+    } catch (error) {
+      formik.setFieldError('email', "This email is already registered");
+    }
   };
 
   const formik = useFormik({
