@@ -5,24 +5,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import petadoption.api.pet.Pet;
-import petadoption.api.user.LoginDTO;
 import petadoption.api.user.User;
-import petadoption.api.user.UserDTO;
 import petadoption.api.user.UserService;
+import petadoption.api.userpreference.UserPreference;
 
 import java.util.*;
 
 @Log4j2
 @RestController
+@RequestMapping("/api/users")
 @CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public User findUserById(@PathVariable Long id) {
         var user = userService.findUser(id).orElse(null);
 
@@ -33,14 +31,8 @@ public class UserController {
         return user;
     }
 
-    @PostMapping("/users")
-    public User saveUser(@RequestBody User user) {
-        System.out.println("in here");
-        return userService.saveUser(user);
-    }
-
     @CrossOrigin(origins = "http://localhost:3000")
-    @PutMapping("/api/update-profile")
+    @PutMapping
     public ResponseEntity<User> updateUser(@RequestBody User updatedUser) {
         log.info("Updating user: {}", updatedUser); // Log the incoming User object
         Optional<User> userOptional = userService.findUser(updatedUser.getId());
@@ -50,7 +42,8 @@ public class UserController {
         }
 
         User user = userOptional.get();
-        user.setName(updatedUser.getName());
+        user.setFirstName(updatedUser.getFirstName());
+        user.setLastName(updatedUser.getLastName());
         user.setBio(updatedUser.getBio());
         user.setEmail(updatedUser.getEmail());
         user.setPhone(updatedUser.getPhone());
@@ -61,21 +54,24 @@ public class UserController {
         return new ResponseEntity<>(savedUser, HttpStatus.OK);
     }
 
+    @PutMapping("/{userId}/preferences")
+    public ResponseEntity<String> updateUserPreferences(
+            @PathVariable Long userId,
+            @RequestBody UserPreference userPreference) {
+
+        User updatedUser = userService.updateUserPreferences(userId, userPreference);
+        return new ResponseEntity<>("User preference update success!", HttpStatus.OK);
+    }
+
     @GetMapping("/allusers")
     public List<User> getAllUsers() {
         return userService.findAllUsers();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/api/register")
-    public ResponseEntity<User> register(@RequestBody UserDTO userDTO) {
-        return ResponseEntity.ok(userService.register(userDTO));
-    }
-
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/api/login")
-    public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO) {
-        return ResponseEntity.ok(userService.login(loginDTO));
-    }
+//    @CrossOrigin(origins = "http://localhost:3000")
+//    @PostMapping("/api/register")
+//    public ResponseEntity<User> register(@RequestBody UserDTO userDTO) {
+//        return ResponseEntity.ok(userService.register(userDTO));
+//    }
 }
 

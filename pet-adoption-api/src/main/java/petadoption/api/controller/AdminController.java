@@ -10,7 +10,7 @@ import petadoption.api.adoptioncenter.AdoptionCenterRepository;
 import petadoption.api.adoptioncenteradmin.AdoptionCenterAdmin;
 import petadoption.api.adoptioncenteradmin.AdoptionCenterAdminRepository;
 import petadoption.api.adoptioncenteradmin.AdoptionCenterAdminService;
-import petadoption.api.user.LoginDTO;
+import petadoption.api.dto.LoginDTO;
 
 import java.util.List;
 

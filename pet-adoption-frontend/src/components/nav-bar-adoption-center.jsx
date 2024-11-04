@@ -6,6 +6,8 @@ import Router, { useRouter } from 'next/router';
 import LoginModal from './login-modal';
 import DialogModal from './dialog-modal';
 import Link from 'next/link';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
+import useSignOut from 'react-auth-kit/hooks/useSignOut';
 
 const pages = ['Manage Pets', 'Manage Events', 'Profile'];
 const settings = ['Settings', 'Logout'];
@@ -14,9 +16,10 @@ const loginSettings = ['Login', 'Create Account'];
 
 export default function NavBar() {
   const router = useRouter();
+  const user = useAuthUser();
+  const signOut = useSignOut();
   
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [user, setUser] = useState(null);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
 
@@ -69,15 +72,6 @@ export default function NavBar() {
     }
     
   };
-
-  useEffect(() => {
-    const userFromLocalStorage = JSON.parse(sessionStorage.getItem('user'));
-    if (userFromLocalStorage) {
-      setUser(userFromLocalStorage);
-    } else {
-      setUser(null);
-    }
-  }, []);
 
   return (
     <>

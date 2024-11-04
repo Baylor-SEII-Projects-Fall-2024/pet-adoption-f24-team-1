@@ -9,34 +9,27 @@ import HomeIcon from '@mui/icons-material/Home';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import axios from 'axios';
+import { loginAdmin } from '@/auth/authentication';
+import useSignIn from 'react-auth-kit/hooks/useSignIn';
 
 const AdoptionCenterLoginPage = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const signIn = useSignIn();
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
-
-    axios.post(`${apiBaseUrl}/api/admins`, {
-      username: email,
-      password: password,
-    })
-            .then(response => {
-                alert("Login successful!");
-                sessionStorage.setItem('user', JSON.stringify(response.data)); // Store user data in session storage
-                // Go to Home Page
-                router.push("/");
-            })
-            .catch(error => {
-                alert("Login failed: " + error.message);
-            });
+    try {
+      const result = await loginAdmin(email, password, signIn);
+      alert("Admin login success!");
+      router.push("/adoption-center-home");
+    } catch(error) {
+      alert("Login failed: " + error.message);
+    }
   }
 
   return (
