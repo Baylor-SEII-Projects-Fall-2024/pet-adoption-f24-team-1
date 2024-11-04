@@ -8,10 +8,13 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import axios from 'axios';
+import { loginAdmin, registerAdmin } from '@/auth/authentication';
+import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import Autocomplete, { usePlacesWidget } from "react-google-autocomplete";
 
 const AdoptionCenterRegisterPage = () => {
     const router = useRouter();
+    const signIn = useSignIn();
 
     // Adoption Center form use states
     const [isAdoptionCenterFormVisible, setIsAdoptionCenterFormVisible] = useState(true);
@@ -112,53 +115,50 @@ const AdoptionCenterRegisterPage = () => {
         }
     };
 
-    const registerAdoptionCenter = (e) => {
-        e.preventDefault();
-
+    const registerAdoptionCenter = async () => {
         const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
     
-        axios.post(`${apiBaseUrl}/api/adoptioncenters`, {
-          centerName: adoptionCenterName,
-          centerAddress: adoptionCenterLocation,
-          centerPhone: adoptionCenterPhone,
-          centerEmail: adoptionCenterEmail,
-        })
-                .then(response => {
-                    alert("Adoption Center Registration successful!");
-                    registerAdmin(e, response.data.centerId);
-    
-                })
-                .catch(error => {
-                    alert("Adoption Center Registration failed: " + error.message);
+        try {
+            const response = await axios.post(`${apiBaseUrl}/api/adoptioncenters`, {
+                centerName: adoptionCenterName,
+                centerAddress: adoptionCenterLocation,
+                centerPhone: adoptionCenterPhone,
+                centerEmail: adoptionCenterEmail,
+            });
+            alert("Adoption Center Registration successful!");
+            console.log(response.data.centerId);
+            return response.data.centerId;
+        } catch (error) {
+            alert("Adoption Center Registration failed: " + error.message);
+            return -1;
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const centerId = await registerAdoptionCenter();
+        console.log(centerId);
+        if (centerId !== -1) {
+            try {
+                const response = await registerAdmin({
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    password: password,
+                    centerId: centerId,
                 });
-    }
-
-    const registerAdmin = (e, centerId) => {
-        e.preventDefault();
-
-        const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
-    
-        axios.post(`${apiBaseUrl}/api/auth/register/admin`, {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: password,
-          centerId: centerId,
-        })
-                .then(response => {
-                    alert("Registration successful!");
-                    sessionStorage.setItem('user', JSON.stringify(response.data)); // Store user data in session storage
-                    // Go to home page
+                alert("Registration success!");
+                // Login if registered
+                try {
+                    const result = await loginAdmin(email, password, signIn);
                     router.push("/adoption-center-home");
-    
-                })
-                .catch(error => {
-                    alert("Registration failed: " + error.message);
-                });
-    }
-
-    const handleSubmit = (e) => {
-        registerAdoptionCenter(e);
+                } catch (error) {
+                    alert("Admin login failed: " + error.message);
+                }
+            } catch (error) {
+                alert("Admin register failed: " + error.message);
+            }
+        }
       };
 
     return (

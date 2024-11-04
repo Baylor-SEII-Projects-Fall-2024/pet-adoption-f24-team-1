@@ -48,6 +48,7 @@ const CreateAccountPage = () => {
       .required('Password is required'),
   })
 
+  // Handle register
   const handleSubmit = async (values) => {
     try {
       const response = await registerUser(values);
@@ -55,7 +56,7 @@ const CreateAccountPage = () => {
       // login user if registered
       try {
         const result = await loginUser(values.email, values.password, signIn);
-        router.push("/user-home");
+        router.push("/set-user-preferences");
       } catch (error) {
         alert("Login failed: " + error.message);
       }
