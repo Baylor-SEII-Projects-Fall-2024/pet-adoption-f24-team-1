@@ -1247,3 +1247,36 @@ java.lang.IllegalArgumentException: Can not set long field petadoption.api.adopt
 2024-10-24T13:09:31.512-05:00  INFO 46448 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-10-24T13:09:31.522-05:00  INFO 46448 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-10-24T13:09:31.544-05:00  INFO 46448 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-11-01T14:37:05.188-05:00  INFO 9264 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 21.0.1 with PID 9264 (/Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by noahcaldwell in /Users/noahcaldwell/Fall2024Classes/SoftwareEngineering2/pet-adoption-f24-team-1)
+2024-11-01T14:37:05.192-05:00  INFO 9264 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-11-01T14:37:05.947-05:00  INFO 9264 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-01T14:37:05.990-05:00  INFO 9264 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 37 ms. Found 8 JPA repository interfaces.
+2024-11-01T14:37:06.325-05:00  INFO 9264 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-11-01T14:37:06.335-05:00  INFO 9264 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-01T14:37:06.335-05:00  INFO 9264 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-11-01T14:37:06.367-05:00  INFO 9264 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-01T14:37:06.367-05:00  INFO 9264 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1094 ms
+2024-11-01T14:37:06.429-05:00  INFO 9264 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-01T14:37:06.697-05:00  INFO 9264 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@17216605
+2024-11-01T14:37:06.698-05:00  INFO 9264 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-01T14:37:06.757-05:00  INFO 9264 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-01T14:37:06.797-05:00  INFO 9264 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-11-01T14:37:06.821-05:00  INFO 9264 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-01T14:37:07.052-05:00  INFO 9264 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-01T14:37:07.794-05:00  INFO 9264 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-01T14:37:07.889-05:00  INFO 9264 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-01T14:37:08.063-05:00  INFO 9264 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-01T14:37:08.535-05:00  WARN 9264 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-01T14:37:08.783-05:00  INFO 9264 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-11-01T14:37:08.790-05:00  INFO 9264 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 4.389 seconds (process running for 5.285)
+2024-11-01T14:38:20.244-05:00  INFO 9264 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-01T14:38:20.245-05:00  INFO 9264 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-11-01T14:38:20.250-05:00  INFO 9264 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2024-11-01T14:38:20.488-05:00 DEBUG 9264 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select u1_0.user_id,u1_0.bio,u1_0.email,u1_0.img_urg,u1_0.location,u1_0.name,u1_0.password,u1_0.phone,u1_0.user_type from users u1_0 where u1_0.email=?
+2024-11-01T14:38:20.556-05:00 DEBUG 9264 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select next_val as id_val from users_sequence for update
+2024-11-01T14:38:20.570-05:00 DEBUG 9264 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : update users_sequence set next_val= ? where next_val=?
+2024-11-01T14:38:20.593-05:00 DEBUG 9264 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : insert into users (bio,email,img_urg,location,name,password,phone,user_type,user_id) values (?,?,?,?,?,?,?,?,?)
+2024-11-01T14:38:49.334-05:00 DEBUG 9264 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select u1_0.user_id,u1_0.bio,u1_0.email,u1_0.img_urg,u1_0.location,u1_0.name,u1_0.password,u1_0.phone,u1_0.user_type from users u1_0 where u1_0.email=?
+2024-11-01T14:45:48.077-05:00  INFO 9264 --- [http-nio-8080-exec-7] p.api.controller.UserController          : Updating user: User(id=2, name=, bio=, email=noahiancaldwell@gmail.com, phone=, location=, imgUrl=, password=Debob5114?!, userType=null)
+2024-11-01T14:45:48.101-05:00 DEBUG 9264 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : select u1_0.user_id,u1_0.bio,u1_0.email,u1_0.img_urg,u1_0.location,u1_0.name,u1_0.password,u1_0.phone,u1_0.user_type from users u1_0 where u1_0.user_id=?
+2024-11-01T14:45:48.115-05:00 DEBUG 9264 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : update users set bio=?,email=?,img_urg=?,location=?,name=?,password=?,phone=?,user_type=? where user_id=?

@@ -213,7 +213,7 @@ export default function UserProfile() {
                   variant="outlined"
                   color="primary"
                   sx={{ position: 'absolute', top: 80, right: 40}}
-                  onClickonClick={() => navigateTo('/adoption-center-profile')}
+                  onClickonClick={() => navigateTo('/')}
                   >
                   Adoption Center
                 </Button>
