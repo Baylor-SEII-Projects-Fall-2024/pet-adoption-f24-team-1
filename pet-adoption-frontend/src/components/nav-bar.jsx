@@ -10,7 +10,7 @@ import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import useSignOut from 'react-auth-kit/hooks/useSignOut';
 
 const pages = ['Centers', 'Matches'];
-const settings = ['Settings', 'Logout'];
+const settings = ['Settings', 'Logout', 'Pet Adoption Forms'];
 const loginSettings = ['Login', 'Create Account'];
 
 
@@ -71,6 +71,8 @@ function NavBar() {
     if(nav === 'Matches')  {
       router.push('/user-home/matches');
     }
+    if(nav == 'Pet Adoption Forms')
+      router.push('/api/pet-adoption-forms');
   };
 
   return (

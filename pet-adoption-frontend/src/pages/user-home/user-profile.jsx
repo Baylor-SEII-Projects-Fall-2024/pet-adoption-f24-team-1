@@ -208,16 +208,6 @@ export default function UserProfile() {
                     Edit Profile
                   </Button>
                 )}
-
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  sx={{ position: 'absolute', top: 80, right: 40}}
-                  onClickonClick={() => navigateTo('/')}
-                  >
-                  Adoption Center
-                </Button>
-
               </Box>
             </Grid>
           </Grid>
