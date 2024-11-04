@@ -15,6 +15,7 @@ export default function UserHome() {
   const router = useRouter();
 
   const [user, setUser] = useState(null);
+  const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [pets, setPets] = useState([]);
 
   // Filters
@@ -33,6 +34,32 @@ export default function UserHome() {
       (genderFltr.length == 2 || genderFltr.length == 0 ? true : pet.petGender == genderFltr[0])
     );
   }
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+
+  // Get location of user
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+        console.log(position.coords.latitude)
+      },
+        (error) => console.log(error.message)
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser");
+    }
+  }, []);
+
 
   useEffect(() => {
     const userFromLocalStorage = JSON.parse(sessionStorage.getItem('user'));
@@ -116,7 +143,7 @@ export default function UserHome() {
             <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2}>
               {pets.filter(filters).map((pet) => (
                 <Grid item>
-                  <PetCard key={pet.petID} pet={pet} location={{adoptionCenter: 'Home Free', address: '111 Drive Street, Waco, TX 76706'}} user={user} liked={false}/>
+                  <PetCard key={pet.petID} pet={pet} user={user} liked={false} location={location} />
                 </Grid>
               ))}
             </Grid>

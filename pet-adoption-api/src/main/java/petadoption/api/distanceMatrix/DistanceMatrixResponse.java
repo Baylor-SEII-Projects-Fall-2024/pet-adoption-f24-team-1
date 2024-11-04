@@ -1,4 +1,4 @@
-package petadoption.api.DistanceMatrix;
+package petadoption.api.distanceMatrix;
 import java.util.List;
 
 public class DistanceMatrixResponse {

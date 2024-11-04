@@ -50,11 +50,11 @@ export default function PetInfoModal(props) {
 
             <Box component="img" sx={{ width: 350, height: 250, objectFit: "cover"}} src={props.pet.imgUrl} alt="pet image"/>
 
-            <Typography variant="h6" component="h2">
+            <Typography variant="h4" component="h2" sx={{ mt: 1}}>
               {props.pet.petName}
             </Typography>
 
-            <Typography sx={{ mt: 1 }}>
+            <Typography align="center" sx={{ mt: 1 }}>
               {props.pet.petName} is a {props.pet.color} {props.pet.petGender} {props.pet.petBreed}, weighing approximately {props.pet.petWeight} kilograms. {props.pet.petGender === 'Male' ? 'He' : 'She'} has a sweet personality and is waiting for the perfect family to provide lots of love and care.
             </Typography>
             
@@ -63,7 +63,7 @@ export default function PetInfoModal(props) {
               <Button variant="contained" sx={{ fontSize: '20px' }} onClick={() => handleAdopt()} startIcon={<VolunteerActivismIcon/>}>Adopt {props.pet.petName}</Button>
             </Box>
 
-            <Box display="flex" justifyContent="flex-end" alignItems="flex-end" sx={{ mt: 2, width: '90%'}}>
+            <Box display="flex" justifyContent="flex-end" alignItems="flex-end" sx={{ mt: 0, width: '90%'}}>
               <Button onClick={props.handleClose}>Close</Button>
             </Box>
 

@@ -1,17 +1,16 @@
 package petadoption.api.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import petadoption.api.DistanceMatrix.DistanceMatrixResponse;
+import petadoption.api.distanceMatrix.DistanceMatrixResponse;
 
 @CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
 @RestController
 @RequestMapping("api/distance")
 public class DistanceMatrixController {
 
-    private final String GOOGLE_API_KEY = "GOOGLE KEY"; // Replace with your API Key
+    private final String GOOGLE_API_KEY = "Google API"; // Replace with your API Key
 
     @GetMapping
     public ResponseEntity<Integer> getDistance(@RequestParam String origin, @RequestParam String destination) {

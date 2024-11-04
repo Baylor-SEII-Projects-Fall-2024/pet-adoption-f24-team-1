@@ -1,4 +1,4 @@
-package petadoption.api.RecommendationEngine;
+package petadoption.api.recommendationEngine;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,13 +31,13 @@ public class RecommendationEngineService {
         List<AttributeFrequency> speciesFrequency = recommendationEngineRepository.findSpeciesFrequency(userID);
         List<AttributeFrequency> breedFrequency = recommendationEngineRepository.findBreedFrequency(userID);
 
-        // Initialize initial scores
-        int speciesPoints = TOP_SPECIES_SCORE;
-        int breedPoints = TOP_BREED_SCORE;
 
         // Loop through each pet and score it
         for(Pet pet : pets)  {
+            // Set initial scores
             int score = 0;
+            int speciesPoints = TOP_SPECIES_SCORE;
+            int breedPoints = TOP_BREED_SCORE;
             // Check species for points
             for(AttributeFrequency attributeFrequency : speciesFrequency)  {
                 if(pet.getPetSpecies().equals(attributeFrequency.getAttribute())) {
@@ -48,7 +48,7 @@ public class RecommendationEngineService {
             }
             // Check breed for points
             for(AttributeFrequency attributeFrequency : breedFrequency)  {
-                if(pet.getPetSpecies().equals(attributeFrequency.getAttribute())) {
+                if(pet.getPetBreed().equals(attributeFrequency.getAttribute())) {
                     score += breedPoints;
                     break;
                 }
@@ -59,11 +59,14 @@ public class RecommendationEngineService {
             petScores.put(pet, score);
         }
 
+        for(Map.Entry<Pet,Integer> entry : petScores.entrySet()) {
+            System.out.println("Name = " + entry.getKey().getPetName() + ", Score = " + entry.getValue());
+        }
+
         List<Pet> recommendedPets = petScores.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .map(Map.Entry::getKey)
                 .toList();
-
 
         return recommendedPets;
     }

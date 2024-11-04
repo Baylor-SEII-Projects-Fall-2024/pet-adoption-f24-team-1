@@ -2,7 +2,7 @@ package petadoption.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import petadoption.api.RecommendationEngine.RecommendationEngineService;
+import petadoption.api.recommendationEngine.RecommendationEngineService;
 import petadoption.api.pet.Pet;
 
 import java.util.List;
@@ -15,8 +15,8 @@ public class RecommendationEngineController {
     @Autowired
     private RecommendationEngineService recommendationEngineService;
 
-    @GetMapping
-    List<Pet> getRecommendedPets(@RequestParam Long userID)  {
-        return recommendationEngineService.recommendationAlgorithm(userID);
+    @GetMapping(value = "/{id}")
+    List<Pet> getRecommendedPets(@PathVariable Long id)  {
+        return recommendationEngineService.recommendationAlgorithm(id);
     }
 }

@@ -1,6 +1,6 @@
-package petadoption.api.DistanceMatrix;
+package petadoption.api.distanceMatrix;
 
-public class Duration {
+public class Distance {
     private String text;
     private int value;
 

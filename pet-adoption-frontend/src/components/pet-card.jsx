@@ -67,7 +67,7 @@ export default function PetCard(props) {
     }
   }
   
-  /*
+  
   useEffect(() => {
     axios.get(`${apiBaseUrl}/api/adoptioncenters/` + props.pet.centerID)
     .then(response => {
@@ -76,7 +76,7 @@ export default function PetCard(props) {
       // Get distance from location to adoption center
       axios.get(`${apiBaseUrl}/api/distance`, { 
         params: {
-          origin: "1311 S 5th St, Waco, TX 76706",
+          origin: props.location.latitude + ', ' + props.location.longitude,
           destination: response.data.centerAddress
         }
       })
@@ -92,8 +92,7 @@ export default function PetCard(props) {
       console.error('Error fetching adoption center:', error);
     });
   }, []);
-  */
-
+  
   
   return (
     <Box>

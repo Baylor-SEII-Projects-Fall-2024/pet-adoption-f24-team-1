@@ -1,4 +1,4 @@
-package petadoption.api.DistanceMatrix;
+package petadoption.api.distanceMatrix;
 
 public class Element {
     private Distance distance;
