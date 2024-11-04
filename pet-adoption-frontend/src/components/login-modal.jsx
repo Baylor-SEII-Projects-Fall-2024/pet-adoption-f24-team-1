@@ -7,7 +7,9 @@ import PetsIcon from '@mui/icons-material/Pets';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { useState, useEffect } from "react";
-import axios from 'axios';
+import useSignIn from 'react-auth-kit/hooks/useSignIn';
+import { useRouter } from 'next/router';
+import { loginUser } from "@/auth/authentication";
 
 const LoginModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -28,38 +30,22 @@ const LoginModal = ({ isOpen, onClose }) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const signIn = useSignIn();
+  const router = useRouter();
 
   // UI handling
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  const handleMouseUpPassword = (event) => {
-    event.preventDefault();
-  };
-
   // Login api
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
-
-    axios.post(`${apiBaseUrl}/api/login`, {
-      username: email,
-      password: password,
-    })
-            .then(response => {
-                alert("Login successful!");
-                console.log(response.data); // Handle authentication state here
-                sessionStorage.setItem('user', JSON.stringify(response.data)); // Store user data in session storage
-                // Reload page
-                window.location.reload();
-            })
-            .catch(error => {
-                alert("Login failed: " + error.message);
-            });
+    try {
+      const result = await loginUser(email, password, signIn);
+      router.push("/user-home");
+    } catch (error) {
+      setError(true);
+    }
   };
 
   return (
@@ -69,7 +55,6 @@ const LoginModal = ({ isOpen, onClose }) => {
       aria-labelledby="login-modal-title"
       aria-describedby="login-modal-description"
       sx={{
-        border: "solid black 2px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center"
@@ -120,6 +105,7 @@ const LoginModal = ({ isOpen, onClose }) => {
               variant="outlined"
               fullWidth
               required
+              error={error}
               sx={{ marginBottom: 2 }}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -131,7 +117,7 @@ const LoginModal = ({ isOpen, onClose }) => {
               type={showPassword ? 'text' : 'password'}
               fullWidth
               required
-              sx={{ marginBottom: 3 }}
+              error={error}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -146,8 +132,11 @@ const LoginModal = ({ isOpen, onClose }) => {
               }}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {error && (
+              <Typography variant="body2" color="red" sx={{ textAlign: "start", marginTop: 1 }}>The email or password is incorrect.</Typography>
+            )}
 
-            <Button type="submit" variant="contained" fullWidth>
+            <Button type="submit" variant="contained" fullWidth sx={{ marginTop: 3 }}>
               Log In
             </Button>
           </form>

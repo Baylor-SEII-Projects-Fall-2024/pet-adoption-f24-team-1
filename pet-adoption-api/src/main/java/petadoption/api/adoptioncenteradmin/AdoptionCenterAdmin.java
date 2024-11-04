@@ -27,9 +27,11 @@ public class AdoptionCenterAdmin {
     @Column(name = "PASSWORD")
     private String password;
 
+    @Column(nullable = false, updatable = false)
+    private final String role = "ADMIN";
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "center_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private AdoptionCenter adoptionCenter;
 }

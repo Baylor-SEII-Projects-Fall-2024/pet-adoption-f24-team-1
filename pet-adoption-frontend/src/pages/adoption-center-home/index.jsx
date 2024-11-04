@@ -4,6 +4,7 @@ import { Button, Box, CardContent, Stack, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import styles from '@/styles/Home.module.css'
 import NavBar from '@/components/nav-bar-adoption-center';
+import ProtectedAdminRoute from '@/components/protected-admin-route';
 
 
 export default function AdoptionCenterHome() {
@@ -14,7 +15,7 @@ export default function AdoptionCenterHome() {
   }
 
   return (
-    <>
+    <ProtectedAdminRoute>
       <Head>
         <title>Adoption Center Home</title>
       </Head>
@@ -51,6 +52,6 @@ export default function AdoptionCenterHome() {
 
         </Stack>
       </main>
-    </>
+    </ProtectedAdminRoute>
   );
 }

@@ -2,6 +2,7 @@ package petadoption.api.user;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import petadoption.api.userpreference.UserPreference;
 
 @Data
 @Entity
@@ -16,30 +17,37 @@ public class User {
             sequenceName = TABLE_NAME + "_SEQUENCE"
     )
     @Column(name = "USER_ID")
-    Long id;
+    private Long id;
 
-    @Column(name = "NAME")
-    String name;
+    @Column(name = "FIRST_NAME")
+    private String firstName;
+
+    @Column(name = "LAST_NAME")
+    private String lastName;
 
     @Column(name = "BIO")
-    String bio;
+    private String bio;
 
     @Column(name = "EMAIL")
-    String email;
+    private String email;
 
     @Column(name = "PHONE")
-    String phone;
+    private String phone;
 
     @Column(name = "LOCATION")
-    String location;
+    private String location;
 
     @Column(name = "IMG_URG")
-    String imgUrl;
+    private String imgUrl;
 
     @Column(name = "PASSWORD")
-    String password;
+    private String password;
 
-    @Column(name = "USER_TYPE")
-    String userType;
+    @Column(nullable = false, updatable = false)
+    private final String role = "USER";
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "preference_id")
+    private UserPreference userPreference;
 
 }
