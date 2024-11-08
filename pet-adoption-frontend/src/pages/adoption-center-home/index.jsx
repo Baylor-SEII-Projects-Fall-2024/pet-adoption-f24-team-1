@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { Button, Box, CardContent, Stack, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import styles from '@/styles/Home.module.css'
-import NavBar from '@/components/nav-bar-adoption-center';
+import NavBar from '@/components/nav-bar';
 import ProtectedAdminRoute from '@/components/protected-admin-route';
 
 

@@ -1,28 +1,39 @@
 import * as React from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Stack } from '@mui/material';
 import PetsIcon from '@mui/icons-material/Pets';
-import { useState, useEffect, useStyles } from 'react';
-import Router, { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import LoginModal from './login-modal';
-import DialogModal from './dialog-modal';
+import DialogModal from './dialog-modal'
+import Badge from '@mui/material/Badge';;
 import dynamic from "next/dynamic";
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import useSignOut from 'react-auth-kit/hooks/useSignOut';
+import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated'
 
-const pages = ['Centers', 'Matches'];
+const adminPages = ['Manage Pets', 'Manage Events', 'Profile'];
+const defaultPages = ['Centers', 'Matches'];
 const settings = ['Settings', 'Logout'];
 const loginSettings = ['Login', 'Create Account'];
 
 
 function NavBar() {
   const router = useRouter();
+  const isAuthenticated = useIsAuthenticated()
   const user = useAuthUser();
   const signOut = useSignOut();
   
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false); // Track mount status
+  //const [pages, setPages] = useState(defaultPages);
+  const [notificationCount, setNotificationCount] = useState(3);
 
+  useEffect(() => {
+    setIsMounted(true); // Indicate component is mounted
+  }, []);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -71,7 +82,12 @@ function NavBar() {
     if(nav === 'Matches')  {
       router.push('/user-home/matches');
     }
+    if(nav === 'Notifications') {
+      router.push('/adoption-center-home/notifications');
+    }
   };
+
+  const pages = isAuthenticated && user?.role === "ADMIN" ? adminPages : defaultPages;
 
   return (
     <>
@@ -120,7 +136,7 @@ function NavBar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {isMounted && pages.map((page) => ( // Only render paged is mounted
               <Button
                 key={page}
                 onClick={() => handleNav(page)}
@@ -131,6 +147,11 @@ function NavBar() {
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
+            <IconButton color="inherit" size='large' onClick={() => handleNav('Notifications')}>
+              <Badge badgeContent={notificationCount} color="error">
+                <NotificationsNoneOutlinedIcon />
+              </Badge>
+            </IconButton>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} >
                 {user ? <Avatar>{user.email.substring(0,1)}</Avatar> : <Avatar>?</Avatar>}
