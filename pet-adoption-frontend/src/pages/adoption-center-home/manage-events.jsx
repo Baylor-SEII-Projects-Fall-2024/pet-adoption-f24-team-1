@@ -7,7 +7,7 @@ import { DataGrid} from '@mui/x-data-grid';
 import { useRef,useEffect, useState } from 'react'
 import axios from 'axios';
 import { useRouter } from 'next/router'
-import NavBar from '@/components/nav-bar-adoption-center';
+import NavBar from '@/components/nav-bar';
 
 
 

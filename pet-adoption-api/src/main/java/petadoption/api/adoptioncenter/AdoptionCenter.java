@@ -1,11 +1,14 @@
 package petadoption.api.adoptioncenter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import petadoption.api.adoptioncenteradmin.AdoptionCenterAdmin;
+import petadoption.api.notification.Notification;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,4 +30,11 @@ public class AdoptionCenter {
 
     @Column(name = "center_email")
     private String centerEmail;
+
+    @Column(name = "zip_code")
+    private long zipCode;
+
+    @OneToMany(mappedBy = "adoptionCenter", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Notification> notifications = new ArrayList<>();
 }

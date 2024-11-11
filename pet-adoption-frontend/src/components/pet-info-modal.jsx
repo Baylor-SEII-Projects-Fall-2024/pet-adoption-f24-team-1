@@ -27,7 +27,10 @@ export default function PetInfoModal(props) {
   const router = useRouter();
 
   const handleAdopt = () => {
-    router.push('/pet-adoption-form');
+    router.push({
+      pathname: '/pet-adoption-form',
+      query: { petId: props.pet.petID },
+    });
   }
   
   return (
