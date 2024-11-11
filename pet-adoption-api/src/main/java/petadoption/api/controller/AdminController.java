@@ -15,7 +15,7 @@ import petadoption.api.dto.LoginDTO;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://34.133.251.138:3000"})
 @RequestMapping("/api/admins")
 public class AdminController {
 
@@ -30,15 +30,5 @@ public class AdminController {
     @GetMapping("/center/{adminId}")
     public ResponseEntity<AdoptionCenter> getAdoptionCenter(@PathVariable(value = "adminId") Long adminId)  {
         return adminService.getAdoptionCenter(adminId);
-    }
-
-    @PostMapping("/{centerId}")
-    public ResponseEntity<AdoptionCenterAdmin> registerAdmin(@PathVariable(value = "centerId") Long centerId, @RequestBody AdoptionCenterAdmin adminRequest) {
-        return adminService.registerAdmin(centerId, adminRequest);
-    }
-
-    @PostMapping
-    public ResponseEntity<AdoptionCenterAdmin> loginAdmin(@RequestBody LoginDTO loginDTO) {
-        return ResponseEntity.ok(adminService.loginAdmin(loginDTO));
     }
 }

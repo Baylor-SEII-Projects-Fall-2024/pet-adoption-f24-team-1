@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Log4j2
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "http://34.133.251.138:3000"})
 @RequestMapping("/api/matches")
 @RestController
 public class MatchController {
