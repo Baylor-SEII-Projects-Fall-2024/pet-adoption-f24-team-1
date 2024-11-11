@@ -58,7 +58,7 @@ class EventServiceTest {
         event.setEventID(eventId);
         when(eventRepository.findById(eventId)).thenReturn(Optional.of(event));
 
-        Optional<Event> foundEvent = eventService.findEventById(eventId);
+        Optional<Event> foundEvent = Optional.ofNullable(eventService.findEventById(eventId));
         assertTrue(foundEvent.isPresent());
         assertEquals(eventId, foundEvent.get().getEventID());
 
@@ -70,7 +70,7 @@ class EventServiceTest {
         Long eventId = 1L;
         when(eventRepository.findById(eventId)).thenReturn(Optional.empty());
 
-        Optional<Event> foundEvent = eventService.findEventById(eventId);
+        Optional<Event> foundEvent = Optional.ofNullable(eventService.findEventById(eventId));
         assertFalse(foundEvent.isPresent());
 
         verify(eventRepository, times(1)).findById(eventId);

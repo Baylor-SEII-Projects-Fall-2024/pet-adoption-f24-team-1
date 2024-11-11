@@ -6,8 +6,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import axios from 'axios';
 import NavBar from '@/components/nav-bar';
-import FilterStack from '@/components/pet-filter-stack';
-import PetCard from '@/components/pet-card';
+import FilterStack from '@/components/adoption-center-filter-stack';
+//import PetCard from '@/components/pet-card';
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 
@@ -63,7 +63,7 @@ private long centerId;
  */
     // Get pets from database
     useEffect(() => {
-        const recommendedPets = [
+        const adoptionCenters = [
             {
                 centerId: 1,
                 centerName: 'Human Society of Central Texas',

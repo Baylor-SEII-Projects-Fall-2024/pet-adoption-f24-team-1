@@ -34,6 +34,9 @@ public class AdoptionCenter {
     @Column(name = "zip_code")
     private long zipCode;
 
+    @Column(name = "center_image_url")
+    private String centerImageUrl;
+
     @OneToMany(mappedBy = "adoptionCenter", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Notification> notifications = new ArrayList<>();
