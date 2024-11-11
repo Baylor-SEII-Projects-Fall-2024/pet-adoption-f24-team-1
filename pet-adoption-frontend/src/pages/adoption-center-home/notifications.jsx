@@ -1,76 +1,45 @@
-import React, { useState } from 'react';
-import Head from 'next/head'
-import { Container, Typography, Card, CardContent, Button, Modal, Box, Stack } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Container, Typography, Card, CardContent, Button, Modal, Box, Stack, Badge } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import NavBar from '@/components/nav-bar';
+import axios from 'axios';
 import ProtectedAdminRoute from '@/components/protected-admin-route';
+import Head from 'next/head';
+import NavBar from '@/components/nav-bar-adoption-center';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
-const notifications = [
-    {
-      id: 1,
-      title: 'New Thumbnail',
-      time: '1 minute ago',
-      message: 'Cody Seibert uploaded a new thumbnail test!',
-    },
-    {
-      id: 2,
-      title: 'New Comment',
-      time: '5 minutes ago',
-      message: 'A user commented on your post!',
-    },
-    {
-      id: 3,
-      title: 'New Like',
-      time: '10 minutes ago',
-      message: 'Your post received a new like!',
-    },
-    {
-      id: 4,
-      title: 'System Update',
-      time: '15 minutes ago',
-      message: 'A new system update is available. Please update to the latest version.',
-    },
-    {
-      id: 5,
-      title: 'New Follower',
-      time: '20 minutes ago',
-      message: 'John Doe started following you!',
-    },
-    {
-      id: 6,
-      title: 'Account Verification',
-      time: '30 minutes ago',
-      message: 'Your account has been successfully verified!',
-    },
-    {
-      id: 7,
-      title: 'Event Reminder',
-      time: '45 minutes ago',
-      message: 'Don\'t forget about the event you signed up for tomorrow!',
-    },
-    {
-      id: 8,
-      title: 'New Message',
-      time: '1 hour ago',
-      message: 'You have received a new message from Jane Doe.',
-    },
-    {
-      id: 9,
-      title: 'Weekly Summary',
-      time: '2 hours ago',
-      message: 'Here is your activity summary for the past week.',
-    },
-    {
-      id: 10,
-      title: 'Security Alert',
-      time: '3 hours ago',
-      message: 'A new login was detected from a different device. Please review.',
-    },
-  ];
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 function NotificationsPage() {
+  const [notifications, setNotifications] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
+  const user = useAuthUser();
+
+  useEffect(() => {
+    // Get adoption center id
+    const getAdoptionCenterId = async () => {
+        try {
+            const response = await axios.get(`${apiBaseUrl}/api/admins/center/${user.id}`)
+            return response.data.centerId;
+        } catch (error) {
+            console.error("Error getting center id:", error);
+            return -1;
+        }
+    };
+
+    getAdoptionCenterId().then((centerId) => {
+        // Fetch notifications from the backend
+        const fetchNotifications = async () => {
+            try {
+            const response = await axios.get(`${apiBaseUrl}/api/notifications/${centerId}`);
+            setNotifications(response.data);
+            } catch (error) {
+            console.error("Error fetching notifications:", error);
+            }
+        };
+        fetchNotifications();
+    });
+  }, []);
 
   const handleOpen = (notification) => {
     setSelectedNotification(notification);
@@ -82,6 +51,19 @@ function NotificationsPage() {
     setSelectedNotification(null);
   };
 
+  const markAsRead = async (notificationId) => {
+    try {
+      await axios.post(`${apiBaseUrl}/api/notifications/markAsRead/${notificationId}`);
+      setNotifications((prevNotifications) =>
+        prevNotifications.map((notification) =>
+          notification.id === notificationId ? { ...notification, isRead: true } : notification
+        )
+      );
+    } catch (error) {
+      console.error("Error marking notification as read:", error);
+    }
+  };
+
   return (
     <ProtectedAdminRoute>
         <Head>
@@ -89,8 +71,8 @@ function NotificationsPage() {
         </Head>
 
         <main>
-        <NavBar />
-        <Container maxWidth="sm" sx={{ mt: 4, my: 10 }}>
+            <NavBar />
+            <Container maxWidth="sm" sx={{ mt: 15 }}>
             <Typography variant="h4" align="center" gutterBottom>
                 Notifications
             </Typography>
@@ -99,16 +81,29 @@ function NotificationsPage() {
                 <Card key={notification.id} sx={{ mb: 2 }}>
                 <CardContent>
                     <Stack direction="row" spacing={2} alignItems="center">
-                    <NotificationsIcon fontSize="large" />
+                    <Badge
+                        color="error"
+                        variant="dot"
+                        invisible={notification.isRead} // Hide badge if the notification is read
+                        sx={{ '& .MuiBadge-dot': { right: -3, top: 3 } }} // Position the badge slightly
+                    >
+                        <NotificationsIcon fontSize="large" />
+                    </Badge>
                     <Box sx={{ flexGrow: 1 }}>
                         <Typography variant="h6">{notification.title}</Typography>
                         <Typography variant="body2" color="text.secondary">
-                        {notification.time}
+                        {new Date(notification.timestamp).toLocaleString()}
                         </Typography>
                         <Typography variant="body2">{notification.message}</Typography>
                     </Box>
-                    <Button variant="contained" onClick={() => handleOpen(notification)}>
-                        Read
+                    <Button
+                        variant="contained"
+                        onClick={() => {
+                        handleOpen(notification);
+                        markAsRead(notification.id);
+                        }}
+                    >
+                        View
                     </Button>
                     </Stack>
                 </CardContent>
@@ -130,21 +125,28 @@ function NotificationsPage() {
                     borderRadius: 2,
                 }}
                 >
-                <Typography variant="h6" gutterBottom>
-                    {selectedNotification?.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" gutterBottom>
-                    {selectedNotification?.time}
-                </Typography>
-                <Typography variant="body1">
-                    {selectedNotification?.message}
-                </Typography>
+                    <Typography variant="h6" gutterBottom>
+                        {selectedNotification?.message}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                        {new Date(selectedNotification?.timestamp).toLocaleString()}
+                    </Typography>
+
+                    <Typography variant="subtitle1" sx={{ mt: 2 }}>Adoption Form Details</Typography>
+                    <Typography variant="body2"><strong>Full Name:</strong> {selectedNotification?.petAdoptionForm?.fullName}</Typography>
+                    <Typography variant="body2"><strong>License Number:</strong> {selectedNotification?.petAdoptionForm?.licenseNumber}</Typography>
+                    <Typography variant="body2"><strong>Address:</strong> {selectedNotification?.petAdoptionForm?.address}</Typography>
+                    <Typography variant="body2"><strong>City, State, Zip:</strong> {selectedNotification?.petAdoptionForm?.cityStatZip}</Typography>
+                    <Typography variant="body2"><strong>Phone Number:</strong> {selectedNotification?.petAdoptionForm?.phoneNumber}</Typography>
+                    <Typography variant="body2"><strong>Email:</strong> {selectedNotification?.petAdoptionForm?.email}</Typography>
+                    <Typography variant="body2"><strong>Employer:</strong> {selectedNotification?.petAdoptionForm?.employer}</Typography>
+                    <Typography variant="body2"><strong>Duration Time:</strong> {new Date(selectedNotification?.petAdoptionForm?.durationTime).toLocaleString()}</Typography>
                 <Button onClick={handleClose} variant="contained" sx={{ mt: 2 }}>
                     Close
                 </Button>
                 </Box>
             </Modal>
-        </Container>
+            </Container>
         </main>
     </ProtectedAdminRoute>
   );
