@@ -138,11 +138,12 @@ function NavBar() {
               ))}
             </Box>
             <Box sx={{ flexGrow: 0 }}>
-              <IconButton color="inherit" size="large" onClick={() => handleNav('Notifications')}>
+              {user?.role === "ADMIN" && (<IconButton color="inherit" size="large" onClick={() => handleNav('Notifications')}>
                 <Badge badgeContent={notificationCount} color="error">
                   <NotificationsNoneOutlinedIcon />
                 </Badge>
               </IconButton>
+            )}
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   {user ? <Avatar>{user.email.substring(0, 1)}</Avatar> : <Avatar>?</Avatar>}
