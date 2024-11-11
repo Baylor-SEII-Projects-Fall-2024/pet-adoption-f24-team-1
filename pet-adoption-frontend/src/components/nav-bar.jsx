@@ -31,7 +31,6 @@ function NavBar() {
   const [notificationCount, setNotificationCount] = useState(0);
 
   useEffect(() => {
-    // Get adoption center id
     const getAdoptionCenterId = async () => {
       try {
           const response = await axios.get(`${apiBaseUrl}/api/admins/center/${user.id}`)
@@ -42,18 +41,21 @@ function NavBar() {
       }
     };
 
-    getAdoptionCenterId().then((centerId) => {
-      // Fetch unread notification count
-      const fetchNotifications = async () => {
-        try {
-        const response = await axios.get(`${apiBaseUrl}/api/notifications/unread/${centerId}`);
-        setNotificationCount(response.data.length);
-        } catch (error) {
-        console.error("Error fetching notifications:", error);
-        }
-    };
-    fetchNotifications();
-    });
+    // Get unread notification count if logged in as admin
+    if (isAuthenticated && user?.role === "ADMIN") {
+      getAdoptionCenterId().then((centerId) => {
+        // Fetch unread notification count
+        const fetchNotifications = async () => {
+          try {
+          const response = await axios.get(`${apiBaseUrl}/api/notifications/unread/${centerId}`);
+          setNotificationCount(response.data.length);
+          } catch (error) {
+          console.error("Error fetching notifications:", error);
+          }
+      };
+      fetchNotifications();
+      });
+    }
   }, []);
 
   const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);

@@ -4,7 +4,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import axios from 'axios';
 import ProtectedAdminRoute from '@/components/protected-admin-route';
 import Head from 'next/head';
-import NavBar from '@/components/nav-bar-adoption-center';
+import NavBar from '@/components/nav-bar';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -19,7 +19,7 @@ function NotificationsPage() {
     // Get adoption center id
     const getAdoptionCenterId = async () => {
         try {
-            const response = await axios.get(`${apiBaseUrl}/api/admins/center/${user.id}`)
+            const response = await axios.get(`${apiBaseUrl}/api/admins/center/${user.id}`);
             return response.data.centerId;
         } catch (error) {
             console.error("Error getting center id:", error);
@@ -38,6 +38,7 @@ function NotificationsPage() {
             }
         };
         fetchNotifications();
+        console.log(notifications);
     });
   }, []);
 
@@ -84,7 +85,7 @@ function NotificationsPage() {
                     <Badge
                         color="error"
                         variant="dot"
-                        invisible={notification.isRead} // Hide badge if the notification is read
+                        invisible={notification.read} // Hide badge if the notification is read
                         sx={{ '& .MuiBadge-dot': { right: -3, top: 3 } }} // Position the badge slightly
                     >
                         <NotificationsIcon fontSize="large" />
