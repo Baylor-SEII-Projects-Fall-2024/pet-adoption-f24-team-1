@@ -29,9 +29,7 @@ function NavBar() {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
-  const [loading, setLoading] = useState(true); // Added loading state
 
-  // Set loading to false once component is mounted
   useEffect(() => {
     // Get adoption center id
     const getAdoptionCenterId = async () => {
@@ -56,7 +54,6 @@ function NavBar() {
     };
     fetchNotifications();
     });
-    setLoading(false);
   }, []);
 
   const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
@@ -77,8 +74,6 @@ function NavBar() {
   };
 
   const pages = isAuthenticated && user?.role == "ADMIN" ? adminPages : defaultPages;
-
-  if (loading) return null; // Return null until client-side data is ready
 
   return (
     <>

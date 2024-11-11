@@ -20,9 +20,9 @@ export default function AdoptionCenterHome() {
         <title>Adoption Center Home</title>
       </Head>
 
+    
       <main>
-      <NavBar />
-
+        <NavBar />
         <Stack sx={{ paddingTop: 0 }} alignItems='center' gap={2}>
         <Box className={styles.container}>
           <Box className={styles.textContainer}>
