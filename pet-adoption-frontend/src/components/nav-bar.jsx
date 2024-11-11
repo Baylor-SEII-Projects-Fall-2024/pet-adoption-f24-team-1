@@ -72,6 +72,9 @@ function NavBar() {
     else if (nav === 'Settings') router.push('/settings');
     else if (nav === 'Logout') setLogoutModalOpen(true);
     else if (nav === 'Matches') router.push('/user-home/matches');
+    else if (nav === 'Manage Pets') router.push('/adoption-center-home/manage-pets');
+    else if (nav === 'Manage Events') router.push('/adoption-center-home/manage-events');
+    else if (nav === 'Profile') router.push('/adoption-center-home/adpotion-center-profile');
     else if (nav === 'Notifications') router.push('/adoption-center-home/notifications');
   };
 
