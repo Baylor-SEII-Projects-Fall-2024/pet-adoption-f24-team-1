@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/notifications")
+@CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
 public class NotificationController {
 
     @Autowired
@@ -20,11 +21,11 @@ public class NotificationController {
     private AdoptionCenterRepository adoptionCenterRepository;
 
     @GetMapping("/{centerId}")
-    public List<Notification> getUnreadNotifications(@PathVariable Long centerId) {
+    public List<Notification> getNotifications(@PathVariable Long centerId) {
         AdoptionCenter center = adoptionCenterRepository.findById(centerId).orElseThrow(
                 () -> new RuntimeException("Adoption center not found"));
 
-        return notificationRepository.findByAdoptionCenterAndIsReadFalse(center);
+        return notificationRepository.findByAdoptionCenterOrderByTimestampDesc(center);
     }
 
     @PostMapping("/markAsRead/{notificationId}")

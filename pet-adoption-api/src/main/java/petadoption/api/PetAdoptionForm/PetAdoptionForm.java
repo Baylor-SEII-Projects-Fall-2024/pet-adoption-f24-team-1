@@ -27,4 +27,5 @@ public class PetAdoptionForm {
     private String employer;
     private Date durationTime;
     private Long petId;
+    private Long userId;
 }

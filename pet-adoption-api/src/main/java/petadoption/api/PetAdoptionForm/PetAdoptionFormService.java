@@ -48,9 +48,11 @@ public class PetAdoptionFormService {
         AdoptionCenter center = adoptionCenterRepository.findById(pet.getCenterID()).orElseThrow(
                 () -> new RuntimeException("Adoption center not found"));
 
-        String message = "New adoption form submitted by " + form.getFullName() +
-                "to adopt " + pet.getPetName() + " from adoption center: " + center.getCenterName();
-        notificationService.createNotification(center, message);
+        String title = "New adoption form submission";
+
+        String message = form.getFullName() + " wants to adopt " + pet.getPetName() + "!";
+
+        notificationService.createNotification(title, message, form, center);
 
         //Save form to database
         return petAdoptionFormRepository.save(form);
