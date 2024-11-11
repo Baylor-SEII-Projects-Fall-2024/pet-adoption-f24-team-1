@@ -28,6 +28,14 @@ public class NotificationController {
         return notificationRepository.findByAdoptionCenterOrderByTimestampDesc(center);
     }
 
+    @GetMapping("/unread/{centerId}")
+    public List<Notification> getUnreadNotifications(@PathVariable Long centerId) {
+        AdoptionCenter center = adoptionCenterRepository.findById(centerId).orElseThrow(
+                () -> new RuntimeException("Adoption center not found"));
+
+        return notificationRepository.findByAdoptionCenterAndIsReadFalseOrderByTimestampDesc(center);
+    }
+
     @PostMapping("/markAsRead/{notificationId}")
     public void markNotificationAsRead(@PathVariable Long notificationId) {
         Notification notification = notificationRepository.findById(notificationId).orElseThrow(
