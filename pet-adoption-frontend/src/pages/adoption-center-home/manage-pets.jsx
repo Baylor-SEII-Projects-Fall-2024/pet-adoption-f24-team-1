@@ -5,32 +5,27 @@ import styles from '@/styles/Home.module.css'
 import { useRouter } from 'next/router'
 import Paper from '@mui/material/Paper';
 import { DataGrid, GridSelectionModel} from '@mui/x-data-grid';
-import NavBar from '@/components/nav-bar-adoption-center';
+import NavBar from '@/components/nav-bar';
 import { useRef,useEffect, useState } from 'react'
 import axios from 'axios';
 import ImageDropzone from '@/components/image-dropzone';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 
 export default function ManagePets() {
-  const [user, setUser] = useState(null);
+  const user = useAuthUser();
   const [adoptionCenter, setAdoptionCenter] = useState(null);
 
   useEffect(() => {
-    const userFromLocalStorage = JSON.parse(sessionStorage.getItem('user'));
-    if (userFromLocalStorage) {
-      setUser(userFromLocalStorage);
-      axios.get(`${apiBaseUrl}/api/admins/center/` + userFromLocalStorage.id)
-      .then(response => {
-        setAdoptionCenter(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      })
-    } else {
-      setUser(null);
-    }
+    axios.get(`${apiBaseUrl}/api/admins/center/${user.id}`)
+    .then(response => {
+      setAdoptionCenter(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    })
   }, []);
 
 

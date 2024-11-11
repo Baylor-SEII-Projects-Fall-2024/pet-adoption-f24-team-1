@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Stack } from '@mui/material';
 import PetsIcon from '@mui/icons-material/Pets';
-import InboxIcon from '@mui/icons-material/Inbox';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import { useState, useEffect, useStyles } from 'react';
 import Router, { useRouter } from 'next/router';
 import LoginModal from './login-modal';
@@ -9,11 +9,11 @@ import DialogModal from './dialog-modal';
 import Link from 'next/link';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import useSignOut from 'react-auth-kit/hooks/useSignOut';
+import Badge from '@mui/material/Badge';
 
 const pages = ['Manage Pets', 'Manage Events', 'Profile'];
 const settings = ['Settings', 'Logout'];
 const loginSettings = ['Login', 'Create Account'];
-const messages = ['Request: John Doe', 'Request: Jane Smith'];
 
 
 export default function NavBar() {
@@ -24,17 +24,10 @@ export default function NavBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
-
-  const handleOpenInbox = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  const [notificationCount, setNotificationCount] = useState(3);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseInbox = () => {
-    setAnchorElUser(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -79,6 +72,9 @@ export default function NavBar() {
     }
     if(nav === 'Profile')  {
       router.push('/adoption-center-home/adpotion-center-profile');
+    }
+    if(nav === 'Notifications') {
+      router.push('/adoption-center-home/notifications');
     }
     
   };
@@ -140,18 +136,14 @@ export default function NavBar() {
               </Button>
             ))}
           </Box>
-
-          <Box sx={{ mr: 2 }}>
-            <Tooltip title="Inbox">
-              <IconButton>
-                <InboxIcon sx={{color: 'white'}}/>
-              </IconButton>
-            </Tooltip>
-          </Box>
-
-          <Box>
-            <Tooltip title="Settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0}}>
+          <Box sx={{ flexGrow: 0 }}>
+          <IconButton color="inherit" size='large' onClick={() => handleNav('Notifications')}>
+            <Badge badgeContent={notificationCount} color="error">
+              <NotificationsNoneOutlinedIcon />
+            </Badge>
+          </IconButton>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {user ? <Avatar>{user.email.substring(0,1)}</Avatar> : <Avatar>?</Avatar>}
               </IconButton>
             </Tooltip>
