@@ -19,6 +19,10 @@ public class RecommendationEngineService {
 
     private final int TOP_SPECIES_SCORE = 150;
     private final int TOP_BREED_SCORE = 100;
+    private final int TOP_COLOR_SCORE = 75;
+    private final int TOP_GENDER_SCORE = 50;
+    private final int TOP_SIZE_SCORE = 75;
+
 
     public List<Pet> recommendationAlgorithm(Long userID)  {
         // Map of pets and their overall score
@@ -30,30 +34,23 @@ public class RecommendationEngineService {
         // Get attributes and their frequency within user's matched pets
         List<AttributeFrequency> speciesFrequency = recommendationEngineRepository.findSpeciesFrequency(userID);
         List<AttributeFrequency> breedFrequency = recommendationEngineRepository.findBreedFrequency(userID);
+        List<AttributeFrequency> colorFrequency = recommendationEngineRepository.findColorFrequency(userID);
+        List<AttributeFrequency> genderFrequency = recommendationEngineRepository.findGenderFrequency(userID);
 
 
         // Loop through each pet and score it
         for(Pet pet : pets)  {
             // Set initial scores
             int score = 0;
-            int speciesPoints = TOP_SPECIES_SCORE;
-            int breedPoints = TOP_BREED_SCORE;
+
             // Check species for points
-            for(AttributeFrequency attributeFrequency : speciesFrequency)  {
-                if(pet.getPetSpecies().equals(attributeFrequency.getAttribute())) {
-                    score += speciesPoints;
-                    break;
-                }
-                speciesPoints = (int) round(speciesPoints * 0.75);
-            }
+            score += collectPoints(pet.getPetSpecies(), speciesFrequency, TOP_SPECIES_SCORE);
             // Check breed for points
-            for(AttributeFrequency attributeFrequency : breedFrequency)  {
-                if(pet.getPetBreed().equals(attributeFrequency.getAttribute())) {
-                    score += breedPoints;
-                    break;
-                }
-                breedPoints = (int) round(breedPoints * 0.75);
-            }
+            score += collectPoints(pet.getPetBreed(), breedFrequency, TOP_BREED_SCORE);
+            // Check color for points
+            score += collectPoints(pet.getColor(), colorFrequency, TOP_COLOR_SCORE);
+            // Check gender for points
+            score += collectPoints(pet.getPetGender(), genderFrequency, TOP_GENDER_SCORE);
 
             // Add pet and final score to map
             petScores.put(pet, score);
@@ -70,4 +67,29 @@ public class RecommendationEngineService {
 
         return recommendedPets;
     }
+
+
+    // collects points based on attribute
+    public int collectPoints(String atrValue, List<AttributeFrequency> afs, int atrPoints)  {
+        int points = 0;
+        for(AttributeFrequency attributeFrequency : afs)  {
+            if(atrValue.equals(attributeFrequency.getAttribute())) {
+                points += atrPoints;
+                break;
+            }
+            atrPoints = (int) round(atrPoints * 0.75);
+        }
+        return points;
+    }
 }
+
+
+/*
+            for(AttributeFrequency attributeFrequency : speciesFrequency)  {
+                if(pet.getPetSpecies().equals(attributeFrequency.getAttribute())) {
+                    score += speciesPoints;
+                    break;
+                }
+                speciesPoints = (int) round(speciesPoints * 0.75);
+            }
+            */

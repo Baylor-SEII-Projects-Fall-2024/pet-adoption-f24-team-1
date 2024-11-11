@@ -9,13 +9,15 @@ import NavBar from '@/components/nav-bar';
 import FilterStack from '@/components/filter-stack';
 import PetCard from '@/components/pet-card';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
 
 export default function Matches() {
+  const user = useAuthUser();
+
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
 
-  const [user, setUser] = useState(null);
   const [pets, setPets] = useState([]);
 
   // Filters
@@ -34,15 +36,6 @@ export default function Matches() {
       (genderFltr.length == 2 || genderFltr.length == 0 ? true : pet.petGender == genderFltr[0])
     );
   }
-
-  useEffect(() => {
-    const userFromLocalStorage = JSON.parse(sessionStorage.getItem('user'));
-    if (userFromLocalStorage) {
-      setUser(userFromLocalStorage);
-    } else {
-      setUser(null);
-    }
-  }, []);
   
   const navigateTo = (page) => {
     router.push(page);

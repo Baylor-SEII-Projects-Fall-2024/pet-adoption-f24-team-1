@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Stack } from '@mui/material';
 import PetsIcon from '@mui/icons-material/Pets';
+import InboxIcon from '@mui/icons-material/Inbox';
 import { useState, useEffect, useStyles } from 'react';
 import Router, { useRouter } from 'next/router';
 import LoginModal from './login-modal';
@@ -12,6 +13,7 @@ import useSignOut from 'react-auth-kit/hooks/useSignOut';
 const pages = ['Manage Pets', 'Manage Events', 'Profile'];
 const settings = ['Settings', 'Logout'];
 const loginSettings = ['Login', 'Create Account'];
+const messages = ['Request: John Doe', 'Request: Jane Smith'];
 
 
 export default function NavBar() {
@@ -23,8 +25,16 @@ export default function NavBar() {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
 
+  const handleOpenInbox = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseInbox = () => {
+    setAnchorElUser(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -130,9 +140,18 @@ export default function NavBar() {
               </Button>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+
+          <Box sx={{ mr: 2 }}>
+            <Tooltip title="Inbox">
+              <IconButton>
+                <InboxIcon sx={{color: 'white'}}/>
+              </IconButton>
+            </Tooltip>
+          </Box>
+
+          <Box>
+            <Tooltip title="Settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0}}>
                 {user ? <Avatar>{user.email.substring(0,1)}</Avatar> : <Avatar>?</Avatar>}
               </IconButton>
             </Tooltip>

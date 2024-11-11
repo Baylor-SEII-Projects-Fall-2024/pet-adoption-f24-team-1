@@ -67,7 +67,7 @@ export default function PetCard(props) {
     }
   }
   
-  
+  /*
   useEffect(() => {
     axios.get(`${apiBaseUrl}/api/adoptioncenters/` + props.pet.centerID)
     .then(response => {
@@ -92,6 +92,7 @@ export default function PetCard(props) {
       console.error('Error fetching adoption center:', error);
     });
   }, []);
+  */
   
   
   return (

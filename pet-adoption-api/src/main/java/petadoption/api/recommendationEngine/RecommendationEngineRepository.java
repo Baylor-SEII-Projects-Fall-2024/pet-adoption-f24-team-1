@@ -29,4 +29,24 @@ public interface RecommendationEngineRepository extends JpaRepository<Pet, Long>
     )
     public List<AttributeFrequency> findBreedFrequency(@Param("userID") Long userID);
 
+    @Query(nativeQuery = true, value =
+            "SELECT attribute, COUNT(*) as frequency " +
+                    "FROM (SELECT color AS attribute " +
+                    "FROM pet p JOIN matches m ON p.petid = m.petid " +
+                    "WHERE m.userid = :userID) as matchedPets " +
+                    "GROUP BY attribute " +
+                    "ORDER BY frequency DESC"
+    )
+    public List<AttributeFrequency> findColorFrequency(@Param("userID") Long userID);
+
+    @Query(nativeQuery = true, value =
+            "SELECT attribute, COUNT(*) as frequency " +
+                    "FROM (SELECT pet_gender AS attribute " +
+                    "FROM pet p JOIN matches m ON p.petid = m.petid " +
+                    "WHERE m.userid = :userID) as matchedPets " +
+                    "GROUP BY attribute " +
+                    "ORDER BY frequency DESC"
+    )
+    public List<AttributeFrequency> findGenderFrequency(@Param("userID") Long userID);
+
 }
