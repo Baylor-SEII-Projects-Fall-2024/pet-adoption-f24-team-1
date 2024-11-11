@@ -3,7 +3,7 @@ import { Box, Button, TextField, Typography, Grid, Paper, IconButton, InputAdorn
 import { useState } from "react";
 import { useRouter } from 'next/router';
 import dynamic from "next/dynamic";
-import AnimalBreeds from './constants/animal-breeds';
+import { AnimalBreeds } from '../components/constants/animal-breeds';
 
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
