@@ -8,12 +8,14 @@ import LoginModal from './login-modal';
 import DialogModal from './dialog-modal';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import useSignOut from 'react-auth-kit/hooks/useSignOut';
+import dynamic from 'next/dynamic';
+import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
+import { useThemeCust } from '@/utils/ThemeContext';
 
 const adminPages = ['Manage Pets', 'Manage Events', 'Profile'];
 const defaultPages = ['Centers', 'Matches'];
 const settings = ['Settings', 'Logout'];
 const loginSettings = ['Login', 'Create Account'];
-
 
 function NavBar() {
   const router = useRouter();
@@ -167,13 +169,13 @@ function NavBar() {
       </Container>
     </AppBar>
     {/* Login modal */}
-    <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
+    <LoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
     {/* Logout modal */}
     <DialogModal open={isLogoutModalOpen} 
                  header="Log out?" 
                  message="This will kick you out of the current session."
                  handleYes={handleLogout}
-                 handleNo={closeLogoutModal}
+                 handleNo={() => setLoginModalOpen(false)}
     />
     </>
   );
