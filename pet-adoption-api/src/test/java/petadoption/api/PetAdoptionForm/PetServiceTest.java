@@ -14,10 +14,10 @@ import static org.mockito.Mockito.*;
 class PetAdoptionFormServiceTest {
 
     @Mock
-    private petAdoptionFormRepository petAdoptionFormRepository;
+    private PetAdoptionFormRepository petAdoptionFormRepository;
 
     @InjectMocks
-    private petAdoptionFormService petAdoptionFormService;
+    private PetAdoptionFormService petAdoptionFormService;
 
     @BeforeEach
     void setUp() {
@@ -26,12 +26,12 @@ class PetAdoptionFormServiceTest {
 
     @Test
     void testSave() {
-        petAdoptionForm form = new petAdoptionForm();
+        PetAdoptionForm form = new PetAdoptionForm();
         form.setFullName("John Doe");
 
         when(petAdoptionFormRepository.save(form)).thenReturn(form);
 
-        petAdoptionForm savedForm = petAdoptionFormService.save(form);
+        PetAdoptionForm savedForm = petAdoptionFormService.save(form);
         assertEquals("John Doe", savedForm.getFullName());
 
         verify(petAdoptionFormRepository, times(1)).save(form);
@@ -39,11 +39,11 @@ class PetAdoptionFormServiceTest {
 
     @Test
     void testFindAll() {
-        petAdoptionForm form1 = new petAdoptionForm();
-        petAdoptionForm form2 = new petAdoptionForm();
+        PetAdoptionForm form1 = new PetAdoptionForm();
+        PetAdoptionForm form2 = new PetAdoptionForm();
         when(petAdoptionFormRepository.findAll()).thenReturn(Arrays.asList(form1, form2));
 
-        List<petAdoptionForm> forms = petAdoptionFormService.findAll();
+        List<PetAdoptionForm> forms = petAdoptionFormService.findAll();
         assertEquals(2, forms.size());
 
         verify(petAdoptionFormRepository, times(1)).findAll();
@@ -51,11 +51,11 @@ class PetAdoptionFormServiceTest {
 
     @Test
     void testGetAllForms() {
-        petAdoptionForm form1 = new petAdoptionForm();
-        petAdoptionForm form2 = new petAdoptionForm();
+        PetAdoptionForm form1 = new PetAdoptionForm();
+        PetAdoptionForm form2 = new PetAdoptionForm();
         when(petAdoptionFormRepository.findAll()).thenReturn(Arrays.asList(form1, form2));
 
-        List<petAdoptionForm> forms = petAdoptionFormService.getAllForms();
+        List<PetAdoptionForm> forms = petAdoptionFormService.getAllForms();
         assertEquals(2, forms.size());
 
         verify(petAdoptionFormRepository, times(1)).findAll();

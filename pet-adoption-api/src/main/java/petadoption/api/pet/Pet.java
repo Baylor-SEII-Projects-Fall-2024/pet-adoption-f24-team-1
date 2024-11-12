@@ -25,5 +25,5 @@ public class Pet {
     private String petSpecies;
     private String color;
     private String imgUrl;
-    private int centerID;
+    private Long centerID;
 }

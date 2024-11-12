@@ -5,8 +5,14 @@ import Image from 'next/image';
 import axios from 'axios';
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 import NavBar from "@/components/nav-bar";
+import { useRouter } from 'next/router';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
 export default function PetAdoptionForm() {
+    const router = useRouter();
+    const { petId } = router.query;
+    const user = useAuthUser();
+
     const [fullName, setFullName] = useState("");
     const [licenseNumber, setLicenseNumber] = useState("");
     const [address, setAddress] = useState("");
@@ -22,6 +28,7 @@ export default function PetAdoptionForm() {
     // Form submission handler
     const handleSubmit = (e) => {
         e.preventDefault();
+        const userId = user.id;
 
         const formData = {
             fullName,
@@ -31,7 +38,9 @@ export default function PetAdoptionForm() {
             phoneNumber,
             email,
             employer,
-            jobTime
+            jobTime,
+            petId,
+            userId,
         };
 
         const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;

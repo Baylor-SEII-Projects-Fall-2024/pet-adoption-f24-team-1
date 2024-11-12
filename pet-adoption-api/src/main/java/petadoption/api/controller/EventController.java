@@ -34,7 +34,7 @@ public class EventController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Event updatedEvent) {
-        Optional<Event> eventOptional = eventService.findEventById(id);
+        Optional<Event> eventOptional = Optional.ofNullable(eventService.findEventById(id));
 
         if (eventOptional.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -42,10 +42,13 @@ public class EventController {
 
         Event event = eventOptional.get();
 
+        // Update all fields from the incoming `updatedEvent`
         event.setDate(updatedEvent.getDate());
         event.setDescription(updatedEvent.getDescription());
         event.setTitle(updatedEvent.getTitle());
         event.setLocation(updatedEvent.getLocation());
+        event.setImageUrl(updatedEvent.getImageUrl());  // Assuming you want to update image URL
+        event.setDetailsPage(updatedEvent.getDetailsPage());  // Assuming you want to update details page
 
         Event savedEvent = eventService.saveEvent(event);
         return new ResponseEntity<>(savedEvent, HttpStatus.OK);

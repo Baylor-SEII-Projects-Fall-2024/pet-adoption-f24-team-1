@@ -24,7 +24,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://34.133.251.138:3000"})
 public class AuthController {
 
     private AuthenticationManager authenticationManager;
@@ -123,7 +123,7 @@ public class AuthController {
 
         adminRepository.save(admin);
 
-        return  new ResponseEntity<>("Admin registered success!", HttpStatus.OK);
+        return new ResponseEntity<>("Admin registered success!", HttpStatus.OK);
     }
 
     @PostMapping("login/admin")

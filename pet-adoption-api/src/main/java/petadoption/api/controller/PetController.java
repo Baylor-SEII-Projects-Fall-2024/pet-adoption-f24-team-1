@@ -10,7 +10,7 @@ import petadoption.api.pet.PetService;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://34.133.251.138:3000"})
 @RequestMapping("/api/pets")
 @RestController
 public class PetController {
@@ -21,6 +21,11 @@ public class PetController {
     @GetMapping
     public List<Pet> getAllPets() {
         return petService.getAllPets();
+    }
+    @GetMapping("/{adminID}")
+    public List<Pet> getAllPets(@PathVariable Long adminID ) {
+        System.out.println(petService.getAllPetsByAdminId(adminID));
+        return petService.getAllPetsByAdminId(adminID);
     }
 
     @PostMapping

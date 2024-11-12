@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 import petadoption.api.distanceMatrix.DistanceMatrixResponse;
 import petadoption.api.distanceMatrix.DistanceMatrixService;
 
-@CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://34.133.251.138:3000"})
 @RestController
 @RequestMapping("api/distance")
 public class DistanceMatrixController {

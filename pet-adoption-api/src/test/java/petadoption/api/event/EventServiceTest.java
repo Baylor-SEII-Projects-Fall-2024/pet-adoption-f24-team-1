@@ -5,15 +5,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class EventServiceTest {
+public class EventServiceTest {
 
     @Mock
     private EventRepository eventRepository;
@@ -28,76 +28,121 @@ class EventServiceTest {
 
     @Test
     void testGetAllEvents() {
+        // Arrange
+        List<Event> events = new ArrayList<>();
         Event event1 = new Event();
+        event1.setEventID(1L);
+        event1.setTitle("Adoption Day");
+        event1.setDate(LocalDate.now());
+        event1.setLocation("Main Center");
+        event1.setDescription("A day for pet adoptions");
+        event1.setImageUrl("http://example.com/image1.jpg");
+        event1.setDetailsPage("http://example.com/details1");
+
         Event event2 = new Event();
-        when(eventRepository.findAll()).thenReturn(Arrays.asList(event1, event2));
+        event2.setEventID(2L);
+        event2.setTitle("Pet Meet & Greet");
+        event2.setDate(LocalDate.now().plusDays(5));
+        event2.setLocation("Community Park");
+        event2.setDescription("A fun event to meet pets");
+        event2.setImageUrl("http://example.com/image2.jpg");
+        event2.setDetailsPage("http://example.com/details2");
 
-        List<Event> events = eventService.getAllEvents();
-        assertEquals(2, events.size());
+        events.add(event1);
+        events.add(event2);
+        when(eventRepository.findAll()).thenReturn(events);
 
+        // Act
+        List<Event> result = eventService.getAllEvents();
+
+        // Assert
+        assertEquals(2, result.size());
         verify(eventRepository, times(1)).findAll();
     }
 
     @Test
     void testSaveEvent() {
+        // Arrange
         Event event = new Event();
+        event.setEventID(1L);
         event.setTitle("Adoption Day");
-
+        event.setDate(LocalDate.now());
+        event.setLocation("Main Center");
+        event.setDescription("A day for pet adoptions");
+        event.setImageUrl("http://example.com/image1.jpg");
+        event.setDetailsPage("http://example.com/details1");
         when(eventRepository.save(event)).thenReturn(event);
 
-        Event savedEvent = eventService.saveEvent(event);
-        assertEquals("Adoption Day", savedEvent.getTitle());
+        // Act
+        Event result = eventService.saveEvent(event);
 
+        // Assert
+        assertNotNull(result);
+        assertEquals("Adoption Day", result.getTitle());
         verify(eventRepository, times(1)).save(event);
     }
 
     @Test
-    void testFindEventById_Present() {
-        Long eventId = 1L;
+    void testFindEventById() {
+        // Arrange
         Event event = new Event();
-        event.setEventID(eventId);
-        when(eventRepository.findById(eventId)).thenReturn(Optional.of(event));
+        event.setEventID(1L);
+        event.setTitle("Adoption Day");
+        event.setDate(LocalDate.now());
+        event.setLocation("Main Center");
+        event.setDescription("A day for pet adoptions");
+        event.setImageUrl("http://example.com/image1.jpg");
+        event.setDetailsPage("http://example.com/details1");
+        when(eventRepository.findById(1L)).thenReturn(Optional.of(event));
 
-        Optional<Event> foundEvent = eventService.findEventById(eventId);
-        assertTrue(foundEvent.isPresent());
-        assertEquals(eventId, foundEvent.get().getEventID());
+        // Act
+        Event result = eventService.findEventById(1L);
 
-        verify(eventRepository, times(1)).findById(eventId);
+        // Assert
+        assertNotNull(result);
+        assertEquals(1L, result.getEventID());
+        assertEquals("Adoption Day", result.getTitle());
+        verify(eventRepository, times(1)).findById(1L);
     }
 
     @Test
-    void testFindEventById_NotPresent() {
-        Long eventId = 1L;
-        when(eventRepository.findById(eventId)).thenReturn(Optional.empty());
+    void testFindEventById_NotFound() {
+        // Arrange
+        when(eventRepository.findById(1L)).thenReturn(Optional.empty());
 
-        Optional<Event> foundEvent = eventService.findEventById(eventId);
-        assertFalse(foundEvent.isPresent());
+        // Act
+        Event result = eventService.findEventById(1L);
 
-        verify(eventRepository, times(1)).findById(eventId);
+        // Assert
+        assertNull(result);
+        verify(eventRepository, times(1)).findById(1L);
     }
 
     @Test
-    void testDeleteEvent_Present() {
-        Long eventId = 1L;
-        Event event = new Event();
-        when(eventRepository.findById(eventId)).thenReturn(Optional.of(event));
+    void testDeleteEvent() {
+        // Arrange
+        when(eventRepository.existsById(1L)).thenReturn(true);
 
-        boolean isDeleted = eventService.deleteEvent(eventId);
-        assertTrue(isDeleted);
+        // Act
+        boolean result = eventService.deleteEvent(1L);
 
-        verify(eventRepository, times(1)).findById(eventId);
-        verify(eventRepository, times(1)).deleteById(eventId);
+        // Assert
+        assertTrue(result);
+        verify(eventRepository, times(1)).existsById(1L);
+        verify(eventRepository, times(1)).deleteById(1L);
     }
 
     @Test
-    void testDeleteEvent_NotPresent() {
-        Long eventId = 1L;
-        when(eventRepository.findById(eventId)).thenReturn(Optional.empty());
+    void testDeleteEvent_NotFound() {
+        // Arrange
+        when(eventRepository.existsById(1L)).thenReturn(false);
 
-        boolean isDeleted = eventService.deleteEvent(eventId);
-        assertFalse(isDeleted);
+        // Act
+        boolean result = eventService.deleteEvent(1L);
 
-        verify(eventRepository, times(1)).findById(eventId);
-        verify(eventRepository, never()).deleteById(eventId);
+        // Assert
+        assertFalse(result);
+        verify(eventRepository, times(1)).existsById(1L);
+        verify(eventRepository, never()).deleteById(1L);
     }
 }

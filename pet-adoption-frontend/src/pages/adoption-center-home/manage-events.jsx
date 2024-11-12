@@ -7,7 +7,8 @@ import { DataGrid} from '@mui/x-data-grid';
 import { useRef,useEffect, useState } from 'react'
 import axios from 'axios';
 import { useRouter } from 'next/router'
-import NavBar from '@/components/nav-bar-adoption-center';
+import NavBar from '@/components/nav-bar';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
 
 
@@ -16,6 +17,7 @@ const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 
 export default function ManageEvents() {
+  const user = useAuthUser();
   const [openInsertDialog, setOpenInsertDialog] = useState(false);
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
   const [selectionModel, setSelectionModel] = useState([]);
@@ -23,7 +25,8 @@ export default function ManageEvents() {
     title: '',
     date:  '',
     description: '',
-    location: ''
+    location: '',
+    centerID: ''
   });
   const columns = [
     { field: "eventID", headerName: "Event ID", width: 100 },
@@ -34,6 +37,19 @@ export default function ManageEvents() {
   ];
   const [events, setEvents] = useState([]);  // State to hold the event data
   const [isFormValid, setIsFormValid] = useState(false);
+
+  const [adoptionCenter, setAdoptionCenter] = useState(null);
+
+  useEffect(() => {
+    axios
+    .get(`${apiBaseUrl}/api/admins/center/${user.id}`)
+    .then(response => {
+      setAdoptionCenter(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }, []);
 
 
   const handleInputChange = (e) => {
@@ -55,19 +71,14 @@ export default function ManageEvents() {
 
 
 
-  const loadData = () => {
-    fetch(`${apiBaseUrl}/api/events`) 
+  const loadData = () => { 
+    axios
+    .get(`${apiBaseUrl}/api/events/${user.id}`)
     .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-       return response.json();
-    })
-    .then((data) => {
-      setEvents(data); 
+      setEvents(response.data); 
     })
     .catch((error) => {
-      throw error;
+      console.log('error is happening here: ', error);
     });
   };
 
@@ -83,9 +94,9 @@ export default function ManageEvents() {
       eventTitle: '',
       eventDate: '',
       eventDescription: '',
-      eventLocation: ''  
+      eventLocation: '',  
+      eventCenterID: ''
     });
-    loadData(); // Reload data to see the newly inserted event
   };
 
 
@@ -95,7 +106,8 @@ export default function ManageEvents() {
     title: event.title,
     date: event.date,
     description: event.description,
-    location: event.location
+    location: event.location,
+    centerID: event.centerID
     }));
 
     const getEventByID = (eventID) => {
@@ -104,24 +116,16 @@ export default function ManageEvents() {
 
   const handleInsertEvent = () => {
     // if(isFormValid){
+    newEventData.centerID = adoptionCenter.centerId;
+    console.log(newEventData)
     axios.post(`${apiBaseUrl}/api/events`, newEventData )
       .then(response => {
+        loadData(); // Reload data to see the newly inserted event
         handleDialogClose();
       })
       .catch(error => {
-        if (error.response) {
-          console.error('Server error:', error.response.data);
-          console.error('Status code:', error.response.status);
-          console.error('Headers:', error.response.headers);
-          console.log(newEventData);
-        } else {
-          console.error('Error:', error.message);
-        }
+        console.error("Insert Failed:", error);
       });
-    // }else{
-    //   // Want to eventually make this an alert dialog
-    //   console.error('NO DATA');
-    // }
     }
 
   const handleInsertDialogOpen = () => {
@@ -156,11 +160,11 @@ export default function ManageEvents() {
         const formattedDate = new Date(selectedEvent.date).toISOString().split('T')[0];
         console.log(formattedDate)
         setNewEventData({
-
           title: selectedEvent.title,
           date: formattedDate,
           description: selectedEvent.description,
           location: selectedEvent.location,
+          centerID: adoptionCenter.id,
         });
         setOpenUpdateDialog(true); // Open the update dialog
       }
@@ -204,8 +208,6 @@ export default function ManageEvents() {
       <p>Manage Events Page</p>
       <NavBar />
 
-
-
         <Stack sx={{  paddingTop: 10, flexDirection:'row', flexGrow: 1,spacing:'4'}}  gap={2}>
         
           {/* <Paper sx={{ height: 400, width: '50%' }}> */}
@@ -228,12 +230,12 @@ export default function ManageEvents() {
           <Stack s1 = {{direction:'column', spacing:'2'}}>
             <Button variant='contained' color="primary" onClick={() => handleUpdateDialogOpen()} className={styles.wideButton}>UPDATE</Button>
             <Button variant='contained' color="primary" onClick={() => handleDeleteEvents()} className={styles.wideButton}>DELETE</Button>
-            <Button variant='contained' color="primary" onClick={() => handleInsertDialogOpen()}>Insert Events</Button>            
+            <Button variant='contained' color="primary" onClick={() => handleInsertDialogOpen()}>INSERT</Button>            
             {/* <Button variant='contained' color="primary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button> */}
           </Stack>
         </Stack>
         <Dialog open={openInsertDialog} onClose={handleDialogClose}>
-          <DialogTitle>Insert event</DialogTitle>
+          <DialogTitle>Insert Event</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Please enter the details of the event you want to insert.
