@@ -16,38 +16,7 @@ export default function AdoptionCenterCard({ adoptionCenter, user }) {
 
     const [liked, setLiked] = useState(false);
 
-    // Handle pet liking functionality
-    const handleLikedCenter = () => {
-        if (!liked) {
-            if (user) {
-                axios.post(`${apiBaseUrl}/api/matches`, {
-                    centerID: adoptionCenter.centerID,
-                    userID: user.id
-                })
-                    .then(() => {
-                        setLiked(true);
-                    })
-                    .catch(error => {
-                        console.error('Error adding match:', error);
-                    });
-            } else {
-                setLoginModalOpen(true);
-            }
-        } else {
-            axios.delete(`${apiBaseUrl}/api/matches`, {
-                params: {
-                    centerID: adoptionCenter.centerID,
-                    userID: user.id
-                }
-            })
-                .then(() => {
-                    setLiked(false);
-                })
-                .catch(error => {
-                    console.error('Error removing match:', error);
-                });
-        }
-    };
+
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -81,7 +50,7 @@ export default function AdoptionCenterCard({ adoptionCenter, user }) {
                                 Go to Homepage
                             </Button>
                             <Button variant="outlined" color="secondary" onClick={() => {
-                                const eventPageUrl = `/adoption-center-home/adoption-center-events/${adoptionCenter.centerID}`;
+                                const eventPageUrl = `/adoption-center-home/adoption-center-events/${adoptionCenter.centerId}`;
                                 navigateTo(eventPageUrl);
                             }} sx={{ width: 100 }}>
                                 View Events
