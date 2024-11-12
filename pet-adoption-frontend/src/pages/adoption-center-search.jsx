@@ -9,6 +9,7 @@ import NavBar from '@/components/nav-bar';
 import FilterStack from '@/components/adoption-center-filter-stack';
 //import PetCard from '@/components/pet-card';
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import PetCard from "@/components/pet-card";
 
 
 export default function adoptionCenterSearch() {
@@ -61,45 +62,7 @@ private long centerId;
     @Column(name = "zip_code")
     private long zipCode;
  */
-    // Get pets from database
-    useEffect(() => {
-        const adoptionCenters = [
-            {
-                centerId: 1,
-                centerName: 'Human Society of Central Texas',
-                centerAddress: '2032 Circle Rd, Waco',
-                centerPhone: '(254) 754-1454',
-                centerEmail: 'humanesocietycentraltexas.org',
-                zipCode: 76706
-            },
-            {
-                centerId: 2,
-                centerName: 'Nightlight Christian Adoptions',
-                centerAddress: '400 Schroeder Dr, Waco',
-                centerPhone: '(254) 741-1633',
-                centerEmail: 'idk@gmail.com',
-                zipCode: 76710
-            },
-            {
-                centerId: 3,
-                centerName: 'Fuzzy Friends Rescue',
-                centerAddress: '6321 Airport Rd, Waco',
-                centerPhone: '(254) 754-9444',
-                centerEmail: 'fuzzyfriendsrescue.com',
-                zipCode: 76708
-            }
-        ]
-        //setPets(recommendedPets);
 
-        axios.get(`${apiBaseUrl}/api/adoptioncenters`)
-            .then(response => {
-                console.log(response.data);
-                setPets(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching adoption centers:', error);
-            });
-    }, []);
 
     return (
         <>

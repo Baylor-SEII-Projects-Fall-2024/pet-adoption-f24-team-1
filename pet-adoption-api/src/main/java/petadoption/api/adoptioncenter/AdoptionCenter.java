@@ -2,11 +2,8 @@ package petadoption.api.adoptioncenter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import petadoption.api.adoptioncenteradmin.AdoptionCenterAdmin;
-import petadoption.api.notification.Notification;
+import petadoption.api.event.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +12,7 @@ import java.util.List;
 @Table(name = "adoption_centers")
 @Data
 public class AdoptionCenter {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "center_generator")
     private long centerId;
@@ -37,7 +35,19 @@ public class AdoptionCenter {
     @Column(name = "center_image_url")
     private String centerImageUrl;
 
+    // One-to-many relationship with Event
     @OneToMany(mappedBy = "adoptionCenter", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Notification> notifications = new ArrayList<>();
+    private List<Event> events = new ArrayList<>();
+
+    // Method to add an event to this adoption center
+    public void addEvent(Event event) {
+        event.setAdoptionCenter(this);  // Set the current AdoptionCenter as the parent
+        this.events.add(event);  // Add the event to the list of events
+    }
+
+    // Method to remove an event from this adoption center (if needed)
+    public void removeEvent(Event event) {
+        event.setAdoptionCenter(null);  // Disassociate the event from this AdoptionCenter
+        this.events.remove(event);  // Remove the event from the list
+    }
 }

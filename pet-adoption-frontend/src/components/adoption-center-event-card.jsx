@@ -1,111 +1,94 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Grid, Typography, Card, CardContent, Button, Modal, CardMedia } from '@mui/material';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { Button, Grid, Box, Stack, Typography, Paper, useTheme } from '@mui/material';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PetInfoModal from '@/components/pet-info-modal';
+import LoginModal from './login-modal';
 import axios from 'axios';
+import { useRouter } from 'next/router'; // Import useRouter
 
-export default function AdoptionCenterEventsPage() {
-    const [events, setEvents] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [openDescriptionModal, setOpenDescriptionModal] = useState(false);
-    const [currentEvent, setCurrentEvent] = useState(null); // Holds the current event data for the modal
-    const router = useRouter();
-    const { centerId } = router.query;  // Get the centerId from the URL
+export default function AdoptionCenterCard({ adoptionCenter, user }) {
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+    const router = useRouter(); // Initialize the router
 
-    useEffect(() => {
-        if (centerId) {
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/events?centerId=${centerId}`)
-                .then(response => {
-                    setEvents(response.data);
-                    setLoading(false);
+    const [open, setOpen] = useState(false);
+    const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+    const theme = useTheme();
+
+    // Handle pet liking functionality
+    const handleLikedCenter = () => {
+        if (!liked) {
+            if (user) {
+                axios.post(`${apiBaseUrl}/api/matches`, {
+                    centerID: adoptionCenter.centerID,
+                    userID: user.id
+                })
+                    .then(() => {
+                        setLiked(true);
+                    })
+                    .catch(error => {
+                        console.error('Error adding match:', error);
+                    });
+            } else {
+                setLoginModalOpen(true);
+            }
+        } else {
+            axios.delete(`${apiBaseUrl}/api/matches`, {
+                params: {
+                    centerID: adoptionCenter.centerID,
+                    userID: user.id
+                }
+            })
+                .then(() => {
+                    setLiked(false);
                 })
                 .catch(error => {
-                    console.error("Error fetching events:", error);
-                    setLoading(false);
+                    console.error('Error removing match:', error);
                 });
         }
-    }, [centerId]);
-
-    const handleOpenDescriptionModal = (event) => {
-        setCurrentEvent(event);
-        setOpenDescriptionModal(true);
     };
 
-    const handleCloseDescriptionModal = () => {
-        setOpenDescriptionModal(false);
-        setCurrentEvent(null);
-    };
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
-    if (loading) return <Typography variant="h6">Loading events...</Typography>;
+    // Function to navigate to events page
+    const navigateTo = (page) => {
+        router.push(page); // Use router.push() to navigate
+    }
 
     return (
-        <Box sx={{ padding: 4 }}>
-            <Typography variant="h4" gutterBottom>
-                Events for Adoption Center {centerId}
-            </Typography>
-            <Grid container spacing={3}>
-                {events.map((event) => (
-                    <Grid item xs={12} sm={6} md={4} key={event.id}>
-                        <Card elevation={3}>
-                            <CardMedia
-                                component="img"
-                                height="140"
-                                image={event.imageUrl}
-                                alt={event.title}
-                            />
-                            <CardContent>
-                                <Typography variant="h6">{event.title}</Typography>
-                                <Typography variant="body2" color="text.secondary">{event.date}</Typography>
-                                <Button
-                                    variant="outlined"
-                                    color="primary"
-                                    onClick={() => handleOpenDescriptionModal(event)}
-                                >
-                                    View Description
-                                </Button>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                ))}
-            </Grid>
+        <Box>
+            <Paper sx={{ width: 250, marginBottom: 10 }} elevation={3}>
+                <Grid container direction="column" alignItems="center" justifyContent="center" rowGap={2}>
 
-            {/* Description Modal */}
-            <Modal
-                open={openDescriptionModal}
-                onClose={handleCloseDescriptionModal}
-                aria-labelledby="description-modal-title"
-                aria-describedby="description-modal-description"
-            >
-                <Box sx={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: 400,
-                    bgcolor: 'background.paper',
-                    border: '2px solid #000',
-                    boxShadow: 24,
-                    p: 4,
-                }}>
-                    {currentEvent && (
-                        <>
-                            <Typography id="description-modal-title" variant="h6" component="h2">
-                                Description of {currentEvent.title}
-                            </Typography>
-                            <Typography id="description-modal-description" sx={{ mt: 2 }}>
-                                {currentEvent.description}
-                            </Typography>
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                onClick={handleCloseDescriptionModal}
-                                sx={{ mt: 2 }}
-                            >
-                                Close
+                    {/* Adoption Center Image */}
+                    <Box component="img" sx={{ width: 250, height: 120, objectFit: "cover" }} src={adoptionCenter.centerImageUrl} alt="Adoption center image" />
+
+                    {/* Adoption Center Info */}
+                    <Stack direction="column" alignItems="center">
+                        <Typography variant="h6" marginBottom={2}>{adoptionCenter.centerName}</Typography>
+                        <Stack direction="row" alignItems="center" spacing={1} marginLeft={-3}>
+                            <LocationOnIcon fontSize="11px" sx={{ color: theme.palette.primary.light }} />
+                            <Typography variant="body2">{adoptionCenter.centerAddress}</Typography>
+                        </Stack>
+                    </Stack>
+
+                    {/* Action Buttons */}
+                    <Grid container direction="column" alignItems="center" justifyContent="center" rowGap={2}>
+                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                            <Button variant="outlined" color="primary" href={adoptionCenter.homepage} target="_blank">
+                                Go to Homepage
                             </Button>
-                        </>
-                    )}
-                </Box>
-            </Modal>
+                            <Button variant="outlined" color="secondary" onClick={() => navigateTo(`/adoption-center-home/adoption-center-events/${adoptionCenter.centerID}`)} sx={{ width: 100 }}>
+                                View Events
+                            </Button>
+                        </Stack>
+                    </Grid>
+                </Grid>
+            </Paper>
+
+            {/* Modals */}
+            <PetInfoModal open={open} handleClose={handleClose} pet={adoptionCenter} />
+            <LoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
         </Box>
     );
 }

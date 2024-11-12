@@ -4,15 +4,17 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PetInfoModal from '@/components/pet-info-modal';
 import LoginModal from './login-modal';
 import axios from 'axios';
-import { useRouter } from 'next/router'; // Import useRouter
+import { useRouter } from 'next/router';
 
 export default function AdoptionCenterCard({ adoptionCenter, user }) {
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
-    const router = useRouter(); // Initialize the router
+    const router = useRouter();
 
     const [open, setOpen] = useState(false);
     const [isLoginModalOpen, setLoginModalOpen] = useState(false);
     const theme = useTheme();
+
+    const [liked, setLiked] = useState(false);
 
     // Handle pet liking functionality
     const handleLikedCenter = () => {
@@ -33,7 +35,7 @@ export default function AdoptionCenterCard({ adoptionCenter, user }) {
             }
         } else {
             axios.delete(`${apiBaseUrl}/api/matches`, {
-                data: {
+                params: {
                     centerID: adoptionCenter.centerID,
                     userID: user.id
                 }
@@ -52,14 +54,14 @@ export default function AdoptionCenterCard({ adoptionCenter, user }) {
 
     // Function to navigate to events page
     const navigateTo = (page) => {
-        router.push(page); // Use router.push() to navigate
-    }
+        console.log('Navigating to:', page);  // Log the full URL
+        router.push(page);
+    };
 
     return (
         <Box>
             <Paper sx={{ width: 250, marginBottom: 10 }} elevation={3}>
                 <Grid container direction="column" alignItems="center" justifyContent="center" rowGap={2}>
-
                     {/* Adoption Center Image */}
                     <Box component="img" sx={{ width: 250, height: 120, objectFit: "cover" }} src={adoptionCenter.centerImageUrl} alt="Adoption center image" />
 
@@ -78,7 +80,10 @@ export default function AdoptionCenterCard({ adoptionCenter, user }) {
                             <Button variant="outlined" color="primary" href={adoptionCenter.homepage} target="_blank">
                                 Go to Homepage
                             </Button>
-                            <Button variant="outlined" color="secondary" onClick={() => navigateTo('/adoption-center-home/adoption-center-events')} sx={{ width: 100 }}>
+                            <Button variant="outlined" color="secondary" onClick={() => {
+                                const eventPageUrl = `/adoption-center-home/adoption-center-events/${adoptionCenter.centerID}`;
+                                navigateTo(eventPageUrl);
+                            }} sx={{ width: 100 }}>
                                 View Events
                             </Button>
                         </Stack>
