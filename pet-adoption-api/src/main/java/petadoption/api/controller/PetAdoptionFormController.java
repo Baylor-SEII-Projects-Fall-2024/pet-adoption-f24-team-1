@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pet-adoption-forms")
-@CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://34.133.251.138:3000"})
 public class PetAdoptionFormController {
 
     @Autowired

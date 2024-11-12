@@ -1,5 +1,5 @@
 
-const AnimalBreeds = {
+export const AnimalBreeds = {
     DOG_BREEDS: [
         "Labrador Retriever",
         "German Shepherd",
@@ -45,5 +45,3 @@ const AnimalBreeds = {
         "Tonkinese"
       ]
 }
-  
-export default AnimalBreeds;

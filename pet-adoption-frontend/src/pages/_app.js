@@ -17,7 +17,7 @@ import '@/styles/globals.css'
 const store = createStore({
   authName:"__auth",
   authType:"cookie",
-  cookieDomain:'localhost',
+  cookieDomain:`${process.env.NEXT_PUBLIC_HOST}`,
   cookieSecure:false,
 })
 
