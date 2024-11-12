@@ -84,15 +84,10 @@ export default function ManagePets() {
 
 
   const loadData = () => {
-    fetch(`${apiBaseUrl}/api/pets`)  // Adjust this endpoint as per your backend
+    axios
+    .get(`${apiBaseUrl}/api/pets/${user.id}`)  // Adjust this endpoint as per your backend
     .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then((data) => {
-      setPets(data);  // Set the fetched data to state
+      setPets(response.data);
     })
     .catch((error) => {
       console.log(error);

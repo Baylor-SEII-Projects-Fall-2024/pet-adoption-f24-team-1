@@ -2,6 +2,7 @@ package petadoption.api.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import petadoption.api.pet.Pet;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,9 @@ public class EventService {
 
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
+    }
+    public List<Event> getAllEventsByAdminId(Long adminID) {
+        return eventRepository.findAllByAdminID(adminID);
     }
 
     public Event saveEvent(Event event) {

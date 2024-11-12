@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import petadoption.api.event.Event;
 import petadoption.api.event.EventService;
 import petadoption.api.event.*;
+import petadoption.api.pet.Pet;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,11 @@ public class EventController {
     @GetMapping
     public List<Event> getAllEvents() {
         return eventService.getAllEvents();
+    }
+    @GetMapping("/{adminID}")
+    public List<Event> getAllEvents(@PathVariable Long adminID ) {
+        System.out.println(eventService.getAllEventsByAdminId(adminID));
+        return eventService.getAllEventsByAdminId(adminID);
     }
 
     @PostMapping

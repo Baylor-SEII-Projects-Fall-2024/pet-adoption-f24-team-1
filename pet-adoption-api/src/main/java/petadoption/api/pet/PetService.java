@@ -15,6 +15,10 @@ public class PetService {
     public List<Pet> getAllPets() {
         return petRepository.findAll();
     }
+    public List<Pet> getAllPetsByAdminId(Long adminID) {
+        return petRepository.findAllByAdminID(adminID);
+    }
+
 
     public Pet savePet(Pet pet) {
         return petRepository.save(pet);

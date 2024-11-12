@@ -22,6 +22,11 @@ public class PetController {
     public List<Pet> getAllPets() {
         return petService.getAllPets();
     }
+    @GetMapping("/{adminID}")
+    public List<Pet> getAllPets(@PathVariable Long adminID ) {
+        System.out.println(petService.getAllPetsByAdminId(adminID));
+        return petService.getAllPetsByAdminId(adminID);
+    }
 
     @PostMapping
     public ResponseEntity<Pet> addPet(@RequestBody Pet pet) {

@@ -21,4 +21,5 @@ public class Event {
     private LocalDate date;
     private String description;
     private String location;
+    private Long centerID;
 }
