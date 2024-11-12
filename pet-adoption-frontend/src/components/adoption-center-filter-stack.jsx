@@ -59,11 +59,13 @@ export default function AdoptionCenterFilterStack(props) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+
     // Fetch adoption centers from API
     useEffect(() => {
         const fetchAdoptionCenters = async () => {
             try {
-                const response = await fetch('http://localhost:8080/api/adoptioncenters');
+                const response = await fetch(`${apiBaseUrl}/api/adoptioncenters`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch adoption centers');
                 }

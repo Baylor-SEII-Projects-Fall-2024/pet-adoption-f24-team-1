@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import petadoption.api.event.Event;
+import petadoption.api.notification.Notification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,10 @@ public class AdoptionCenter {
     // One-to-many relationship with Event
     @OneToMany(mappedBy = "adoptionCenter", cascade = CascadeType.ALL)
     private List<Event> events = new ArrayList<>();
+
+    @OneToMany(mappedBy = "adoptionCenter", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Notification> notifications = new ArrayList<>();
 
     // Method to add an event to this adoption center
     public void addEvent(Event event) {
