@@ -2,6 +2,7 @@ package petadoption.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import petadoption.api.recommendationEngine.DistancePet;
 import petadoption.api.recommendationEngine.RecommendationEngineService;
 import petadoption.api.pet.Pet;
 
@@ -15,8 +16,8 @@ public class RecommendationEngineController {
     @Autowired
     private RecommendationEngineService recommendationEngineService;
 
-    @GetMapping(value = "/{id}")
-    List<Pet> getRecommendedPets(@PathVariable Long id)  {
-        return recommendationEngineService.recommendationAlgorithm(id);
+    @GetMapping("/")
+    List<DistancePet> getRecommendedPets(@RequestParam Long id, @RequestParam String userLocation)  {
+        return recommendationEngineService.recommendationAlgorithm(id, userLocation);
     }
 }

@@ -25,7 +25,7 @@ public class AdoptionCenterService {
     }
 
     public ResponseEntity<AdoptionCenter> getAdoptionCenter(int id)  {
-        Optional<AdoptionCenter> center = adoptionCenterRepository.findById(Long.valueOf(id));
+        Optional<AdoptionCenter> center = adoptionCenterRepository.findById((long) id);
         return center
                 .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));

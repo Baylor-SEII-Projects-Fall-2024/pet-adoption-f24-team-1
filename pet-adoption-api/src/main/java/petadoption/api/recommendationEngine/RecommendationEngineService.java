@@ -1,14 +1,16 @@
 package petadoption.api.recommendationEngine;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import petadoption.api.adoptioncenter.AdoptionCenter;
+import petadoption.api.adoptioncenter.AdoptionCenterService;
+import petadoption.api.distanceMatrix.Distance;
+import petadoption.api.distanceMatrix.DistanceMatrixService;
 import petadoption.api.matches.MatchService;
 import petadoption.api.pet.Pet;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.lang.Math.round;
 
@@ -18,22 +20,39 @@ public class RecommendationEngineService {
     @Autowired
     private RecommendationEngineRepository recommendationEngineRepository;
 
+    @Autowired
+    private AdoptionCenterService adoptionCenterService;
+
+    @Autowired
+    private DistanceMatrixService distanceMatrixService;
+
     private final int TOP_SPECIES_SCORE = 150;
     private final int TOP_BREED_SCORE = 100;
     private final int TOP_COLOR_SCORE = 75;
     private final int TOP_GENDER_SCORE = 50;
     private final int TOP_SIZE_SCORE = 75;
 
-    public List<Pet> recommendationAlgorithm(Long userID)  {
+    public List<DistancePet> recommendationAlgorithm(Long userID, String userLocation)  {
         // Map of pets and their overall score
         Map<Pet, Integer> petScores = new HashMap<>();
 
         // Initial list of all pets in the database
         List<Pet> pets = recommendationEngineRepository.findAllNotMatched(userID);
 
+        // Get distances of adoption centers
+        Map<Integer, Integer> centerDistances = new HashMap<>();
+        if(!userLocation.isEmpty()) {
+            centerDistances = getCenterDistances(pets, userLocation);
+        }
+
         // If the user hasn't liked 5 pets yet, recommend randomly
         if(recommendationEngineRepository.findMatchCount(userID) < 5)  {
-            return pets;
+            List<DistancePet> petsWithDistance = new ArrayList<>();
+            for(Pet pet : pets)  {
+                DistancePet dp = new DistancePet(pet, -1);
+                petsWithDistance.add(dp);
+            }
+            return petsWithDistance;
         }
 
         // Get attributes and their frequency within user's matched pets
@@ -69,7 +88,7 @@ public class RecommendationEngineService {
                 .map(Map.Entry::getKey)
                 .toList();
 
-        return recommendedPets;
+        return mapPetDistances(recommendedPets, centerDistances);
     }
 
 
@@ -84,5 +103,33 @@ public class RecommendationEngineService {
             atrPoints = (int) round(atrPoints * 0.75);
         }
         return points;
+    }
+
+    // finds distance of adoption centers
+    public Map<Integer, Integer> getCenterDistances(List<Pet> pets, String userLocation)  {
+        // Key: centerId, Value: distance
+        Map<Integer, Integer> centerDistances = new HashMap<>();
+
+        for(Pet pet : pets) {
+            if(!centerDistances.containsKey(pet.getCenterID())) {
+                AdoptionCenter ac = adoptionCenterService.getAdoptionCenter(pet.getCenterID()).getBody();
+                assert ac != null;
+                String centerLocation = ac.getCenterAddress();
+                Integer distance = distanceMatrixService.getDistance(userLocation, centerLocation).getBody();
+                centerDistances.put(pet.getCenterID(), distance);
+            }
+        }
+        return centerDistances;
+    }
+
+    // Link distance to pet
+    public List<DistancePet> mapPetDistances(List<Pet> pets, Map<Integer, Integer> centerDistances)  {
+        List<DistancePet> petsWithDistance = new ArrayList<>();
+        for(Pet pet : pets)  {
+            DistancePet dp;
+            dp = new DistancePet(pet, centerDistances.getOrDefault(pet.getCenterID(), -1));
+            petsWithDistance.add(dp);
+        }
+        return petsWithDistance;
     }
 }
