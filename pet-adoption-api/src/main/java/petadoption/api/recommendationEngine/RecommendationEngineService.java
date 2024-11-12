@@ -2,6 +2,7 @@ package petadoption.api.recommendationEngine;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import petadoption.api.matches.MatchService;
 import petadoption.api.pet.Pet;
 
 import java.util.Comparator;
@@ -23,20 +24,23 @@ public class RecommendationEngineService {
     private final int TOP_GENDER_SCORE = 50;
     private final int TOP_SIZE_SCORE = 75;
 
-
     public List<Pet> recommendationAlgorithm(Long userID)  {
         // Map of pets and their overall score
         Map<Pet, Integer> petScores = new HashMap<>();
 
         // Initial list of all pets in the database
-        List<Pet> pets = recommendationEngineRepository.findAll();
+        List<Pet> pets = recommendationEngineRepository.findAllNotMatched(userID);
+
+        // If the user hasn't liked 5 pets yet, recommend randomly
+        if(recommendationEngineRepository.findMatchCount(userID) < 5)  {
+            return pets;
+        }
 
         // Get attributes and their frequency within user's matched pets
         List<AttributeFrequency> speciesFrequency = recommendationEngineRepository.findSpeciesFrequency(userID);
         List<AttributeFrequency> breedFrequency = recommendationEngineRepository.findBreedFrequency(userID);
         List<AttributeFrequency> colorFrequency = recommendationEngineRepository.findColorFrequency(userID);
         List<AttributeFrequency> genderFrequency = recommendationEngineRepository.findGenderFrequency(userID);
-
 
         // Loop through each pet and score it
         for(Pet pet : pets)  {
@@ -82,14 +86,3 @@ public class RecommendationEngineService {
         return points;
     }
 }
-
-
-/*
-            for(AttributeFrequency attributeFrequency : speciesFrequency)  {
-                if(pet.getPetSpecies().equals(attributeFrequency.getAttribute())) {
-                    score += speciesPoints;
-                    break;
-                }
-                speciesPoints = (int) round(speciesPoints * 0.75);
-            }
-            */

@@ -8,16 +8,19 @@ import DialogModal from './dialog-modal';
 import dynamic from "next/dynamic";
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import useSignOut from 'react-auth-kit/hooks/useSignOut';
+import ContrastIcon from '@mui/icons-material/Contrast';
+import { useThemeCust } from '@/utils/ThemeContext';
+
 
 const pages = ['Centers', 'Matches'];
 const settings = ['Settings', 'Logout'];
 const loginSettings = ['Login', 'Create Account'];
 
-
 function NavBar() {
   const router = useRouter();
   const user = useAuthUser();
   const signOut = useSignOut();
+  const { toggleTheme, isDarkMode } = useThemeCust();
   
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -130,6 +133,15 @@ function NavBar() {
               </Button>
             ))}
           </Box>
+
+          <Box sx={{ mr: 3 }}>
+            <Tooltip title={isDarkMode ? 'Light Mode' : 'Dark Mode'}>
+              <IconButton onClick={toggleTheme}>
+                <ContrastIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} >

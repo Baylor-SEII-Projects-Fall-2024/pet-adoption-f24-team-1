@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { Button, Card, CardContent, Stack, Typography, Grid, TextField, Container, Link, Paper, Box } from '@mui/material'
+import { Button, Card, CardContent, Stack, Typography, Grid, TextField, Container, Link, Paper, Box, Pagination } from '@mui/material'
 import styles from '@/styles/Home.module.css'
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
@@ -19,6 +19,8 @@ export default function UserHome() {
 
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [pets, setPets] = useState([]);
+  const [page, setPage] = useState(1);
+  const petsPerPage = 20;
 
   // Filters
   const [ageFltr, setAgeFltr] = useState([0, 30]);
@@ -44,7 +46,7 @@ export default function UserHome() {
       x.innerHTML = "Geolocation is not supported by this browser.";
     }
   }
-  /*
+  
   // Get location of user
   useEffect(() => {
     if (navigator.geolocation) {
@@ -61,25 +63,28 @@ export default function UserHome() {
       console.log("Geolocation is not supported by this browser");
     }
   }, []);
-  */
 
-  
-  const navigateTo = (page) => {
-    router.push(page);
-  }
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
 
   // Get pets from database
   useEffect(() => {
     const request = user ? `/api/recommendation/${user.id}` : '/api/pets'
     axios.get(`${apiBaseUrl}${request}`)
      .then(response => {
-        console.log(response.data);
         setPets(response.data);
       })
      .catch(error => {
         console.error('Error fetching pets:', error);
       });
   }, []);
+
+  const indexOfLastPet = page * petsPerPage;
+  const indexOfFirstPet = indexOfLastPet - petsPerPage;
+  const filteredPets = pets.filter(filters)
+  const currentPets = filteredPets.slice(indexOfFirstPet, indexOfLastPet);
+  const totalPages = Math.ceil(filteredPets.length / petsPerPage);
 
   return (
     <>
@@ -94,17 +99,19 @@ export default function UserHome() {
         
           <Stack direction="row" >
             <FilterStack ageFltr={ageFltr} breedFltr={breedFltr} speciesFltr={speciesFltr} weightFltr={weightFltr} genderFltr={genderFltr} setAgeFltr={setAgeFltr} setBreedFltr={setBreedFltr} setSpeciesFltr={setSpeciesFltr} setWeightFltr={setWeightFltr} setGenderFltr={setGenderFltr}/>
+
             <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2}>
-              {pets.filter(filters).map((pet) => (
+              {currentPets.map((pet) => (
                 <Grid item>
                   <PetCard key={pet.petID} pet={pet} user={user} liked={false} location={location} />
                 </Grid>
               ))}
             </Grid>
-            
-            
           </Stack>
-        
+
+          <Stack sx={{ paddingBottom: 10 }} alignItems='center'>
+            <Pagination count={totalPages} page={page} onChange={handlePageChange}/>
+          </Stack>
         </Stack>
       </main>
     </>

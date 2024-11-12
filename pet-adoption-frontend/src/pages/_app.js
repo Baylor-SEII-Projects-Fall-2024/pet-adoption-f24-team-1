@@ -12,6 +12,7 @@ import createStore from 'react-auth-kit/createStore';
 import AuthProvider from 'react-auth-kit/AuthProvider';
 
 import '@/styles/globals.css'
+import { ThemeContextProvider } from '@/utils/ThemeContext';
 
 // Initialize Auth
 const store = createStore({
@@ -35,12 +36,10 @@ export default function App({ Component, pageProps }) {
               <link rel='icon' href='/favicon.ico' />
             </Head>
 
-            <PetAdoptionThemeProvider>
-              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-              <CssBaseline />
-
+            <ThemeContextProvider>
+              <CssBaseline/>
               <Component {...pageProps} />
-            </PetAdoptionThemeProvider>
+            </ThemeContextProvider>
           </AppCacheProvider>
       </ReduxProvider>
     </AuthProvider>

@@ -9,9 +9,11 @@ import { useState, useEffect } from'react';
 import PetInfoModal from '@/components/pet-info-modal';
 import LoginModal from './login-modal';
 import axios from 'axios';
+import { useThemeCust } from '@/utils/ThemeContext';
 
 export default function PetCard(props) {
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+  const { toggleTheme, isDarkMode } = useThemeCust();
 
   const [liked, setLiked] = useState(props.liked);
   const [open, setOpen] = useState(false);
@@ -124,36 +126,46 @@ export default function PetCard(props) {
             <Stack direction={{ xs: 'column', sm: 'row'}} spacing={2}>
               <Stack justifyContent="space-between" direction="row" spacing={1} alignItems="center" sx={{width: 105}}>
                 <Typography variant="body2" align="left">Gender:</Typography>
-                <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex" }} alignItems="center" align="right" justifyContent="center">
-                  <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.pet.petGender}</Typography>
+                <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: "white"}}>
+                  <Box sx={{ borderRadius: 1, height: "100%", width: "100%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex" }} alignItems="center" align="right" justifyContent="center">
+                    <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.pet.petGender}</Typography>
+                  </Box>
                 </Box>
               </Stack>
               <Stack justifyContent="space-between" direction="row" spacing={1} alignItems="center" sx={{width: 105}}>
                 <Typography variant="body2" align="left">Age:</Typography>
-                <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex" }} alignItems="center" align="right" justifyContent="center">
-                  <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.pet.petAge} years</Typography>
+                <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: "white"}}>
+                  <Box sx={{ borderRadius: 1, height: "100%", width: "100%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex" }} alignItems="center" align="right" justifyContent="center">
+                    <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.pet.petAge} years</Typography>
+                  </Box>
                 </Box>
               </Stack>
             </Stack>  
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
               <Stack justifyContent="space-between" direction="row" spacing={1} alignItems="center" sx={{width: 105}}>
                 <Typography variant="body2" align="left">Breed:</Typography>
-                <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex", wordWrap: "break-word" }} alignItems="center" align="right" justifyContent="center">
-                  <Typography fontSize="10px" align="center" color={theme.palette.primary.dark}>{breed}</Typography>
+                <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: "white"}}>
+                  <Box sx={{ borderRadius: 1, height: "100%", width: "100%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex", wordWrap: "break-word" }} alignItems="center" align="right" justifyContent="center">
+                    <Typography fontSize="10px" align="center" color={theme.palette.primary.dark}>{breed}</Typography>
+                  </Box>
                 </Box>
               </Stack>
               <Stack justifyContent="space-between" direction="row" spacing={1} alignItems="center" sx={{width: 105}}>
                 <Typography variant="body2" align="left">Weight:</Typography>
-                <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex" }} alignItems="center" align="right" justifyContent="center">
-                  <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.pet.petWeight} kg</Typography>
+                <Box sx={{ borderRadius: 1, height: "110%", width: "110%", bgcolor: "white"}}>
+                  <Box sx={{ borderRadius: 1, height: "100%", width: "100%", bgcolor: alpha(theme.palette.primary.light, 0.30), display: "flex" }} alignItems="center" align="right" justifyContent="center">
+                    <Typography variant="caption" align="center" color={theme.palette.primary.dark}>{props.pet.petWeight} kg</Typography>
+                  </Box>
                 </Box>
               </Stack>
             </Stack>
           </Grid>
 
-          <Box sx={{ width: 200, height: 50 }}>
-            <Button onClick={handleOpen} sx={{ width: 200 }}variant="outlined" color="primary">Pet Info</Button>
-          </Box>
+          <Stack sx={{ width: 230, height: 50 }} direction="column" alignItems="center">
+            
+              <Button onClick={handleOpen} sx={{ width: 220, bgcolor: alpha(theme.palette.primary.light, 0.05), color: isDarkMode ? theme.palette.primary.light : theme.palette.primary.main }}variant="outlined">Pet Info</Button>
+            
+          </Stack>
         </Grid>
       </Paper>
 
