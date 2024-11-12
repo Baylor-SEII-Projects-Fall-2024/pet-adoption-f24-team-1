@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class DistanceMatrixService {
 
-    private final String GOOGLE_API_KEY = "AIzaSyBQS-ZROyq-WdQ3YYjXqaZWZ3AKMvOrxY0";
+    private final String GOOGLE_API_KEY = "";
 
     public ResponseEntity<Integer> getDistance(String origin, String destination) {
         String url = String.format(

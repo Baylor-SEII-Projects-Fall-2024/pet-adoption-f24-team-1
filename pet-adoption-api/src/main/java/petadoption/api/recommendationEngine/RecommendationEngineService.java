@@ -112,11 +112,11 @@ public class RecommendationEngineService {
 
         for(Pet pet : pets) {
             if(!centerDistances.containsKey(pet.getCenterID())) {
-                AdoptionCenter ac = adoptionCenterService.getAdoptionCenter(pet.getCenterID()).getBody();
+                AdoptionCenter ac = adoptionCenterService.getAdoptionCenter(Math.toIntExact(pet.getCenterID())).getBody();
                 assert ac != null;
                 String centerLocation = ac.getCenterAddress();
                 Integer distance = distanceMatrixService.getDistance(userLocation, centerLocation).getBody();
-                centerDistances.put(pet.getCenterID(), distance);
+                centerDistances.put(Math.toIntExact(pet.getCenterID()), distance);
             }
         }
         return centerDistances;
