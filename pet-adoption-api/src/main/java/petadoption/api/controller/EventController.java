@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import petadoption.api.event.Event;
 import petadoption.api.event.EventService;
 import petadoption.api.event.*;
-import petadoption.api.pet.Pet;
 
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = {"http://localhost:3000", "http://34.133.251.138:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
 @RequestMapping("/api/events")
 @RestController
 public class EventController {
@@ -23,11 +22,6 @@ public class EventController {
     @GetMapping
     public List<Event> getAllEvents() {
         return eventService.getAllEvents();
-    }
-    @GetMapping("/{adminID}")
-    public List<Event> getAllEvents(@PathVariable Long adminID ) {
-        System.out.println(eventService.getAllEventsByAdminId(adminID));
-        return eventService.getAllEventsByAdminId(adminID);
     }
 
     @PostMapping
@@ -40,7 +34,7 @@ public class EventController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Event updatedEvent) {
-        Optional<Event> eventOptional = eventService.findEventById(id);
+        Optional<Event> eventOptional = Optional.ofNullable(eventService.findEventById(id));
 
         if (eventOptional.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -48,10 +42,13 @@ public class EventController {
 
         Event event = eventOptional.get();
 
+        // Update all fields from the incoming `updatedEvent`
         event.setDate(updatedEvent.getDate());
         event.setDescription(updatedEvent.getDescription());
         event.setTitle(updatedEvent.getTitle());
         event.setLocation(updatedEvent.getLocation());
+        event.setImageUrl(updatedEvent.getImageUrl());  // Assuming you want to update image URL
+        event.setDetailsPage(updatedEvent.getDetailsPage());  // Assuming you want to update details page
 
         Event savedEvent = eventService.saveEvent(event);
         return new ResponseEntity<>(savedEvent, HttpStatus.OK);

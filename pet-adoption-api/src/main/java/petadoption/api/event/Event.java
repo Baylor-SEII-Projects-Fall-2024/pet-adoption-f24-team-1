@@ -1,18 +1,19 @@
 package petadoption.api.event;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import petadoption.api.adoptioncenter.AdoptionCenter;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "event")
+@Table(name = "events")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Event {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long eventID;
@@ -21,5 +22,18 @@ public class Event {
     private LocalDate date;
     private String description;
     private String location;
-    private Long centerID;
+
+    // Linking Event to AdoptionCenter
+    @ManyToOne
+    @JoinColumn(name = "adoption_center_id", referencedColumnName = "centerId")
+    @JsonIgnore  // Add this annotation to ignore the adoptionCenter during serialization
+    private AdoptionCenter adoptionCenter;
+
+    @Setter
+    @Getter
+    private String imageUrl;
+
+    @Setter
+    @Getter
+    private String detailsPage;
 }
