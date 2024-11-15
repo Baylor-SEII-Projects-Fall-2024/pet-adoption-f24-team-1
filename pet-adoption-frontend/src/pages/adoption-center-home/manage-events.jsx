@@ -10,6 +10,9 @@ import { useRouter } from 'next/router'
 import NavBar from '@/components/nav-bar';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
+import { styled, css } from '@mui/system';
+
+
 
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -58,13 +61,6 @@ export default function ManageEvents() {
       ...prevState,
       [name]: value
     }));
-    console.log(newEventData);
-    setIsFormValid(
-      newEventData.title !== '' &&
-      newEventData.date !== '' &&
-      newEventData.description !== '' &&
-      newEventData.location !== ''
-    );
   };  
 
 
@@ -114,8 +110,18 @@ export default function ManageEvents() {
       return eventsData.find(event => event.id === eventID);
     }
 
+
+    useEffect(() => {
+      setIsFormValid(
+        (newEventData.title || '').trim() !== '' &&
+        (newEventData.date || '').trim() !== '' &&
+        (newEventData.description || '').trim() !== '' &&
+        (newEventData.location || '').trim() !== ''
+      );
+    }, [newEventData]);
+    
   const handleInsertEvent = () => {
-    // if(isFormValid){
+    if(isFormValid){
     newEventData.centerID = adoptionCenter.centerId;
     console.log(newEventData)
     axios.post(`${apiBaseUrl}/api/events`, newEventData )
@@ -126,7 +132,25 @@ export default function ManageEvents() {
       .catch(error => {
         console.error("Insert Failed:", error);
       });
+    }else{
+      let str = "";
+
+      if((newEventData.title || '').trim() === ''){
+        str+=" title"
+      }
+      if((newEventData.date  || '').trim() === ''){
+        str+=" date"
+      }
+      if((newEventData.description || '').toString().trim() === ''){
+        str+=" description"
+      }
+      if((newEventData.location || '').trim() === ''){
+        str+=" location"
+      }
+
+      alert(`Please provide proper input for:${str}`);
     }
+  }
 
   const handleInsertDialogOpen = () => {
     setOpenInsertDialog(true);
@@ -231,7 +255,6 @@ export default function ManageEvents() {
             <Button variant='contained' color="primary" onClick={() => handleUpdateDialogOpen()} className={styles.wideButton}>UPDATE</Button>
             <Button variant='contained' color="primary" onClick={() => handleDeleteEvents()} className={styles.wideButton}>DELETE</Button>
             <Button variant='contained' color="primary" onClick={() => handleInsertDialogOpen()}>INSERT</Button>            
-            {/* <Button variant='contained' color="primary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button> */}
           </Stack>
         </Stack>
         <Dialog open={openInsertDialog} onClose={handleDialogClose}>
@@ -240,9 +263,6 @@ export default function ManageEvents() {
             <DialogContentText>
               Please enter the details of the event you want to insert.
             </DialogContentText>
-  {/* //date; 
-  //description;
-  //location; */}
             <TextField margin="dense" name="title" label="Title"  type="text" fullWidth variant="outlined" value={newEventData.title} onChange={handleInputChange}/>
             <TextField margin="dense" name="date"  type="date" fullWidth variant="outlined" value={newEventData.date} onChange={handleInputChange}/>
             <TextField margin="dense" name="description" label="Description"  type="text" fullWidth variant="outlined" value={newEventData.description} onChange={handleInputChange}/>
