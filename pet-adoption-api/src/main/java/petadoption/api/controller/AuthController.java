@@ -123,7 +123,7 @@ public class AuthController {
 
         adminRepository.save(admin);
 
-        return  new ResponseEntity<>("Admin registered success!", HttpStatus.OK);
+        return new ResponseEntity<>("Admin registered success!", HttpStatus.OK);
     }
 
     @PostMapping("login/admin")

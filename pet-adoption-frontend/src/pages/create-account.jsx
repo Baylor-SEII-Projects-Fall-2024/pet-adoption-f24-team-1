@@ -58,7 +58,7 @@ const CreateAccountPage = () => {
         const result = await loginUser(values.email, values.password, signIn);
         router.push("/set-user-preferences");
       } catch (error) {
-        alert("Login failed: " + error.message);
+        alert("Login failed: " + error);
       }
     } catch (error) {
       formik.setFieldError('email', "This email is already registered");

@@ -129,7 +129,7 @@ const AdoptionCenterRegisterPage = () => {
             console.log(response.data.centerId);
             return response.data.centerId;
         } catch (error) {
-            alert("Adoption Center Registration failed: " + error.message);
+            alert("Adoption Center Registration failed: " + error);
             return -1;
         }
     };
@@ -153,10 +153,10 @@ const AdoptionCenterRegisterPage = () => {
                     const result = await loginAdmin(email, password, signIn);
                     router.push("/adoption-center-home");
                 } catch (error) {
-                    alert("Admin login failed: " + error.message);
+                    alert("Admin login failed: " + error);
                 }
             } catch (error) {
-                alert("Admin register failed: " + error.message);
+                alert("Admin register failed: " + error);
             }
         }
       };
