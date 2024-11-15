@@ -17,6 +17,8 @@ const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 export default function ManagePets() {
   const user = useAuthUser();
   const [adoptionCenter, setAdoptionCenter] = useState(null);
+  const [isFormValid, setIsFormValid] = useState(false);
+
 
   useEffect(() => {
     axios.get(`${apiBaseUrl}/api/admins/center/${user.id}`)
@@ -76,7 +78,6 @@ export default function ManagePets() {
       ...prevState,
       [name]: value
     }));
-    console.log(newPetData);
   };  
 
 
@@ -134,7 +135,21 @@ export default function ManagePets() {
     return petsData.find(pet => pet.id === petId);
   }
 
+  useEffect(() => {
+    setIsFormValid(
+    (newPetData.petName || '').trim() !== '' &&
+    (newPetData.petBreed || '').trim() !== '' &&
+    (newPetData.petGender || '').trim() !== '' &&
+    (newPetData.petAge || '').toString().trim() !== '' &&
+    (newPetData.petWeight || '').toString().trim() !== '' &&
+    (newPetData.petSpecies || '').trim() !== '' &&
+    (newPetData.color || '').trim() !== ''
+    );
+  }, [newPetData]);
+  
+
   const handleInsertPet = () => {
+    if(isFormValid){
     newPetData.imgUrl = imgUrl;
     newPetData.centerID = adoptionCenter.centerId;
     console.log(newPetData)
@@ -147,6 +162,33 @@ export default function ManagePets() {
         console.error("Insert Failed:", error);
         //setErrorMessage("Insert Failed: " + error.message);
       });
+    }else{
+      let str = "";
+
+      if((newPetData.petName || '').trim() === ''){
+        str+=" name"
+      }
+      if((newPetData.petBreed || '').trim() === ''){
+        str+=" breed"
+      }
+      if((newPetData.petGender || '').trim() === ''){
+        str+=" gender"
+      }
+      if((newPetData.petAge || '').toString().trim() === ''){
+        str+=" age"
+      }
+      if((newPetData.petWeight || '').toString().trim() === ''){
+        str+=" weight"
+      }
+      if((newPetData.petSpecies || '').trim() === ''){
+        str+=" species"
+      }
+      if((newPetData.color || '').trim() === ''){
+        str+=" color"
+      }
+
+      alert(`Please provide proper input for:${str}`);
+    }
   };
   const handleInsertDialogOpen = () => {
     setOpenInsertDialog(true);
@@ -245,7 +287,7 @@ export default function ManagePets() {
           <Stack s1 = {{direction:'column', spacing:'2'}}>
             <Button variant='contained' color="primary" onClick={() => handleUpdateDialogOpen()} className={styles.wideButton}>UPDATE</Button>
             <Button variant='contained' color="primary" onClick={() => handleDeletePets()} className={styles.wideButton}>DELETE</Button>
-            <Button variant='contained' color="primary" onClick={() => handleInsertDialogOpen()}>Insert Pets</Button>            
+            <Button variant='contained' color="primary" onClick={() => handleInsertDialogOpen()}>INSERT</Button>            
             {/* <Button variant='contained' color="primary" onClick={() => navigateTo()} className={styles.wideButton}>LOAD DATA</Button> */}
           </Stack>
         </Stack>
@@ -262,7 +304,6 @@ export default function ManagePets() {
             <TextField margin="dense"name="petWeight"label="Weight (kg)"type="number" fullWidthvariant="outlined"value={newPetData.petWeight}onChange={handleInputChange}/>
             <TextField margin="dense"name="petSpecies"label="Species"type="text"fullWidth variant="outlined"value={newPetData.petSpecies}onChange={handleInputChange}/>
             <TextField margin="dense"name="color"label="Color"type="text"fullWidth variant="outlined"value={newPetData.color}onChange={handleInputChange}/>
-
             <Box sx={{ width: 200, height: 50 }}>
               <ImageDropzone newPetData={newPetData} imgUrl={imgUrl} setImgUrl={setImgUrl}/>
             </Box>
