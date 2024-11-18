@@ -7384,3 +7384,194 @@ java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" bec
 2024-11-18T17:26:47.360-06:00  INFO 17103 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-11-18T17:26:47.372-06:00  INFO 17103 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-11-18T17:26:47.408-06:00  INFO 17103 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-11-18T17:47:32.783-06:00  INFO 17758 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 17758 (/Users/jakemauldin/Desktop/SWE2/template-project/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by jakemauldin in /Users/jakemauldin/Desktop/SWE2/template-project/pet-adoption-f24-team-1/pet-adoption-api)
+2024-11-18T17:47:32.785-06:00  INFO 17758 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-11-18T17:47:33.279-06:00  INFO 17758 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-18T17:47:33.326-06:00  INFO 17758 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 42 ms. Found 10 JPA repository interfaces.
+2024-11-18T17:47:33.673-06:00  INFO 17758 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-11-18T17:47:33.682-06:00  INFO 17758 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-18T17:47:33.682-06:00  INFO 17758 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-11-18T17:47:33.713-06:00  INFO 17758 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-18T17:47:33.713-06:00  INFO 17758 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 888 ms
+2024-11-18T17:47:33.777-06:00  INFO 17758 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-18T17:47:34.052-06:00  INFO 17758 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@76a9a009
+2024-11-18T17:47:34.053-06:00  INFO 17758 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-18T17:47:34.112-06:00  INFO 17758 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-18T17:47:34.150-06:00  INFO 17758 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-11-18T17:47:34.173-06:00  INFO 17758 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-18T17:47:34.406-06:00  INFO 17758 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-18T17:47:35.274-06:00  INFO 17758 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-18T17:47:35.336-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : alter table pet modify column centerid bigint
+2024-11-18T17:47:35.498-06:00  INFO 17758 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-18T17:47:35.779-06:00  INFO 17758 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-18T17:47:36.159-06:00  INFO 17758 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-11-18T17:47:36.307-06:00  WARN 17758 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-18T17:47:36.656-06:00  INFO 17758 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-11-18T17:47:36.664-06:00  INFO 17758 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 4.357 seconds (process running for 5.687)
+2024-11-18T17:47:36.666-06:00  INFO 17758 --- [main] p.api.adoptioncenter.DataInitializer     : Initializing data...
+2024-11-18T17:47:36.720-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : select ac1_0.center_id,ac1_0.center_address,ac1_0.center_email,ac1_0.center_image_url,ac1_0.center_name,ac1_0.center_phone,ac1_0.zip_code from adoption_centers ac1_0
+2024-11-18T17:47:36.740-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : select e1_0.adoption_center_id,e1_0.eventid,e1_0.date,e1_0.description,e1_0.details_page,e1_0.image_url,e1_0.location,e1_0.title from events e1_0 where e1_0.adoption_center_id=?
+2024-11-18T17:47:36.748-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : select n1_0.center_id,n1_0.id,n1_0.is_read,n1_0.message,paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.duration_time,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.pet_id,paf1_0.phone_number,paf1_0.user_id,n1_0.timestamp,n1_0.title from notifications n1_0 left join pet_adoption_form paf1_0 on paf1_0.id=n1_0.form_id where n1_0.center_id=?
+2024-11-18T17:47:36.751-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : select e1_0.adoption_center_id,e1_0.eventid,e1_0.date,e1_0.description,e1_0.details_page,e1_0.image_url,e1_0.location,e1_0.title from events e1_0 where e1_0.adoption_center_id=?
+2024-11-18T17:47:36.753-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : select n1_0.center_id,n1_0.id,n1_0.is_read,n1_0.message,paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.duration_time,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.pet_id,paf1_0.phone_number,paf1_0.user_id,n1_0.timestamp,n1_0.title from notifications n1_0 left join pet_adoption_form paf1_0 on paf1_0.id=n1_0.form_id where n1_0.center_id=?
+2024-11-18T17:47:36.764-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : delete from events where eventid=?
+2024-11-18T17:47:36.767-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : delete from events where eventid=?
+2024-11-18T17:47:36.768-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : delete from events where eventid=?
+2024-11-18T17:47:36.770-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : delete from adoption_centers where center_id=?
+2024-11-18T17:47:36.772-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : delete from events where eventid=?
+2024-11-18T17:47:36.773-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : delete from events where eventid=?
+2024-11-18T17:47:36.774-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : delete from events where eventid=?
+2024-11-18T17:47:36.775-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : delete from adoption_centers where center_id=?
+2024-11-18T17:47:36.788-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : select next_val as id_val from center_generator for update
+2024-11-18T17:47:36.790-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : update center_generator set next_val= ? where next_val=?
+2024-11-18T17:47:36.797-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : select next_val as id_val from events_seq for update
+2024-11-18T17:47:36.798-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : update events_seq set next_val= ? where next_val=?
+2024-11-18T17:47:36.804-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : insert into adoption_centers (center_address,center_email,center_image_url,center_name,center_phone,zip_code,center_id) values (?,?,?,?,?,?,?)
+2024-11-18T17:47:36.808-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : insert into events (adoption_center_id,date,description,details_page,image_url,location,title,eventid) values (?,?,?,?,?,?,?,?)
+2024-11-18T17:47:36.811-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : insert into events (adoption_center_id,date,description,details_page,image_url,location,title,eventid) values (?,?,?,?,?,?,?,?)
+2024-11-18T17:47:36.812-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : insert into events (adoption_center_id,date,description,details_page,image_url,location,title,eventid) values (?,?,?,?,?,?,?,?)
+2024-11-18T17:47:36.813-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : insert into adoption_centers (center_address,center_email,center_image_url,center_name,center_phone,zip_code,center_id) values (?,?,?,?,?,?,?)
+2024-11-18T17:47:36.814-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : insert into events (adoption_center_id,date,description,details_page,image_url,location,title,eventid) values (?,?,?,?,?,?,?,?)
+2024-11-18T17:47:36.815-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : insert into events (adoption_center_id,date,description,details_page,image_url,location,title,eventid) values (?,?,?,?,?,?,?,?)
+2024-11-18T17:47:36.816-06:00 DEBUG 17758 --- [main] org.hibernate.SQL                        : insert into events (adoption_center_id,date,description,details_page,image_url,location,title,eventid) values (?,?,?,?,?,?,?,?)
+2024-11-18T17:47:36.821-06:00  INFO 17758 --- [main] p.api.adoptioncenter.DataInitializer     : Database initialized with updated adoption centers and events.
+2024-11-18T17:47:41.366-06:00  INFO 17758 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-18T17:47:41.366-06:00  INFO 17758 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-11-18T17:47:41.369-06:00  INFO 17758 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2024-11-18T17:47:41.430-06:00 DEBUG 17758 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-11-18T17:47:41.430-06:00 DEBUG 17758 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-11-18T17:47:41.441-06:00 DEBUG 17758 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0 where not exists(select 1 from matches m1_0 where m1_0.userid=? and p1_0.petid=m1_0.petid)
+2024-11-18T17:47:41.472-06:00 DEBUG 17758 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select count(*) from matches m1_0 where m1_0.userid=?
+2024-11-18T17:47:41.479-06:00 DEBUG 17758 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-11-18T17:47:41.479-06:00 DEBUG 17758 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-11-18T17:47:41.498-06:00 DEBUG 17758 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT pet_species AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
+2024-11-18T17:47:41.516-06:00 DEBUG 17758 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT pet_breed AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
+2024-11-18T17:47:41.521-06:00 DEBUG 17758 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT color AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
+2024-11-18T17:47:41.524-06:00 DEBUG 17758 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT pet_gender AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
+2024-11-18T17:47:41.570-06:00 DEBUG 17758 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0 where not exists(select 1 from matches m1_0 where m1_0.userid=? and p1_0.petid=m1_0.petid)
+2024-11-18T17:47:41.598-06:00 DEBUG 17758 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select count(*) from matches m1_0 where m1_0.userid=?
+2024-11-18T17:47:41.602-06:00 DEBUG 17758 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT pet_species AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
+2024-11-18T17:47:41.612-06:00 DEBUG 17758 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT pet_breed AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
+2024-11-18T17:47:41.622-06:00 DEBUG 17758 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT color AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
+2024-11-18T17:47:41.627-06:00 DEBUG 17758 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT pet_gender AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
+2024-11-18T17:47:45.318-06:00 DEBUG 17758 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0 where not exists(select 1 from matches m1_0 where m1_0.userid=? and p1_0.petid=m1_0.petid)
+2024-11-18T17:47:45.348-06:00 DEBUG 17758 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : select ac1_0.center_id,ac1_0.center_address,ac1_0.center_email,ac1_0.center_image_url,ac1_0.center_name,ac1_0.center_phone,ac1_0.zip_code from adoption_centers ac1_0 where ac1_0.center_id=?
+2024-11-18T17:47:45.825-06:00 DEBUG 17758 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : select count(*) from matches m1_0 where m1_0.userid=?
+2024-11-18T17:47:45.828-06:00 DEBUG 17758 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT pet_species AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
+2024-11-18T17:47:45.831-06:00 DEBUG 17758 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT pet_breed AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
+2024-11-18T17:47:45.833-06:00 DEBUG 17758 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT color AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
+2024-11-18T17:47:45.836-06:00 DEBUG 17758 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT pet_gender AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
+2024-11-18T17:47:45.847-06:00 ERROR 17758 --- [http-nio-8080-exec-7] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "java.util.Map.getOrDefault(Object, Object)" is null] with root cause
+
+java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "java.util.Map.getOrDefault(Object, Object)" is null
+	at petadoption.api.recommendationEngine.RecommendationEngineService.mapPetDistances(RecommendationEngineService.java:134) ~[main/:na]
+	at petadoption.api.recommendationEngine.RecommendationEngineService.recommendationAlgorithm(RecommendationEngineService.java:92) ~[main/:na]
+	at petadoption.api.controller.RecommendationEngineController.getRecommendedPets(RecommendationEngineController.java:21) ~[main/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:181) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at petadoption.api.security.JWTAuthenticationFilter.doFilterInternal(JWTAuthenticationFilter.java:40) ~[main/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at java.base/java.lang.Thread.run(Thread.java:1570) ~[na:na]
+
+2024-11-18T17:48:39.584-06:00  INFO 17758 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-18T17:48:39.591-06:00  INFO 17758 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-11-18T17:48:39.622-06:00  INFO 17758 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
