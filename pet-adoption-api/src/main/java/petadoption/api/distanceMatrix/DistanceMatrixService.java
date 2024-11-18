@@ -1,5 +1,6 @@
 package petadoption.api.distanceMatrix;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,11 +10,10 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class DistanceMatrixService {
 
-    @Autowired
-    private Environment env;
+    @Value("${GOOGLE_API_KEY:default}")
+    private String GOOGLE_API_KEY;
 
     public ResponseEntity<Integer> getDistance(String origin, String destination) {
-        final String GOOGLE_API_KEY = env.getProperty("google.api.key");
         String url = String.format(
                 "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=%s&destinations=%s&key=%s",
                 origin, destination, GOOGLE_API_KEY

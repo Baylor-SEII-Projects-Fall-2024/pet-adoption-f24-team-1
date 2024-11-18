@@ -40,7 +40,7 @@ public class RecommendationEngineService {
         List<Pet> pets = recommendationEngineRepository.findAllNotMatched(userID);
 
         // Get distances of adoption centers
-        Map<Integer, Integer> centerDistances = new HashMap<>();
+        Map<Long, Integer> centerDistances = new HashMap<>();
         if(!userLocation.isEmpty()) {
             centerDistances = getCenterDistances(pets, userLocation);
         }
@@ -78,10 +78,11 @@ public class RecommendationEngineService {
             // Add pet and final score to map
             petScores.put(pet, score);
         }
-
+        /*
         for(Map.Entry<Pet,Integer> entry : petScores.entrySet()) {
             System.out.println("Name = " + entry.getKey().getPetName() + ", Score = " + entry.getValue());
         }
+         */
 
         List<Pet> recommendedPets = petScores.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
@@ -106,24 +107,27 @@ public class RecommendationEngineService {
     }
 
     // finds distance of adoption centers
-    public Map<Integer, Integer> getCenterDistances(List<Pet> pets, String userLocation)  {
+    public Map<Long, Integer> getCenterDistances(List<Pet> pets, String userLocation)  {
         // Key: centerId, Value: distance
-        Map<Integer, Integer> centerDistances = new HashMap<>();
+        Map<Long, Integer> centerDistances = new HashMap<>();
 
         for(Pet pet : pets) {
             if(!centerDistances.containsKey(pet.getCenterID())) {
-                AdoptionCenter ac = adoptionCenterService.getAdoptionCenter(Math.toIntExact(pet.getCenterID())).getBody();
-                assert ac != null;
-                String centerLocation = ac.getCenterAddress();
+                AdoptionCenter ac = adoptionCenterService.getAdoptionCenter(pet.getCenterID()).getBody();
+
+                String centerLocation = null;
+                if (ac != null) {
+                    centerLocation = ac.getCenterAddress();
+                }
                 Integer distance = distanceMatrixService.getDistance(userLocation, centerLocation).getBody();
-                centerDistances.put(Math.toIntExact(pet.getCenterID()), distance);
+                centerDistances.put(pet.getCenterID(), distance);
             }
         }
         return centerDistances;
     }
 
     // Link distance to pet
-    public List<DistancePet> mapPetDistances(List<Pet> pets, Map<Integer, Integer> centerDistances)  {
+    public List<DistancePet> mapPetDistances(List<Pet> pets, Map<Long, Integer> centerDistances)  {
         List<DistancePet> petsWithDistance = new ArrayList<>();
         for(Pet pet : pets)  {
             DistancePet dp;

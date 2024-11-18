@@ -29,7 +29,7 @@ public class AdoptionCenterController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<AdoptionCenter> getAdoptionCenter(@PathVariable int id) {
+    public ResponseEntity<AdoptionCenter> getAdoptionCenter(@PathVariable Long id) {
         return adoptionCenterService.getAdoptionCenter(id);
     }
 
