@@ -12,6 +12,8 @@ export default function AdoptionCenterEventsPage() {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [openDialog, setOpenDialog] = useState(false);
 
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+
     const router = useRouter();
     const { centerId: queryCenterId } = router.query;
 
@@ -26,7 +28,7 @@ export default function AdoptionCenterEventsPage() {
             setLoading(true);
             setError(null);
 
-            fetch(`http://localhost:8080/api/adoptioncenters/${centerId}/events`)
+            fetch(`${apiBaseUrl}/api/adoptioncenters/${centerId}/events`)
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error('Failed to fetch events');
