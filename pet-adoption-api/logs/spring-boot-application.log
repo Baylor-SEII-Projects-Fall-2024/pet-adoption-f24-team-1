@@ -5818,3 +5818,95 @@ java.lang.IllegalArgumentException: Could not resolve placeholder 'GOOGLE_API_KE
 2024-11-18T16:44:28.727-06:00 DEBUG 15931 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT pet_breed AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
 2024-11-18T16:44:28.729-06:00 DEBUG 15931 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT color AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
 2024-11-18T16:44:28.731-06:00 DEBUG 15931 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : SELECT attribute, COUNT(*) as frequency FROM (SELECT pet_gender AS attribute FROM pet p JOIN matches m ON p.petid = m.petid WHERE m.userid = ?) as matchedPets GROUP BY attribute ORDER BY frequency DESC
+=======
+2024-11-14T09:06:27.195-06:00  INFO 72670 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 72670 (/Users/jakemauldin/Desktop/SWE2/template-project/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by jakemauldin in /Users/jakemauldin/Desktop/SWE2/template-project/pet-adoption-f24-team-1/pet-adoption-api)
+2024-11-14T09:06:27.201-06:00  INFO 72670 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-11-14T09:06:27.723-06:00  INFO 72670 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-14T09:06:27.770-06:00  INFO 72670 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 42 ms. Found 9 JPA repository interfaces.
+2024-11-14T09:06:28.116-06:00  INFO 72670 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-11-14T09:06:28.125-06:00  INFO 72670 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-14T09:06:28.125-06:00  INFO 72670 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-11-14T09:06:28.157-06:00  INFO 72670 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-14T09:06:28.157-06:00  INFO 72670 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 902 ms
+2024-11-14T09:06:28.221-06:00  INFO 72670 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-14T09:06:28.578-06:00  INFO 72670 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7b297740
+2024-11-14T09:06:28.579-06:00  INFO 72670 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-14T09:06:28.645-06:00  INFO 72670 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-14T09:06:28.690-06:00  INFO 72670 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-11-14T09:06:28.715-06:00  INFO 72670 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-14T09:06:28.962-06:00  INFO 72670 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-14T09:06:29.957-06:00  INFO 72670 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-14T09:06:30.139-06:00  INFO 72670 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-14T09:06:30.468-06:00  INFO 72670 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-11-14T09:06:30.535-06:00  INFO 72670 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-14T09:06:31.034-06:00  WARN 72670 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-14T09:06:31.410-06:00  INFO 72670 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-11-14T09:06:31.417-06:00  INFO 72670 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 5.005 seconds (process running for 6.474)
+2024-11-14T09:06:39.944-06:00  INFO 72670 --- [http-nio-8080-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-14T09:06:39.945-06:00  INFO 72670 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-11-14T09:06:39.948-06:00  INFO 72670 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2024-11-14T09:06:40.049-06:00 DEBUG 72670 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-11-14T09:06:40.049-06:00 DEBUG 72670 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-11-14T09:06:40.050-06:00 DEBUG 72670 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-11-14T09:06:40.089-06:00 DEBUG 72670 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-11-14T09:06:40.089-06:00 DEBUG 72670 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-11-14T09:06:40.133-06:00 DEBUG 72670 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-11-14T09:06:40.157-06:00 DEBUG 72670 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-11-14T10:31:51.848-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m52s511ms).
+2024-11-14T10:36:24.392-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m32s568ms).
+2024-11-14T10:48:57.496-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m33s15ms).
+2024-11-14T10:52:22.937-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m55s426ms).
+2024-11-14T10:54:31.438-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m8s480ms).
+2024-11-14T10:55:48.554-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=47s110ms).
+2024-11-14T10:57:39.609-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m51s54ms).
+2024-11-14T10:58:26.595-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46s986ms).
+2024-11-14T10:59:17.360-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=50s765ms).
+2024-11-14T11:39:57.351-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=40m39s991ms).
+2024-11-14T11:52:35.838-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m38s487ms).
+2024-11-14T11:55:03.362-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m27s505ms).
+2024-11-14T11:56:52.733-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m49s371ms).
+2024-11-14T12:05:45.468-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m22s726ms).
+2024-11-14T12:07:19.827-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m34s361ms).
+2024-11-14T12:12:18.392-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m19s916ms).
+2024-11-14T12:14:33.251-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m14s859ms).
+2024-11-14T12:42:25.066-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=27m51s815ms).
+2024-11-14T12:47:25.416-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m254ms).
+2024-11-14T13:40:37.992-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m12s223ms).
+2024-11-14T13:41:40.117-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m2s125ms).
+2024-11-14T14:18:51.751-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m41s442ms).
+2024-11-14T14:22:19.601-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m27s855ms).
+2024-11-14T14:25:06.442-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m46s839ms).
+2024-11-14T14:56:44.604-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m8s25ms).
+2024-11-14T14:58:22.432-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m37s829ms).
+2024-11-14T15:00:29.199-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m6s766ms).
+2024-11-14T15:01:47.619-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m18s420ms).
+2024-11-14T15:03:38.007-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m50s388ms).
+2024-11-14T15:19:36.673-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m58s667ms).
+2024-11-14T15:33:40.471-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m33s780ms).
+2024-11-14T16:27:45.894-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=54m5s423ms).
+2024-11-14T16:55:29.785-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=27m43s891ms).
+2024-11-14T17:01:35.598-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m5s813ms).
+2024-11-14T17:13:38.955-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m3s357ms).
+2024-11-14T17:14:30.374-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51s419ms).
+2024-11-14T17:15:23.356-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=52s982ms).
+2024-11-14T17:17:23.505-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m149ms).
+2024-11-14T17:18:20.788-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=57s283ms).
+2024-11-14T17:19:10.373-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=49s585ms).
+2024-11-14T17:20:30.100-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48s946ms).
+2024-11-14T17:22:37.568-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m7s469ms).
+2024-11-14T17:23:28.789-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51s216ms).
+2024-11-14T17:29:13.641-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m52s618ms).
+2024-11-14T17:32:21.858-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m43s960ms).
+2024-11-14T17:36:29.075-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m33s903ms).
+2024-11-14T17:38:17.439-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m48s360ms).
+2024-11-14T17:39:37.895-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m20s459ms).
+2024-11-14T17:49:24.934-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m44s85ms).
+2024-11-14T17:51:05.975-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m10s422ms).
+2024-11-14T17:52:09.095-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m3s120ms).
+2024-11-14T17:53:55.408-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m6s916ms).
+2024-11-14T17:55:22.622-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=54s529ms).
+2024-11-14T18:02:41.681-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m44s264ms).
+2024-11-14T18:38:01.357-06:00  WARN 72670 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=35m19s674ms).
+2024-11-14T18:40:50.568-06:00  INFO 72670 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-14T18:40:50.608-06:00  INFO 72670 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-11-14T18:40:50.677-06:00  INFO 72670 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

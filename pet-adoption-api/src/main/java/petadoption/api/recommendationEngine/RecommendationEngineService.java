@@ -28,7 +28,7 @@ public class RecommendationEngineService {
 
     private final int TOP_SPECIES_SCORE = 150;
     private final int TOP_BREED_SCORE = 100;
-    private final int TOP_COLOR_SCORE = 75;
+    private final int TOP_COLOR_SCORE = 50;
     private final int TOP_GENDER_SCORE = 50;
     private final int TOP_SIZE_SCORE = 75;
 
