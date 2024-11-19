@@ -4,9 +4,9 @@ import org.simplejavamail.api.email.Email;
 import org.simplejavamail.api.mailer.config.TransportStrategy;
 import org.simplejavamail.email.*;
 import org.simplejavamail.mailer.MailerBuilder;
-//import org.simplejavamail.email.EmailBuilder;
+import org.simplejavamail.email.EmailBuilder;
 //import org.simplejavamail.mailer.Mailer;
-//import org.simplejavamail.mailer.MailerBuilder;
+import org.simplejavamail.mailer.MailerBuilder;
 //import org.simplejavamail.mailer.config.TransportStrategy;
 
 

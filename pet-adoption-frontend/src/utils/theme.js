@@ -1,10 +1,7 @@
 import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material';
 
-// This file lets you modify the global theme of your project. Any changes here will affect all
-// Material UI components throughout your website. Correspondingly, this is where you would set
-// up your color palette, standard spacings, etc.
-const themeOptions = {
+const lightTheme = createTheme({
     typography: {
         fontFamily: 'Roboto, Noto Sans, sans-serif',
         fontSize: 14,
@@ -26,7 +23,8 @@ const themeOptions = {
                     marginBottom: 4,
                 },
                 outlinedPrimary: {
-                    border: '2px solid'
+                    border: '2px solid',
+                    borderRadius: '20px'
                 },
                 outlinedSecondary: {
                     border: '2px solid'
@@ -36,12 +34,12 @@ const themeOptions = {
     },
     palette: {
         primary: {
-            main: '#008CBA',
-            light: '#4CAF50',
-            dark: '#004575',
+            main: '#08352D',
+            light: '#158F78',
+            dark: '#062822',
         },
         secondary: {
-            main: '#f44336',
+            main: '#0F6153',
             light: '#ff9800',
             dark: '#b71c1c',
         },
@@ -49,14 +47,62 @@ const themeOptions = {
             default: '#f5f5f5',
         }
     }
-};
+});
 
-export const theme = createTheme(themeOptions);
+const darkTheme = createTheme({
+    typography: {
+        fontFamily: 'Roboto, Noto Sans, sans-serif',
+        fontSize: 14,
+        body2: {
+            fontSize: 14
+        }
+    },
+    shape: {
+        borderRadius: 5,
+    },
+    components: {
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    textTransform: 'none',
+                    marginLeft: 4,
+                    marginRight: 4,
+                    marginTop: 4,
+                    marginBottom: 4,
+                },
+                outlinedPrimary: {
+                    border: '2px solid',
+                    borderRadius: '20px'
+                },
+                outlinedSecondary: {
+                    border: '2px solid'
+                },
+            },
+        },
+    },
+    palette: {
+        mode: 'dark',
+        primary: {
+            main: '#08352D',
+            light: '#008F78',
+            dark: '#062822',
+        },
+        secondary: {
+            main: '#2D0835',
+            light: '#ff9800',
+            dark: '#b71c1c',
+        },
+        background: {
+            default: '#191816',
+        },
+    },
+    shadows: [
+        'none',
+        '0px 1px 8px rgba(255, 255, 255, 0.08), 0px 1px 1px rgba(255, 255, 255, 0.05), 0px 2px 1px rgba(255, 255, 255, 0.01)',
+        '0px 3px 9px rgba(255, 255, 255, 0.12), 0px 1px 3px rgba(255, 255, 255, 0.04)',
+        '0px 2px 4px rgba(255, 255, 255, 0.16), 0px 2px 6px rgba(255, 255, 255, 0.04)',
+        // Up to 25 levels for Material UI shadows
+      ]
+});
 
-export const PetAdoptionThemeProvider = ({children}) => {
-    return (
-        <ThemeProvider theme={theme}>
-            {children}
-        </ThemeProvider>
-    );
-};
+export { lightTheme, darkTheme };

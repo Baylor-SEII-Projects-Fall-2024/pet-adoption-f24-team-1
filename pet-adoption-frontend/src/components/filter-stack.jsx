@@ -15,7 +15,7 @@ function valuetext(value) {
 export default function FilterStack(props) {
   const [age, setAge] = useState([0, 30])
   const [weight, setWeight] = useState([0, 200])
-  const [distance, setDistance] = useState(50)
+  const [distance, setDistance] = useState(100)
 
   const [species, setSpecies] = useState([]);
   const [breeds, setBreeds] = useState([]);
@@ -56,6 +56,10 @@ export default function FilterStack(props) {
 
   const handleDistanceChange = (event, newValue) => {
     setDistance(newValue);
+  };
+
+  const handleDistanceComm = (event, newValue) => {
+    props.setDistanceFltr(newValue);
   };
 
   const handleSpeciesChange = (event) => {
@@ -152,10 +156,11 @@ export default function FilterStack(props) {
           getAriaLabel={() => 'Distance'}
           value={distance}
           onChange={handleDistanceChange}
+          onChangeCommitted={handleDistanceComm}
           valueLabelDisplay="auto"
           getAriaValueText={valuetext}
           min={0}
-          max={50}
+          max={100}
           sx={{width: '90%'}}
         />
       </Box>

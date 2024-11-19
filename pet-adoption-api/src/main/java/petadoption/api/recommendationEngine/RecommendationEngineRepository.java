@@ -9,6 +9,12 @@ import java.util.List;
 
 public interface RecommendationEngineRepository extends JpaRepository<Pet, Long> {
 
+    @Query("SELECT p FROM Pet p WHERE NOT EXISTS (SELECT 1 FROM Match m WHERE m.userID = :userID AND p.petID = m.petID)")
+    public List<Pet> findAllNotMatched(@Param("userID") Long userID);
+
+    @Query("SELECT COUNT(*) FROM Match m WHERE m.userID = :userID")
+    public Integer findMatchCount(@Param("userID") Long userID);
+
     @Query(nativeQuery = true, value =
                     "SELECT attribute, COUNT(*) as frequency " +
                     "FROM (SELECT pet_species AS attribute " +
