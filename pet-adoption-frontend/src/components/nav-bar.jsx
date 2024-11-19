@@ -90,7 +90,7 @@ function NavBar() {
                 variant="h6"
                 noWrap
                 component="a"
-                href="/user-home"
+                href={user?.role==="ADMIN" ? "/adoption-center-home" : "/user-home"}
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },
@@ -100,6 +100,7 @@ function NavBar() {
                   color: 'inherit',
                   textDecoration: 'none',
                 }}
+                onClick={()=> handleHomeNav()}
               >
                 FLUFFY FRIENDS
               </Typography>
