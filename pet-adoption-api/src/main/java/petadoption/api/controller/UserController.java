@@ -14,7 +14,7 @@ import java.util.*;
 @Log4j2
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = {"http://localhost:3000", "http://35.238.40.26:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://34.133.251.138:3000"})
 public class UserController {
 
     @Autowired

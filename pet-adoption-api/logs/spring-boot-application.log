@@ -891,3 +891,65 @@ java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" bec
 2024-11-18T17:52:57.994-06:00  INFO 17890 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-11-18T17:52:58.006-06:00  INFO 17890 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-11-18T17:52:58.032-06:00  INFO 17890 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+=======
+2024-11-19T13:28:01.216-06:00  INFO 26510 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 26510 (/Users/jakemauldin/Desktop/SWE2/template-project/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by jakemauldin in /Users/jakemauldin/Desktop/SWE2/template-project/pet-adoption-f24-team-1/pet-adoption-api)
+2024-11-19T13:28:01.224-06:00  INFO 26510 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-11-19T13:28:01.928-06:00  INFO 26510 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-19T13:28:01.987-06:00  INFO 26510 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 53 ms. Found 10 JPA repository interfaces.
+2024-11-19T13:28:02.391-06:00  INFO 26510 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-11-19T13:28:02.400-06:00  INFO 26510 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-19T13:28:02.401-06:00  INFO 26510 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-11-19T13:28:02.437-06:00  INFO 26510 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-19T13:28:02.437-06:00  INFO 26510 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1183 ms
+2024-11-19T13:28:02.502-06:00  INFO 26510 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-19T13:28:02.859-06:00  INFO 26510 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@700b9e6b
+2024-11-19T13:28:02.860-06:00  INFO 26510 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-19T13:28:02.928-06:00  INFO 26510 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-19T13:28:02.971-06:00  INFO 26510 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-11-19T13:28:02.995-06:00  INFO 26510 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-19T13:28:03.246-06:00  INFO 26510 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-19T13:28:04.063-06:00  INFO 26510 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-19T13:28:04.145-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : alter table pet modify column centerid bigint
+2024-11-19T13:28:04.367-06:00  INFO 26510 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-19T13:28:04.642-06:00  INFO 26510 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-19T13:28:05.006-06:00  INFO 26510 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-11-19T13:28:05.156-06:00  WARN 26510 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-19T13:28:05.518-06:00  INFO 26510 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-11-19T13:28:05.526-06:00  INFO 26510 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 4.627 seconds (process running for 5.359)
+2024-11-19T13:28:05.528-06:00  INFO 26510 --- [main] p.api.adoptioncenter.DataInitializer     : Initializing data...
+2024-11-19T13:28:05.581-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : select ac1_0.center_id,ac1_0.center_address,ac1_0.center_email,ac1_0.center_image_url,ac1_0.center_name,ac1_0.center_phone,ac1_0.zip_code from adoption_centers ac1_0
+2024-11-19T13:28:05.601-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : select e1_0.adoption_center_id,e1_0.eventid,e1_0.date,e1_0.description,e1_0.details_page,e1_0.image_url,e1_0.location,e1_0.title from events e1_0 where e1_0.adoption_center_id=?
+2024-11-19T13:28:05.609-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : select n1_0.center_id,n1_0.id,n1_0.is_read,n1_0.message,paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.duration_time,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.pet_id,paf1_0.phone_number,paf1_0.user_id,n1_0.timestamp,n1_0.title from notifications n1_0 left join pet_adoption_form paf1_0 on paf1_0.id=n1_0.form_id where n1_0.center_id=?
+2024-11-19T13:28:05.613-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : select e1_0.adoption_center_id,e1_0.eventid,e1_0.date,e1_0.description,e1_0.details_page,e1_0.image_url,e1_0.location,e1_0.title from events e1_0 where e1_0.adoption_center_id=?
+2024-11-19T13:28:05.615-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : select n1_0.center_id,n1_0.id,n1_0.is_read,n1_0.message,paf1_0.id,paf1_0.address,paf1_0.city_stat_zip,paf1_0.duration_time,paf1_0.email,paf1_0.employer,paf1_0.full_name,paf1_0.license_number,paf1_0.pet_id,paf1_0.phone_number,paf1_0.user_id,n1_0.timestamp,n1_0.title from notifications n1_0 left join pet_adoption_form paf1_0 on paf1_0.id=n1_0.form_id where n1_0.center_id=?
+2024-11-19T13:28:05.627-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : delete from events where eventid=?
+2024-11-19T13:28:05.632-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : delete from events where eventid=?
+2024-11-19T13:28:05.633-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : delete from events where eventid=?
+2024-11-19T13:28:05.633-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : delete from adoption_centers where center_id=?
+2024-11-19T13:28:05.635-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : delete from events where eventid=?
+2024-11-19T13:28:05.636-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : delete from events where eventid=?
+2024-11-19T13:28:05.637-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : delete from events where eventid=?
+2024-11-19T13:28:05.637-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : delete from adoption_centers where center_id=?
+2024-11-19T13:28:05.650-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : select next_val as id_val from center_generator for update
+2024-11-19T13:28:05.652-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : update center_generator set next_val= ? where next_val=?
+2024-11-19T13:28:05.661-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : select next_val as id_val from events_seq for update
+2024-11-19T13:28:05.663-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : update events_seq set next_val= ? where next_val=?
+2024-11-19T13:28:05.670-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : insert into adoption_centers (center_address,center_email,center_image_url,center_name,center_phone,zip_code,center_id) values (?,?,?,?,?,?,?)
+2024-11-19T13:28:05.674-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : insert into events (adoption_center_id,date,description,details_page,image_url,location,title,eventid) values (?,?,?,?,?,?,?,?)
+2024-11-19T13:28:05.677-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : insert into events (adoption_center_id,date,description,details_page,image_url,location,title,eventid) values (?,?,?,?,?,?,?,?)
+2024-11-19T13:28:05.678-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : insert into events (adoption_center_id,date,description,details_page,image_url,location,title,eventid) values (?,?,?,?,?,?,?,?)
+2024-11-19T13:28:05.680-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : insert into adoption_centers (center_address,center_email,center_image_url,center_name,center_phone,zip_code,center_id) values (?,?,?,?,?,?,?)
+2024-11-19T13:28:05.680-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : insert into events (adoption_center_id,date,description,details_page,image_url,location,title,eventid) values (?,?,?,?,?,?,?,?)
+2024-11-19T13:28:05.681-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : insert into events (adoption_center_id,date,description,details_page,image_url,location,title,eventid) values (?,?,?,?,?,?,?,?)
+2024-11-19T13:28:05.683-06:00 DEBUG 26510 --- [main] org.hibernate.SQL                        : insert into events (adoption_center_id,date,description,details_page,image_url,location,title,eventid) values (?,?,?,?,?,?,?,?)
+2024-11-19T13:28:05.688-06:00  INFO 26510 --- [main] p.api.adoptioncenter.DataInitializer     : Database initialized with updated adoption centers and events.
+2024-11-19T13:28:35.242-06:00  INFO 26510 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-19T13:28:35.243-06:00  INFO 26510 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-11-19T13:28:35.246-06:00  INFO 26510 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2024-11-19T13:28:35.325-06:00 DEBUG 26510 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-11-19T13:28:35.325-06:00 DEBUG 26510 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-11-19T13:28:35.328-06:00 DEBUG 26510 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-11-19T13:28:35.385-06:00 DEBUG 26510 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-11-19T13:28:35.385-06:00 DEBUG 26510 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-11-19T13:28:35.436-06:00 DEBUG 26510 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-11-19T13:28:35.484-06:00 DEBUG 26510 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0

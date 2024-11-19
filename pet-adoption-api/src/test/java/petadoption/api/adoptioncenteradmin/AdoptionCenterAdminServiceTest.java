@@ -8,12 +8,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import petadoption.api.adoptioncenter.AdoptionCenter;
-import petadoption.api.adoptioncenter.AdoptionCenterRepository;
-import petadoption.api.dto.LoginDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -22,9 +20,6 @@ class AdoptionCenterAdminServiceTest {
 
     @Mock
     private AdoptionCenterAdminRepository adminRepository;
-
-    @Mock
-    private AdoptionCenterRepository centerRepository;
 
     @InjectMocks
     private AdoptionCenterAdminService adminService;
@@ -35,92 +30,49 @@ class AdoptionCenterAdminServiceTest {
     }
 
     @Test
-    void testGetAllAdmins() {
-        AdoptionCenterAdmin admin1 = new AdoptionCenterAdmin();
-        AdoptionCenterAdmin admin2 = new AdoptionCenterAdmin();
-        when(adminRepository.findAll()).thenReturn(Arrays.asList(admin1, admin2));
+    void getAllAdmins_ShouldReturnAllAdmins() {
+        // Arrange
+        List<AdoptionCenterAdmin> admins = new ArrayList<>();
+        admins.add(new AdoptionCenterAdmin());
+        admins.add(new AdoptionCenterAdmin());
+        when(adminRepository.findAll()).thenReturn(admins);
 
+        // Act
         ResponseEntity<List<AdoptionCenterAdmin>> response = adminService.getAllAdmins();
-        List<AdoptionCenterAdmin> admins = response.getBody();
 
-        assertNotNull(admins);
-        assertEquals(2, admins.size());
+        // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
-
+        assertEquals(admins, response.getBody());
         verify(adminRepository, times(1)).findAll();
     }
 
     @Test
-    void testRegisterAdmin_Success() {
-        Long centerId = 1L;
-        AdoptionCenter center = new AdoptionCenter();
-        center.setCenterId(centerId);
-        AdoptionCenterAdmin adminRequest = new AdoptionCenterAdmin();
-        adminRequest.setEmail("admin@example.com");
-
-        when(centerRepository.findById(centerId)).thenReturn(Optional.of(center));
-        when(adminRepository.save(adminRequest)).thenReturn(adminRequest);
-
-        ResponseEntity<AdoptionCenterAdmin> response = adminService.registerAdmin(centerId, adminRequest);
-
-        assertNotNull(response.getBody());
-        assertEquals("admin@example.com", response.getBody().getEmail());
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-
-        verify(centerRepository, times(1)).findById(centerId);
-        verify(adminRepository, times(1)).save(adminRequest);
-    }
-
-    @Test
-    void testRegisterAdmin_CenterNotFound() {
-        Long centerId = 1L;
-        AdoptionCenterAdmin adminRequest = new AdoptionCenterAdmin();
-
-        when(centerRepository.findById(centerId)).thenReturn(Optional.empty());
-
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            adminService.registerAdmin(centerId, adminRequest);
-        });
-
-        assertEquals("Adoption center not found", exception.getMessage());
-        verify(centerRepository, times(1)).findById(centerId);
-        verify(adminRepository, never()).save(any(AdoptionCenterAdmin.class));
-    }
-
-    @Test
-    void testLoginAdmin_Success() {
-        LoginDTO loginDTO = new LoginDTO();
-        loginDTO.setUsername("admin@example.com");
-        loginDTO.setPassword("password");
-
+    void getAdoptionCenter_ShouldReturnAdoptionCenter_WhenAdminExists() {
+        // Arrange
+        Long adminId = 1L;
+        AdoptionCenter adoptionCenter = new AdoptionCenter();
         AdoptionCenterAdmin admin = new AdoptionCenterAdmin();
-        admin.setEmail("admin@example.com");
-        admin.setPassword("password");
+        admin.setAdoptionCenter(adoptionCenter);
+        when(adminRepository.findById(adminId)).thenReturn(Optional.of(admin));
 
-        when(adminRepository.findByEmail(loginDTO.getUsername())).thenReturn(Optional.of(admin));
+        // Act
+        ResponseEntity<AdoptionCenter> response = adminService.getAdoptionCenter(adminId);
 
-        AdoptionCenterAdmin loggedInAdmin = adminService.loginAdmin(loginDTO);
-
-        assertNotNull(loggedInAdmin);
-        assertEquals("admin@example.com", loggedInAdmin.getEmail());
-        assertEquals("password", loggedInAdmin.getPassword());
-
-        verify(adminRepository, times(1)).findByEmail(loginDTO.getUsername());
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(adoptionCenter, response.getBody());
+        verify(adminRepository, times(1)).findById(adminId);
     }
 
     @Test
-    void testLoginAdmin_InvalidCredentials() {
-        LoginDTO loginDTO = new LoginDTO();
-        loginDTO.setUsername("admin@example.com");
-        loginDTO.setPassword("wrongpassword");
+    void getAdoptionCenter_ShouldThrowException_WhenAdminDoesNotExist() {
+        // Arrange
+        Long adminId = 1L;
+        when(adminRepository.findById(adminId)).thenReturn(Optional.empty());
 
-        when(adminRepository.findByEmail(loginDTO.getUsername())).thenReturn(Optional.empty());
-
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            adminService.loginAdmin(loginDTO);
-        });
-
-        assertEquals("Invalid username or password", exception.getMessage());
-        verify(adminRepository, times(1)).findByEmail(loginDTO.getUsername());
+        // Act & Assert
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> adminService.getAdoptionCenter(adminId));
+        assertEquals("Adoption center not found", exception.getMessage());
+        verify(adminRepository, times(1)).findById(adminId);
     }
 }

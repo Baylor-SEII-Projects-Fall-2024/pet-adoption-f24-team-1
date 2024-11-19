@@ -1,10 +1,13 @@
 package petadoption.api.adoptioncenter;
 
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import petadoption.api.adoptioncenteradmin.AdoptionCenterAdmin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,7 @@ public class AdoptionCenterService {
         return new ResponseEntity<>(centers, HttpStatus.OK);
     }
 
-    public ResponseEntity<AdoptionCenter> getAdoptionCenter(int id)  {
+    public ResponseEntity<AdoptionCenter> getAdoptionCenter(Long id)  {
         Optional<AdoptionCenter> center = adoptionCenterRepository.findById((long) id);
         return center
                 .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
@@ -42,5 +45,9 @@ public class AdoptionCenterService {
         adoptionCenterRepository.save(center);
 
         return new ResponseEntity<>(center, HttpStatus.OK);
+    }
+
+    public AdoptionCenter getAdoptionCenterById(Long centerId) {
+        return adoptionCenterRepository.findById(centerId).orElse(null); // Return null if not found
     }
 }

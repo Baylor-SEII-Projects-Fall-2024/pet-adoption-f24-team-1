@@ -17,30 +17,9 @@ public class AdoptionCenterAdminService {
     @Autowired
     private AdoptionCenterAdminRepository adminRepository;
 
-    @Autowired
-    private AdoptionCenterRepository centerRepository;
-
     public ResponseEntity<List<AdoptionCenterAdmin>> getAllAdmins() {
         List<AdoptionCenterAdmin> admins = adminRepository.findAll();
         return new ResponseEntity<>(admins, HttpStatus.OK);
-    }
-
-    public ResponseEntity<AdoptionCenterAdmin> registerAdmin(Long centerId,AdoptionCenterAdmin adminRequest) {
-        AdoptionCenterAdmin admin = centerRepository.findById(centerId).map(center -> {
-            adminRequest.setAdoptionCenter(center);
-            return adminRepository.save(adminRequest);
-        }).orElseThrow(() -> new RuntimeException("Adoption center not found"));
-
-        return new ResponseEntity<>(admin, HttpStatus.CREATED);
-    }
-
-    public AdoptionCenterAdmin loginAdmin(LoginDTO loginDTO) {
-        Optional<AdoptionCenterAdmin> adminOptional = adminRepository.findByEmail(loginDTO.getEmail());
-        System.out.println(adminOptional.get().getEmail() + " " + adminOptional.get().getPassword());
-        if (adminOptional.isPresent() && adminOptional.get().getPassword().equals(loginDTO.getPassword())) {
-            return adminOptional.get();
-        }
-        throw new RuntimeException("Invalid username or password");
     }
 
     public ResponseEntity<AdoptionCenter> getAdoptionCenter(Long id)  {

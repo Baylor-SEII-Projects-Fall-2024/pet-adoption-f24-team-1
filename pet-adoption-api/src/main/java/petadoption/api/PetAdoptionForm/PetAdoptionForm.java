@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class petAdoptionForm{
+public class PetAdoptionForm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +26,6 @@ public class petAdoptionForm{
     private String email;
     private String employer;
     private Date durationTime;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date submissionData;
+    private Long petId;
+    private Long userId;
 }
