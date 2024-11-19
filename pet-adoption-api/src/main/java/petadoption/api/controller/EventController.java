@@ -40,7 +40,7 @@ public class EventController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Event updatedEvent) {
-        Optional<Event> eventOptional = eventService.findEventById(id);
+        Optional<Event> eventOptional = Optional.ofNullable(eventService.findEventById(id));
 
         if (eventOptional.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
