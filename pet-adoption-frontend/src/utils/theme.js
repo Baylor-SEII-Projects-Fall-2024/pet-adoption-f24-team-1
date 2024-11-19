@@ -96,13 +96,6 @@ const darkTheme = createTheme({
             default: '#191816',
         },
     },
-    shadows: [
-        'none',
-        '0px 1px 8px rgba(255, 255, 255, 0.08), 0px 1px 1px rgba(255, 255, 255, 0.05), 0px 2px 1px rgba(255, 255, 255, 0.01)',
-        '0px 3px 9px rgba(255, 255, 255, 0.12), 0px 1px 3px rgba(255, 255, 255, 0.04)',
-        '0px 2px 4px rgba(255, 255, 255, 0.16), 0px 2px 6px rgba(255, 255, 255, 0.04)',
-        // Up to 25 levels for Material UI shadows
-      ]
 });
 
 export { lightTheme, darkTheme };
