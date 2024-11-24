@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Button, Box, Card, CardContent, Stack, Typography, Grid } from '@mui/material'
-import styles from '@/styles/Home.module.css'
 
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 import PetsOutlinedIcon from '@mui/icons-material/PetsOutlined';
@@ -20,6 +19,7 @@ export default function HomePage() {
   const router = useRouter();
 
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+  const petDisplayNum = 4;
 
   const navigateTo = (page) => {
     router.push(page);
@@ -27,7 +27,7 @@ export default function HomePage() {
 
   useEffect(() => {
     // Fetch pets
-    axios.get(`${apiBaseUrl}/api/pets`)
+    axios.get(`${apiBaseUrl}/api/pets?limit=${petDisplayNum}`)
       .then(response => {
           let pets = response.data.map(pet => {return {...pet, distance: 0}})
           console.log(pets)
@@ -60,7 +60,7 @@ export default function HomePage() {
               height: "95vh"
             }}
           >
-            <Box>
+            <Box sx={{ maxWidth: "50%" }}>
               <Typography variant="h4" sx={{ fontWeight: "bold" }}>
                 Give a New Life to
               </Typography>
@@ -71,7 +71,7 @@ export default function HomePage() {
               >
                 Fluffy Friends
               </Typography>
-              <Typography sx={{ marginBottom: "2rem", maxWidth: "50%" }}>
+              <Typography sx={{ marginBottom: "2rem", maxWidth: {md: "60%"} }}>
                 Adopting a pet not only provides a loving home for an animal in need,
                 but it also brings companionship and joy to your life.
                 Every adoption helps reduce the number of animals in shelters,
@@ -101,7 +101,7 @@ export default function HomePage() {
               }}
             >
               <img
-                src="/pets.png" // Replace with the actual path
+                src="/pets.png"
                 alt="Furry Friends"
                 style={{ width: "80%", height: "auto" }}
               />
@@ -109,7 +109,7 @@ export default function HomePage() {
           </Box>
 
           {/* Pet Cards */}
-          <Box 
+          <Box
             sx={{
               marginBottom: "4rem",
               display: "flex",

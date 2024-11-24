@@ -12,8 +12,9 @@ import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 
+const userPages = ['Find Pets', 'Centers', 'Matches'];
 const adminPages = ['Manage Pets', 'Manage Events', 'Profile'];
-const defaultPages = ['Centers', 'Matches'];
+const defaultPages = ['Find Pets', 'Centers'];
 const settings = ['Settings', 'Logout'];
 const loginSettings = ['Login', 'Create Account'];
 
@@ -68,6 +69,7 @@ function NavBar() {
 
   const handleNav = (nav) => {
     if (nav === 'Login') setLoginModalOpen(true);
+    else if (nav === "Find Pets") router.push('/user-home')
     else if (nav === 'Create Account') router.push('/create-account');
     else if (nav === 'Settings') router.push('/settings');
     else if (nav === 'Logout') setLogoutModalOpen(true);
@@ -78,7 +80,13 @@ function NavBar() {
     else if (nav === 'Notifications') router.push('/adoption-center-home/notifications');
   };
 
-  const pages = isAuthenticated && user?.role == "ADMIN" ? adminPages : defaultPages;
+  let pages = defaultPages;
+
+  if (isAuthenticated && user?.role === "USER") {
+    pages = userPages;
+  } else if (isAuthenticated && user?.role === "ADMIN") {
+    pages = adminPages;
+  }
 
   return (
     <>
@@ -91,7 +99,7 @@ function NavBar() {
                 variant="h6"
                 noWrap
                 component="a"
-                href={user?.role==="ADMIN" ? "/adoption-center-home" : "/user-home"}
+                href={user?.role==="ADMIN" ? "/adoption-center-home" : "/"}
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },
@@ -101,7 +109,6 @@ function NavBar() {
                   color: 'inherit',
                   textDecoration: 'none',
                 }}
-                onClick={()=> handleHomeNav()}
               >
                 FLUFFY FRIENDS
               </Typography>
