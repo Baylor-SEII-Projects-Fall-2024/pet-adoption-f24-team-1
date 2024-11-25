@@ -32,7 +32,7 @@ class PetServiceTest {
         Pet pet2 = new Pet();
         when(petRepository.findAll()).thenReturn(Arrays.asList(pet1, pet2));
 
-        List<Pet> pets = petService.getAllPets();
+        List<Pet> pets = petService.getAllPets(-1);
         assertEquals(2, pets.size());
 
         verify(petRepository, times(1)).findAll();
