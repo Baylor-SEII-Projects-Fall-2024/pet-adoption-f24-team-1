@@ -6,7 +6,6 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import NavBar from '@/components/nav-bar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useRouter } from 'next/router';
@@ -26,7 +25,6 @@ export default function UserProfile() {
   const [bio, setBio] = useState();
   const [email, setEmail] = useState();
   const [phone, setPhone] = useState();
-  const [location, setLocation] = useState();
   const [imgUrl, setProfilePicture] = useState();
   const [password, setPassword] = useState();
   const [userType, setUserType] = useState();
@@ -41,11 +39,10 @@ export default function UserProfile() {
     console.log(user)
     if (user) {
       setId(user.id);
-      setName(user.firstName || '');
+      setName(user.firstName + " " + user.lastName || '');
       setBio(user.bio || '');
       setEmail(user.email || '');
       setPhone(user.phone || '');
-      setLocation(user.location || '');
       setProfilePicture(user.imgUrl || '');
       setPassword(user.password);
       setUserType(user.userType);
@@ -56,8 +53,8 @@ export default function UserProfile() {
   const handleEditProfile = () => setIsEditing(true);
   const handleSaveProfile = async () => {
     try {
-      await axios.put(`${apiBaseUrl}/api/update-profile`, { id, name, bio, email, phone, location, imgUrl, password, userType });
-      sessionStorage.setItem('user', JSON.stringify({ name, bio, email, phone, location, imgUrl }));
+      await axios.put(`${apiBaseUrl}/api/update-profile`, { id, name, bio, email, phone, imgUrl, password, userType });
+      sessionStorage.setItem('user', JSON.stringify({ name, bio, email, phone, imgUrl }));
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -134,13 +131,6 @@ export default function UserProfile() {
                           fullWidth
                           sx={{ marginBottom: 1 }}
                         />
-                        <TextField
-                          label="Location"
-                          value={location}
-                          onChange={(e) => setLocation(e.target.value)}
-                          fullWidth
-                          sx={{ marginBottom: 1 }}
-                        />
                       </>
                     ) : (
                       <>
@@ -164,15 +154,6 @@ export default function UserProfile() {
                           <Grid item>
                             <Typography variant="body2" color="text.secondary">
                               <strong>Phone:</strong> {phone}
-                            </Typography>
-                          </Grid>
-
-                          <Grid item>
-                            <LocationOnIcon fontSize="small" />
-                          </Grid>
-                          <Grid item>
-                            <Typography variant="body2" color="text.secondary">
-                              <strong>Location:</strong> {location}
                             </Typography>
                           </Grid>
                         </Grid>
