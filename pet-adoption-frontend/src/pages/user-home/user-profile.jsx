@@ -12,6 +12,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import ImageDropzone from '@/components/image-dropzone';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -32,20 +33,22 @@ export default function UserProfile() {
 
   // State for the modal
   const [openModal, setOpenModal] = useState(false);
+  const user = useAuthUser()
 
   // Fetch user profile data from sessionStorage when component mounts
   useEffect(() => {
-    const userFromSessionStorage = JSON.parse(sessionStorage.getItem('user'));
-    if (userFromSessionStorage) {
-      setId(userFromSessionStorage.id);
-      setName(userFromSessionStorage.name || '');
-      setBio(userFromSessionStorage.bio || '');
-      setEmail(userFromSessionStorage.email || '');
-      setPhone(userFromSessionStorage.phone || '');
-      setLocation(userFromSessionStorage.location || '');
-      setProfilePicture(userFromSessionStorage.imgUrl || '');
-      setPassword(userFromSessionStorage.password);
-      setUserType(userFromSessionStorage.userType);
+
+    console.log(user)
+    if (user) {
+      setId(user.id);
+      setName(user.firstName || '');
+      setBio(user.bio || '');
+      setEmail(user.email || '');
+      setPhone(user.phone || '');
+      setLocation(user.location || '');
+      setProfilePicture(user.imgUrl || '');
+      setPassword(user.password);
+      setUserType(user.userType);
     }
   }, []);
 
