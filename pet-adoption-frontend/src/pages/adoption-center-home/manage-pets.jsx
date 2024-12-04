@@ -3,10 +3,10 @@ import Head from 'next/head'
 import { Button, Stack, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Box } from '@mui/material'
 import styles from '@/styles/Home.module.css'
 import { useRouter } from 'next/router'
-import Paper from '@mui/material/Paper';
-import { DataGrid, GridSelectionModel} from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
+import { Select, MenuItem } from '@mui/material';
 import NavBar from '@/components/nav-bar';
-import { useRef,useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios';
 import ImageDropzone from '@/components/image-dropzone';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
@@ -46,13 +46,6 @@ export default function ManagePets() {
     centerID: ''
   });
 
-  const handleRowSelection = (selectionModel) => {
-    const selectedID = selectionModel[0]; // Only single row selection
-    const selectedPet = petsData.find((pet) => pet.id === selectedID);
-    setSelectionModel(selectedID)
-    setSelectedRow(selectedPet);
-    console.log(selectedRows);
-  };
 
   const columns = [
     { field: "petID", headerName: "Pet ID", width: 100 },
@@ -67,9 +60,6 @@ export default function ManagePets() {
   ];
   
   const [pets, setPets] = useState([]);  // State to hold the pet data
-  const [loading, setLoading] = useState(true);  // State to handle loading
-  const [error, setError] = useState(null);  // State to handle errors
-  const [selectedRows, setSelectedRows] = React.useState([]);
   const [imgUrl, setImgUrl] = useState('');
 
   const handleInputChange = (e) => {
@@ -79,9 +69,6 @@ export default function ManagePets() {
       [name]: value
     }));
   };  
-
-
-
 
 
   const loadData = () => {
@@ -143,7 +130,9 @@ export default function ManagePets() {
     (newPetData.petAge || '').toString().trim() !== '' &&
     (newPetData.petWeight || '').toString().trim() !== '' &&
     (newPetData.petSpecies || '').trim() !== '' &&
-    (newPetData.color || '').trim() !== ''
+    (newPetData.color || '').trim() !== '' && 
+    newPetData.petAge >= 0 && 
+    newPetData.petWeight > 0
     );
   }, [newPetData]);
   
@@ -176,9 +165,13 @@ export default function ManagePets() {
       }
       if((newPetData.petAge || '').toString().trim() === ''){
         str+=" age"
+      }else if(newPetData.petAge < 0){
+        alert('Pet age cannot be less than 0.')
       }
       if((newPetData.petWeight || '').toString().trim() === ''){
         str+=" weight"
+      }else if(newPetData.petWeight <= 0){
+        alert('Pet weight cannot be zero or less.')
       }
       if((newPetData.petSpecies || '').trim() === ''){
         str+=" species"
@@ -187,7 +180,7 @@ export default function ManagePets() {
         str+=" color"
       }
 
-      alert(`Please provide proper input for:${str}`);
+      alert(`Please fill in values for:${str}.`);
     }
   };
   const handleInsertDialogOpen = () => {
@@ -298,12 +291,16 @@ export default function ManagePets() {
               Please enter the details of the pet you want to insert.
             </DialogContentText>
             <TextField margin="dense" name="petName" label="Name"  type="text" fullWidth variant="outlined" value={newPetData.petName} onChange={handleInputChange}/>
-            <TextField margin="dense"name="petBreed"label="Breed"type="text"fullWidth variant="outlined"value={newPetData.petBreed}onChange={handleInputChange}/>
-            <TextField margin="dense"name="petGender"label="Gender"type="text"fullWidthvariant="outlined"value={newPetData.petGender}onChange={handleInputChange}/>
-            <TextField margin="dense"name="petAge"label="Age"type="number"fullWidthvariant="outlined"value={newPetData.petAge}onChange={handleInputChange}/>
-            <TextField margin="dense"name="petWeight"label="Weight (kg)"type="number" fullWidthvariant="outlined"value={newPetData.petWeight}onChange={handleInputChange}/>
             <TextField margin="dense"name="petSpecies"label="Species"type="text"fullWidth variant="outlined"value={newPetData.petSpecies}onChange={handleInputChange}/>
+            <TextField margin="dense"name="petBreed"label="Breed"type="text"fullWidth variant="outlined"value={newPetData.petBreed}onChange={handleInputChange}/>
             <TextField margin="dense"name="color"label="Color"type="text"fullWidth variant="outlined"value={newPetData.color}onChange={handleInputChange}/>
+            <Select margin="dense"name="petGender"fullWidthvariant="outlined"value={newPetData.petGender}onChange={handleInputChange} displayEmpty sx={{ mt: 1, mr: 1 }} >
+              <MenuItem value="" disabled>Gender</MenuItem>
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
+            </Select>
+            <TextField margin="dense"name="petAge"label="Age"type="number"fullWidthvariant="outlined"value={newPetData.petAge}onChange={handleInputChange} sx={{ mr: 1 }}/>
+            <TextField margin="dense"name="petWeight"label="Weight (kg)"type="number" fullWidthvariant="outlined"value={newPetData.petWeight}onChange={handleInputChange} sx={{ mr: 1 }}/>
             <Box sx={{ width: 200, height: 50 }}>
               <ImageDropzone newPetData={newPetData} imgUrl={imgUrl} setImgUrl={setImgUrl}/>
             </Box>
