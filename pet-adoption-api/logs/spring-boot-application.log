@@ -58,3 +58,53 @@
 2024-11-20T16:15:56.283-06:00  INFO 26510 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-11-20T16:15:56.386-06:00  INFO 26510 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-11-20T16:15:56.498-06:00  INFO 26510 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-12-05T12:15:13.259-06:00  INFO 94650 --- [main] petadoption.api.PetAdoptionApplication   : Starting PetAdoptionApplication using Java 22.0.2 with PID 94650 (/Users/jakemauldin/Desktop/SWE2/template-project/pet-adoption-f24-team-1/pet-adoption-api/build/classes/java/main started by jakemauldin in /Users/jakemauldin/Desktop/SWE2/template-project/pet-adoption-f24-team-1/pet-adoption-api)
+2024-12-05T12:15:13.261-06:00  INFO 94650 --- [main] petadoption.api.PetAdoptionApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-12-05T12:15:13.781-06:00  INFO 94650 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-05T12:15:13.835-06:00  INFO 94650 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 49 ms. Found 10 JPA repository interfaces.
+2024-12-05T12:15:14.207-06:00  INFO 94650 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-12-05T12:15:14.217-06:00  INFO 94650 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-05T12:15:14.217-06:00  INFO 94650 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-12-05T12:15:14.249-06:00  INFO 94650 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-12-05T12:15:14.249-06:00  INFO 94650 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 964 ms
+2024-12-05T12:15:14.309-06:00  INFO 94650 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-05T12:15:14.704-06:00  INFO 94650 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@781654f8
+2024-12-05T12:15:14.706-06:00  INFO 94650 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-05T12:15:14.773-06:00  INFO 94650 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-05T12:15:14.813-06:00  INFO 94650 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-12-05T12:15:14.838-06:00  INFO 94650 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-12-05T12:15:15.079-06:00  INFO 94650 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-05T12:15:15.943-06:00  INFO 94650 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-05T12:15:16.147-06:00  INFO 94650 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-05T12:15:16.406-06:00  INFO 94650 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-12-05T12:15:16.790-06:00  INFO 94650 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-12-05T12:15:16.952-06:00  WARN 94650 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-05T12:15:17.352-06:00  INFO 94650 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-12-05T12:15:17.360-06:00  INFO 94650 --- [main] petadoption.api.PetAdoptionApplication   : Started PetAdoptionApplication in 4.409 seconds (process running for 5.029)
+2024-12-05T12:15:54.107-06:00  INFO 94650 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-05T12:15:54.108-06:00  INFO 94650 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-05T12:15:54.115-06:00  INFO 94650 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2024-12-05T12:15:54.347-06:00 DEBUG 94650 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0 limit ?,?
+2024-12-05T12:15:54.416-06:00 DEBUG 94650 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : select count(p1_0.petid) from pet p1_0
+2024-12-05T12:15:54.533-06:00 DEBUG 94650 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0 limit ?,?
+2024-12-05T12:15:54.535-06:00 DEBUG 94650 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select count(p1_0.petid) from pet p1_0
+2024-12-05T12:16:01.293-06:00 DEBUG 94650 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-12-05T12:16:01.302-06:00 DEBUG 94650 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-12-05T12:16:01.302-06:00 DEBUG 94650 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-12-05T12:16:01.334-06:00 DEBUG 94650 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-12-05T12:16:01.334-06:00 DEBUG 94650 --- [http-nio-8080-exec-9] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-12-05T12:16:01.350-06:00 DEBUG 94650 --- [http-nio-8080-exec-10] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-12-05T12:16:07.264-06:00 DEBUG 94650 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0 limit ?,?
+2024-12-05T12:16:07.273-06:00 DEBUG 94650 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select count(p1_0.petid) from pet p1_0
+2024-12-05T12:16:07.303-06:00 DEBUG 94650 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0 limit ?,?
+2024-12-05T12:16:07.312-06:00 DEBUG 94650 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : select count(p1_0.petid) from pet p1_0
+2024-12-05T12:19:19.610-06:00 DEBUG 94650 --- [http-nio-8080-exec-10] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-12-05T12:19:19.610-06:00 DEBUG 94650 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-12-05T12:19:19.641-06:00 DEBUG 94650 --- [http-nio-8080-exec-6] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-12-05T12:19:19.703-06:00 DEBUG 94650 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : select distinct p1_0.pet_breed from pet p1_0
+2024-12-05T12:19:19.716-06:00 DEBUG 94650 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : select distinct p1_0.pet_species from pet p1_0
+2024-12-05T12:19:19.755-06:00 DEBUG 94650 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0
+2024-12-05T12:19:23.351-06:00 DEBUG 94650 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0 limit ?,?
+2024-12-05T12:19:23.358-06:00 DEBUG 94650 --- [http-nio-8080-exec-5] org.hibernate.SQL                        : select count(p1_0.petid) from pet p1_0
+2024-12-05T12:19:23.390-06:00 DEBUG 94650 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : select p1_0.petid,p1_0.centerid,p1_0.color,p1_0.img_url,p1_0.pet_age,p1_0.pet_breed,p1_0.pet_gender,p1_0.pet_name,p1_0.pet_species,p1_0.pet_weight from pet p1_0 limit ?,?
+2024-12-05T12:19:23.393-06:00 DEBUG 94650 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : select count(p1_0.petid) from pet p1_0
