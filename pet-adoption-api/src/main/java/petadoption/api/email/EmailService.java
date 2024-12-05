@@ -12,14 +12,25 @@ import org.simplejavamail.mailer.MailerBuilder;
 
 public class EmailService {
     static void builderBuildAndSend(Email email){
-        MailerBuilder
-                .withSMTPServer("mail.smtp2go.com",
-                        2525,
-                        "nicholas_nolen1@baylor.edu",
-                        "xltlHLbGWIM6Q6iB")
-                .withTransportStrategy(TransportStrategy.SMTP_TLS)
-                .buildMailer()
-                .sendMail(email);
+        try {
+            MailerBuilder
+                    .withSMTPServer("mail.smtp2go.com",
+                            2525,
+                            "nicholas_nolen1@baylor.edu",
+                            "xltlHLbGWIM6Q6iB")
+                    .withTransportStrategy(TransportStrategy.SMTP_TLS)
+                    .buildMailer()
+                    .sendMail(email);
+        }catch(Exception ignored){
+            MailerBuilder
+                    .withSMTPServer("mail.smtp2go.com",
+                            2525,
+                            "nicholas_nolen1@baylor.edu",
+                            "xltlHLbGWIM6Q6iB")
+                    .withTransportStrategy(TransportStrategy.SMTP_TLS)
+                    .buildMailer()
+                    .sendMail(email);
+        }
     }
     static Email constructRequest(String message, String emailRecipient, String emailAddress){
         return EmailBuilder.startingBlank()
@@ -41,6 +52,7 @@ public class EmailService {
         Email email = constructRequest(message, adoptionCenter, emailAddress);
         // Sending the email using SMTP
         builderBuildAndSend(email);
+        System.out.println("Adoption Notification Email Sent");
     }
     public static void sendUserRegistrationEmail(String requesteeName,
                                                  String emailRecipient, String emailAddress ) {

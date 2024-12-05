@@ -64,6 +64,31 @@ export default function PetAdoptionForm() {
                 }
                 setIsSubmitted(true);
             });
+            let requesteename =  user.firstName + " " + user.lastName 
+            let params = {
+                requesteeName: requesteename,
+                petId: parseInt(petId,10),
+            }
+            console.log({params})
+
+            axios.get(`${apiBaseUrl}/api/emails/Admin-Email-Notification`, {params})
+            .then(response => {
+                console.log("Admin Notified")
+
+            })
+            .catch(error => {
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    setMessage(`Error: ${error.response.data}`);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    setMessage("No response from server.");
+                } else {
+                    // Something happened in setting up the request that triggered an error
+                    setMessage("There was an error submitting the form. Please try again.");
+                }
+                setIsSubmitted(true);
+            });
     };
 
     return (
