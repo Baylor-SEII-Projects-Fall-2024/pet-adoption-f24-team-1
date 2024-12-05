@@ -61,6 +61,17 @@ function NavBar() {
       };
       fetchNotifications();
       });
+    } else if (isAuthenticated && user?.role === "USER") {
+      // Fetch unread notification count
+      const fetchNotifications = async () => {
+        try {
+        const response = await axios.get(`${apiBaseUrl}/api/notifications/user/unread/${user.id}`);
+        setNotificationCount(response.data.length);
+        } catch (error) {
+        console.error("Error fetching notifications:", error);
+        }
+      };
+      fetchNotifications();
     }
   }, []);
 
@@ -82,7 +93,13 @@ function NavBar() {
     else if (nav === 'Manage Pets') router.push('/adoption-center-home/manage-pets');
     else if (nav === 'Manage Events') router.push('/adoption-center-home/manage-events');
     else if (nav === 'Profile') router.push('/adoption-center-home/adpotion-center-profile');
-    else if (nav === 'Notifications') router.push('/adoption-center-home/notifications');
+    else if (nav === 'Notifications') {
+      if (user?.role === "ADMIN") {
+        router.push('/adoption-center-home/notifications');
+      } else {
+        router.push('/user-home/notifications');
+      }
+    }
   };
 
   let pages = defaultPages;
@@ -158,7 +175,7 @@ function NavBar() {
                 </IconButton>
               </Tooltip>
             </Box>
-            {user?.role === "ADMIN" && (<IconButton color="inherit" size="large" onClick={() => handleNav('Notifications')}>
+            {user && (<IconButton color="inherit" size="large" onClick={() => handleNav('Notifications')}>
                 <Badge badgeContent={notificationCount} color="error">
                   <NotificationsNoneOutlinedIcon />
                 </Badge>
