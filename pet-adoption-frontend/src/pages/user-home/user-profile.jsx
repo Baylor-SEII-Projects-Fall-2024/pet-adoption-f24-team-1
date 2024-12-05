@@ -17,11 +17,13 @@ const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function UserProfile() {
   const router = useRouter();
+  const user = useAuthUser()
 
   // State variables for editing
   const [isEditing, setIsEditing] = useState(false);
   const [id, setId] = useState();
-  const [name, setName] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
   const [bio, setBio] = useState();
   const [email, setEmail] = useState();
   const [phone, setPhone] = useState();
@@ -31,7 +33,6 @@ export default function UserProfile() {
 
   // State for the modal
   const [openModal, setOpenModal] = useState(false);
-  const user = useAuthUser()
 
   // Fetch user profile data from sessionStorage when component mounts
   useEffect(() => {
@@ -39,7 +40,8 @@ export default function UserProfile() {
     console.log(user)
     if (user) {
       setId(user.id);
-      setName(user.firstName + " " + user.lastName || '');
+      setFirstName(user.firstName || '');
+      setLastName(user.lastName || '');
       setBio(user.bio || '');
       setEmail(user.email || '');
       setPhone(user.phone || '');
@@ -53,8 +55,8 @@ export default function UserProfile() {
   const handleEditProfile = () => setIsEditing(true);
   const handleSaveProfile = async () => {
     try {
-      await axios.put(`${apiBaseUrl}/api/update-profile`, { id, name, bio, email, phone, imgUrl, password, userType });
-      sessionStorage.setItem('user', JSON.stringify({ name, bio, email, phone, imgUrl }));
+      await axios.put(`${apiBaseUrl}/api/users/update`, { id, firstName, lastName, bio, email, phone, imgUrl, password, userType });
+      sessionStorage.setItem('user', JSON.stringify({ firstName, lastName, bio, email, phone, imgUrl }));
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -88,7 +90,7 @@ export default function UserProfile() {
                   {/* Profile Picture */}
                   <Grid item>
                     <Avatar
-                      alt={name}
+                      alt={firstName}
                       src={imgUrl || ''}
                       sx={{ width: 120, height: 120, cursor: 'pointer' }}  // Cursor changes to pointer
                       onClick={handleAvatarClick} // Open modal on click
@@ -102,12 +104,19 @@ export default function UserProfile() {
                     {isEditing ? (
                       <>
                         <TextField
-                          label="Name"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
+                          label="First Name"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
                           fullWidth
                           sx={{ marginBottom: 1 }}
                         />
+                        <TextField
+                          label="Last Name"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          fullWidth
+                          sx={{ marginBottom: 1}}
+                          />
                         <TextField
                           label="Bio"
                           value={bio}
@@ -134,7 +143,7 @@ export default function UserProfile() {
                       </>
                     ) : (
                       <>
-                        <Typography variant="h5">{name}</Typography>
+                        <Typography variant="h5">{firstName + " " + lastName}</Typography>
                         <Typography variant="body1" color="text.secondary" paragraph>
                           {bio}
                         </Typography>

@@ -34,9 +34,6 @@ public class User {
     @Column(name = "PHONE")
     private String phone;
 
-    @Column(name = "LOCATION")
-    private String location;
-
     @Column(name = "IMG_URG")
     private String imgUrl;
 

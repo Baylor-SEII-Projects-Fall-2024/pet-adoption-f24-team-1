@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestBody User updatedUser) {
         log.info("Updating user: {}", updatedUser); // Log the incoming User object
         Optional<User> userOptional = userService.findUser(updatedUser.getId());
@@ -47,7 +47,6 @@ public class UserController {
         user.setBio(updatedUser.getBio());
         user.setEmail(updatedUser.getEmail());
         user.setPhone(updatedUser.getPhone());
-        user.setLocation(updatedUser.getLocation());
         user.setImgUrl(updatedUser.getImgUrl());
 
         User savedUser = userService.saveUser(user);
