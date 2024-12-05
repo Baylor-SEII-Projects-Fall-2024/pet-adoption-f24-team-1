@@ -19,7 +19,6 @@ public class PetService {
         return petRepository.findAllByAdminID(adminID);
     }
 
-
     public Pet savePet(Pet pet) {
         return petRepository.save(pet);
     }

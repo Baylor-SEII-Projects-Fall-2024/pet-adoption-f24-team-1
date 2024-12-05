@@ -2,6 +2,9 @@ import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material';
 
 const lightTheme = createTheme({
+    link: {
+        color: 'inherit',
+    },
     typography: {
         fontFamily: 'Roboto, Noto Sans, sans-serif',
         fontSize: 14,

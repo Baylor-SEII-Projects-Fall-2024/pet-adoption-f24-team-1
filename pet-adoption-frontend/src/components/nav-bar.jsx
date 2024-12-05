@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Stack, Badge } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Stack, Badge, useTheme } from '@mui/material';
 import PetsIcon from '@mui/icons-material/Pets';
+import ContrastIcon from '@mui/icons-material/Contrast';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -11,6 +12,7 @@ import useSignOut from 'react-auth-kit/hooks/useSignOut';
 import dynamic from 'next/dynamic';
 import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
 import { useThemeCust } from '@/utils/ThemeContext';
+import { ThemeContext } from '@emotion/react';
 
 const adminPages = ['Manage Pets', 'Manage Events', 'Profile'];
 const defaultPages = ['Centers', 'Matches'];
@@ -23,6 +25,7 @@ function NavBar() {
   const user = useAuthUser();
   const signOut = useSignOut();
   const { toggleTheme, isDarkMode } = useThemeCust();
+  const theme = useTheme();
   
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -136,6 +139,15 @@ function NavBar() {
               </Button>
             ))}
           </Box>
+
+          <Box sx={{ mr: 3 }}>
+            <Tooltip title={isDarkMode ? 'Light Mode' : 'Dark Mode'}>
+              <IconButton onClick={toggleTheme}>
+                <ContrastIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} >
