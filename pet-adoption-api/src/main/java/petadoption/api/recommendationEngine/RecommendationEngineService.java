@@ -78,11 +78,6 @@ public class RecommendationEngineService {
             // Add pet and final score to map
             petScores.put(pet, score);
         }
-        /*
-        for(Map.Entry<Pet,Integer> entry : petScores.entrySet()) {
-            System.out.println("Name = " + entry.getKey().getPetName() + ", Score = " + entry.getValue());
-        }
-         */
 
         List<Pet> recommendedPets = petScores.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
@@ -137,3 +132,10 @@ public class RecommendationEngineService {
         return petsWithDistance;
     }
 }
+
+
+ /*
+        for(Map.Entry<Pet,Integer> entry : petScores.entrySet()) {
+            System.out.println("Name = " + entry.getKey().getPetName() + ", Score = " + entry.getValue());
+        }
+         */

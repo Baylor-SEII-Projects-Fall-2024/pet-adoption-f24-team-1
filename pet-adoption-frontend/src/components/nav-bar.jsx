@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Stack, Badge } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Stack, Badge, useTheme } from '@mui/material';
 import PetsIcon from '@mui/icons-material/Pets';
+import ContrastIcon from '@mui/icons-material/Contrast';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -9,6 +10,8 @@ import DialogModal from './dialog-modal';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import useSignOut from 'react-auth-kit/hooks/useSignOut';
 import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
+import { useThemeCust } from '@/utils/ThemeContext';
+import { ThemeContext } from '@emotion/react';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 
@@ -25,6 +28,8 @@ function NavBar() {
   const isAuthenticated = useIsAuthenticated();
   const user = useAuthUser();
   const signOut = useSignOut();
+  const { toggleTheme, isDarkMode } = useThemeCust();
+  const theme = useTheme();
   
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -145,25 +150,34 @@ function NavBar() {
                 </Button>
               ))}
             </Box>
+
+            <Box sx={{ mr: 3 }}>
+              <Tooltip title={isDarkMode ? 'Light Mode' : 'Dark Mode'}>
+                <IconButton onClick={toggleTheme}>
+                  <ContrastIcon />
+                </IconButton>
+              </Tooltip>
+            </Box>
+
             <Box sx={{ flexGrow: 0 }}>
-              {user?.role === "ADMIN" && (<IconButton color="inherit" size="large" onClick={() => handleNav('Notifications')}>
-                <Badge badgeContent={notificationCount} color="error">
-                  <NotificationsNoneOutlinedIcon />
-                </Badge>
-              </IconButton>
-            )}
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  {user ? <Avatar>{user.email.substring(0, 1)}</Avatar> : <Avatar>?</Avatar>}
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} >
+                  {user ? <Avatar>{user.email.substring(0,1)}</Avatar> : <Avatar>?</Avatar>}
                 </IconButton>
               </Tooltip>
               <Menu
                 sx={{ mt: '45px' }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
                 keepMounted
-                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
@@ -173,6 +187,46 @@ function NavBar() {
                   </MenuItem>
                 ))}
               </Menu>
+              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                {pages.map((page) => (
+                  <Button
+                    key={page}
+                    onClick={() => handleNav(page)}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    {page}
+                  </Button>
+                ))}
+              </Box>
+              <Box sx={{ flexGrow: 0 }}>
+                {user?.role === "ADMIN" && (<IconButton color="inherit" size="large" onClick={() => handleNav('Notifications')}>
+                  <Badge badgeContent={notificationCount} color="error">
+                    <NotificationsNoneOutlinedIcon />
+                  </Badge>
+                </IconButton>
+              )}
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    {user ? <Avatar>{user.email.substring(0, 1)}</Avatar> : <Avatar>?</Avatar>}
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                  keepMounted
+                  transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {(user ? settings : loginSettings).map((setting) => (
+                    <MenuItem key={setting} onClick={() => handleNav(setting)}>
+                      <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
             </Box>
           </Toolbar>
         </Container>

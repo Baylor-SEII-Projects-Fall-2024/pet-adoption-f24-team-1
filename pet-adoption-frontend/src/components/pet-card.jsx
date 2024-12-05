@@ -69,34 +69,6 @@ export default function PetCard(props) {
     }
   }
   
-  /*
-  useEffect(() => {
-    axios.get(`${apiBaseUrl}/api/adoptioncenters/` + props.pet.centerID)
-    .then(response => {
-      setAdoptionCenter(response.data);
-
-      // Get distance from location to adoption center
-      axios.get(`${apiBaseUrl}/api/distance`, { 
-        params: {
-          origin: props.location.latitude + ', ' + props.location.longitude,
-          destination: response.data.centerAddress
-        }
-      })
-      .then(response => {
-        const distance = response.data;
-        console.log(distance);
-      })
-      .catch(error => {
-        console.error('Error fetching distance:', error);
-      })
-    })
-    .catch(error => {
-      console.error('Error fetching adoption center:', error);
-    });
-  }, []);
-  */
-  
-  
   return (
     <Box>
       <Paper sx={{ width: 250, marginBottom: 10 }} elevation={3}>
@@ -118,7 +90,7 @@ export default function PetCard(props) {
             </Stack>
             <Stack direction="row" alignItems="center" spacing={1} >
               
-              <Typography fontSize="11px">{adoptionCenter ? adoptionCenter.centerAddress : '111 Drive Street, Waco, TX 76706'}</Typography>
+              <Link fontSize="11px" href={`https://www.google.com/maps/place/${adoptionCenter ? adoptionCenter.centerAddress : '1311 S 5th St, Waco, TX 76706'}`} target="_blank" rel="noopener noreferrer" sx={{ color: !isDarkMode ? theme.palette.primary.dark : 'white' }}>{adoptionCenter ? adoptionCenter.centerAddress : '1311 S 5th St, Waco, TX 76706'}</Link>
             </Stack>
           </Stack>
 

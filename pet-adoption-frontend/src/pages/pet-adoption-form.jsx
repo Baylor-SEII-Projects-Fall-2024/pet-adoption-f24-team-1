@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import { Button, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Button, Grid, Stack, TextField, Typography, Box } from '@mui/material';
 import Image from 'next/image';
 import axios from 'axios';
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
@@ -12,6 +12,7 @@ export default function PetAdoptionForm() {
     const router = useRouter();
     const { petId } = router.query;
     const user = useAuthUser();
+    console.log(user);
 
     const [fullName, setFullName] = useState("");
     const [licenseNumber, setLicenseNumber] = useState("");
@@ -74,6 +75,7 @@ export default function PetAdoptionForm() {
             <main>
                 <Stack spacing={10}>
                 <NavBar />
+                <Box sx={{ width: 400, alignItems: 'center', alignSelf: 'center'}}>
                 {!isSubmitted ? (
                     <form onSubmit={handleSubmit}>
                         <Stack sx={{ paddingTop: 4 }} alignItems="center" gap={2}>
@@ -90,6 +92,7 @@ export default function PetAdoptionForm() {
                                     fullWidth
                                     required
                                     onChange={(e) => setFullName(e.target.value)}
+                                    defaultValue={user?.firstName + " " + user?.lastName}
                                 />
                             </Grid>
 
@@ -138,6 +141,7 @@ export default function PetAdoptionForm() {
                                     fullWidth
                                     required
                                     onChange={(e) => setPhoneNumber(e.target.value)}
+                                    defaultValue={user?.phone}
                                 />
                             </Grid>
 
@@ -150,6 +154,7 @@ export default function PetAdoptionForm() {
                                     fullWidth
                                     required
                                     onChange={(e) => setEmail(e.target.value)}
+                                    defaultValue={user?.email}
                                 />
                             </Grid>
 
@@ -196,6 +201,7 @@ export default function PetAdoptionForm() {
                         <Typography variant="body1">Your pet adoption form has been successfully submitted.</Typography>
                     </Stack>
                 )}
+                </Box>
                 </Stack>
             </main>
         </>
