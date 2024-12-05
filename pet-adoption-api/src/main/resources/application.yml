@@ -18,12 +18,8 @@ logging:
   level:
     root: INFO
     org.hibernate.SQL: DEBUG
-<<<<<<< HEAD
     org.hibernate.type.descriptor.sql.BasicTypeDescriptor: TRACE
 
 google:
   api:
     key: ${GOOGLE_API_KEY}
-=======
-    org.hibernate.type.descriptor.sql.BasicTypeDescriptor: TRACE
->>>>>>> main
