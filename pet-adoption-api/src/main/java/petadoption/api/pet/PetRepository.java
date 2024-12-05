@@ -14,4 +14,5 @@ public interface PetRepository extends JpaRepository<Pet, Long> {
     List<Pet> findAllByAdminID(@Param("centerID") Long centerID);
     @Query("SELECT DISTINCT p.petBreed FROM Pet p")
     List<String> findBreeds();
+    Pet findPetByPetID(Long petID);
 }
