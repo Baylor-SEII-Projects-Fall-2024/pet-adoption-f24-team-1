@@ -64,13 +64,17 @@ export default function PetAdoptionForm() {
                 }
                 setIsSubmitted(true);
             });
+            let requesteename =  user.firstName + " " + user.lastName 
+            let params = {
+                requesteeName: requesteename,
+                petId: parseInt(petId,10),
+            }
+            console.log({params})
 
-            axios.post(`${apiBaseUrl}/api/Admin-Notification-Email`, params={
-                requesteeName: fullName,
-                petId: petId,
-            })
+            axios.get(`${apiBaseUrl}/api/emails/Admin-Email-Notification`, {params})
             .then(response => {
                 console.log("Admin Notified")
+
             })
             .catch(error => {
                 if (error.response) {

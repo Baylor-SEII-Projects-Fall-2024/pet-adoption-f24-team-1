@@ -28,9 +28,8 @@ public class EmailController {
     private AdoptionCenterRepository adoptionCenterRepository;
     @Autowired
     private AdoptionCenterAdminRepository adoptionCenterAdminRepository;
-
-    @GetMapping("/Admin-Notification-Email")
-    public void sendAdminNotification(@RequestParam String requesteeName,
+    @GetMapping("/Admin-Email-Notification")
+    public String sendAdminNotification(@RequestParam String requesteeName,
                                       @RequestParam Long petId) {
 
         Pet pet =
@@ -39,8 +38,9 @@ public class EmailController {
                 adoptionCenterRepository.findAdoptionCenterByCenterId(pet.getCenterID());
         AdoptionCenterAdmin adoptionCenterAdmin =
                 adoptionCenterAdminRepository.findAdoptionCenterAdminByAdoptionCenter(center);
-
-        sendPetAdoptedAdminNotificationEmail(requesteeName, pet.getPetName(), center.getCenterName(), adoptionCenterAdmin.getEmail());
+        String adminEmail = adoptionCenterAdmin.getEmail();
+        sendPetAdoptedAdminNotificationEmail(requesteeName, pet.getPetName(), center.getCenterName(), adminEmail);
+       return "Email sent to " + adminEmail;
     }
     @GetMapping("/User-Registration-Email")
     public void sendUserRegistration(@RequestParam String requesteeName,
