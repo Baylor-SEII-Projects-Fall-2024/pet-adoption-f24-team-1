@@ -151,15 +151,21 @@ function NavBar() {
               ))}
             </Box>
 
-            <Box sx={{ mr: 3 }}>
+            <Box>
               <Tooltip title={isDarkMode ? 'Light Mode' : 'Dark Mode'}>
                 <IconButton onClick={toggleTheme}>
                   <ContrastIcon />
                 </IconButton>
               </Tooltip>
             </Box>
+            {user?.role === "ADMIN" && (<IconButton color="inherit" size="large" onClick={() => handleNav('Notifications')}>
+                <Badge badgeContent={notificationCount} color="error">
+                  <NotificationsNoneOutlinedIcon />
+                </Badge>
+              </IconButton>
+            )}
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 1 }}>
                 {user ? <Avatar>{user.email.substring(0, 1)}</Avatar> : <Avatar>?</Avatar>}
               </IconButton>
             </Tooltip>
