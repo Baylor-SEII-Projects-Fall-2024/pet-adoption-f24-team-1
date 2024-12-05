@@ -8,6 +8,7 @@ import petadoption.api.adoptioncenter.AdoptionCenter;
 import petadoption.api.adoptioncenter.AdoptionCenterRepository;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -17,6 +18,10 @@ public class EventService {
     private EventRepository eventRepository;
 
     // Fetch all events
+    public List<Event> getAllEventsByAdminId(Long adminID) {
+        return eventRepository.findAllById(Collections.singleton(adminID));
+    }
+
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
     }

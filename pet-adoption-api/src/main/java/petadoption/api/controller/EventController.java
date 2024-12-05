@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import petadoption.api.event.Event;
 import petadoption.api.event.EventService;
 import petadoption.api.event.*;
+import petadoption.api.pet.Pet;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,11 @@ public class EventController {
     @GetMapping
     public List<Event> getAllEvents() {
         return eventService.getAllEvents();
+    }
+    @GetMapping("/{adminID}")
+    public List<Event> getAllEvents(@PathVariable Long adminID ) {
+        System.out.println(eventService.getAllEventsByAdminId(adminID));
+        return eventService.getAllEventsByAdminId(adminID);
     }
 
     @PostMapping
@@ -42,13 +48,10 @@ public class EventController {
 
         Event event = eventOptional.get();
 
-        // Update all fields from the incoming `updatedEvent`
         event.setDate(updatedEvent.getDate());
         event.setDescription(updatedEvent.getDescription());
         event.setTitle(updatedEvent.getTitle());
         event.setLocation(updatedEvent.getLocation());
-        event.setImageUrl(updatedEvent.getImageUrl());  // Assuming you want to update image URL
-        event.setDetailsPage(updatedEvent.getDetailsPage());  // Assuming you want to update details page
 
         Event savedEvent = eventService.saveEvent(event);
         return new ResponseEntity<>(savedEvent, HttpStatus.OK);

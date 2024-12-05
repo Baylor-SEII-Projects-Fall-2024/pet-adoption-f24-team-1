@@ -6,26 +6,27 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import NavBar from '@/components/nav-bar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import ImageDropzone from '@/components/image-dropzone';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function UserProfile() {
   const router = useRouter();
+  const user = useAuthUser()
 
   // State variables for editing
   const [isEditing, setIsEditing] = useState(false);
   const [id, setId] = useState();
-  const [name, setName] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
   const [bio, setBio] = useState();
   const [email, setEmail] = useState();
   const [phone, setPhone] = useState();
-  const [location, setLocation] = useState();
   const [imgUrl, setProfilePicture] = useState();
   const [password, setPassword] = useState();
   const [userType, setUserType] = useState();
@@ -35,17 +36,18 @@ export default function UserProfile() {
 
   // Fetch user profile data from sessionStorage when component mounts
   useEffect(() => {
-    const userFromSessionStorage = JSON.parse(sessionStorage.getItem('user'));
-    if (userFromSessionStorage) {
-      setId(userFromSessionStorage.id);
-      setName(userFromSessionStorage.name || '');
-      setBio(userFromSessionStorage.bio || '');
-      setEmail(userFromSessionStorage.email || '');
-      setPhone(userFromSessionStorage.phone || '');
-      setLocation(userFromSessionStorage.location || '');
-      setProfilePicture(userFromSessionStorage.imgUrl || '');
-      setPassword(userFromSessionStorage.password);
-      setUserType(userFromSessionStorage.userType);
+
+    console.log(user)
+    if (user) {
+      setId(user.id);
+      setFirstName(user.firstName || '');
+      setLastName(user.lastName || '');
+      setBio(user.bio || '');
+      setEmail(user.email || '');
+      setPhone(user.phone || '');
+      setProfilePicture(user.imgUrl || '');
+      setPassword(user.password);
+      setUserType(user.userType);
     }
   }, []);
 
@@ -53,8 +55,8 @@ export default function UserProfile() {
   const handleEditProfile = () => setIsEditing(true);
   const handleSaveProfile = async () => {
     try {
-      await axios.put(`${apiBaseUrl}/api/update-profile`, { id, name, bio, email, phone, location, imgUrl, password, userType });
-      sessionStorage.setItem('user', JSON.stringify({ name, bio, email, phone, location, imgUrl }));
+      await axios.put(`${apiBaseUrl}/api/users/update`, { id, firstName, lastName, bio, email, phone, imgUrl, password, userType });
+      sessionStorage.setItem('user', JSON.stringify({ firstName, lastName, bio, email, phone, imgUrl }));
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -88,7 +90,7 @@ export default function UserProfile() {
                   {/* Profile Picture */}
                   <Grid item>
                     <Avatar
-                      alt={name}
+                      alt={firstName}
                       src={imgUrl || ''}
                       sx={{ width: 120, height: 120, cursor: 'pointer' }}  // Cursor changes to pointer
                       onClick={handleAvatarClick} // Open modal on click
@@ -102,12 +104,19 @@ export default function UserProfile() {
                     {isEditing ? (
                       <>
                         <TextField
-                          label="Name"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
+                          label="First Name"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
                           fullWidth
                           sx={{ marginBottom: 1 }}
                         />
+                        <TextField
+                          label="Last Name"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          fullWidth
+                          sx={{ marginBottom: 1}}
+                          />
                         <TextField
                           label="Bio"
                           value={bio}
@@ -131,17 +140,10 @@ export default function UserProfile() {
                           fullWidth
                           sx={{ marginBottom: 1 }}
                         />
-                        <TextField
-                          label="Location"
-                          value={location}
-                          onChange={(e) => setLocation(e.target.value)}
-                          fullWidth
-                          sx={{ marginBottom: 1 }}
-                        />
                       </>
                     ) : (
                       <>
-                        <Typography variant="h5">{name}</Typography>
+                        <Typography variant="h5">{firstName + " " + lastName}</Typography>
                         <Typography variant="body1" color="text.secondary" paragraph>
                           {bio}
                         </Typography>
@@ -161,15 +163,6 @@ export default function UserProfile() {
                           <Grid item>
                             <Typography variant="body2" color="text.secondary">
                               <strong>Phone:</strong> {phone}
-                            </Typography>
-                          </Grid>
-
-                          <Grid item>
-                            <LocationOnIcon fontSize="small" />
-                          </Grid>
-                          <Grid item>
-                            <Typography variant="body2" color="text.secondary">
-                              <strong>Location:</strong> {location}
                             </Typography>
                           </Grid>
                         </Grid>

@@ -1,6 +1,7 @@
 package petadoption.api.pet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,10 @@ public class PetService {
     @Autowired
     private PetRepository petRepository;
 
-    public List<Pet> getAllPets() {
+    public List<Pet> getAllPets(int limit) {
+        if (limit >= 0) {
+            return petRepository.findAll(PageRequest.of(0, limit)).getContent();
+        }
         return petRepository.findAll();
     }
     public List<Pet> getAllPetsByAdminId(Long adminID) {

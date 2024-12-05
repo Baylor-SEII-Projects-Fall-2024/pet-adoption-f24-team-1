@@ -19,9 +19,10 @@ public class PetController {
     private PetService petService;
 
     @GetMapping
-    public List<Pet> getAllPets() {
-        return petService.getAllPets();
+    public List<Pet> getAllPets(@RequestParam(defaultValue = "-1") int limit) {
+        return petService.getAllPets(limit);
     }
+
     @GetMapping("/{adminID}")
     public List<Pet> getAllPets(@PathVariable Long adminID ) {
         System.out.println(petService.getAllPetsByAdminId(adminID));
