@@ -37,7 +37,7 @@ public class EmailService {
                 .from( "Furry Friends Mailer System"
                         , "nicholas_nolen1@baylor.edu")
                 .to(emailRecipient, emailAddress)
-                .withSubject("Pet Adoption Request")
+                .withSubject("Furry Friends Automatic Notification")
                 .withPlainText(message)
                 .buildEmail();
     }
@@ -54,15 +54,15 @@ public class EmailService {
         builderBuildAndSend(email);
         System.out.println("Adoption Notification Email Sent");
     }
-    public static void sendUserRegistrationEmail(String requesteeName,
-                                                 String emailRecipient, String emailAddress ) {
+    public static void sendUserRegistrationEmail(String emailRecipient, String emailAddress ) {
         String message;
-        message = "Thank you for registering for Fluffy Friends "+requesteeName+ "!\n";
+        message = "Thank you for registering for Fluffy Friends "+emailRecipient+ "!\n";
         message += "We hope you find your forever friend!\n";
         // Constructing the email message
         Email email = constructRequest(message, emailRecipient, emailAddress);
         // Sending the email using SMTP
         builderBuildAndSend(email);
+        System.out.println("Registration confirmation email sent " + emailAddress);
     }
     public static void sendUserAdoptionConfirmedEmail(String requesteeName, String petName,
                                                  String emailRecipient, String emailAddress ) {

@@ -19,6 +19,9 @@ const CreateAccountPage = () => {
   const router = useRouter();
   const signIn = useSignIn();
 
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+
+
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   //Validation requirements
@@ -56,6 +59,35 @@ const CreateAccountPage = () => {
       // login user if registered
       try {
         const result = await loginUser(values.email, values.password, signIn);
+
+      let requesteename =  values.firstName + " " + values.lastName 
+      
+      let params = {
+        emailRecipient: requesteename,
+        emailAddress: values.email
+      }
+      console.log({params})
+
+      axios.get(`${apiBaseUrl}/api/emails/User-Registration-Email`, {params})
+      .then(response => {
+        console.log("User Notified")
+
+      })
+      .catch(error => {
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            setMessage(`Error: ${error.response.data}`);
+        } else if (error.request) {
+            // The request was made but no response was received
+            setMessage("No response from server.");
+        } else {
+            // Something happened in setting up the request that triggered an error
+            setMessage("There was an error submitting the form. Please try again.");
+        }
+        setIsSubmitted(true);
+      });
+
+
         router.push("/set-user-preferences");
       } catch (error) {
         alert("Login failed: " + error);

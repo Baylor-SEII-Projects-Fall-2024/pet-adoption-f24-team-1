@@ -43,10 +43,11 @@ public class EmailController {
        return "Email sent to " + adminEmail;
     }
     @GetMapping("/User-Registration-Email")
-    public void sendUserRegistration(@RequestParam String requesteeName,
-                                     @RequestParam String emailRecipient,
+    public String sendUserRegistration(@RequestParam String emailRecipient,
                                      @RequestParam String emailAddress ) {
-        sendUserRegistrationEmail(requesteeName, emailRecipient, emailAddress);
+        sendUserRegistrationEmail(emailRecipient, emailAddress);
+        return "Registration confirmation email sent to " + emailAddress;
+
     }
     @GetMapping("/User-Adoption-Confirmed")
     public void sendUserAdoptionConfirmed(@RequestParam String requesteeName,
