@@ -1,11 +1,13 @@
 package petadoption.api.notification;
 
+import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import petadoption.api.PetAdoptionForm.PetAdoptionForm;
 import petadoption.api.adoptioncenter.AdoptionCenter;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class NotificationService {
@@ -23,5 +25,14 @@ public class NotificationService {
         notification.setAdoptionCenter(center);
 
         notificationRepository.save(notification);
+    }
+
+    public boolean deleteNotification(Long id) {
+        Optional<Notification> petOptional = notificationRepository.findById(id);
+        if (petOptional.isPresent()) {
+            notificationRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

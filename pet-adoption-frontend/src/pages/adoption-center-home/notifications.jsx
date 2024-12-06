@@ -65,6 +65,102 @@ function NotificationsPage() {
     }
   };
 
+  const approveAdoption = async () => {
+    const getPetName = async (petId) => {
+        try {
+            const response = await axios.get(`${apiBaseUrl}/api/pets/pet/${petId}`);
+            return response.data.petName;
+        } catch (error) {
+            console.error("Error getting center id:", error);
+            return -1;
+        }
+    };
+    const petId = selectedNotification.petAdoptionForm.petId;
+    const petName = await getPetName(petId);
+    const centerName = selectedNotification.adoptionCenter.centerName;
+    const notificationId = selectedNotification.id;
+    const userId = selectedNotification.petAdoptionForm.userId;
+    const title = "Adoption request approved";
+    const message = `Congratulations! Your adoption request for ${petName} has been approved by ${centerName}.`
+    
+    // Send notification to user
+    try {
+        await axios.post(`${apiBaseUrl}/api/notifications/user/send`, null, {
+            params: {
+                title: title,
+                message: message,
+                userId: userId
+            }
+        });
+    } catch (error) {
+        console.error("Error sending notification:", error);
+        return -1;
+    }
+
+    // Remove pet from database
+    try {
+        await axios.delete(`${apiBaseUrl}/api/pets/${petId}`);
+    } catch (error) {
+        console.error("Error removing pet:", error);
+        return -1;
+    }
+
+    // Remove notification
+    try {
+        await axios.delete(`${apiBaseUrl}/api/notifications/${notificationId}`);
+    } catch (error) {
+        console.error("Error removing pet:", error);
+        return -1;
+    }
+
+    // Reload page
+    window.location.reload();
+  }
+
+  const declineAdoption = async () => {
+    const getPetName = async (petId) => {
+        try {
+            const response = await axios.get(`${apiBaseUrl}/api/pets/pet/${petId}`);
+            return response.data.petName;
+        } catch (error) {
+            console.error("Error getting center id:", error);
+            return -1;
+        }
+    };
+    const petId = selectedNotification.petAdoptionForm.petId;
+    const petName = await getPetName(petId);
+    const centerName = selectedNotification.adoptionCenter.centerName;
+    const notificationId = selectedNotification.id;
+    const userId = selectedNotification.petAdoptionForm.userId;
+    const title = "Adoption request declined";
+    const message = `We're sorry, but your adoption request for ${petName} has been declined by ${centerName}.`
+
+    // Send notification to user
+    try {
+        await axios.post(`${apiBaseUrl}/api/notifications/user/send`, null, {
+            params: {
+                title: title,
+                message: message,
+                userId: userId
+            }
+        });
+    } catch (error) {
+        console.error("Error sending notification:", error);
+        return -1;
+    }
+
+    // Remove notification
+    try {
+        await axios.delete(`${apiBaseUrl}/api/notifications/${notificationId}`);
+    } catch (error) {
+        console.error("Error removing pet:", error);
+        return -1;
+    }
+
+    // Reload page
+    window.location.reload();
+  }
+
   return (
     <ProtectedAdminRoute>
         <Head>
@@ -142,9 +238,26 @@ function NotificationsPage() {
                     <Typography variant="body2"><strong>Email:</strong> {selectedNotification?.petAdoptionForm?.email}</Typography>
                     <Typography variant="body2"><strong>Employer:</strong> {selectedNotification?.petAdoptionForm?.employer}</Typography>
                     <Typography variant="body2"><strong>Duration Time:</strong> {new Date(selectedNotification?.petAdoptionForm?.durationTime).toLocaleString()}</Typography>
-                <Button onClick={handleClose} variant="contained" sx={{ mt: 2 }}>
-                    Close
-                </Button>
+                    <Box sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                    }}>
+                        <Button onClick={handleClose} variant="contained" sx={{ mt: 2 }}>
+                            Close
+                        </Button>
+                        <Box sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                        }}>
+                            <Button onClick={declineAdoption} variant="outlined" sx={{ mt: 2, color: 'red' }}>
+                                Decline
+                            </Button>
+                            <Button onClick={approveAdoption} variant="contained" sx={{ mt: 2 }}>
+                                Approve
+                            </Button>
+                        </Box>
+                    </Box>
                 </Box>
             </Modal>
             </Container>

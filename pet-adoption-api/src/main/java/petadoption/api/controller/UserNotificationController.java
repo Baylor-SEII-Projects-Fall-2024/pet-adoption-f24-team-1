@@ -57,4 +57,13 @@ public class UserNotificationController {
         UserNotification userNotification = userNotificationService.createNotification(title, message, user);
         return new ResponseEntity<>(userNotification, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteNotification(@PathVariable Long id) {
+        boolean isRemoved = userNotificationService.deleteNotification(id);
+        if (!isRemoved) {
+            return new ResponseEntity<>("Notification not found", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>("Notification deleted successfully", HttpStatus.OK);
+    }
 }

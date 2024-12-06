@@ -23,6 +23,16 @@ public class PetController {
         return petService.getAllPets(limit);
     }
 
+    @GetMapping("/pet/{petId}")
+    public ResponseEntity<?> getPet(@PathVariable Long petId) {
+        Optional<Pet> foundPet = petService.getPet(petId);
+        if (foundPet.isPresent()) {
+            return new ResponseEntity<>(foundPet.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Pet not found.", HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/{adminID}")
     public List<Pet> getAllPets(@PathVariable Long adminID ) {
         System.out.println(petService.getAllPetsByAdminId(adminID));

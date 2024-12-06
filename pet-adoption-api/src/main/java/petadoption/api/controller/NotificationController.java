@@ -1,11 +1,14 @@
 package petadoption.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import petadoption.api.adoptioncenter.AdoptionCenter;
 import petadoption.api.adoptioncenter.AdoptionCenterRepository;
 import petadoption.api.notification.Notification;
 import petadoption.api.notification.NotificationRepository;
+import petadoption.api.notification.NotificationService;
 
 import java.util.List;
 
@@ -16,6 +19,9 @@ public class NotificationController {
 
     @Autowired
     private NotificationRepository notificationRepository;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @Autowired
     private AdoptionCenterRepository adoptionCenterRepository;
@@ -42,5 +48,14 @@ public class NotificationController {
                 () -> new RuntimeException("Notification not found"));
         notification.setRead(true);
         notificationRepository.save(notification);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteNotification(@PathVariable Long id) {
+        boolean isRemoved = notificationService.deleteNotification(id);
+        if (!isRemoved) {
+            return new ResponseEntity<>("Notification not found", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>("Notification deleted successfully", HttpStatus.OK);
     }
 }

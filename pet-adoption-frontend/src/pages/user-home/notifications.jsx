@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Container, Typography, Card, CardContent, Button, Modal, Box, Stack, Badge } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import axios from 'axios';
-import ProtectedAdminRoute from '@/components/protected-admin-route';
 import Head from 'next/head';
 import NavBar from '@/components/nav-bar';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
