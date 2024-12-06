@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import petadoption.api.pet.Pet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,5 +50,9 @@ public class AdoptionCenterService {
 
     public AdoptionCenter getAdoptionCenterById(Long centerId) {
         return adoptionCenterRepository.findById(centerId).orElse(null); // Return null if not found
+    }
+
+    public AdoptionCenter saveAdoptionCenter(AdoptionCenter adoptionCenter) {
+        return adoptionCenterRepository.save(adoptionCenter);
     }
 }

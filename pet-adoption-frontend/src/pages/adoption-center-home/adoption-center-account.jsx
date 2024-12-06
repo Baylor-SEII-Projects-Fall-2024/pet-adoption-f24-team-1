@@ -17,10 +17,13 @@ export default function AdoptionCenterAccount() {
   const [adminEmail, setAdminEmail] = useState('');
 
   // ----- Adoption Center Info States -----
+  const [centerId, setCenterId] = useState('');
   const [centerName, setCenterName] = useState('');
+  const [centerAddress, setCenterAddress] = useState('');
+  const [zipCode, setCenterZip] = useState('');
   const [centerEmail, setCenterEmail] = useState('');
   const [centerPhone, setCenterPhone] = useState('');
-  const [centerImgUrl, setCenterImgUrl] = useState('');
+  const [centerImageUrl, setCenterImageUrl] = useState('');
 
   useEffect(() => {
     if (user?.id && user?.role == "ADMIN") {
@@ -39,10 +42,13 @@ export default function AdoptionCenterAccount() {
       axios.get(`${apiBaseUrl}/api/admins/center/${user.id}`)
         .then(response => {
           const centerData = response.data;
+          setCenterId(centerData.centerId)
           setCenterName(centerData.centerName || '');
+          setCenterAddress(centerData.centerAddress || '');
+          setCenterZip(centerData.zipCode || '');
           setCenterEmail(centerData.centerEmail || '');
           setCenterPhone(centerData.centerPhone || '');
-          setCenterImgUrl(centerData.centerImgUrl || '');
+          setCenterImageUrl(centerData.centerImageUrl || '');
         })
         .catch(error => console.error("Error fetching center info:", error));
     }
@@ -69,14 +75,15 @@ export default function AdoptionCenterAccount() {
   const handleSaveCenterInfo = () => {
     // Adjust the payload and endpoint based on your backend
     const payload = {
-      adminId: user.id,
       centerName,
-      centerEmail,
+      centerAddress,
       centerPhone,
-      centerImgUrl
+      centerEmail,
+      zipCode,
+      centerImageUrl
     };
 
-    axios.put(`${apiBaseUrl}/api/admins/center/update`, payload)
+    axios.put(`${apiBaseUrl}/api/adoptioncenters/${centerId}`, payload)
       .then(response => {
         console.log("Center info updated:", response.data);
       })
@@ -160,8 +167,24 @@ export default function AdoptionCenterAccount() {
                 />
               </Grid>
               <Grid item xs={12}>
+                <TextField
+                  label="Center Address"
+                  value={centerAddress}
+                  onChange={(e) => setCenterAddress(e.target.value)}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Center Zip"
+                  value={zipCode}
+                  onChange={(e) => setCenterZip(e.target.value)}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
                 {
-                <ImageDropzone setImgUrl={setCenterImgUrl} />
+                <ImageDropzone setImgUrl={setCenterImageUrl} />
                 }
               </Grid>
               <Grid item xs={12} textAlign="right">
