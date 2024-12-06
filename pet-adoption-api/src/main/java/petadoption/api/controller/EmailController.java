@@ -9,6 +9,8 @@ import petadoption.api.adoptioncenteradmin.AdoptionCenterAdminRepository;
 import petadoption.api.pet.Pet;
 import petadoption.api.pet.PetRepository;
 import petadoption.api.adoptioncenter.AdoptionCenterRepository;
+import petadoption.api.user.User;
+import petadoption.api.user.UserRepository;
 
 import java.util.List;
 
@@ -28,6 +30,8 @@ public class EmailController {
     private AdoptionCenterRepository adoptionCenterRepository;
     @Autowired
     private AdoptionCenterAdminRepository adoptionCenterAdminRepository;
+    @Autowired
+    private UserRepository userRepository;
     @GetMapping("/Admin-Email-Notification")
     public String sendAdminNotification(@RequestParam String requesteeName,
                                       @RequestParam Long petId) {
@@ -50,11 +54,11 @@ public class EmailController {
 
     }
     @GetMapping("/User-Adoption-Confirmed")
-    public void sendUserAdoptionConfirmed(@RequestParam String requesteeName,
-                                          @RequestParam String petName,
-                                          @RequestParam String emailRecipient,
-                                          @RequestParam String emailAddress ) {
-        sendUserAdoptionConfirmedEmail(requesteeName, petName, emailRecipient,  emailAddress);
+    public String sendUserAdoptionConfirmed(@RequestParam String petName,
+                                          @RequestParam Long userId) {
+        User user = userRepository.findById(userId.longValue());
+        sendUserAdoptionConfirmedEmail(petName, user.getFirstName(),  user.getEmail());
+        return "Adoption confirmation email sent to " + user.getEmail();
     }
     @GetMapping("/User-Adoption-Denied")
     public void sendUserAdoptionDenied(@RequestParam String requesteeName,

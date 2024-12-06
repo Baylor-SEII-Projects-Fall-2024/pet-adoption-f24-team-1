@@ -64,15 +64,17 @@ public class EmailService {
         builderBuildAndSend(email);
         System.out.println("Registration confirmation email sent " + emailAddress);
     }
-    public static void sendUserAdoptionConfirmedEmail(String requesteeName, String petName,
+    public static void sendUserAdoptionConfirmedEmail( String petName,
                                                  String emailRecipient, String emailAddress ) {
         String message;
-        message = "Congratulations, " + requesteeName + ", your request to adopt"
+        message = "Congratulations, " + emailRecipient + ", your request to adopt "
                 + petName + " has been approved!\n";
+        message += "We hope you have a great life with your new furry friend!\n";
         // Constructing the email message
         Email email = constructRequest(message, emailRecipient, emailAddress);
         // Sending the email using SMTP
         builderBuildAndSend(email);
+        System.out.println("Adoption confirmation email sent " + emailAddress);
     }
     public static void sendUserAdoptionDeniedEmail(String requesteeName, String petName,
                                                  String emailRecipient, String emailAddress ) {

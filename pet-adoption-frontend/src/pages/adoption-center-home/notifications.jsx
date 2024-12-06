@@ -96,6 +96,21 @@ function NotificationsPage() {
         console.error("Error sending notification:", error);
         return -1;
     }
+    const email = selectedNotification.petAdoptionForm.email;
+    const userName = selectedNotification.petAdoptionForm.fullName;
+    // SENDING THE USER AN EMAIL ON TOP OF OTHER NOTIFICAITONS
+    try {
+        
+        await axios.get(`${apiBaseUrl}/api/emails/User-Adoption-Confirmed`, {
+            params: {
+                petName: petName,
+                userId: userId
+            }
+        });
+    } catch (error) {
+        console.error("Error sending notification:", error);
+        return -1;
+    }
 
     // Remove pet from database
     try {
