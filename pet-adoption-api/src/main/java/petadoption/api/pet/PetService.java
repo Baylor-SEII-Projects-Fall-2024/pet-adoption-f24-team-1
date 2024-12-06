@@ -19,6 +19,10 @@ public class PetService {
         }
         return petRepository.findAll();
     }
+
+    public Optional<Pet> getPet(Long petId) {
+        return petRepository.findById(petId);
+    }
     public List<Pet> getAllPetsByAdminId(Long adminID) {
         return petRepository.findAllByAdminID(adminID);
     }

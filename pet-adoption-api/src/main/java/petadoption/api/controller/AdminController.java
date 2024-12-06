@@ -22,6 +22,11 @@ public class AdminController {
     @Autowired
     private AdoptionCenterAdminService adminService;
 
+    @GetMapping("/{adminId}")
+    public ResponseEntity<AdoptionCenterAdmin> getAdmin(@PathVariable(value = "adminId") Long adminId) {
+        return adminService.getAdmin(adminId);
+    }
+
     @GetMapping
     public ResponseEntity<List<AdoptionCenterAdmin>> getAllAdmins() {
         return adminService.getAllAdmins();

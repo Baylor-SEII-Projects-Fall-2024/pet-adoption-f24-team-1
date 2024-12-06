@@ -61,6 +61,17 @@ function NavBar() {
       };
       fetchNotifications();
       });
+    } else if (isAuthenticated && user?.role === "USER") {
+      // Fetch unread notification count
+      const fetchNotifications = async () => {
+        try {
+        const response = await axios.get(`${apiBaseUrl}/api/notifications/user/unread/${user.id}`);
+        setNotificationCount(response.data.length);
+        } catch (error) {
+        console.error("Error fetching notifications:", error);
+        }
+      };
+      fetchNotifications();
     }
   }, []);
 
@@ -76,13 +87,26 @@ function NavBar() {
     if (nav === 'Login') setLoginModalOpen(true);
     else if (nav === "Find Pets") router.push('/user-home')
     else if (nav === 'Create Account') router.push('/create-account');
-    else if (nav === 'Settings') router.push('/user-home/user-profile');
+    //changing this for account info changes
+    else if (nav === 'Settings') {
+      if (user?.role == "ADMIN") {
+        router.push('/adoption-center-home/adoption-center-account');
+      } else {
+        router.push('/user-home/user-account')
+      }
+    } 
     else if (nav === 'Logout') setLogoutModalOpen(true);
     else if (nav === 'Matches') router.push('/user-home/matches');
     else if (nav === 'Manage Pets') router.push('/adoption-center-home/manage-pets');
     else if (nav === 'Manage Events') router.push('/adoption-center-home/manage-events');
     else if (nav === 'Profile') router.push('/adoption-center-home/adpotion-center-profile');
-    else if (nav === 'Notifications') router.push('/adoption-center-home/notifications');
+    else if (nav === 'Notifications') {
+      if (user?.role === "ADMIN") {
+        router.push('/adoption-center-home/notifications');
+      } else {
+        router.push('/user-home/notifications');
+      }
+    }
   };
 
   let pages = defaultPages;
@@ -151,15 +175,21 @@ function NavBar() {
               ))}
             </Box>
 
-            <Box sx={{ mr: 3 }}>
+            <Box>
               <Tooltip title={isDarkMode ? 'Light Mode' : 'Dark Mode'}>
                 <IconButton onClick={toggleTheme}>
                   <ContrastIcon />
                 </IconButton>
               </Tooltip>
             </Box>
+            {user && (<IconButton color="inherit" size="large" onClick={() => handleNav('Notifications')}>
+                <Badge badgeContent={notificationCount} color="error">
+                  <NotificationsNoneOutlinedIcon />
+                </Badge>
+              </IconButton>
+            )}
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 1 }}>
                 {user ? <Avatar>{user.email.substring(0, 1)}</Avatar> : <Avatar>?</Avatar>}
               </IconButton>
             </Tooltip>
