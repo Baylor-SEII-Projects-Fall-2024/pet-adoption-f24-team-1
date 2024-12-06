@@ -87,7 +87,14 @@ function NavBar() {
     if (nav === 'Login') setLoginModalOpen(true);
     else if (nav === "Find Pets") router.push('/user-home')
     else if (nav === 'Create Account') router.push('/create-account');
-    else if (nav === 'Settings') router.push('/user-home/user-profile');
+    //changing this for account info changes
+    else if (nav === 'Settings') {
+      if (user?.role == "ADMIN") {
+        router.push('/adoption-center-home/adoption-center-account');
+      } else {
+        router.push('/user-home/user-account')
+      }
+    } 
     else if (nav === 'Logout') setLogoutModalOpen(true);
     else if (nav === 'Matches') router.push('/user-home/matches');
     else if (nav === 'Manage Pets') router.push('/adoption-center-home/manage-pets');

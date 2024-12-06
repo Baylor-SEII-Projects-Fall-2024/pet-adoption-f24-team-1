@@ -17,6 +17,14 @@ public class AdoptionCenterAdminService {
     @Autowired
     private AdoptionCenterAdminRepository adminRepository;
 
+    public ResponseEntity<AdoptionCenterAdmin> getAdmin(Long id) {
+        Optional<AdoptionCenterAdmin> admin = adminRepository.findById(id);
+        if (admin.isPresent()) {
+            return new ResponseEntity<>(admin.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     public ResponseEntity<List<AdoptionCenterAdmin>> getAllAdmins() {
         List<AdoptionCenterAdmin> admins = adminRepository.findAll();
         return new ResponseEntity<>(admins, HttpStatus.OK);
