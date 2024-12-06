@@ -17,7 +17,7 @@ const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function UserProfile() {
   const router = useRouter();
-  const user = useAuthUser()
+  const user = useAuthUser();
 
   // State variables for editing
   const [isEditing, setIsEditing] = useState(false);
