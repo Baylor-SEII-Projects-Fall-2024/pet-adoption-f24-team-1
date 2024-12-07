@@ -74,18 +74,20 @@ public class EmailService {
         Email email = constructRequest(message, emailRecipient, emailAddress);
         // Sending the email using SMTP
         builderBuildAndSend(email);
-        System.out.println("Adoption confirmation email sent " + emailAddress);
+        System.out.println("Adoption acceptance email sent " + emailAddress);
     }
-    public static void sendUserAdoptionDeniedEmail(String requesteeName, String petName,
+    public static void sendUserAdoptionDeniedEmail(String petName,
                                                  String emailRecipient, String emailAddress ) {
         String message;
-        message = "Unfortunately, " + requesteeName + ", your request to adopt"
-                + petName + " has been Denied!\n";
+        message = "Unfortunately, " + emailRecipient + ", your request to adopt "
+                + petName + " has been Denied.\n";
         message += "We apologize for this inconvenience, feel free to search our website to find the best fit for you!";
         // Constructing the email message
         Email email = constructRequest(message, emailRecipient, emailAddress);
         // Sending the email using SMTP
         builderBuildAndSend(email);
+        System.out.println("Adoption denial email sent " + emailAddress);
+
     }
 
     }

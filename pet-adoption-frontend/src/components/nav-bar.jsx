@@ -79,8 +79,12 @@ function NavBar() {
   const handleCloseUserMenu = () => setAnchorElUser(null);
 
   const handleLogout = () => {
-    signOut();
-    window.location.reload();
+      signOut();
+      if (user?.role != "ADMIN") {
+      window.location.reload();
+    }else{
+      router.push('/user-home')
+    }
   };
 
   const handleNav = (nav) => {

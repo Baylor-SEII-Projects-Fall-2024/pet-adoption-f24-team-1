@@ -58,14 +58,14 @@ public class EmailController {
                                           @RequestParam Long userId) {
         User user = userRepository.findById(userId.longValue());
         sendUserAdoptionConfirmedEmail(petName, user.getFirstName(),  user.getEmail());
-        return "Adoption confirmation email sent to " + user.getEmail();
+        return "Adoption acceptance email sent to " + user.getEmail();
     }
     @GetMapping("/User-Adoption-Denied")
-    public void sendUserAdoptionDenied(@RequestParam String requesteeName,
-                                       @RequestParam String petName,
-                                       @RequestParam String emailRecipient,
-                                       @RequestParam String emailAddress ) {
-        sendUserAdoptionDeniedEmail(requesteeName, petName, emailRecipient, emailAddress);
+    public String sendUserAdoptionDenied(@RequestParam String petName,
+                                       @RequestParam Long userId) {
+        User user = userRepository.findById(userId.longValue());
+        sendUserAdoptionDeniedEmail(petName, user.getFirstName(),  user.getEmail());
+        return "Adoption denial email sent to " + user.getEmail();
     }
 
 }
