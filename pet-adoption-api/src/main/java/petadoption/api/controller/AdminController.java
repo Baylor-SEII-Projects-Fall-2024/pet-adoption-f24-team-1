@@ -27,6 +27,22 @@ public class AdminController {
         return adminService.getAdmin(adminId);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<AdoptionCenterAdmin> updateAdmin(@PathVariable Long id, @RequestBody AdoptionCenterAdmin updateAdmin) {
+        ResponseEntity<AdoptionCenterAdmin> responseEntity = adminService.getAdmin(id);
+
+        if (responseEntity.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        AdoptionCenterAdmin existingAdmin = responseEntity.getBody();
+        existingAdmin.setFirstName(updateAdmin.getFirstName());
+        existingAdmin.setLastName(updateAdmin.getLastName());
+        existingAdmin.setEmail(updateAdmin.getEmail());
+
+        return adminService.saveAdmin(existingAdmin);
+    }
+
     @GetMapping
     public ResponseEntity<List<AdoptionCenterAdmin>> getAllAdmins() {
         return adminService.getAllAdmins();

@@ -58,13 +58,12 @@ export default function AdoptionCenterAccount() {
   const handleSaveAdminInfo = () => {
     // Adjust the payload and endpoint based on your backend
     const payload = {
-      id: user.id,
       firstName: adminFirstName,
       lastName: adminLastName,
       email: adminEmail
     };
 
-    axios.put(`${apiBaseUrl}/api/admins/update`, payload)
+    axios.put(`${apiBaseUrl}/api/admins/${user.id}`, payload)
       .then(response => {
         console.log("Admin info updated:", response.data);
       })

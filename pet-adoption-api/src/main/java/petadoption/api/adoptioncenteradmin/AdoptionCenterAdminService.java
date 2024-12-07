@@ -25,6 +25,10 @@ public class AdoptionCenterAdminService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    public ResponseEntity<AdoptionCenterAdmin> saveAdmin(AdoptionCenterAdmin admin) {
+        return new ResponseEntity<>(adminRepository.save(admin), HttpStatus.CREATED);
+    }
+
     public ResponseEntity<List<AdoptionCenterAdmin>> getAllAdmins() {
         List<AdoptionCenterAdmin> admins = adminRepository.findAll();
         return new ResponseEntity<>(admins, HttpStatus.OK);

@@ -12,7 +12,7 @@ import PetCard from '@/components/pet-card';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-export default function UserProfile() {
+export default function AdoptionCenterProfile() {
   const router = useRouter();
   const user = useAuthUser();
 
@@ -55,12 +55,12 @@ export default function UserProfile() {
           sx={{
             mt: 8,
             width: '100%',
-            height: 450,
+            height: 420,
             backgroundImage: `url(${imgUrl || ''})`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            backgroundColor: 'transparent' 
+            backgroundColor: 'black' 
           }}
         />
 
