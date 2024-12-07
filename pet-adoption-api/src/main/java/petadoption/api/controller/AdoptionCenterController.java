@@ -1,14 +1,17 @@
 package petadoption.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import petadoption.api.adoptioncenter.AdoptionCenter;
 import petadoption.api.adoptioncenter.AdoptionCenterService;
 import petadoption.api.event.Event;
 import petadoption.api.event.EventService;
+import petadoption.api.pet.Pet;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = {"http://localhost:3000", "http://34.133.251.138:3000"})
 @RestController
@@ -36,6 +39,26 @@ public class AdoptionCenterController {
     @PostMapping
     public ResponseEntity<AdoptionCenter> addCenter(@RequestBody AdoptionCenter adoptionCenter) {
         return adoptionCenterService.addCenter(adoptionCenter);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AdoptionCenter> updateAdoptionCenter(@PathVariable Long id, @RequestBody AdoptionCenter updateCenter) {
+        AdoptionCenter existingCenter = adoptionCenterService.getAdoptionCenterById(id);
+
+        if (existingCenter == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        existingCenter.setCenterName(updateCenter.getCenterName());
+        existingCenter.setCenterAddress(updateCenter.getCenterAddress());
+        existingCenter.setCenterPhone(updateCenter.getCenterPhone());
+        existingCenter.setCenterEmail(updateCenter.getCenterEmail());
+        existingCenter.setZipCode(updateCenter.getZipCode());
+        existingCenter.setCenterImageUrl(updateCenter.getCenterImageUrl());
+
+        AdoptionCenter savedCenter = adoptionCenterService.saveAdoptionCenter(existingCenter);
+
+        return new ResponseEntity<>(savedCenter, HttpStatus.OK);
     }
 
     // New method to get events for a specific adoption center
