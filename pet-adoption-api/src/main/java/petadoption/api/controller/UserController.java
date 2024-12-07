@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import petadoption.api.adoptioncenteradmin.AdoptionCenterAdmin;
 import petadoption.api.user.User;
 import petadoption.api.user.UserService;
 import petadoption.api.userpreference.UserPreference;
@@ -31,27 +32,28 @@ public class UserController {
         return user;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PutMapping("/update")
-    public ResponseEntity<User> updateUser(@RequestBody User updatedUser) {
-        log.info("Updating user: {}", updatedUser); // Log the incoming User object
-        Optional<User> userOptional = userService.findUser(updatedUser.getId());
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updateUser) {
+        Optional<User> userOptional = userService.findUser(id);
 
         if (userOptional.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        User user = userOptional.get();
-        user.setFirstName(updatedUser.getFirstName());
-        user.setLastName(updatedUser.getLastName());
-        user.setBio(updatedUser.getBio());
-        user.setEmail(updatedUser.getEmail());
-        user.setPhone(updatedUser.getPhone());
-        user.setImgUrl(updatedUser.getImgUrl());
+        User existingUser = userOptional.get();
 
-        User savedUser = userService.saveUser(user);
+        existingUser.setFirstName(updateUser.getFirstName());
+        existingUser.setLastName(updateUser.getLastName());
+        existingUser.setEmail(updateUser.getEmail());
+        existingUser.setPhone(updateUser.getPhone());
+        existingUser.setBio(updateUser.getBio());
+        existingUser.setImgUrl(updateUser.getImgUrl());
+
+        User savedUser = userService.saveUser(existingUser);
+
         return new ResponseEntity<>(savedUser, HttpStatus.OK);
     }
+
 
     @PutMapping("/{userId}/preferences")
     public ResponseEntity<String> updateUserPreferences(
