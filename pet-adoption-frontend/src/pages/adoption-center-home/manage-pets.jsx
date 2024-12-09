@@ -209,6 +209,7 @@ export default function ManagePets() {
   };
 
   const handleUpdatePet = () => {
+    newPetData.imgUrl = imgUrl;
     const petID = selectionModel[0]; // Get the selected pet ID
     axios.put(`${apiBaseUrl}/api/pets/${petID}`, newPetData) // Update the pet
       .then(response => {
@@ -242,11 +243,6 @@ export default function ManagePets() {
 
 
   const router = useRouter();
-
-  const navigateTo = (page) => {
-    router.push(page);
-  }
-  
 
   return (
     <>
@@ -319,15 +315,18 @@ export default function ManagePets() {
               Please change the details of the pet you want to update.
             </DialogContentText>
             <TextField margin="dense" name="petName" label="Name"  type="text" fullWidth variant="outlined" value={newPetData.petName} onChange={handleInputChange}/>
-            <TextField margin="dense"name="petBreed"label="Breed"type="text"fullWidth variant="outlined"value={newPetData.petBreed}onChange={handleInputChange}/>
-            <TextField margin="dense"name="petGender"label="Gender"type="text"fullWidthvariant="outlined"value={newPetData.petGender}onChange={handleInputChange}/>
-            <TextField margin="dense"name="petAge"label="Age"type="number"fullWidthvariant="outlined"value={newPetData.petAge}onChange={handleInputChange}/>
-            <TextField margin="dense"name="petWeight"label="Weight (kg)"type="number"fullWidthvariant="outlined"value={newPetData.petWeight}onChange={handleInputChange}/>
             <TextField margin="dense"name="petSpecies"label="Species"type="text"fullWidth variant="outlined"value={newPetData.petSpecies}onChange={handleInputChange}/>
+            <TextField margin="dense"name="petBreed"label="Breed"type="text"fullWidth variant="outlined"value={newPetData.petBreed}onChange={handleInputChange}/>
             <TextField margin="dense"name="color"label="Color"type="text"fullWidth variant="outlined"value={newPetData.color}onChange={handleInputChange}/>
-
+            <Select margin="dense"name="petGender"fullWidthvariant="outlined"value={newPetData.petGender}onChange={handleInputChange} displayEmpty sx={{ mt: 1, mr: 1 }} >
+              <MenuItem value="" disabled>Gender</MenuItem>
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
+            </Select>
+            <TextField margin="dense"name="petAge"label="Age"type="number"fullWidthvariant="outlined"value={newPetData.petAge}onChange={handleInputChange} sx={{ mr: 1 }}/>
+            <TextField margin="dense"name="petWeight"label="Weight (kg)"type="number" fullWidthvariant="outlined"value={newPetData.petWeight}onChange={handleInputChange} sx={{ mr: 1 }}/>
             <Box sx={{ width: 200, height: 50 }}>
-              <ImageDropzone newPetData={newPetData}/>
+            <ImageDropzone newPetData={newPetData} imgUrl={imgUrl} setImgUrl={setImgUrl}/>
             </Box>
 
           </DialogContent>
