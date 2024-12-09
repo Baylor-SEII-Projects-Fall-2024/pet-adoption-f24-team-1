@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class DistanceMatrixService {
 
-    @Value("${GOOGLE_KEY}")
+    //@Value("${GOOGLE_KEY}")
     private String google_api_key;
 
     public ResponseEntity<Integer> getDistance(String origin, String destination)  {
@@ -18,6 +18,7 @@ public class DistanceMatrixService {
                 "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=%s&destinations=%s&key=%s",
                 origin, destination, google_api_key
         );
+        System.out.println((google_api_key));
 
         RestTemplate restTemplate = new RestTemplate();
         try {
