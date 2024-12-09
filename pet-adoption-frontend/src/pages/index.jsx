@@ -84,7 +84,7 @@ export default function HomePage() {
                 Adopt Now
               </Button>
               <Button variant="outlined" color="primary"
-                onClick={() => navigateTo('/user-home/adoption-center-search')}
+                onClick={() => navigateTo('/adoption-center-search')}
               >
                 Find Adoption centers
               </Button>

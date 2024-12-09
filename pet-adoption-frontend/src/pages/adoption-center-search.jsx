@@ -12,6 +12,7 @@ import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/post
 import PetCard from "@/components/pet-card";
 
 
+
 export default function adoptionCenterSearch() {
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
     const router = useRouter();
@@ -27,8 +28,8 @@ export default function adoptionCenterSearch() {
     function filters(AdoptionCenter)  {
         return (
             (AdoptionCenter.zipCode >= zipCodeFltr[0] && AdoptionCenter.zipCode <= zipCodeFltr()[1]) &&
-            (addressFltr == 'Any' ? true : AdoptionCenter.centerAddress == addressFltr) &&
-            (nameFltr == 'Any' ? true : AdoptionCenter.centerName == breedFltr)
+            (addressFltr === 'Any' ? true : AdoptionCenter.centerAddress === addressFltr) &&
+            (nameFltr === 'Any' ? true : AdoptionCenter.centerName === nameFltr)
         );
     }
 
