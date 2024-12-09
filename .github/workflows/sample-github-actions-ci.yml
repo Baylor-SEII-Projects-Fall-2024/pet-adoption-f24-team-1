@@ -17,7 +17,7 @@ jobs:
 
       - name: Create backend .env
         run: |
-          echo "GOOGLE_KEY=${{ secrets.GOOGLE_API_KEY }}" >> pet-adoption-api/.env
+          echo "GOOGLE_KEY=${{ secrets.GOOGLE_KEY }}" >> pet-adoption-api/.env
 
       - name: Build
         # This step builds both the frontend and backend docker images using
