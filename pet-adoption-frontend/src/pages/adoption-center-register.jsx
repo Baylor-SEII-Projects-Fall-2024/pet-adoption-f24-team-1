@@ -53,6 +53,11 @@ const AdoptionCenterRegisterPage = () => {
 
     const handleClickShowPassword = () => setShowPassword(!showPassword);
 
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
     const checkAllFields = () => {
         let fieldsValid = true;
         if (adoptionCenterName === "") {
@@ -73,7 +78,7 @@ const AdoptionCenterRegisterPage = () => {
         } else {
             setAdoptionCenterPhoneError(false);
         }
-        if (adoptionCenterEmail === "") {
+        if (adoptionCenterEmail === "" || !validateEmail(adoptionCenterEmail)) {
             setAdoptionCenterEmailError(true);
             fieldsValid = false;
         } else {
@@ -276,7 +281,9 @@ const AdoptionCenterRegisterPage = () => {
                         <Typography variant="h6" sx={{ marginY: 1, textAlign: "start" }}>Email address?</Typography>
                         <TextField
                             error={adoptionCenterEmailError}
-                            label="Adoption Center's phone number"
+                            helperText={adoptionCenterEmailError ? "Enter a valid email address" : ""}
+                            type="email"
+                            label="Adoption Center's email"
                             variant="outlined"
                             fullWidth
                             required
@@ -330,6 +337,7 @@ const AdoptionCenterRegisterPage = () => {
                     <TextField
                         label="Email"
                         variant="outlined"
+                        type='email'
                         fullWidth
                         required
                         sx={{ marginBottom: 2 }}

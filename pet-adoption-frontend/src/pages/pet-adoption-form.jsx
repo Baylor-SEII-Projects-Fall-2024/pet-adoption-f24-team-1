@@ -12,14 +12,13 @@ export default function PetAdoptionForm() {
     const router = useRouter();
     const { petId } = router.query;
     const user = useAuthUser();
-    console.log(user);
 
-    const [fullName, setFullName] = useState("");
+    const [fullName, setFullName] = useState(user ? user.firstName + ' ' + user.lastName : "");
     const [licenseNumber, setLicenseNumber] = useState("");
     const [address, setAddress] = useState("");
     const [cityStateZip, setCityStateZip] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState(user ? user.phone : "");
+    const [email, setEmail] = useState(user ? user.email : "");
     const [employer, setEmployer] = useState("");
     const [jobTime, setJobTime] = useState("");
 

@@ -140,28 +140,6 @@ const CreateAccountPage = () => {
         <Typography variant="subtitle1" sx={{ marginBottom: 3 }}>
           Start adopting new friends today!
         </Typography>
-        
-        {/* Google Sign-Up Button */}
-        <Button
-          variant="outlined"
-          startIcon={<GoogleIcon />}
-          fullWidth
-          sx={{ marginBottom: 2 }}
-        >
-          Sign up with Google
-        </Button>
-
-        {/* Facebook Sign-Up Button */}
-        <Button
-          variant="outlined"
-          startIcon={<FacebookIcon />}
-          fullWidth
-          sx={{ marginBottom: 2 }}
-        >
-          Sign up with Facebook
-        </Button>
-
-        <Typography variant="subtitle1" sx={{ marginY: 2 }}>OR</Typography>
 
         <form onSubmit={formik.handleSubmit}>
           {/* First Name Input */}
