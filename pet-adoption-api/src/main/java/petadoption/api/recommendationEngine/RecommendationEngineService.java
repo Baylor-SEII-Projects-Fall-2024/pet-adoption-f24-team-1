@@ -127,17 +127,9 @@ public class RecommendationEngineService {
         List<DistancePet> petsWithDistance = new ArrayList<>();
         for(Pet pet : pets)  {
             DistancePet dp;
-            System.out.println(pet.getCenterID());
             dp = new DistancePet(pet, centerDistances.getOrDefault(pet.getCenterID(), -1));
             petsWithDistance.add(dp);
         }
         return petsWithDistance;
     }
 }
-
-
- /*
-        for(Map.Entry<Pet,Integer> entry : petScores.entrySet()) {
-            System.out.println("Name = " + entry.getKey().getPetName() + ", Score = " + entry.getValue());
-        }
-         */

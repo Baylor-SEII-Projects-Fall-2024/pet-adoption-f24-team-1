@@ -46,7 +46,7 @@ export default function UserAccount() {
 
     // Handle Save for user details
     const handleSaveDetails = () => {
-        const payload = { firstName, lastName, email, phone, bio, imgUrl };
+        const payload = { firstName, lastName, newEmail, phone, bio, imgUrl };
 
         axios.put(`${apiBaseUrl}/api/users/${user.id}`, payload)
             .then(response => {
