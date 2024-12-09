@@ -3,55 +3,60 @@ import {
     Stack,
     Typography,
     TextField,
-    Grid,
-    Box,
-    Paper
+    Grid
 } from '@mui/material';
 import { useState, useEffect } from 'react';
 import NavBar from "@/components/nav-bar";
-import AdoptionCenterCard from "@/components/adoption-center-card"; // Assuming you have a component for displaying adoption centers
+import AdoptionCenterCard from "@/components/adoption-center-card";
 
-// Custom FilterStack for Adoption Centers
+// FilterStack Component
 function FilterStack({ nameFltr, addressFltr, zipCodeFltr, onNameChange, onAddressChange, onZipCodeChange }) {
     return (
-        <Stack sx={{ width: 300, position: 'sticky', marginLeft: 3, marginRight: 3 }} spacing={5}>
-            <Stack sx={{ boxShadow: '0 2px 2px -2px gray' }}>
-                <Typography fontSize={19}>Filters</Typography>
-            </Stack>
-
-            <Stack spacing={2}>
-                <Typography>Name</Typography>
-                <TextField
-                    value={nameFltr}
-                    onChange={onNameChange}
-                    placeholder="Enter adoption center name"
-                    variant="outlined"
-                    fullWidth
-                />
-                <Typography>Address</Typography>
-                <TextField
-                    value={addressFltr}
-                    onChange={onAddressChange}
-                    placeholder="Enter adoption center address"
-                    variant="outlined"
-                    fullWidth
-                />
-                <Typography>Zip Code</Typography>
-                <TextField
-                    type="number"
-                    value={zipCodeFltr}
-                    onChange={onZipCodeChange}
-                    placeholder="Enter zip code"
-                    variant="outlined"
-                    fullWidth
-                />
-            </Stack>
+        <Stack
+            sx={{
+                width: 300,
+                position: 'sticky',
+                marginLeft: 3,
+                marginRight: 3,
+                padding: 2,
+                border: '1px solid #ddd',
+                borderRadius: 1,
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            }}
+            spacing={3}
+        >
+            <Typography variant="h6">Filters</Typography>
+            <TextField
+                label="Name"
+                value={nameFltr}
+                onChange={onNameChange}
+                placeholder="Enter adoption center name"
+                variant="outlined"
+                fullWidth
+            />
+            <TextField
+                label="Address"
+                value={addressFltr}
+                onChange={onAddressChange}
+                placeholder="Enter adoption center address"
+                variant="outlined"
+                fullWidth
+            />
+            <TextField
+                label="Zip Code"
+                type="number"
+                value={zipCodeFltr}
+                onChange={onZipCodeChange}
+                placeholder="Enter zip code"
+                variant="outlined"
+                fullWidth
+            />
         </Stack>
     );
 }
 
-export default function AdoptionCenterFilterStack(props) {
-    // Initialize state with empty strings for name and address filters, and 'Any' for zip code if preferred
+// AdoptionCenterFilterStack Component
+export default function AdoptionCenterFilterStack() {
     const [nameFltr, setNameFltr] = useState('');
     const [addressFltr, setAddressFltr] = useState('');
     const [zipCodeFltr, setZipCodeFltr] = useState('');
@@ -61,18 +66,18 @@ export default function AdoptionCenterFilterStack(props) {
 
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    // Fetch adoption centers from API
     useEffect(() => {
         const fetchAdoptionCenters = async () => {
             try {
+                console.log("Fetching adoption centers from:", `${apiBaseUrl}/api/adoptioncenters`); // Log API URL
                 const response = await fetch(`${apiBaseUrl}/api/adoptioncenters`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch adoption centers');
-                }
+                console.log("Response status:", response.status); // Log response status
+                if (!response.ok) throw new Error('Failed to fetch adoption centers');
                 const data = await response.json();
-                console.log(data); // Log the data to inspect the structure
+                console.log("Fetched adoption centers:", data); // Log fetched data
                 setAdoptionCenters(data);
             } catch (err) {
+                console.error("Error fetching adoption centers:", err.message); // Log error
                 setError(err.message);
             } finally {
                 setLoading(false);
@@ -80,41 +85,48 @@ export default function AdoptionCenterFilterStack(props) {
         };
 
         fetchAdoptionCenters();
-    }, []);
-    // Empty dependency array to run once on component mount
+    }, [apiBaseUrl]);
 
-    // Handle changes for each filter input
+
+    // Event handlers for filters
     const handleNameChange = (event) => {
-        setNameFltr(event.target.value);
+        const value = event.target.value;
+        console.log("Name filter changed to:", value); // Log name filter change
+        setNameFltr(value);
     };
 
     const handleAddressChange = (event) => {
-        setAddressFltr(event.target.value);
+        const value = event.target.value;
+        console.log("Address filter changed to:", value); // Log address filter change
+        setAddressFltr(value);
     };
 
     const handleZipCodeChange = (event) => {
-        setZipCodeFltr(event.target.value);
+        const value = event.target.value;
+        console.log("Zip Code filter changed to:", value); // Log zip code filter change
+        setZipCodeFltr(value);
     };
 
-    // Filter function to apply filters to the adoption centers list (partial match)
-    const filters = (adoptionCenter) => {
-        return (
-            (nameFltr === '' || adoptionCenter.name.toLowerCase().includes(nameFltr.toLowerCase())) &&
-            (addressFltr === '' || adoptionCenter.address.toLowerCase().includes(addressFltr.toLowerCase())) &&
-            (zipCodeFltr === '' || adoptionCenter.zipCode.includes(zipCodeFltr))
-        );
-    };
+    // Filter logic
+    const filteredCenters = adoptionCenters.filter((center) => {
+        const matchesName = !nameFltr || center.name?.toLowerCase().includes(nameFltr.toLowerCase());
+        const matchesAddress = !addressFltr || center.address?.toLowerCase().includes(addressFltr.toLowerCase());
+        const matchesZip = !zipCodeFltr || center.zipCode?.includes(zipCodeFltr);
 
-    // Check if any filter field is non-empty
-    const hasValidFilters = nameFltr || addressFltr || zipCodeFltr;
+        console.log(`Center: ${center.name}, Matches Name: ${matchesName}, Matches Address: ${matchesAddress}, Matches Zip: ${matchesZip}`);
+        return matchesName && matchesAddress && matchesZip;
+    });
+
+    console.log("Filtered centers:", filteredCenters); // Log filtered results
 
     return (
         <main>
-            <Stack spacing={10}>
+            <Stack spacing={6}>
+                {/* Navigation Bar */}
                 <NavBar />
 
-                <Stack direction="row">
-                    {/* Adoption Center Filters */}
+                <Stack direction="row" spacing={3}>
+                    {/* Filter Panel */}
                     <FilterStack
                         nameFltr={nameFltr}
                         addressFltr={addressFltr}
@@ -124,18 +136,27 @@ export default function AdoptionCenterFilterStack(props) {
                         onZipCodeChange={handleZipCodeChange}
                     />
 
-                    {/* Only render the filtered adoption center cards if the user has entered valid data */}
-                    {loading && <Typography>Loading...</Typography>}
-                    {error && <Typography>Error: {error}</Typography>}
-                    {!loading && !error && (
-                        <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2}>
-                            {adoptionCenters.filter(filters).map((center) => (
-                                <Grid item key={center.id}>
+                    {/* Adoption Centers List */}
+                    <Grid
+                        container
+                        spacing={2}
+                        sx={{ flex: 1 }}
+                        alignItems="flex-start"
+                    >
+                        {loading ? (
+                            <Typography>Loading...</Typography>
+                        ) : error ? (
+                            <Typography color="error">Error: {error}</Typography>
+                        ) : filteredCenters.length > 0 ? (
+                            filteredCenters.map((center) => (
+                                <Grid item xs={12} sm={6} md={4} key={center.id}>
                                     <AdoptionCenterCard adoptionCenter={center} />
                                 </Grid>
-                            ))}
-                        </Grid>
-                    )}
+                            ))
+                        ) : (
+                            <Typography>No adoption centers found</Typography>
+                        )}
+                    </Grid>
                 </Stack>
             </Stack>
         </main>

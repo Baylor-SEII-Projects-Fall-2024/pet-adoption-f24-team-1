@@ -1,57 +1,84 @@
-import React from 'react';
-import Head from 'next/head'
-import { Button, Box, CardContent, Stack, Typography } from '@mui/material'
-import { useRouter } from 'next/router'
-import styles from '@/styles/Home.module.css'
+import React, { useState, useEffect } from 'react';
+import { Grid, Stack, Pagination, TextField } from '@mui/material';
+import axios from 'axios';
 import NavBar from '@/components/nav-bar';
-import ProtectedAdminRoute from '@/components/protected-admin-route';
-
+import FilterStack from '@/components/filter-stack';  // Adjust this to fit the new filter logic
 
 export default function AdoptionCenterHome() {
-  const router = useRouter();
+    const [data, setData] = useState([]);
+    const [page, setPage] = useState(1);
+    const itemsPerPage = 20;
 
-  const navigateTo = (page) => {
-    router.push(page);
-  }
+    // Filters for name, address, and zip code
+    const [nameFltr, setNameFltr] = useState('');
+    const [addressFltr, setAddressFltr] = useState('');
+    const [zipFltr, setZipFltr] = useState('');
 
-  return (
-    <ProtectedAdminRoute>
-      <Head>
-        <title>Adoption Center Home</title>
-      </Head>
+    // Filter logic
+    function filters(item) {
+        return (
+            (nameFltr ? item.name.toLowerCase().includes(nameFltr.toLowerCase()) : true) &&
+            (addressFltr ? item.address.toLowerCase().includes(addressFltr.toLowerCase()) : true) &&
+            (zipFltr ? item.zipCode.includes(zipFltr) : true)
+        );
+    }
 
-    
-      <main>
-        <NavBar />
-        <Stack sx={{ paddingTop: 0 }} alignItems='center' gap={2}>
-        <Box className={styles.container}>
-          <Box className={styles.textContainer}>
-            <Typography variant='h3'>Adoption Center Home Page</Typography>
-            <Box sx={{ display: "flex", justifyContent: "center", width: "100%"}}>
-              <Typography
-                variant="h5"
-                noWrap
-                component="a"
-                sx={{
-                  mr: 2,
-                  display: 'flex',
-                  fontFamily: 'monospace',
-                  fontWeight: 700,
-                  letterSpacing: '.3rem',
-                  color: 'inherit',
-                  textDecoration: 'none',
-                }}
-              >
-              </Typography>
-            </Box>
-            <Typography sx={{ maxWidth: "400px" }}>Here is your landing page for displaying and editing events and pet postings!</Typography>
-          </Box>
+    // Fetch data (could be any data with name, address, and zip code)
+    useEffect(() => {
+        axios.get('/api/data')  // Adjust to your actual API endpoint
+            .then(response => {
+                setData(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
 
+    // Pagination logic
+    const indexOfLastItem = page * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const filteredData = data.filter(filters);
+    const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
-        </Box>
+    const handlePageChange = (event, value) => {
+        setPage(value);
+    };
 
-        </Stack>
-      </main>
-    </ProtectedAdminRoute>
-  );
+    return (
+        <>
+            <main>
+                <Stack spacing={10}>
+                    <NavBar />
+
+                    <Stack direction="row">
+                        <FilterStack
+                            nameFltr={nameFltr}
+                            setNameFltr={setNameFltr}
+                            addressFltr={addressFltr}
+                            setAddressFltr={setAddressFltr}
+                            zipFltr={zipFltr}
+                            setZipFltr={setZipFltr}
+                        />
+
+                        <Grid container direction="row" spacing={2} display="flex" alignItems="center" justifyContent="left">
+                            {currentItems.map((item, index) => (
+                                <Grid item key={index}>
+                                    <div>
+                                        <h3>{item.name}</h3>
+                                        <p>{item.address}</p>
+                                        <p>{item.zipCode}</p>
+                                    </div>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </Stack>
+
+                    <Stack sx={{ paddingBottom: 10 }} alignItems="center">
+                        <Pagination count={totalPages} page={page} onChange={handlePageChange} />
+                    </Stack>
+                </Stack>
+            </main>
+        </>
+    );
 }
