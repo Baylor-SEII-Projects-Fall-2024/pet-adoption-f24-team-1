@@ -5,8 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import petadoption.api.adoptioncenter.AdoptionCenter;
-import petadoption.api.adoptioncenter.AdoptionCenterRepository;
-import petadoption.api.dto.LoginDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +14,8 @@ public class AdoptionCenterAdminService {
 
     @Autowired
     private AdoptionCenterAdminRepository adminRepository;
+    @Autowired
+    private AdoptionCenterAdminRepository adoptionCenterAdminRepository;
 
     public ResponseEntity<AdoptionCenterAdmin> getAdmin(Long id) {
         Optional<AdoptionCenterAdmin> admin = adminRepository.findById(id);
@@ -40,5 +40,9 @@ public class AdoptionCenterAdminService {
             return new ResponseEntity<>(adminOptional.get().getAdoptionCenter(), HttpStatus.OK);
         }
         throw new RuntimeException("Adoption center not found");
+    }
+
+    public boolean emailExists(String email) {
+        return adoptionCenterAdminRepository.findByEmail(email).isPresent();
     }
 }
