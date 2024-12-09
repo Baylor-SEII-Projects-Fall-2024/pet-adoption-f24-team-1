@@ -16,8 +16,6 @@ export default function AdoptionCenterCard({ adoptionCenter, user }) {
 
     const [liked, setLiked] = useState(false);
 
-
-
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -29,10 +27,11 @@ export default function AdoptionCenterCard({ adoptionCenter, user }) {
 
     return (
         <Box>
-            <Paper sx={{ width: 250, marginBottom: 10 }} elevation={3}>
+            {/* Adjust the width of the Paper component to make the cards thinner */}
+            <Paper sx={{ width: 220, marginBottom: 10 }} elevation={3}>
                 <Grid container direction="column" alignItems="center" justifyContent="center" rowGap={2}>
                     {/* Adoption Center Image */}
-                    <Box component="img" sx={{ width: 250, height: 120, objectFit: "cover" }} src={adoptionCenter.centerImageUrl} alt="Adoption center image" />
+                    <Box component="img" sx={{ width: 220, height: 120, objectFit: "cover" }} src={adoptionCenter.centerImageUrl} alt="Adoption center image" />
 
                     {/* Adoption Center Info */}
                     <Stack direction="column" alignItems="center">

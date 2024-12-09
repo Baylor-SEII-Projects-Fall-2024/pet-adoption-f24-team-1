@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Stack, Pagination, TextField } from '@mui/material';
+import { Grid, Stack, Pagination } from '@mui/material';
 import axios from 'axios';
 import NavBar from '@/components/nav-bar';
 import FilterStack from '@/components/filter-stack';  // Adjust this to fit the new filter logic
+
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000';  // Or replace with actual base URL
 
 export default function AdoptionCenterHome() {
     const [data, setData] = useState([]);
@@ -14,19 +16,13 @@ export default function AdoptionCenterHome() {
     const [addressFltr, setAddressFltr] = useState('');
     const [zipFltr, setZipFltr] = useState('');
 
-    // Filter logic
-    function filters(item) {
-        return (
-            (nameFltr ? item.name.toLowerCase().includes(nameFltr.toLowerCase()) : true) &&
-            (addressFltr ? item.address.toLowerCase().includes(addressFltr.toLowerCase()) : true) &&
-            (zipFltr ? item.zipCode.includes(zipFltr) : true)
-        );
-    }
+    const [filteredData, setFilteredData] = useState([]);
 
-    // Fetch data (could be any data with name, address, and zip code)
+    // Fetch data from the correct API endpoint
     useEffect(() => {
-        axios.get('/api/data')  // Adjust to your actual API endpoint
+        axios.get(`${apiBaseUrl}/api/adoptioncenters`)  // Use the correct API endpoint here
             .then(response => {
+                console.log('Fetched data:', response.data);  // Log data to verify it's correct
                 setData(response.data);
             })
             .catch(error => {
@@ -34,10 +30,24 @@ export default function AdoptionCenterHome() {
             });
     }, []);
 
+    // Apply filters to the fetched data
+    useEffect(() => {
+        function filters(item) {
+            return (
+                (nameFltr ? item.name.toLowerCase().includes(nameFltr.toLowerCase()) : true) &&
+                (addressFltr ? item.address.toLowerCase().includes(addressFltr.toLowerCase()) : true) &&
+                (zipFltr ? item.zipCode.includes(zipFltr) : true)
+            );
+        }
+
+        // Apply filters to data and update filtered data
+        const filtered = data.filter(filters);
+        setFilteredData(filtered);
+    }, [data, nameFltr, addressFltr, zipFltr]);  // Re-filter when data or filter criteria change
+
     // Pagination logic
     const indexOfLastItem = page * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const filteredData = data.filter(filters);
     const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 

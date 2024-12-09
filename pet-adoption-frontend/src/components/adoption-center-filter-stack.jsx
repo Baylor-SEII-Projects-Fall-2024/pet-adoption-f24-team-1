@@ -21,7 +21,8 @@ function FilterStack({ nameFltr, addressFltr, zipCodeFltr, onNameChange, onAddre
                 padding: 2,
                 border: '1px solid #ddd',
                 borderRadius: 1,
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                flexShrink: 0 // Prevents it from shrinking and overlapping
             }}
             spacing={3}
         >
@@ -66,6 +67,7 @@ export default function AdoptionCenterFilterStack() {
 
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
+    // Fetch adoption centers from API
     useEffect(() => {
         const fetchAdoptionCenters = async () => {
             try {
@@ -86,7 +88,6 @@ export default function AdoptionCenterFilterStack() {
 
         fetchAdoptionCenters();
     }, [apiBaseUrl]);
-
 
     // Event handlers for filters
     const handleNameChange = (event) => {
@@ -109,11 +110,11 @@ export default function AdoptionCenterFilterStack() {
 
     // Filter logic
     const filteredCenters = adoptionCenters.filter((center) => {
-        const matchesName = !nameFltr || center.name?.toLowerCase().includes(nameFltr.toLowerCase());
-        const matchesAddress = !addressFltr || center.address?.toLowerCase().includes(addressFltr.toLowerCase());
-        const matchesZip = !zipCodeFltr || center.zipCode?.includes(zipCodeFltr);
+        const matchesName = !nameFltr || center.centerName?.toLowerCase().includes(nameFltr.toLowerCase());
+        const matchesAddress = !addressFltr || center.centerAddress?.toLowerCase().includes(addressFltr.toLowerCase());
+        const matchesZip = !zipCodeFltr || center.centerZipCode?.toString().includes(zipCodeFltr);  // Assuming there's a zipCode field
 
-        console.log(`Center: ${center.name}, Matches Name: ${matchesName}, Matches Address: ${matchesAddress}, Matches Zip: ${matchesZip}`);
+        console.log(`Center: ${center.centerName}, Matches Name: ${matchesName}, Matches Address: ${matchesAddress}, Matches Zip: ${matchesZip}`);
         return matchesName && matchesAddress && matchesZip;
     });
 
@@ -125,7 +126,7 @@ export default function AdoptionCenterFilterStack() {
                 {/* Navigation Bar */}
                 <NavBar />
 
-                <Stack direction="row" spacing={3}>
+                <Stack direction="row" spacing={3} sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
                     {/* Filter Panel */}
                     <FilterStack
                         nameFltr={nameFltr}
@@ -139,8 +140,13 @@ export default function AdoptionCenterFilterStack() {
                     {/* Adoption Centers List */}
                     <Grid
                         container
-                        spacing={2}
-                        sx={{ flex: 1 }}
+                        spacing={6} // Increased spacing to space out the cards more
+                        sx={{
+                            flex: 1,
+                            justifyContent: 'flex-start', // Aligns the items to the start of the container
+                            marginTop: 2, // Optional: adds space above the grid
+                            width: '100%', // Ensures the grid takes full width
+                        }}
                         alignItems="flex-start"
                     >
                         {loading ? (
@@ -149,7 +155,7 @@ export default function AdoptionCenterFilterStack() {
                             <Typography color="error">Error: {error}</Typography>
                         ) : filteredCenters.length > 0 ? (
                             filteredCenters.map((center) => (
-                                <Grid item xs={12} sm={6} md={4} key={center.id}>
+                                <Grid item xs={12} sm={6} md={4} key={center.centerId}> {/* Ensures unique keys */}
                                     <AdoptionCenterCard adoptionCenter={center} />
                                 </Grid>
                             ))
