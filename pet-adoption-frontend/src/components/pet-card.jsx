@@ -68,6 +68,16 @@ export default function PetCard(props) {
       });
     }
   }
+
+  useEffect(() => {
+    axios.get(`${apiBaseUrl}/api/adoptioncenters/${props.pet.centerID}`)
+      .then(response => {
+          setAdoptionCenter(response.data)
+        })
+      .catch(error => {
+          console.error('Error fetching pets:', error);
+        });
+  },[])
   
   return (
     <Box>

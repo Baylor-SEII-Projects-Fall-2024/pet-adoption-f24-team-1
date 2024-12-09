@@ -108,6 +108,7 @@ public class RecommendationEngineService {
 
         for(Pet pet : pets) {
             if(!centerDistances.containsKey(pet.getCenterID())) {
+                Long centerID = pet.getCenterID();
                 AdoptionCenter ac = adoptionCenterService.getAdoptionCenter(pet.getCenterID()).getBody();
 
                 String centerLocation = null;
@@ -126,6 +127,7 @@ public class RecommendationEngineService {
         List<DistancePet> petsWithDistance = new ArrayList<>();
         for(Pet pet : pets)  {
             DistancePet dp;
+            System.out.println(pet.getCenterID());
             dp = new DistancePet(pet, centerDistances.getOrDefault(pet.getCenterID(), -1));
             petsWithDistance.add(dp);
         }

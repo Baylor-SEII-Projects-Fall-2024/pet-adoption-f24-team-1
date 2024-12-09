@@ -4,9 +4,9 @@ import petadoption.api.pet.Pet;
 
 public class DistancePet {
     private Pet pet;
-    private int distance;
+    private Integer distance;
 
-    public DistancePet(Pet pet, int distance) {
+    public DistancePet(Pet pet, Integer distance) {
         this.pet = pet;
         this.distance = distance;
     }
@@ -15,7 +15,7 @@ public class DistancePet {
         return pet;
     }
 
-    public int getDistance() {
+    public Integer getDistance() {
         return distance;
     }
 
