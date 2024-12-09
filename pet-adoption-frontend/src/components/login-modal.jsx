@@ -75,28 +75,6 @@ const LoginModal = ({ isOpen, onClose }) => {
           <Typography variant="body2" sx={{ marginBottom: 3 }}>
             Don't have an account? <Link href="create-account">Sign up</Link>
           </Typography>
-          
-          {/* Google Sign-Up Button */}
-          <Button
-            variant="outlined"
-            startIcon={<GoogleIcon />}
-            fullWidth
-            sx={{ marginBottom: 2 }}
-          >
-            Sign in with Google
-          </Button>
-
-          {/* Facebook Sign-Up Button */}
-          <Button
-            variant="outlined"
-            startIcon={<FacebookIcon />}
-            fullWidth
-            sx={{ marginBottom: 2 }}
-          >
-            Sign in with Facebook
-          </Button>
-
-          <Typography variant="subtitle1" sx={{ marginY: 2 }}>OR</Typography>
 
           <form onSubmit={handleSubmit}>
             {/* Email Input */}
