@@ -3,7 +3,6 @@ package petadoption.api.user;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import petadoption.api.dto.LoginDTO;
 import petadoption.api.userpreference.UserPreference;
 
 import java.util.List;
@@ -39,5 +38,9 @@ public class UserService {
         user.getUserPreference().setAgeMax(newPreferences.getAgeMax());
 
         return userRepository.save(user);
+    }
+
+    public boolean emailExists(String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 }

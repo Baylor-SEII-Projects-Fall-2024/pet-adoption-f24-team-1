@@ -1,6 +1,5 @@
 package petadoption.api.dto;
 import lombok.Data;
-import petadoption.api.userpreference.UserPreference;
 
 // UserDTO without password for returning to frontend
 @Data

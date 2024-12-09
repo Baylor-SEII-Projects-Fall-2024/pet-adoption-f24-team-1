@@ -1,11 +1,13 @@
 package petadoption.api.controller;
 
+import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import petadoption.api.adoptioncenteradmin.AdoptionCenterAdmin;
+import petadoption.api.dto.LoginUpdateDTO;
 import petadoption.api.user.User;
 import petadoption.api.user.UserService;
 import petadoption.api.userpreference.UserPreference;
@@ -20,6 +22,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/{id}")
     public User findUserById(@PathVariable Long id) {
@@ -67,6 +72,41 @@ public class UserController {
     @GetMapping("/allusers")
     public List<User> getAllUsers() {
         return userService.findAllUsers();
+    }
+
+    @PutMapping("/{id}/login")
+    public ResponseEntity<String> updateLoginInfo(@PathVariable Long id, @Valid @RequestBody LoginUpdateDTO loginUpdateRequest) {
+        Optional<User> userOptional = userService.findUser(id);
+
+        if (userOptional.isEmpty()) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+
+        User user = userOptional.get();
+
+        // Validate current password
+        if (!passwordEncoder.matches(loginUpdateRequest.getCurrentPassword(), user.getPassword())) {
+            return new ResponseEntity<>("Invalid current password", HttpStatus.UNAUTHORIZED);
+        }
+
+        // Update email if provided
+        if (loginUpdateRequest.getNewEmail() != null && !loginUpdateRequest.getNewEmail().isBlank()) {
+            // Check if email is already taken
+            if (userService.emailExists(loginUpdateRequest.getNewEmail())) {
+                return new ResponseEntity<>("Email already in use", HttpStatus.CONFLICT);
+            }
+            user.setEmail(loginUpdateRequest.getNewEmail());
+        }
+
+        // Update password if provided
+        if (loginUpdateRequest.getNewPassword() != null && !loginUpdateRequest.getNewPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(loginUpdateRequest.getNewPassword()));
+        }
+
+        // Save updated user to the database
+        userService.saveUser(user);
+
+        return new ResponseEntity<>("Login information updated successfully", HttpStatus.OK);
     }
 
 //    @CrossOrigin(origins = "http://localhost:3000")
