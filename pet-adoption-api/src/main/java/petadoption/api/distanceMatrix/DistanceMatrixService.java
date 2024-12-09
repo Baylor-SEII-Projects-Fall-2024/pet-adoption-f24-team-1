@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class DistanceMatrixService {
 
-    @Value("${GOOGLE_KEY}")
+    //@Value("${GOOGLE_KEY}")
     private String google_api_key;
 
     public ResponseEntity<Integer> getDistance(String origin, String destination)  {
