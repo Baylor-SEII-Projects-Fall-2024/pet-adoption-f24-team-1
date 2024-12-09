@@ -1,15 +1,13 @@
 import React from 'react';
 import Head from 'next/head';
-import { Button, Card, CardContent, Stack, Typography, Grid, TextField, Container, Link, Paper, Box, Pagination } from '@mui/material'
-import styles from '@/styles/Home.module.css'
+import { Button, Card, CardContent, Stack, Typography, Grid, Container, Pagination } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import NavBar from '@/components/nav-bar';
 import FilterStack from '@/components/filter-stack';
 import AdoptionCenterCard from '@/components/adoption-center-card';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
-
 
 export default function AdoptionCenterHome() {
     const user = useAuthUser();
@@ -17,28 +15,26 @@ export default function AdoptionCenterHome() {
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
     const router = useRouter();
 
-    const [Name, setName] = useState('');
-    const [Address, setAddress] = useState([]);
-    const [zipCode, setZipCode] = useState(1);
+    const [adoptionCenters, setAdoptionCenters] = useState([]);
+    const [location, setLocation] = useState(null);
+    const [page, setPage] = useState(1);
     const centersPerPage = 20;
 
     // Filters
     const [nameFltr, setNameFltr] = useState('Any');
     const [addressFltr, setAddressFltr] = useState('Any');
-    const [zipCodeFilter, setZipCodeFltr] = useState([501,99950]);
+    const [zipCodeFilter, setZipCodeFltr] = useState([501, 99950]);
 
-    function filters(adoptionCenter)  {
-        return (
-            (nameFltr == 'Any' ? true : adoptionCenter.Name == nameFltr) &&
-            (addressFltr == 'Any' ? true : adoptionCenter.address == addressFltr) &&
-            (adoptionCenter.zipCode >= zipCodeFilter[0] && adoptionCenter.zipCode <= zipCodeFilter[1])
-        );
-    }
+    const handlePageChange = (event, value) => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setPage(value);
+    };
 
-    // Get location of user
     useEffect(() => {
+        // Get location of user
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
                     setLocation(position.coords.latitude + ', ' + position.coords.longitude);
                 },
                 (error) => console.log(error.message)
@@ -48,11 +44,55 @@ export default function AdoptionCenterHome() {
         }
     }, []);
 
-    const handlePageChange = (event, value) => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        setPage(value);
-    };
+    useEffect(() => {
+        const request = user ? `/api/adoption-centers` : '/api/adoption-centers';
 
+        if (!user) {
+            console.log('Not signed in');
+            axios
+                .get(`${apiBaseUrl}${request}`)
+                .then((response) => {
+                    const adoptionCenters = response.data.map((center) => ({
+                        ...center,
+                        distance: 0, // Default to 0 or calculate based on some logic
+                    }));
+                    setAdoptionCenters(adoptionCenters); // Update state
+                })
+                .catch((error) => {
+                    console.error('Error fetching adoption centers:', error);
+                });
+        } else {
+            axios
+                .get(`${apiBaseUrl}${request}`, {
+                    params: {
+                        id: user.id,
+                        userLocation: location,
+                    },
+                })
+                .then((response) => {
+                    const adoptionCenters = response.data.map((item) => ({
+                        ...item.center, // Adjust based on your API response
+                        distance: item.distance, // Distance if provided by backend
+                    }));
+                    setAdoptionCenters(adoptionCenters); // Update state
+                })
+                .catch((error) => {
+                    console.error('Error fetching adoption centers:', error);
+                });
+        }
+    }, [location, user]);
+
+    // Filters function
+    function filters(adoptionCenter) {
+        return (
+            (nameFltr === 'Any' ? true : adoptionCenter.Name === nameFltr) &&
+            (addressFltr === 'Any' ? true : adoptionCenter.address === addressFltr) &&
+            adoptionCenter.zipCode >= zipCodeFilter[0] && adoptionCenter.zipCode <= zipCodeFilter[1]
+        );
+    }
+
+    const currentCenters = adoptionCenters.filter(filters).slice((page - 1) * centersPerPage, page * centersPerPage);
+    const totalPages = Math.ceil(adoptionCenters.filter(filters).length / centersPerPage);
 
     return (
         <>
@@ -62,23 +102,29 @@ export default function AdoptionCenterHome() {
 
             <main>
                 <Stack spacing={10}>
-                    <NavBar/>
+                    <NavBar />
 
-
-                    <Stack direction="row" >
-                        <FilterStack ageFltr={ageFltr} breedFltr={breedFltr} speciesFltr={speciesFltr} weightFltr={weightFltr} distanceFltr={distanceFltr} genderFltr={genderFltr} setAgeFltr={setAgeFltr} setBreedFltr={setBreedFltr} setSpeciesFltr={setSpeciesFltr} setWeightFltr={setWeightFltr} setDistanceFltr={setDistanceFltr} setGenderFltr={setGenderFltr}/>
+                    <Stack direction="row">
+                        <FilterStack
+                            nameFltr={nameFltr}
+                            addressFltr={addressFltr}
+                            zipCodeFilter={zipCodeFilter}
+                            setNameFltr={setNameFltr}
+                            setAddressFltr={setAddressFltr}
+                            setZipCodeFltr={setZipCodeFltr}
+                        />
 
                         <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2}>
-                            {currentPets.map((pet) => (
-                                <Grid item>
-                                    <AdoptionCenterCard key={adoptionCenter.Name} adoptionCenter={adoptionCenter} user={user} liked={false} location={location} />
+                            {currentCenters.map((center) => (
+                                <Grid item key={center.id}>
+                                    <AdoptionCenterCard adoptionCenterId={center.id} />
                                 </Grid>
                             ))}
                         </Grid>
                     </Stack>
 
-                    <Stack sx={{ paddingBottom: 10 }} alignItems='center'>
-                        <Pagination count={totalPages} page={page} onChange={handlePageChange}/>
+                    <Stack sx={{ paddingBottom: 10 }} alignItems="center">
+                        <Pagination count={totalPages} page={page} onChange={handlePageChange} />
                     </Stack>
                 </Stack>
             </main>
