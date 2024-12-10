@@ -1,91 +1,128 @@
-import React, { useState, useEffect } from 'react';
-import { Grid, Stack, Pagination } from '@mui/material';
+import React from 'react';
+import Head from 'next/head';
+import { Button, Card, CardContent, Stack, Typography, Grid, TextField, Container, Link, Paper, Box, Pagination } from '@mui/material'
+import styles from '@/styles/Home.module.css'
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'
 import axios from 'axios';
 import NavBar from '@/components/nav-bar';
-import FilterStack from '@/components/filter-stack';  // Adjust this to fit the new filter logic
+import FilterStack from '@/components/adoption-center-filter-stack';
+import PetCard from '@/components/adoption-center-card';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
-const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000';  // Or replace with actual base URL
 
-export default function AdoptionCenterHome() {
-    const [data, setData] = useState([]);
+export default function CenterUserHome() {
+    const user = useAuthUser();
+
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+    const router = useRouter();
+
+    const [location, setLocation] = useState('');
+    const [pets, setPets] = useState([]);
     const [page, setPage] = useState(1);
-    const itemsPerPage = 20;
+    const petsPerPage = 20;
 
-    // Filters for name, address, and zip code
-    const [nameFltr, setNameFltr] = useState('');
-    const [addressFltr, setAddressFltr] = useState('');
-    const [zipFltr, setZipFltr] = useState('');
+    // Filters
+    const [ageFltr, setAgeFltr] = useState([0, 30]);
+    const [weightFltr, setWeightFltr] = useState([0, 200]);
+    const [distanceFltr, setDistanceFltr] = useState(100);
+    const [breedFltr, setBreedFltr] = useState('Any');
+    const [speciesFltr, setSpeciesFltr] = useState('Any');
+    const [genderFltr, setGenderFltr] = useState(() => []);
 
-    const [filteredData, setFilteredData] = useState([]);
+    function filters(pet)  {
+        return (
+            (pet.petAge >= ageFltr[0] && pet.petAge <= ageFltr[1]) &&
+            (pet.petWeight >= weightFltr[0] && pet.petWeight <= weightFltr[1]) &&
+            (pet.distance <= distanceFltr) &&
+            (speciesFltr == 'Any' ? true : pet.petSpecies == speciesFltr) &&
+            (breedFltr == 'Any' ? true : pet.petBreed == breedFltr) &&
+            (genderFltr.length == 2 || genderFltr.length == 0 ? true : pet.petGender == genderFltr[0])
+        );
+    }
 
-    // Fetch data from the correct API endpoint
+    // Get location of user
     useEffect(() => {
-        axios.get(`${apiBaseUrl}/api/adoptioncenters`)  // Use the correct API endpoint here
-            .then(response => {
-                console.log('Fetched data:', response.data);  // Log data to verify it's correct
-                setData(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                    setLocation(position.coords.latitude + ', ' + position.coords.longitude);
+                },
+                (error) => console.log(error.message)
+            );
+        } else {
+            console.log("Geolocation is not supported by this browser");
+        }
     }, []);
 
-    // Apply filters to the fetched data
-    useEffect(() => {
-        function filters(item) {
-            return (
-                (nameFltr ? item.name.toLowerCase().includes(nameFltr.toLowerCase()) : true) &&
-                (addressFltr ? item.address.toLowerCase().includes(addressFltr.toLowerCase()) : true) &&
-                (zipFltr ? item.zipCode.includes(zipFltr) : true)
-            );
-        }
-
-        // Apply filters to data and update filtered data
-        const filtered = data.filter(filters);
-        setFilteredData(filtered);
-    }, [data, nameFltr, addressFltr, zipFltr]);  // Re-filter when data or filter criteria change
-
-    // Pagination logic
-    const indexOfLastItem = page * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
-    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-
     const handlePageChange = (event, value) => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         setPage(value);
     };
 
+    // Get pets from database
+    useEffect(() => {
+        const request = user ? `/api/recommendation/` : '/api/pets'
+        if(!user)  {
+            console.log('not signed in')
+            axios.get(`${apiBaseUrl}${request}`)
+                .then(response => {
+                    let pets = response.data.map(pet => {return {...pet, distance: 0}})
+                    console.log(pets)
+                    setPets(pets);
+                })
+                .catch(error => {
+                    console.error('Error fetching pets:', error);
+                });
+        }
+        else  {
+            axios.get(`${apiBaseUrl}${request}`, {
+                params: {
+                    id: user.id,
+                    userLocation: location
+                }
+            })
+                .then(response => {
+                    let pets = response.data.map(item => {return {...item.pet, distance: item.distance}})
+                    console.log(pets)
+                    setPets(pets);
+                })
+                .catch(error => {
+                    console.error('Error fetching pets:', error);
+                });
+        }
+    }, [location, user]);
+
+    const indexOfLastPet = page * petsPerPage;
+    const indexOfFirstPet = indexOfLastPet - petsPerPage;
+    const filteredPets = pets.filter(filters)
+    const currentPets = filteredPets.slice(indexOfFirstPet, indexOfLastPet);
+    const totalPages = Math.ceil(filteredPets.length / petsPerPage);
+
     return (
         <>
+            <Head>
+                <title>Home</title>
+            </Head>
+
             <main>
                 <Stack spacing={10}>
-                    <NavBar />
+                    <NavBar/>
 
-                    <Stack direction="row">
-                        <FilterStack
-                            nameFltr={nameFltr}
-                            setNameFltr={setNameFltr}
-                            addressFltr={addressFltr}
-                            setAddressFltr={setAddressFltr}
-                            zipFltr={zipFltr}
-                            setZipFltr={setZipFltr}
-                        />
 
-                        <Grid container direction="row" spacing={2} display="flex" alignItems="center" justifyContent="left">
-                            {currentItems.map((item, index) => (
-                                <Grid item key={index}>
-                                    <div>
-                                        <h3>{item.name}</h3>
-                                        <p>{item.address}</p>
-                                        <p>{item.zipCode}</p>
-                                    </div>
+                    <Stack direction="row" >
+                        <FilterStack ageFltr={ageFltr} breedFltr={breedFltr} speciesFltr={speciesFltr} weightFltr={weightFltr} distanceFltr={distanceFltr} genderFltr={genderFltr} setAgeFltr={setAgeFltr} setBreedFltr={setBreedFltr} setSpeciesFltr={setSpeciesFltr} setWeightFltr={setWeightFltr} setDistanceFltr={setDistanceFltr} setGenderFltr={setGenderFltr}/>
+
+                        <Grid container direction="row" display="flex" alignItems="center" justifyContent="left" rowGap={2} spacing={2}>
+                            {currentPets.map((pet) => (
+                                <Grid item>
+                                    <PetCard key={pet.petID} pet={pet} user={user} liked={false} location={location} />
                                 </Grid>
                             ))}
                         </Grid>
                     </Stack>
 
-                    <Stack sx={{ paddingBottom: 10 }} alignItems="center">
-                        <Pagination count={totalPages} page={page} onChange={handlePageChange} />
+                    <Stack sx={{ paddingBottom: 10 }} alignItems='center'>
+                        <Pagination count={totalPages} page={page} onChange={handlePageChange}/>
                     </Stack>
                 </Stack>
             </main>
