@@ -23,6 +23,8 @@ public class Event {
     private String description;
     private String location;
 
+    private Long thecenterId;
+
     // Linking Event to AdoptionCenter
     @ManyToOne
     @JoinColumn(name = "adoption_center_id", referencedColumnName = "centerId")
