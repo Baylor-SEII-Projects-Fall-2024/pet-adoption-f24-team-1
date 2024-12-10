@@ -121,7 +121,6 @@ const CreateAccountPage = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f5f5f5'
       }}
     >
       <Paper
