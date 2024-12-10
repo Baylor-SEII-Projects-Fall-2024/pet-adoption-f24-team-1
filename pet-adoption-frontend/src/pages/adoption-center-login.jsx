@@ -26,7 +26,7 @@ const AdoptionCenterLoginPage = () => {
     try {
       const result = await loginAdmin(email, password, signIn);
       alert("Admin login success!");
-      router.push("/adoption-center-home");
+      router.push("/adoption-center-home/adpotion-center-profile");
     } catch(error) {
       alert("Login failed: " + error.message);
     }

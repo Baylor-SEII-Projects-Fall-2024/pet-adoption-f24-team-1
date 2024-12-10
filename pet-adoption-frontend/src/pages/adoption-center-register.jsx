@@ -156,7 +156,7 @@ const AdoptionCenterRegisterPage = () => {
                 // Login if registered
                 try {
                     const result = await loginAdmin(email, password, signIn);
-                    router.push("/adoption-center-home");
+                    router.push("/adoption-center-home/adpotion-center-profile");
                 } catch (error) {
                     alert("Admin login failed: " + error);
                 }
