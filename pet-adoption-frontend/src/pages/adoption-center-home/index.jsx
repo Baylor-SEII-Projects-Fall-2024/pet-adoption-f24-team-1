@@ -10,6 +10,10 @@ import FilterStack from '@/components/adoption-center-filter-stack';
 import PetCard from '@/components/adoption-center-card';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
+<<<<<<< HEAD
+=======
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+>>>>>>> 848bca463ff5894f13e9c6cf26691475d3563a80
 
 export default function CenterUserHome() {
     const user = useAuthUser();

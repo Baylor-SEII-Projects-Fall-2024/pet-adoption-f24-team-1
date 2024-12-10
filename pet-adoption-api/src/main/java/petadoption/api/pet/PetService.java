@@ -27,6 +27,10 @@ public class PetService {
         return petRepository.findAllByAdminID(adminID);
     }
 
+    public List<Pet> getPetsByAdoptionCenterId(Long adoptionCenterId) {
+        return petRepository.findByCenterID(adoptionCenterId);
+    }
+
     public Pet savePet(Pet pet) {
         return petRepository.save(pet);
     }

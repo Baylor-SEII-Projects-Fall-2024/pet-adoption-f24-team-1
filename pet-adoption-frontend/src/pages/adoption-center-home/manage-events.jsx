@@ -29,7 +29,7 @@ export default function ManageEvents() {
     date:  '',
     description: '',
     location: '',
-    centerID: ''
+    thecenterId: ''
   });
   const columns = [
     { field: "eventID", headerName: "Event ID", width: 100 },
@@ -67,20 +67,24 @@ export default function ManageEvents() {
 
 
 
-  const loadData = () => { 
+  const loadData = async() => { 
+    if(adoptionCenter){
+    console.log("Loaded center: " + adoptionCenter.centerId)
     axios
-    .get(`${apiBaseUrl}/api/events/${user.id}`)
+    .get(`${apiBaseUrl}/api/events/${adoptionCenter.centerId}`)
     .then((response) => {
       setEvents(response.data); 
+      console.log(response.data)
     })
     .catch((error) => {
       console.log('error is happening here: ', error);
     });
+  }
   };
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [adoptionCenter]);
 
 
   const handleDialogClose = () => {
@@ -103,7 +107,7 @@ export default function ManageEvents() {
     date: event.date,
     description: event.description,
     location: event.location,
-    centerID: event.centerID
+    thecenterID: event.thecenterID
     }));
 
     const getEventByID = (eventID) => {
@@ -122,7 +126,7 @@ export default function ManageEvents() {
     
   const handleInsertEvent = () => {
     if(isFormValid){
-    newEventData.centerID = adoptionCenter.centerId;
+    newEventData.thecenterId = adoptionCenter.centerId;
     console.log(newEventData)
     axios.post(`${apiBaseUrl}/api/events`, newEventData )
       .then(response => {
@@ -188,7 +192,7 @@ export default function ManageEvents() {
           date: formattedDate,
           description: selectedEvent.description,
           location: selectedEvent.location,
-          centerID: adoptionCenter.id,
+          theCenterId: adoptionCenter.id,
         });
         setOpenUpdateDialog(true); // Open the update dialog
       }

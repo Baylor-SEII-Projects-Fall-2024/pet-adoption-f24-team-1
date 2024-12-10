@@ -5,6 +5,7 @@ import NavBar from '@/components/nav-bar';
 import axios from 'axios';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import ImageDropzone from '@/components/image-dropzone';
+import ProtectedAdminRoute from '@/components/protected-admin-route';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -118,7 +119,7 @@ export default function AdoptionCenterAccount() {
 };
 
   return (
-    <>
+    <ProtectedAdminRoute>
       <Head>
         <title>Adoption Center Account</title>
       </Head>
@@ -265,6 +266,6 @@ export default function AdoptionCenterAccount() {
           </Box>
         </Container>
       </main>
-    </>
+    </ProtectedAdminRoute>
   );
 }

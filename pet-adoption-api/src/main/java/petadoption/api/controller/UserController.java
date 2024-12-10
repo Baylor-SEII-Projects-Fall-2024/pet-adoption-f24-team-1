@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import petadoption.api.dto.LoginUpdateDTO;
+import petadoption.api.dto.UserDTO;
 import petadoption.api.user.User;
 import petadoption.api.user.UserService;
 import petadoption.api.userpreference.UserPreference;
@@ -38,7 +39,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updateUser) {
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserDTO updateUser) {
         Optional<User> userOptional = userService.findUser(id);
 
         if (userOptional.isEmpty()) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { Button, Box, Card, CardContent, Stack, Typography, Grid } from '@mui/material'
+import { Button, Box, Card, CardContent, Stack, Typography, Grid, alpha, useTheme} from '@mui/material'
 
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 import PetsOutlinedIcon from '@mui/icons-material/PetsOutlined';
@@ -13,11 +13,14 @@ import axios from 'axios';
 import { width } from '@mui/system';
 import Footer from '@/components/footer';
 import PreFooterSection from '@/components/pre-footer-section';
+import { useThemeCust } from '@/utils/ThemeContext';
 
 export default function HomePage() {
   const [pets, setPets] = useState(null);
   const router = useRouter();
-
+  const { toggleTheme, isDarkMode } = useThemeCust();
+  const theme = useTheme();
+  
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
   const petDisplayNum = 4;
 
@@ -84,6 +87,7 @@ export default function HomePage() {
                 Adopt Now
               </Button>
               <Button variant="outlined" color="primary"
+                sx={{ width: 220, bgcolor: alpha(theme.palette.primary.light, 0.05), color: isDarkMode ? theme.palette.primary.light : theme.palette.primary.main }}
                 onClick={() => navigateTo('/user-home/adoption-center-search')}
               >
                 Find Adoption centers
@@ -141,7 +145,9 @@ export default function HomePage() {
               ))}
             </Grid>
             <Box sx={{ textAlign: "center" }}>
-              <Button variant="outlined" color="primary" onClick={() => navigateTo("/user-home")}>
+              <Button variant="outlined" color="primary"
+                sx={{ width: 220, bgcolor: alpha(theme.palette.primary.light, 0.05), color: isDarkMode ? theme.palette.primary.light : theme.palette.primary.main }}
+                onClick={() => navigateTo("/user-home")}>
                 See more
               </Button>
             </Box>
@@ -196,10 +202,8 @@ export default function HomePage() {
                   <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
                     2
                   </Typography>
-                  <PetsOutlinedIcon sx={{ width: "80px", height: "auto" }}/>
-                  <Typography>
-                    Describe your pet preferences.
-                  </Typography>
+                  <ContentPasteSearchOutlinedIcon sx={{ width: "80px", height: "auto" }}/>
+                  <Typography>Start your search for pets.</Typography>
                 </Box>
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -214,13 +218,16 @@ export default function HomePage() {
                   <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
                     3
                   </Typography>
-                  <ContentPasteSearchOutlinedIcon sx={{ width: "80px", height: "auto" }}/>
-                  <Typography>Start your search!</Typography>
+                  <PetsOutlinedIcon sx={{ width: "80px", height: "auto" }}/>
+                  <Typography>
+                    Match with pets based on feedback!
+                  </Typography>
                 </Box>
               </Grid>
             </Grid>
             <Box sx={{ textAlign: "center", marginTop: "4rem" }}>
-              <Button variant="outlined" color="primary" onClick={() => navigateTo('/create-account')}>
+              <Button variant="outlined" color="primary"
+                sx={{ width: 220, bgcolor: alpha(theme.palette.primary.light, 0.05), color: isDarkMode ? theme.palette.primary.light : theme.palette.primary.main }}onClick={() => navigateTo('/create-account')}>
                 Start Today!
               </Button>
             </Box>

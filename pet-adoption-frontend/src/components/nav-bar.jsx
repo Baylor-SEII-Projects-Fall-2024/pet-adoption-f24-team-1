@@ -15,7 +15,7 @@ import { ThemeContext } from '@emotion/react';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 
-const userPages = ['Find Pets', 'Centers', 'Matches'];
+const userPages = ['Find Pets', 'Centers', 'Matches', 'Profile'];
 const adminPages = ['Manage Pets', 'Manage Events', 'Profile'];
 const defaultPages = ['Find Pets', 'Centers'];
 const settings = ['Settings', 'Logout'];
@@ -104,7 +104,13 @@ function NavBar() {
     else if (nav === 'Centers') router.push('/user-home/adoption-center-search')
     else if (nav === 'Manage Pets') router.push('/adoption-center-home/manage-pets');
     else if (nav === 'Manage Events') router.push('/adoption-center-home/manage-events');
-    else if (nav === 'Profile') router.push('/adoption-center-home/adpotion-center-profile');
+    else if (nav === 'Profile') {
+      if (user?.role == "ADMIN") {
+        router.push('/adoption-center-home/adpotion-center-profile');
+      } else {
+        router.push('/user-home/user-profile')
+      }
+    } 
     else if (nav === 'Notifications') {
       if (user?.role === "ADMIN") {
         router.push('/adoption-center-home/notifications');

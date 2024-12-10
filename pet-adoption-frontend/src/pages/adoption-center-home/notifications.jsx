@@ -6,6 +6,7 @@ import ProtectedAdminRoute from '@/components/protected-admin-route';
 import Head from 'next/head';
 import NavBar from '@/components/nav-bar';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
+import Footer from '@/components/footer';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
