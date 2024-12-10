@@ -4,7 +4,7 @@ import axios from 'axios';
 import NavBar from '@/components/nav-bar';
 import FilterStack from '@/components/filter-stack';  // Adjust this to fit the new filter logic
 
-const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000';  // Or replace with actual base URL
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default function AdoptionCenterHome() {
     const [data, setData] = useState([]);

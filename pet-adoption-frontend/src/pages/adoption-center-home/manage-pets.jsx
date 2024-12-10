@@ -149,6 +149,7 @@ export default function ManagePets() {
       })
       .catch(error => {
         console.error("Insert Failed:", error);
+        alert(error);
         //setErrorMessage("Insert Failed: " + error.message);
       });
     }else{
