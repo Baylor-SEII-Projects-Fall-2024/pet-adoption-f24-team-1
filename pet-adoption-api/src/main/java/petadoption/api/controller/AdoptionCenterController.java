@@ -9,9 +9,9 @@ import petadoption.api.adoptioncenter.AdoptionCenterService;
 import petadoption.api.event.Event;
 import petadoption.api.event.EventService;
 import petadoption.api.pet.Pet;
+import petadoption.api.pet.PetService;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = {"http://localhost:3000", "http://34.133.251.138:3000"})
 @RestController
@@ -23,6 +23,9 @@ public class AdoptionCenterController {
 
     @Autowired
     private EventService eventService;  // Add EventService to retrieve events
+
+    @Autowired
+    private PetService petService;
 
     // Existing methods
 
@@ -76,5 +79,14 @@ public class AdoptionCenterController {
 
         // Return 200 OK with an empty list if no events are found
         return ResponseEntity.ok(events);  // This ensures an empty list is returned with 200 OK
+    }
+
+    @GetMapping("/{adoptionCenterId}/pets")
+    public ResponseEntity<List<Pet>> getPetsByAdoptionCenter(@PathVariable Long adoptionCenterId) {
+        List<Pet> pets = petService.getPetsByAdoptionCenterId(adoptionCenterId);
+        if (pets.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(pets);
     }
 }
