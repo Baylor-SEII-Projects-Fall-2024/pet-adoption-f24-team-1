@@ -67,18 +67,22 @@ public class AdoptionCenterController {
     // New method to get events for a specific adoption center
     @GetMapping("/{centerId}/events")
     public ResponseEntity<List<Event>> getEventsByAdoptionCenter(@PathVariable Long centerId) {
-        // Fetch AdoptionCenter using the centerId
-        AdoptionCenter adoptionCenter = adoptionCenterService.getAdoptionCenterById(centerId);
+        // old way we did this with events
+//        // Fetch AdoptionCenter using the centerId
+//        AdoptionCenter adoptionCenter = adoptionCenterService.getAdoptionCenterById(centerId);
+//
+//        if (adoptionCenter == null) {
+//            return ResponseEntity.notFound().build();  // Return 404 if Adoption Center not found
+//        }
+//
+//        // Get the list of events associated with this adoption center
+//        List<Event> events = adoptionCenter.getEvents();
+//
+//        // Return 200 OK with an empty list if no events are found
+//        return ResponseEntity.ok(events);  // This ensures an empty list is returned with 200 OK
 
-        if (adoptionCenter == null) {
-            return ResponseEntity.notFound().build();  // Return 404 if Adoption Center not found
-        }
+        return ResponseEntity.ok(eventService.getAllEventsByAdminId(centerId));
 
-        // Get the list of events associated with this adoption center
-        List<Event> events = adoptionCenter.getEvents();
-
-        // Return 200 OK with an empty list if no events are found
-        return ResponseEntity.ok(events);  // This ensures an empty list is returned with 200 OK
     }
 
     @GetMapping("/{adoptionCenterId}/pets")

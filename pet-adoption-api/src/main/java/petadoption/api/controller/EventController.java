@@ -24,10 +24,10 @@ public class EventController {
     public List<Event> getAllEvents() {
         return eventService.getAllEvents();
     }
-    @GetMapping("/{adminID}")
-    public List<Event> getAllEvents(@PathVariable Long adminID ) {
-        System.out.println(eventService.getAllEventsByAdminId(adminID));
-        return eventService.getAllEventsByAdminId(adminID);
+    @GetMapping("/{thecenterID}")
+    public List<Event> getAllEvents(@PathVariable Long thecenterID ) {
+        System.out.println(eventService.getAllEventsByAdminId(thecenterID));
+        return eventService.getAllEventsByAdminId(thecenterID);
     }
 
     @PostMapping
