@@ -6,19 +6,8 @@ import {
     Grid
 } from '@mui/material';
 import { useState, useEffect } from 'react';
-<<<<<<< HEAD
 import NavBar from "@/components/nav-bar";
 import AdoptionCenterCard from "@/components/adoption-center-card";
-=======
-import { useRouter } from 'next/router'
-import axios from 'axios';
-import NavBar from '@/components/nav-bar';
-import FilterStack from '@/components/adoption-center-filter-stack';
-//import PetCard from '@/components/pet-card';
-import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
-import PetCard from "@/components/pet-card";
-import Footer from '@/components/footer';
->>>>>>> 848bca463ff5894f13e9c6cf26691475d3563a80
 
 // FilterStack Component
 function FilterStack({ nameFltr, addressFltr, onNameChange, onAddressChange}) {
@@ -159,13 +148,7 @@ export default function AdoptionCenterFilterStack() {
                         )}
                     </Grid>
                 </Stack>
-<<<<<<< HEAD
             </Stack>
         </main>
-=======
-                <Footer />
-            </main>
-        </>
->>>>>>> 848bca463ff5894f13e9c6cf26691475d3563a80
     );
 }
