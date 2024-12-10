@@ -10,6 +10,7 @@ import FilterStack from '@/components/adoption-center-filter-stack';
 //import PetCard from '@/components/pet-card';
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 import PetCard from "@/components/pet-card";
+import Footer from '@/components/footer';
 
 
 export default function adoptionCenterSearch() {
@@ -89,6 +90,7 @@ export default function adoptionCenterSearch() {
                     </Stack>
 
                 </Stack>
+                <Footer />
             </main>
         </>
     );

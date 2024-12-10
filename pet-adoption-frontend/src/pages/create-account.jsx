@@ -88,7 +88,7 @@ const CreateAccountPage = () => {
       });
 
 
-        router.push("/set-user-preferences");
+        router.push("/user-home");
       } catch (error) {
         alert("Login failed: " + error);
       }

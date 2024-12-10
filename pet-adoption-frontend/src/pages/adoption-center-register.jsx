@@ -310,8 +310,6 @@ const AdoptionCenterRegisterPage = () => {
                     the information below to create an admin account for your adoption center.
                 </Typography>
 
-                <Typography variant="subtitle1" sx={{ marginY: 2 }}>Note: More admin accounts can be created later</Typography>
-
                 <form onSubmit={handleSubmit}>
                     {/* First Name Input */}
                     <TextField
