@@ -196,10 +196,8 @@ export default function HomePage() {
                   <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
                     2
                   </Typography>
-                  <PetsOutlinedIcon sx={{ width: "80px", height: "auto" }}/>
-                  <Typography>
-                    Describe your pet preferences.
-                  </Typography>
+                  <ContentPasteSearchOutlinedIcon sx={{ width: "80px", height: "auto" }}/>
+                  <Typography>Start your search for pets.</Typography>
                 </Box>
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -214,8 +212,10 @@ export default function HomePage() {
                   <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
                     3
                   </Typography>
-                  <ContentPasteSearchOutlinedIcon sx={{ width: "80px", height: "auto" }}/>
-                  <Typography>Start your search!</Typography>
+                  <PetsOutlinedIcon sx={{ width: "80px", height: "auto" }}/>
+                  <Typography>
+                    Match with pets based on feedback!
+                  </Typography>
                 </Box>
               </Grid>
             </Grid>
