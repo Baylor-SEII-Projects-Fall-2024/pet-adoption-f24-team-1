@@ -35,7 +35,7 @@ export default function AdoptionCenterAccount() {
 
   useEffect(() => {
     if (user?.id && user?.role == "ADMIN") {
-      // Fetch current admin info
+      // Fetch current admin 
       axios.get(`${apiBaseUrl}/api/admins/${user.id}`)
         .then(response => {
           const adminData = response.data;

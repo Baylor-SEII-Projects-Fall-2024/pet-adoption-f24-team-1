@@ -30,7 +30,6 @@ public class AdminController {
         return adminService.getAdmin(adminId);
     }
 
-   ////FIXME: make this use a DTO
     @PutMapping("/{id}")
     public ResponseEntity<AdoptionCenterAdmin> updateAdmin(@PathVariable Long id, @RequestBody AdoptionCenterAdmin updateAdmin) {
         ResponseEntity<AdoptionCenterAdmin> responseEntity = adminService.getAdmin(id);
@@ -42,7 +41,6 @@ public class AdminController {
         AdoptionCenterAdmin existingAdmin = responseEntity.getBody();
         existingAdmin.setFirstName(updateAdmin.getFirstName());
         existingAdmin.setLastName(updateAdmin.getLastName());
-        existingAdmin.setEmail(updateAdmin.getEmail());
 
         return adminService.saveAdmin(existingAdmin);
     }
