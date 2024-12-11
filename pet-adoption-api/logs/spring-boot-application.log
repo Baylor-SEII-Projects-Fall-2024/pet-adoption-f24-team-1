@@ -692,3 +692,20 @@ Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot add or upda
 2024-12-10T15:02:10.118-06:00 DEBUG 5767 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : select e1_0.adoption_center_id,e1_0.eventid,e1_0.date,e1_0.description,e1_0.details_page,e1_0.image_url,e1_0.location,e1_0.title from events e1_0 where e1_0.adoption_center_id=?
 2024-12-10T15:04:23.047-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m2s954ms).
 2024-12-10T15:26:25.739-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=21m32s680ms).
+2024-12-10T15:38:06.517-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m40s702ms).
+2024-12-10T15:39:55.287-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m48s770ms).
+2024-12-10T15:41:53.246-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m57s958ms).
+2024-12-10T15:51:24.317-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=49s549ms).
+2024-12-10T15:53:20.489-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m56s173ms).
+2024-12-10T16:26:43.363-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=33m22s873ms).
+2024-12-10T16:27:46.260-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m2s897ms).
+2024-12-10T16:29:25.714-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m39s455ms).
+2024-12-10T16:38:32.097-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m6s383ms).
+2024-12-10T16:53:36.136-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m4s39ms).
+2024-12-10T17:15:45.571-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=22m9s435ms).
+2024-12-10T17:35:59.096-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m13s525ms).
+2024-12-10T17:42:34.410-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m35s313ms).
+2024-12-10T17:44:43.549-06:00  WARN 5767 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m9s139ms).
+2024-12-10T17:57:05.051-06:00  INFO 5767 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-10T17:57:05.059-06:00  INFO 5767 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-12-10T17:57:05.078-06:00  INFO 5767 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
