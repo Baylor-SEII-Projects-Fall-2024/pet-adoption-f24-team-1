@@ -150,6 +150,7 @@ export default function FilterStack(props) {
           sx={{width: '90%'}}
         />
       </Box>
+      {/* Doesn't work anymore
       <Box>
         <Typography marginLeft={1.5}>Distance (mi)</Typography>
         <Slider
@@ -164,6 +165,7 @@ export default function FilterStack(props) {
           sx={{width: '90%'}}
         />
       </Box>
+      */}
       
       
     </Stack>
