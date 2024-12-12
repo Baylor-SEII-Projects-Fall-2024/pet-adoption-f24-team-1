@@ -18,8 +18,8 @@ public class EventService {
     private EventRepository eventRepository;
 
     // Fetch all events
-    public List<Event> getAllEventsByAdminId(Long adminID) {
-        return eventRepository.findAllById(Collections.singleton(adminID));
+    public List<Event> getAllEventsByAdminId(Long theCenterId) {
+        return eventRepository.findEventsByThecenterId(theCenterId);
     }
 
     public List<Event> getAllEvents() {

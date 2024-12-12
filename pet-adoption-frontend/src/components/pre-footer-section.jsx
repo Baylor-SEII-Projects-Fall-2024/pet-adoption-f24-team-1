@@ -9,7 +9,6 @@ const PreFooterSection = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#f9f9f9",
         padding: "2rem",
         borderTop: "1px solid #ddd",
         marginTop: "2rem",

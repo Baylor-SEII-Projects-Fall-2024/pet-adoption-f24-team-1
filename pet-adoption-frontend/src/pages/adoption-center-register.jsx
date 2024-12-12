@@ -156,7 +156,7 @@ const AdoptionCenterRegisterPage = () => {
                 // Login if registered
                 try {
                     const result = await loginAdmin(email, password, signIn);
-                    router.push("/adoption-center-home");
+                    router.push("/adoption-center-home/adpotion-center-profile");
                 } catch (error) {
                     alert("Admin login failed: " + error);
                 }
@@ -309,8 +309,6 @@ const AdoptionCenterRegisterPage = () => {
                     Now that we have your adoption center information, please fill out
                     the information below to create an admin account for your adoption center.
                 </Typography>
-
-                <Typography variant="subtitle1" sx={{ marginY: 2 }}>Note: More admin accounts can be created later</Typography>
 
                 <form onSubmit={handleSubmit}>
                     {/* First Name Input */}

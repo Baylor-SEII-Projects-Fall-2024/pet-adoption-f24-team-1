@@ -8,6 +8,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import axios from 'axios';
 import PetCard from '@/components/pet-card';
+import ProtectedUserRoute from '@/components/protected-user-route';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -53,6 +54,7 @@ export default function UserProfile() {
   }, [user]);
 
   return (
+    <ProtectedUserRoute>
     <>
       <Head>
         <title>User Profile</title>
@@ -122,5 +124,6 @@ export default function UserProfile() {
         </Container>
       </main>
     </>
+    </ProtectedUserRoute>
   );
 }

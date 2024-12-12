@@ -5,6 +5,7 @@ import NavBar from '@/components/nav-bar';
 import axios from 'axios';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import ImageDropzone from '@/components/image-dropzone';
+import ProtectedUserRoute from '@/components/protected-user-route';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -20,7 +21,7 @@ export default function UserAccount() {
 
     // State variables for login info
     const [currentEmail, setCurrentEmail] = useState('');
-    const [newEmail, setNewEmail] = useState(''); 
+    const [newEmail, setNewEmail] = useState('');
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -35,7 +36,7 @@ export default function UserAccount() {
                     setFirstName(data.firstName || '');
                     setLastName(data.lastName || '');
                     setCurrentEmail(data.email || '');
-                    setNewEmail(data.email);
+                    setNewEmail(data.email || '');
                     setPhone(data.phone || '');
                     setBio(data.bio || '');
                     setImgUrl(data.imgUrl || '');
@@ -46,7 +47,7 @@ export default function UserAccount() {
 
     // Handle Save for user details
     const handleSaveDetails = () => {
-        const payload = { firstName, lastName, newEmail, phone, bio, imgUrl };
+        const payload = { firstName, lastName, bio, email: currentEmail, phone, imgUrl };
 
         axios.put(`${apiBaseUrl}/api/users/${user.id}`, payload)
             .then(response => {
@@ -85,7 +86,7 @@ export default function UserAccount() {
     };
 
     return (
-        <>
+        <ProtectedUserRoute>
             <Head>
                 <title>My Account</title>
             </Head>
@@ -202,6 +203,6 @@ export default function UserAccount() {
                     </Box>
                 </Container>
             </main>
-        </>
+        </ProtectedUserRoute>
     );
 }

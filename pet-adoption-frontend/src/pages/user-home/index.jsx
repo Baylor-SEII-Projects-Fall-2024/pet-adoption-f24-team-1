@@ -9,6 +9,7 @@ import NavBar from '@/components/nav-bar';
 import FilterStack from '@/components/filter-stack';
 import PetCard from '@/components/pet-card';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
+import Footer from '@/components/footer';
 
 
 export default function UserHome() {
@@ -125,6 +126,7 @@ export default function UserHome() {
             <Pagination count={totalPages} page={page} onChange={handlePageChange}/>
           </Stack>
         </Stack>
+        <Footer />
       </main>
     </>
   );

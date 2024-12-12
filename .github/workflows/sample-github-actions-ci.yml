@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Create .env
+      - name: Create frontend .env
         run: |
           echo "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=${{ secrets.API_CLOUDINARY_KEY }}" >> pet-adoption-frontend/.env
 
