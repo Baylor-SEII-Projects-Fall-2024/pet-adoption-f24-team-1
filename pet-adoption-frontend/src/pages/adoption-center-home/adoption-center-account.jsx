@@ -72,8 +72,12 @@ export default function AdoptionCenterAccount() {
     axios.put(`${apiBaseUrl}/api/admins/${user.id}`, payload)
       .then(response => {
         console.log("Admin info updated:", response.data);
+        alert('Account details updated successfully!');
       })
-      .catch(error => console.error("Error updating admin info:", error));
+      .catch(error => {
+        console.error("Error updating user account:", error);
+        alert('Failed to update account details.');
+    });
   };
 
   const handleSaveCenterInfo = () => {
@@ -89,8 +93,12 @@ export default function AdoptionCenterAccount() {
     axios.put(`${apiBaseUrl}/api/adoptioncenters/${centerId}`, payload)
       .then(response => {
         console.log("Center info updated:", response.data);
+        alert('Adoption Center Details updated successfully!');
       })
-      .catch(error => console.error("Error updating center info:", error));
+      .catch(error => {
+        console.error("Error updating adoption center:", error);
+        alert('Failed to update adoption center details.');
+    });
   };
 
   ////FIXME: Need to make this work for the admin
